@@ -4,6 +4,7 @@ import Store from './redux/context'
 import reducer from './redux/reducer'
 import { usePersistedContext, usePersistedReducer } from '@/hooks/usePersist'
 import Frame from '@/containers/Frame'
+import '@/styles/index.less'
 
 const App: React.FC = () => {
   const globalStore = usePersistedContext(useContext(Store), 'state', false)

@@ -1,0 +1,69 @@
+.header-right {
+  height: 64px;
+  line-height: 64px;
+  width: 100%;
+  position: relative;
+  //  search-box
+  #search-box {
+    float: left;
+    height: 22px;
+    padding-left: 16px;
+    line-height: 22px;
+    margin: 22px auto 0px;
+    border-left: 1px solid rgb(235, 237, 240);
+    .search-icon {
+      color: #ced4d9;
+      position: relative;
+      top: 0.5px;
+      cursor: pointer;
+    }
+    .search-input {
+      font-size: 14px;
+      margin-top: -5px;
+      width: 200px;
+      border: 0;
+      -webkit-box-shadow: none;
+      box-shadow: none;
+      background: transparent;
+      &::placeholder {
+        color: #a3b1bf;
+      }
+    }
+  }
+  //  nav
+  .header-nav {
+    border: 0;
+    float: right;
+    font-size: 14px;
+    font-variant: tabular-nums;
+  }
+  .header-nav.ant-menu-horizontal {
+    border-bottom: none;
+  }
+  .header-nav.ant-menu-horizontal > .ant-menu-item {
+    height: 64px;
+    line-height: 60px;
+    min-width: 72px;
+    border-top: 2px solid transparent;
+  }
+  .header-nav.ant-menu-horizontal > .ant-menu-item:hover {
+    border-top: 2px solid #1890ff;
+    border-bottom: 2px solid transparent;
+  }
+  .header-nav.ant-menu-horizontal > .ant-menu-item-selected {
+    border-top: 2px solid #1890ff;
+    border-bottom: 2px solid transparent;
+  }
+  .header-nav.ant-menu-horizontal > .ant-menu-item-selected a {
+    color: #1890ff;
+  }
+  .header-nav > .ant-menu-item {
+    text-align: center;
+  }
+
+  // user info
+  .header-userInfo {
+    float: right;
+    padding: 0 40px 0 16px;
+  }
+}
