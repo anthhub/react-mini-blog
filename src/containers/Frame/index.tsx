@@ -6,6 +6,7 @@ import Header from './Header'
 import Sider from './Sider'
 // import Main from './Main'
 import Test from '@/pages/Test'
+import './index.less'
 
 // 响应式
 const siderLayout = { xxl: 4, xl: 5, lg: 5, sm: 0, xs: 0 }
