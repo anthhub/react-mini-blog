@@ -1,6 +1,5 @@
 import React, { useContext, useReducer } from 'react'
 
-import Frame from '@/containers/Frame'
 import { usePersistedContext, usePersistedReducer } from '@/hooks/usePersist'
 import '@/styles/index.less'
 import Store from './redux/context'
@@ -15,7 +14,6 @@ const App: React.FC = () => {
   console.log('%c%s', 'color: #20bd08;font-size:15px', '===TQY===: App:React.FC -> state', state)
   return (
     <Store.Provider value={{ ...state, dispatch }}>
-      {/* <Frame /> */}
       <AppRouter />
     </Store.Provider>
   )

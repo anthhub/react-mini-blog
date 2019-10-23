@@ -1,9 +1,11 @@
 import Frame from '@/containers/Frame'
+import Test from '@/pages/Test'
 import { lazy } from 'react'
 
 export const lazyComponents = {
   Home: lazy(() => import('../pages/home')),
   Frame,
+  Test,
 }
 
 const routes: IRoute[] = [
@@ -14,6 +16,7 @@ const routes: IRoute[] = [
     childRoutes: [
       { path: '/', component: 'Home' },
       { path: '/home', component: 'Home' },
+      { path: '/test', component: 'Test' },
       // { path: 'article/:id', component: Article },
     ],
   },

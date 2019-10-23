@@ -4,6 +4,7 @@ import { BackTop, Col, Layout, Row } from 'antd'
 
 import Header from './Header'
 import './index.less'
+import Main from './Main'
 import Sider from './Sider'
 
 // 响应式
@@ -18,7 +19,9 @@ const Frame: React.FC = ({ children }) => {
         <Col {...siderLayout}>
           <Sider />
         </Col>
-        <Col {...contentLayout}>{children}</Col>
+        <Col {...contentLayout}>
+          <Main>{children}</Main>
+        </Col>
       </Row>
       <BackTop />
     </Layout>

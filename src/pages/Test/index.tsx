@@ -4,9 +4,16 @@ import './App.css'
 
 import { useRedux } from '@/redux/context'
 import { Button } from 'antd'
+import { useLocation, useParams } from 'react-router-dom'
 
 const Test: React.FC = () => {
   const { init, dispatch, count } = useRedux()
+
+  const parmas = useParams()
+  const location = useLocation()
+
+  console.log('%c%s', 'color: #20bd08;font-size:15px', '===TQY===: Test:React.FC -> parmas', { parmas }, { location })
+
   console.log('%c%s', 'color: #f2ceb6', init, dispatch, count)
   return (
     <div className="App">

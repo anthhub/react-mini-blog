@@ -1,8 +1,8 @@
 import React from 'react'
 import './index.less'
 
-const Header: React.FC = props => {
-  return <div>header</div>
+const Main: React.FC = ({ children }) => {
+  return <div className="app-main">{children}</div>
 }
 
-export default Header
+export default Main
