@@ -1,6 +1,7 @@
 import React, { Suspense } from 'react'
 import { Redirect, Route, Switch } from 'react-router-dom'
-import { IRoute, lazyComponents } from './routes'
+import { lazyComponents } from './lazyComponents'
+import { IRoute } from './routes'
 
 const renderRoutes = (routesTree: IRoute[]) => (
   <Switch>

@@ -1,5 +1,5 @@
 import React from 'react'
-import './index.less'
+// import './index.less'
 
 const Main: React.FC = ({ children }) => {
   return <div className="app-main">{children}</div>

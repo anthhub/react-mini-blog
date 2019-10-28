@@ -1,12 +1,4 @@
-import Frame from '@/containers/Frame'
-import Test from '@/pages/Test'
-import { lazy } from 'react'
-
-export const lazyComponents = {
-  Home: lazy(() => import('../pages/home')),
-  Frame,
-  Test,
-}
+import { TLazyComponentsKeys } from './lazyComponents'
 
 const routes: IRoute[] = [
   {
@@ -23,8 +15,6 @@ const routes: IRoute[] = [
 ]
 
 export default routes
-
-export type TLazyComponentsKeys = keyof typeof lazyComponents
 
 export interface IRoute {
   path: string
