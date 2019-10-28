@@ -1,7 +1,7 @@
 import React, { useContext, useReducer } from 'react'
 
 import { usePersistedContext, usePersistedReducer } from '@/hooks/usePersist'
-import '@/styles/index.less'
+
 import Store from './redux/context'
 import reducer from './redux/reducer'
 import AppRouter from './routes'
