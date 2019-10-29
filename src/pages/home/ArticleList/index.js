@@ -1,6 +1,5 @@
 import React from 'react';
 // import { connect } from 'react-redux';
-import { Input, Button } from 'antd';
 import Article from './Article';
 import { Wrapper } from './style';
 

@@ -39,14 +39,14 @@
 import React from 'react';
 // import { connect } from 'react-redux';
 import ArticleList from './ArticleList';
-import SideBar from './SideBar';
+import AppDownload from './AppDownload';
 import { Wrapper } from './style';
 
 const Home = (props) => {
 	return (
 		<Wrapper>
-			<ArticleList>aaa</ArticleList>
-			<SideBar>aaa</SideBar>
+			<ArticleList />
+			<AppDownload />
 		</Wrapper>
 	);
 };
