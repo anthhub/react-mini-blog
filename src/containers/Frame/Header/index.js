@@ -1,6 +1,5 @@
 import React from 'react';
 // import { connect } from 'react-redux';
-// import './node_modules/antd/dist/antd.css';
 import { Input, Button } from 'antd';
 import { Wrapper } from './style';
 
@@ -14,7 +13,7 @@ const Header = (props) => {
 				</a>
 				<nav>
 					<ul className="nav">
-						<li className="nav-item">
+						<li className="">
 							<ul className="nav-list">
 								<a href="/home">
 									<li className="active nav-item">首页</li>

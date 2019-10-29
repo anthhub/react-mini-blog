@@ -9,7 +9,8 @@ export const Wrapper = styled.div`
 	left: 0;
 	width: 100%;
 	height: 60px;
-	border-bottom: 1px solid #f1f1f1;
+	// border-bottom: 1px solid #f1f1f1;
+	box-shadow: 0 1px 2px 0 rgba(0, 0, 0, .05);
 	background: #ffffff;
 
 	.header {

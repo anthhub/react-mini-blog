@@ -1,17 +1,16 @@
-import React from 'react'
+import React from 'react';
 
-import Main from './Main'
+import Main from './Main';
 
-import Header from './Header'
-import './index.less'
+import Header from './Header';
 
 const Frame: React.FC = ({ children }) => {
-  return (
-    <div className="App">
-      <Header />
-      <Main> {children} </Main>
-    </div>
-  )
-}
+	return (
+		<div className="App">
+			<Header />
+			<Main> {children} </Main>
+		</div>
+	);
+};
 
-export default Frame
+export default Frame;

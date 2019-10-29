@@ -33,11 +33,11 @@ export const GlobalStyle = createGlobalStyle`
 		display: block;
 	}
 	body {
-		font-size: 14px;
+		font-size: 12px;
     font-family: -apple-system, SF UI Text, PingFang SC, Hiragino Sans GB, Microsoft YaHei, WenQuanYi Micro Hei, Helvetica Neue, Helvetica,Arial, sans-serif;
     color: #333;
-		// 小红书的 body 背景色是灰色（上滑下滑到底都能看到）
-		background-color: #fbfbfb;
+		// 掘金 body 背景色是灰色（上滑下滑到底都能看到）
+		background-color: #f4f5f5;
 	}
 	ol, ul {
 		list-style: none;
