@@ -45,10 +45,23 @@ export const Wrapper = styled.div`
 				}
 
 				.little-box {
-					width: 48px;
+					display: flex;
+					justify-content: center;
+					align-items: center;
 					height: 26px;
+					padding: 0 10px;
+					color: #b2bac2;
+					font-weight: 700;
 					border: 1px solid #edeeef;
 					border-radius: 1px;
+
+					&.comment {
+						margin-left: -1px;
+					}
+
+					.count {
+						margin-left: 3px;
+					}
 				}
 			}
 

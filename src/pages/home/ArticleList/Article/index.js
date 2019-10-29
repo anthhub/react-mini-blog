@@ -30,16 +30,22 @@ const Article = (props) => {
 
 							<div>
 								<ul className="info-row">
-									<li className="little-box">
-										<a>
-											<img src="https://b-gold-cdn.xitu.io/v3/static/img/zan.e9d7698.svg" />
-											<span>27</span>
+									<li>
+										<a className="little-box like">
+											<img
+												className="icon"
+												src="https://b-gold-cdn.xitu.io/v3/static/img/zan.e9d7698.svg"
+											/>
+											<span className="count">27</span>
 										</a>
 									</li>
-									<li className="little-box">
-										<a>
-											<img src="https://b-gold-cdn.xitu.io/v3/static/img/comment.4d5744f.svg" />
-											<span>7</span>
+									<li>
+										<a className="little-box comment">
+											<img
+												className="icon"
+												src="https://b-gold-cdn.xitu.io/v3/static/img/comment.4d5744f.svg"
+											/>
+											<span className="count">7</span>
 										</a>
 									</li>
 								</ul>
