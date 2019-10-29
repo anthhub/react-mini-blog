@@ -42,11 +42,12 @@ import ArticleList from './ArticleList';
 import AppDownload from './AppDownload';
 import { Wrapper } from './style';
 
-const Home = (props) => {
+// const Home = (props) => {
+const Home: React.FC = (props) => {
 	return (
 		<Wrapper>
-			<ArticleList />
-			<AppDownload />
+			<ArticleList/>
+			<AppDownload/>
 		</Wrapper>
 	);
 };

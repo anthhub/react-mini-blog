@@ -3,7 +3,7 @@ import React from 'react';
 import Article from './Article';
 import { Wrapper } from './style';
 
-const ArticleList = (props) => {
+const ArticleList:React.FC = (props) => {
 	return (
 		<Wrapper>
 			<header className="header">
@@ -23,6 +23,20 @@ const ArticleList = (props) => {
 			</header>
 
 			<ul>
+				<Article />
+				<Article />
+				<Article />
+				<Article />
+				<Article />
+				<Article />
+				<Article />
+				<Article />
+				<Article />
+				<Article />
+				<Article />
+				<Article />
+				<Article />
+				<Article />
 				<Article />
 				<Article />
 				<Article />

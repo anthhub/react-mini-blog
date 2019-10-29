@@ -2,7 +2,7 @@ import React from 'react';
 // import { connect } from 'react-redux';
 import { Wrapper } from './style';
 
-const Article = (props) => {
+const Article:React.FC = (props) => {
 	return (
 		<Wrapper>
 			<li>

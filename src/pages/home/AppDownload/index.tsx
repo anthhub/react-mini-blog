@@ -2,7 +2,7 @@ import React from 'react';
 // import { connect } from 'react-redux';
 import { Wrapper } from './style';
 
-const AppDownload = (props) => {
+const AppDownload:React.FC = (props) => {
 	return (
 		<Wrapper>
 			<a className='app-link'>
