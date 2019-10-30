@@ -41,6 +41,7 @@ import React from 'react';
 import ArticleList from './ArticleList';
 import AppDownload from './AppDownload';
 import { Wrapper } from './style';
+import { BackTop } from 'antd';
 
 // const Home = (props) => {
 const Home: React.FC = (props) => {
@@ -48,6 +49,7 @@ const Home: React.FC = (props) => {
 		<Wrapper>
 			<ArticleList/>
 			<AppDownload/>
+			<BackTop />
 		</Wrapper>
 	);
 };
