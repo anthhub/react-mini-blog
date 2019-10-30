@@ -30,7 +30,7 @@ export default function useFetch<T, U, V>(request: V & promiseCb, initialRequest
     }
   }, [param])
 
-  function doFetch(arg: T) {
+  function doFetch(arg?: T) {
     setParam(arg)
   }
 
