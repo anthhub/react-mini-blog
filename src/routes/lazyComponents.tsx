@@ -1,13 +1,14 @@
 import Frame from '@/containers/Frame';
 
-import { Spin } from 'antd';
+
 import React, { lazy, Suspense } from 'react';
+import SpinCenter from '@/components/SpinCenter';
 
 export type TLazyComponentsKeys = keyof typeof lazyComponents;
 
 const withSuspense = (Component: any) => {
 	return (props: any) => (
-		<Suspense fallback={<Spin />}>
+		<Suspense fallback={<SpinCenter />}>
 			<Component {...props} />
 		</Suspense>
 	);
