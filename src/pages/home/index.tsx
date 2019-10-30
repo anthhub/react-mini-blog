@@ -36,10 +36,12 @@
 
 // export default Home;
 
+
+// 首页
 import React from 'react';
 // import { connect } from 'react-redux';
 import ArticleList from './ArticleList';
-import AppDownload from './AppDownload';
+import AppDownload from '../../components/AppDownload';
 import { Wrapper } from './style';
 import { BackTop } from 'antd';
 
@@ -55,3 +57,11 @@ const Home: React.FC = (props) => {
 };
 
 export default Home;
+
+/* 
+待办：
+
+改回到顶部按钮的样式
+模拟数据后端
+
+*/
