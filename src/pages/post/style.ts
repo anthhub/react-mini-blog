@@ -16,7 +16,6 @@ export const Wrapper = styled.div`
 		width: 700px;
 		// height:200px;
 		// background:#fff;
-		overflow: hidden;
 	}
 
 	.right {
