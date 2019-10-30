@@ -1,79 +1,51 @@
-import React, { Component } from 'react'
-import { Affix, Input, Menu, Dropdown, Button, Icon, message, Badge, Avatar, Popover } from 'antd'
-// import { connect } from 'react-redux'
-import Nav from './nav'
-import './index.less'
-import SlideMenu from './SlideMenu'
+import React from 'react';
+// import { connect } from 'react-redux';
+import { Input, Button } from 'antd';
+import { Wrapper } from './style';
 
-class Header extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      top: 0,
-    }
-  }
-  handleMenuClick(e) {
-    message.info('Click on menu item.')
-    console.log('click', e.key)
-  }
+const Header = (props) => {
+	return (
+		// 把传入的 theme 作为类名，若无传入的属性，类名为空
+		<Wrapper>
+			<header className="header">
+				<a className="logo-link">
+					<div className="logo" />
+				</a>
+				<nav>
+					<ul className="nav">
+						<li className="">
+							<ul className="nav-list">
+								<a href="/home">
+									<li className="active nav-item">首页</li>
+								</a>
+								<a>
+									<li className="nav-item">沸点</li>
+								</a>
+								<a>
+									<li className="nav-item">话题</li>
+								</a>
+								<a>
+									<li className="nav-item">小册</li>
+								</a>
+								<a>
+									<li className="nav-item">活动</li>
+								</a>
+							</ul>
+						</li>
+						<li className="nav-item search">
+							<Input style={{ width: 156, height: 32 }} />
+						</li>
+						<li className="nav-item write">
+							<Button type="primary">写文章</Button>
+						</li>
+						<li className="nav-item menu">
+							<div className="avatar" />
+						</li>
+					</ul>
+				</nav>
+			</header>
+		</Wrapper>
+	);
+};
 
-  render() {
-    const Search = Input.Search
-    const menu = (
-      <Menu onClick={this.handleMenuClick}>
-        <Menu.Item key="1">发布沸点</Menu.Item>
-        <Menu.Item key="2">分享链接</Menu.Item>
-      </Menu>
-    )
-    const isLogin = this.props.userName !== '' ? true : false
-    return (
-      <Affix offsetTop={this.state.top}>
-        <div className="pageHeader">
-          <div className="container">
-            <a href="/" className="logo">
-              <img src="//b-gold-cdn.xitu.io/v3/static/img/logo.a7995ad.svg" alt="掘金" className="logo-img" />
-            </a>
-            <nav className="main-nav">
-              <Search placeholder="搜索更新啦" onSearch={value => console.log(value)} style={{ width: 200 }} />
-              <Dropdown overlay={menu}>
-                <Button>
-                  写文章 <Icon type="down" />
-                </Button>
-              </Dropdown>
-              <Badge count={this.props.count} overflowCount={10}>
-                <a href="/">
-                  <Icon type="notification" />
-                </a>
-              </Badge>
-              {isLogin ? (
-                <Popover placement="bottomRight" content={<SlideMenu userId={this.props.userId} />} trigger="click">
-                  <Avatar icon="user" src={this.props.userImage} style={{ cursor: 'pointer' }} />
-                </Popover>
-              ) : (
-                <div>
-                  <span className="login" onClick={() => this.props.handlelogin()}>
-                    登录
-                  </span>
-                  <span className="register">注册</span>
-                </div>
-              )}
-            </nav>
-          </div>
-        </div>
-      </Affix>
-    )
-  }
-}
-
-// const mapStateToProps = (state) => {
-//     return {
-//         count: state.pageHeaderReducer.notificationCount,
-//         userName:state.userReducer.userName,
-//         userImage:state.userReducer.userImage,
-//         userId:state.userReducer.userId
-//     }
-// }
-
-// Header=connect(mapStateToProps)(Header)
-
-export default Header
+export default Header;

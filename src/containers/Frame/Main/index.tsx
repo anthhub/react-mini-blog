@@ -1,8 +1,7 @@
-import React from 'react'
-// import './index.less'
+import React from 'react';
 
 const Main: React.FC = ({ children }) => {
-  return <div className="app-main">{children}</div>
-}
+	return <div className="app-main">{children}</div>;
+};
 
-export default Main
+export default Main;
