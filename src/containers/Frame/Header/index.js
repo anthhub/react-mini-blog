@@ -4,6 +4,8 @@ import { Input, Button } from 'antd';
 import { Wrapper } from './style';
 
 const Header = (props) => {
+	const avatarClick = () => {};
+
 	return (
 		// 把传入的 theme 作为类名，若无传入的属性，类名为空
 		<Wrapper>
@@ -39,7 +41,21 @@ const Header = (props) => {
 							<Button type="primary">写文章</Button>
 						</li>
 						<li className="nav-item menu">
-							<div className="avatar" />
+							<div className="avatar" onClick={avatarClick} />
+							<ul className="dropdown-list">
+								<li>
+									<a className="menu-item">
+										<i />
+										<span>设置</span>
+									</a>
+								</li>
+								<li>
+									<a className="menu-item">
+										<i />
+										<span>登出</span>
+									</a>
+								</li>
+							</ul>
 						</li>
 					</ul>
 				</nav>

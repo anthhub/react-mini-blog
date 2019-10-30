@@ -67,5 +67,4 @@ export const Wrapper = styled.div`
 		font-weight: 700;
 		color: #333;
 	}
-	// }
 `;
