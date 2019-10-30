@@ -7,7 +7,7 @@ const data = {};
 const Article: React.FC = (props) => {
 	return (
 		<Wrapper>
-			<article className="article">
+			{/* <article className="article"> */}
 				<div className="author">
 					<div className='author-info'>
 						<a>
@@ -29,12 +29,12 @@ const Article: React.FC = (props) => {
 					</div>
 					<button className="follow">关注</button>
 				</div>
-				文章
 				<h1 className='article-title'>个人服务器运维指南</h1>
-			</article>
+				文章
+			{/* </article>
 			<div className="tag-list">标签</div>
 			<div className="author-footer">底部作者</div>
-			<div className="comment-list">评论</div>
+			<div className="comment-list">评论</div> */}
 		</Wrapper>
 	);
 };
