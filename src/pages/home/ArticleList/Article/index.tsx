@@ -2,11 +2,11 @@ import React from 'react';
 // import { connect } from 'react-redux';
 import { Wrapper } from './style';
 
-const Article:React.FC = (props) => {
+const Article: React.FC = (props) => {
 	return (
 		<Wrapper>
 			<li>
-				<a>
+				<a href="/post" target='_blank'>
 					<section className="content">
 						<div className="info-box">
 							<div>
@@ -23,9 +23,7 @@ const Article:React.FC = (props) => {
 							</div>
 
 							<div className="title">
-								<a className="title-link" href="#">
-									重温一下 JS 进阶需要掌握的 13 个概念
-								</a>
+								<a className="title-link">重温一下 JS 进阶需要掌握的 13 个概念</a>
 							</div>
 
 							<div>

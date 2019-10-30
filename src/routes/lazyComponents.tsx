@@ -16,5 +16,6 @@ const withSuspense = (Component: any) => {
 export const lazyComponents = {
 	Frame,
 	Home: withSuspense(lazy(() => import('../pages/home'))),
+	Post: withSuspense(lazy(() => import('../pages/post'))),
 	Test: withSuspense(lazy(() => import('../pages/test')))
 };
