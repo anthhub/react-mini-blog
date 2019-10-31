@@ -6,7 +6,7 @@ import { Wrapper } from './style';
 
 const Login: React.FC = (props) => {
 	return (
-		<Wrapper>
+		<Wrapper style={{ display: 'none' }}>
 			<form className="login-box">
 				<i className="close-btn" />
 				<div className="input-panel">

@@ -8,7 +8,6 @@ import AppDownload from '../../components/AppDownload'
 import Article from './Article'
 import Author from './Author'
 import Catalog from './Catalog'
-import Recommended from './Recommended'
 // import { connect } from 'react-redux';
 import { Wrapper } from './style'
 
@@ -23,7 +22,6 @@ const Post: React.FC = props => {
     <Wrapper>
       <div className="left">
         <Article {...item} />
-        <Recommended />
       </div>
       <div className="right">
         <Author />
