@@ -7,9 +7,10 @@
 import styled from 'styled-components';
 
 export const Wrapper = styled.div`
-	display: flex;
-	flex-direction: row;
-	justify-content: space-between;
-	width: 960px;
-	margin: 76px auto 0;
+	.loading {
+		position: fixed;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+	}
 `;

@@ -4,7 +4,7 @@ import { Wrapper } from './style';
 import { BackTop } from 'antd';
 import AppDownload from '../../components/AppDownload';
 import Article from './Article';
-import Recommended from './Recommended';
+// import Recommended from './Recommended';
 import Author from './Author';
 import Catalog from './Catalog';
 
@@ -13,7 +13,7 @@ const Post: React.FC = (props) => {
 		<Wrapper>
 			<div className="left">
 				<Article />
-				<Recommended />
+				{/* <Recommended /> */}
 			</div>
 			<div className="right">
 				<Author />
