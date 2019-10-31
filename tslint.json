@@ -26,7 +26,7 @@
     "object-shorthand-properties-first": false,
     "no-console": false,
     "no-empty": true,
-    "no-empty-interface": true,
+    "no-empty-interface": false,
     "no-object-literal-type-assertion": false,
     "jsx-no-multiline-js": true,
     "no-unused-expression": true,
@@ -75,7 +75,7 @@
     "triple-equals": [true, "allow-null-check"],
     "type-literal-delimiter": false,
     "typedef": [true, "property-declaration"],
-    "variable-name": [true, "ban-keywords", "check-format", "allow-pascal-case", "allow-leading-underscore"],
+    "variable-name": [false, "ban-keywords", "check-format", "allow-pascal-case", "allow-leading-underscore"],
     "no-shadowed-variable": true,
 
     "jsx-no-lambda": true,

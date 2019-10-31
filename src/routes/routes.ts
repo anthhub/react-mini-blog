@@ -8,8 +8,8 @@ const routes: IRoute[] = [
     childRoutes: [
       { path: '/', component: 'Home' },
       { path: '/home', component: 'Home' },
-      { path: '/post', component: 'Post' },
-      { path: '/test', component: 'Test' }
+      { path: '/post/:id', component: 'Post' },
+      { path: '/test', component: 'Test' },
       // { path: 'article/:id', component: Article },
     ],
   },

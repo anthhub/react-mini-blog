@@ -1,9 +1,9 @@
-import React from 'react';
+import React from 'react'
 // import { connect } from 'react-redux';
-import { Wrapper } from './style';
+import { Wrapper } from './style'
 
-const Recommended: React.FC = (props) => {
-	return <Wrapper />;
-};
+const Recommended: React.FC = props => {
+  return <Wrapper />
+}
 
-export default Recommended;
+export default Recommended

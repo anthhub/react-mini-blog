@@ -1,17 +1,17 @@
 import { getArticles } from '@/Api/article'
+import { ArticleEntity } from '@/entities/article.entity'
 import useFetch from '@/hooks/useFetch'
-import React, { useEffect } from 'react'
+import { IPage } from '@/interfaces/common.interface'
+import React from 'react'
 // import { connect } from 'react-redux';
 import Article from '../Article'
 import { Wrapper } from './style'
 
 const ArticleList: React.FC = props => {
-  const { data, doFetch } = useFetch(getArticles)
+  const { data } = useFetch(getArticles)
   console.log('%c%s', 'color: #20bd08;font-size:15px', '===TQY===: data', data)
 
-  useEffect(() => {
-    doFetch()
-  }, [])
+  const list = (data && (data as IPage<ArticleEntity>).edges) || []
 
   return (
     <Wrapper>
@@ -32,26 +32,9 @@ const ArticleList: React.FC = props => {
       </header>
 
       <ul>
-        <Article />
-        <Article />
-        <Article />
-        <Article />
-        <Article />
-        <Article />
-        <Article />
-        <Article />
-        <Article />
-        <Article />
-        <Article />
-        <Article />
-        <Article />
-        <Article />
-        <Article />
-        <Article />
-        <Article />
-        <Article />
-        <Article />
-        <Article />
+        {list.map((item: ArticleEntity) => (
+          <Article {...item} key={item.id} />
+        ))}
       </ul>
     </Wrapper>
   )
