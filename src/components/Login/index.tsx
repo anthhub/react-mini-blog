@@ -11,7 +11,7 @@ const Login: React.FC = (props) => {
 				<i className="close-btn" />
 				<div className="input-panel">
 					<h1 className="title">注册</h1>
-					<div>
+					<div className="input-group">
 						<input className="input" placeholder="请输入邮箱" />
 						<input type="password" className="input" placeholder="请输入密码（不少于 6 位）" />
 					</div>

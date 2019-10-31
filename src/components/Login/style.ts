@@ -5,6 +5,8 @@
 // `
 
 import styled from 'styled-components';
+import closePicGray from '../../statics/close-gray.png'
+import closePicBlack from '../../statics/close-black.png'
 
 export const Wrapper = styled.div`
 	position: fixed;
@@ -26,54 +28,56 @@ export const Wrapper = styled.div`
 		background: #fff;
 		border-radius: 2px;
 
+		.close-btn {
+			display:block;
+			width:10px;
+			height:10px;
+			background: ${closePicGray} no-repeat center/contain;
+		}
+
 		.title {
 			margin-bottom: 24px;
 			font-size: 18px;
 			font-weight: 700;
 		}
 
-		.input {
-			margin-bottom: 10px;
-			padding: 10px;
-			width: 100%;
-			color: #000;
-			border: 1px solid #e9e9e9;
-			border-radius: 2px;
-			box-sizing: border-box;
+		.input-group {
+			margin-bottom: 6px;
+			.input {
+				margin-bottom: 10px;
+				padding: 10px;
+				width: 100%;
+				color: #000;
+				border: 1px solid #e9e9e9;
+				border-radius: 2px;
+				box-sizing: border-box;
 
-			// 兼容不同浏览器的 placeholder
-			input::-webkit-input-placeholder,
-			textarea::-webkit-input-placeholder {
-				color: #666;
-				font-size: 16px;
-			}
+				// 兼容不同浏览器的 placeholder
+				input::-webkit-input-placeholder,
+				textarea::-webkit-input-placeholder {
+					color: #666;
+					font-size: 16px;
+				}
 
-			input:-moz-placeholder,
-			textarea:-moz-placeholder {
-				color: #666;
-				font-size: 16px;
-			}
+				input:-moz-placeholder,
+				textarea:-moz-placeholder {
+					color: #666;
+					font-size: 16px;
+				}
 
-			input::-moz-placeholder,
-			textarea::-moz-placeholder {
-				color: #666;
-				font-size: 16px;
-			}
+				input::-moz-placeholder,
+				textarea::-moz-placeholder {
+					color: #666;
+					font-size: 16px;
+				}
 
-			input:-ms-input-placeholder,
-			textarea:-ms-input-placeholder {
-				color: #666;
-				font-size: 16px;
+				input:-ms-input-placeholder,
+				textarea:-ms-input-placeholder {
+					color: #666;
+					font-size: 16px;
+				}
 			}
 		}
-
-		.switch {
-			margin-top: 12px;
-			font-size: 14px;
-			color: #007fff;
-			text-align: center;
-		}
-
 		.commit-btn {
 			width: 100%;
 			height: 28px;
@@ -83,6 +87,13 @@ export const Wrapper = styled.div`
 			border: none;
 			outline: none;
 			cursor: pointer;
+		}
+
+		.switch {
+			margin-top: 12px;
+			font-size: 14px;
+			color: #007fff;
+			text-align: center;
 		}
 	}
 `;
