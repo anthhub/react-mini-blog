@@ -1,30 +1,34 @@
-import React from 'react'
+import { ArticleEntity } from '@/entities/article.entity'
+import React, { memo } from 'react'
 import { Link } from 'react-router-dom'
 // import { connect } from 'react-redux';
 import { Wrapper } from './style'
 
-const Article: React.FC = props => {
+interface IProps extends ArticleEntity {}
+
+const Article: React.FC<IProps> = ({ title, update_at, author, type, screenshot, id }) => {
+  console.log('%c%s', 'color: #20bd08;font-size:15px', '===TQY===: screenshot', screenshot)
   return (
-    <Wrapper>
+    <Wrapper screenshot={screenshot}>
       <li>
-        <div>
+        <Link to={`/post/${id}`}>
           <section className="content">
             <div className="info-box">
               <div>
                 <ul className="info-row">
                   <li className="column info-item">专栏</li>
                   <li className="info-item">
-                    <a className="user-link">前端小智</a>
+                    <a className="user-link">{author}</a>
                   </li>
-                  <li className="info-item">3小时前</li>
+                  <li className="info-item">{update_at}</li>
                   <li className="">
-                    <a className="tag-link">JavaScript</a>
+                    <a className="tag-link">{type}</a>
                   </li>
                 </ul>
               </div>
 
               <div className="title">
-                <div className="title-link">重温一下 JS 进阶需要掌握的 13 个概念</div>
+                <div className="title-link">{title}</div>
               </div>
 
               <div>
@@ -45,18 +49,12 @@ const Article: React.FC = props => {
               </div>
             </div>
 
-            <div
-              className="thumb"
-              style={{
-                background:
-                  'url(\'https://ss1.baidu.com/-4o3dSag_xI4khGko9WTAnF6hhy/image/h%3D300/sign=7ecc7f20ae0f4bfb93d09854334e788f/10dfa9ec8a1363279e1ed28c9b8fa0ec09fac79a.jpg\') no-repeat center/cover',
-              }}
-            />
+            <div className="thumb" />
           </section>
-        </div>
+        </Link>
       </li>
     </Wrapper>
   )
 }
 
-export default Article
+export default memo(Article)

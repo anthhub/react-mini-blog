@@ -10850,10 +10850,10 @@ typedarray@^0.0.6:
   resolved "https://registry.npm.taobao.org/typedarray/download/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
   integrity sha1-hnrHTjhkGHsdPUfZlqeOxciDB3c=
 
-typescript@3.6.4:
-  version "3.6.4"
-  resolved "https://registry.npm.taobao.org/typescript/download/typescript-3.6.4.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Ftypescript%2Fdownload%2Ftypescript-3.6.4.tgz#b18752bb3792bc1a0281335f7f6ebf1bbfc5b91d"
-  integrity sha1-sYdSuzeSvBoCgTNff26/G7/FuR0=
+typescript@^3.8.0-dev.20191030:
+  version "3.8.0-dev.20191030"
+  resolved "https://registry.npm.taobao.org/typescript/download/typescript-3.8.0-dev.20191030.tgz#0c155abbdfbeb254b45e53e5934e508eff429826"
+  integrity sha1-DBVau9++slS0XlPlk05Qjv9CmCY=
 
 ua-parser-js@^0.7.18:
   version "0.7.20"
