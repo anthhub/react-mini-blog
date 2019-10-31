@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 
 type promiseCb = (args: any) => Promise<any>
 
-export default function useFetch<T, U, V>(request: V & promiseCb, initialRequestParam?: T, initialData?: U) {
+export default function useFetch<U, V, T>(request: V & promiseCb, initialRequestParam?: T, initialData?: U) {
   const [data, setData] = useState(initialData)
   const [isLoading, setIsLoading] = useState(false)
   const [isError, setIsError] = useState(false)
@@ -15,14 +15,17 @@ export default function useFetch<T, U, V>(request: V & promiseCb, initialRequest
     async function fetchData() {
       try {
         const result = await request(param)
-        setData(result)
+
+        if (!didCancel) {
+          setData(result)
+        }
       } catch (error) {
         if (!didCancel) {
           setIsError(true)
         }
+      } finally {
+        setIsLoading(false)
       }
-
-      setIsLoading(false)
     }
     fetchData()
     return () => {
@@ -30,7 +33,7 @@ export default function useFetch<T, U, V>(request: V & promiseCb, initialRequest
     }
   }, [param])
 
-  function doFetch(arg: T) {
+  function doFetch(arg?: T) {
     setParam(arg)
   }
 

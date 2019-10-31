@@ -1,26 +1,26 @@
-import React, { useContext, useReducer } from 'react';
-import { usePersistedContext, usePersistedReducer } from '@/hooks/usePersist';
+import { usePersistedContext, usePersistedReducer } from '@/hooks/usePersist'
+import React, { useContext, useReducer } from 'react'
 
-import Store from './redux/context';
-import reducer from './redux/reducer';
+import Store from './redux/context'
+import reducer from './redux/reducer'
 
-import AppRouter from './routes';
+import AppRouter from './routes'
 
-import { GlobalStyle } from './style';
+import { GlobalStyle } from './style'
 
 const App: React.FC = () => {
-	const globalStore = usePersistedContext(useContext(Store), 'state', false);
+  const globalStore = usePersistedContext(useContext(Store), 'state', false)
 
-	const [ state, dispatch ] = usePersistedReducer(useReducer(reducer, globalStore), 'state');
+  const [state, dispatch] = usePersistedReducer(useReducer(reducer, globalStore), 'state')
 
-	console.log('%c%s', 'color: #20bd08;font-size:15px', '===TQY===: App:React.FC -> state', state);
+  console.log('%c%s', 'color: #20bd08;font-size:15px', '===TQY===: App:React.FC -> state', state)
 
-	return (
-		<Store.Provider value={{ ...state, dispatch }}>
-			<GlobalStyle />
-			<AppRouter />
-		</Store.Provider>
-	);
-};
+  return (
+    <Store.Provider value={{ ...state, dispatch }}>
+      <GlobalStyle />
+      <AppRouter />
+    </Store.Provider>
+  )
+}
 
-export default App;
+export default App
