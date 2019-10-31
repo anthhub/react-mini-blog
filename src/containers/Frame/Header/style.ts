@@ -146,7 +146,7 @@ export const Wrapper = styled.div`
 				}
 			}
 
-			.login-part {
+			.login-area {
 				color: #007fff;
 				font-size: 16px;
 				padding-right: 0;

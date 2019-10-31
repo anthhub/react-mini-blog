@@ -17,5 +17,6 @@ export const lazyComponents = {
   Frame,
   Home: withSuspense(lazy(() => import('../pages/home'))),
   Post: withSuspense(lazy(() => import('../pages/post'))),
-  Test: withSuspense(lazy(() => import('../pages/test'))),
+  Settings: withSuspense(lazy(() => import('../pages/settings'))),
+  Test: withSuspense(lazy(() => import('../pages/test')))
 }

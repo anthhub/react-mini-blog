@@ -56,7 +56,7 @@ const Header: React.FC = (props) => {
 								<div className="avatar" />
 							</li>
 						) : (
-							<li className="nav-item login-part">
+							<li className="nav-item login-area">
 								<span className="login">登录</span>
 								<span className="register">注册</span>
 							</li>
