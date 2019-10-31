@@ -5,8 +5,8 @@
 // `
 
 import styled from 'styled-components';
-import closePicGray from '../../statics/close-gray.png'
-import closePicBlack from '../../statics/close-black.png'
+import closePicGray from '../../../statics/close-gray.png';
+import closePicBlack from '../../../statics/close-black.png';
 
 export const Wrapper = styled.div`
 	position: fixed;
@@ -29,10 +29,15 @@ export const Wrapper = styled.div`
 		border-radius: 2px;
 
 		.close-btn {
-			display:block;
-			width:10px;
-			height:10px;
-			background: ${closePicGray} no-repeat center/contain;
+			float: right;
+			width: 20px;
+			height: 20px;
+			background: url(${closePicGray}) no-repeat center/contain;
+			cursor: pointer;
+
+			:hover {
+				background: url(${closePicBlack}) no-repeat center/contain;
+			}
 		}
 
 		.title {
@@ -53,26 +58,22 @@ export const Wrapper = styled.div`
 				box-sizing: border-box;
 
 				// 兼容不同浏览器的 placeholder
-				input::-webkit-input-placeholder,
-				textarea::-webkit-input-placeholder {
+				::-webkit-input-placeholder {
 					color: #666;
 					font-size: 16px;
 				}
 
-				input:-moz-placeholder,
-				textarea:-moz-placeholder {
+				:-moz-placeholder {
 					color: #666;
 					font-size: 16px;
 				}
 
-				input::-moz-placeholder,
-				textarea::-moz-placeholder {
+				::-moz-placeholder {
 					color: #666;
 					font-size: 16px;
 				}
 
-				input:-ms-input-placeholder,
-				textarea:-ms-input-placeholder {
+				:-ms-input-placeholder {
 					color: #666;
 					font-size: 16px;
 				}
@@ -94,6 +95,7 @@ export const Wrapper = styled.div`
 			font-size: 14px;
 			color: #007fff;
 			text-align: center;
+			cursor: pointer;
 		}
 	}
 `;
