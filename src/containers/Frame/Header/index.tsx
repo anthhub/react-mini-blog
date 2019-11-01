@@ -1,6 +1,6 @@
 // import { connect } from 'react-redux';
 // import { Button, Input } from 'antd';
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Wrapper } from './style';
 import Login from '../Login';
@@ -14,6 +14,7 @@ const loginStatus: boolean = true;
 const Header: React.FC = (props) => {
 	// 是否显示 Login 组件
 	const { flag, setFalse, setTrue } = useFlag(false);
+	const [ showDropdown, setDropdown ] = useState(false);
 
 	return (
 		<Wrapper>
@@ -46,7 +47,8 @@ const Header: React.FC = (props) => {
 							<form className="search-form">
 								{/* <Input style={{ width: 156, height: 32 }} /> */}
 								<input className="search-input" placeholder="搜索" />
-								<img alt='search'
+								<img
+									alt="search"
 									className="search-icon"
 									src="https://b-gold-cdn.xitu.io/v3/static/img/juejin-search-icon.6f8ba1b.svg"
 								/>
@@ -57,21 +59,23 @@ const Header: React.FC = (props) => {
 						</li>
 						{loginStatus ? (
 							<li className="nav-item menu">
-								<div className="avatar" />
-								<ul className="dropdown-list">
-								<li>
-									<a className="menu-item">
-										<i />
-										<span>设置</span>
-									</a>
-								</li>
-								<li>
-									<a className="menu-item">
-										<i />
-										<span>登出</span>
-									</a>
-								</li>
-							</ul>
+								<div className="avatar" onClick={()=>setDropdown(true)}/>
+								{showDropdown && (
+									<ul className="dropdown-list">
+										<li>
+											<a className="menu-item" href="/settings">
+												<i />
+												<span>设置</span>
+											</a>
+										</li>
+										<li>
+											<a className="menu-item">
+												<i />
+												<span>登出</span>
+											</a>
+										</li>
+									</ul>
+								)}
 							</li>
 						) : (
 							<li className="nav-item login-area">
