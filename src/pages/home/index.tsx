@@ -11,7 +11,7 @@ const Home: React.FC = props => {
     <Wrapper>
       <ArticleList />
       <AppDownload />
-      <Login/>
+      {/* <Login/> */}
       <BackTop />
     </Wrapper>
   )
