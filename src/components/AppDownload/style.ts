@@ -33,6 +33,8 @@ export const Wrapper = styled.div`
 
 		.desc {
 			color: #909090;
+			font-size: 12px;
+			margin-top: 6px;
 		}
 	}
 `;
