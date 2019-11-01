@@ -33,7 +33,7 @@ const ArticleList: React.FC = props => {
 
       <ul>
         {list.map((item: ArticleEntity) => (
-          <Article {...item} key={item.id} />
+          <Article {...item} key={item._id} />
         ))}
       </ul>
     </Wrapper>
