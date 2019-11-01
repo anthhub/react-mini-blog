@@ -16,7 +16,7 @@ const getView = (tag: number) => {
 	}
 };
 
-const Settings: React.FC = (props) => {
+const Editor: React.FC = (props) => {
 	return (
 		<Wrapper>
 			{/* 第一版只做个人资料页面 不显示导航栏 若要加导航栏 记得改 Profile 组件的 margin-top */}
@@ -26,4 +26,4 @@ const Settings: React.FC = (props) => {
 	);
 };
 
-export default Settings;
+export default Editor;

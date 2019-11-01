@@ -3,8 +3,8 @@ import React from 'react';
 import { Wrapper } from './style';
 
 // 是否处于被编辑状态
-const editStatus: boolean = true;
-// const editStatus: boolean = false;
+// const editStatus: boolean = true;
+const editStatus: boolean = false;
 
 const getBtn = (status: boolean) => {
 	return status ? (
