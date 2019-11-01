@@ -1,6 +1,6 @@
 // import { connect } from 'react-redux';
 // import { Button, Input } from 'antd';
-import React, { useState } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { Wrapper } from './style';
 import Login from '../Login';
@@ -15,6 +15,23 @@ const Header: React.FC = (props) => {
 	// 是否显示 Login 组件
 	const { flag, setFalse, setTrue } = useFlag(false);
 	const [ showDropdown, setDropdown ] = useState(false);
+
+	const hideDropdown = useCallback((e: any) => {
+		console.log(e, { showDropdown });
+		setDropdown(false);
+	}, []);
+
+	console.log('render');
+
+	useEffect(() => {
+		console.log('mount');
+
+		document.addEventListener('click', hideDropdown);
+		return () => {
+			console.log('unmount');
+			document.removeEventListener('click', hideDropdown);
+		};
+	}, []);
 
 	return (
 		<Wrapper>
@@ -59,7 +76,14 @@ const Header: React.FC = (props) => {
 						</li>
 						{loginStatus ? (
 							<li className="nav-item menu">
-								<div className="avatar" onClick={()=>setDropdown(true)}/>
+								<div
+									className="avatar"
+									onClick={(e) => {
+										e.nativeEvent.stopImmediatePropagation();
+
+										setDropdown(true);
+									}}
+								/>
 								{showDropdown && (
 									<ul className="dropdown-list">
 										<li>
