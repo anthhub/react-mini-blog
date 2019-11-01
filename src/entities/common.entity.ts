@@ -1,5 +1,5 @@
 export class CommonEntity {
-  id!: string
+  _id!: string
 
   create_at!: number
 

@@ -6,12 +6,12 @@ import { Wrapper } from './style'
 
 interface IProps extends ArticleEntity {}
 
-const Article: React.FC<IProps> = ({ title, update_at, author, type, screenshot, id }) => {
+const Article: React.FC<IProps> = ({ title, update_at, author, type, screenshot, _id }) => {
   console.log('%c%s', 'color: #20bd08;font-size:15px', '===TQY===: screenshot', screenshot)
   return (
     <Wrapper screenshot={screenshot}>
       <li>
-        <Link to={`/post/${id}`}>
+        <Link to={`/post/${_id}`}>
           <section className="content">
             <div className="info-box">
               <div>
