@@ -4,11 +4,15 @@ import React from 'react';
 // import { connect } from 'react-redux';
 import { Wrapper } from './style';
 
-const Login: React.FC = (props) => {
+interface IProps {
+	onClose: (e: any) => void;
+}
+
+const Login: React.FC<IProps> = ({ onClose }) => {
 	return (
-		<Wrapper style={{ display: 'none' }}>
+		<Wrapper>
 			<form className="login-box">
-				<i className="close-btn" />
+				<i className="close-btn" onClick={onClose} />
 				<div className="input-panel">
 					<h1 className="title">注册</h1>
 					<div className="input-group">

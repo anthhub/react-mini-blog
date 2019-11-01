@@ -1,5 +1,5 @@
 import React from 'react';
-// import Navigation from './Navigation';
+import Navigation from './Navigation';
 import Profile from './Profile';
 import Password from './Password';
 import { Wrapper } from './style';

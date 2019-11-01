@@ -11,8 +11,7 @@ import editIcon from '../../../statics/edit.svg';
 export const Wrapper = styled.div`
 	width: 696px;
 	padding: 32px 48px 84px;
-	/* 加导航栏（46px）后 margin-top: 128px; */
-	margin: 82px 0 24px;
+	margin: 128px 0 24px;
 	background: #fff;
 	border-radius: 2px;
 	box-shadow: 0 1px 2px 0 rgba(0, 0, 0, .05);
