@@ -2,6 +2,11 @@ import { TLazyComponentsKeys } from './lazyComponents';
 
 const routes: IRoute[] = [
 	{
+		path: '/editor',
+		exact: true,
+		component: 'Test'
+	},
+	{
 		path: '/',
 		exact: true,
 		component: 'Frame',

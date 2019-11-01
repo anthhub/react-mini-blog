@@ -4,12 +4,17 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Wrapper } from './style';
 import Login from '../Login';
+import useFlag from '@/hooks/useFlag';
 
-// 登录和退出时导航栏右侧有差异
-// const loginStatus: boolean = true;
-const loginStatus: boolean = false;
+// 登录状态 true
+// 退出状态 false
+const loginStatus: boolean = true;
+// const loginStatus: boolean = false;
 
 const Header: React.FC = (props) => {
+	// 是否显示 Login 组件
+	const { flag, setFalse, setTrue } = useFlag(false);
+
 	return (
 		// 把传入的 theme 作为类名，若无传入的属性，类名为空
 		<Wrapper>
@@ -42,7 +47,7 @@ const Header: React.FC = (props) => {
 							<form className="search-form">
 								{/* <Input style={{ width: 156, height: 32 }} /> */}
 								<input className="search-input" placeholder="搜索" />
-								<img
+								<img alt='search'
 									className="search-icon"
 									src="https://b-gold-cdn.xitu.io/v3/static/img/juejin-search-icon.6f8ba1b.svg"
 								/>
@@ -57,14 +62,18 @@ const Header: React.FC = (props) => {
 							</li>
 						) : (
 							<li className="nav-item login-area">
-								<span className="login">登录</span>
-								<span className="register">注册</span>
+								<span className="login" onClick={setTrue}>
+									登录
+								</span>
+								<span className="register" onClick={setTrue}>
+									注册
+								</span>
 							</li>
 						)}
 					</ul>
 				</nav>
 			</header>
-			<Login />
+			{flag && <Login onClose={setFalse} />}
 		</Wrapper>
 	);
 };

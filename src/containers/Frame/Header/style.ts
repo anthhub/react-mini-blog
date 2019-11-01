@@ -11,7 +11,7 @@ export const Wrapper = styled.div`
 	height: 60px;
 	// border-bottom: 1px solid #f1f1f1;
 	box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-	background: #ffffff;
+	background: #fff;
 
 	.header {
 		display: flex;
@@ -43,7 +43,7 @@ export const Wrapper = styled.div`
 			width: 838px;
 			height: 60px;
 
-			/* 导航栏暂时你不用 */
+			/* 导航栏暂时不用 */
 			.nav-list {
 				display: flex;
 				flex-direction: row;
@@ -150,6 +150,11 @@ export const Wrapper = styled.div`
 				color: #007fff;
 				font-size: 16px;
 				padding-right: 0;
+
+				.login,
+				.register {
+					cursor: pointer;
+				}
 
 				.login::after {
 					content: '·';

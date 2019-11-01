@@ -1,5 +1,5 @@
 // 全局样式
-import { createGlobalStyle } from 'styled-components'
+import { createGlobalStyle } from 'styled-components';
 
 export const GlobalStyle = createGlobalStyle`
 	/* http://meyerweb.com/eric/tools/css/reset/
@@ -34,9 +34,9 @@ export const GlobalStyle = createGlobalStyle`
 	}
 	body {
 		font-size: 12px;
-    font-family: -apple-system, SF UI Text, PingFang SC, Hiragino Sans GB, Microsoft YaHei, WenQuanYi Micro Hei, Helvetica Neue, Helvetica,Arial, sans-serif;
-    color: #333;
-		// 掘金 body 背景色是灰色（上滑下滑到底都能看到）
+    	font-family: -apple-system, SF UI Text, PingFang SC, Hiragino Sans GB, Microsoft YaHei, WenQuanYi Micro Hei, Helvetica Neue, Helvetica,Arial, sans-serif;
+    	color: #333;
+		// 掘金 body 背景色是灰色
 		background-color: #f4f5f5;
 	}
 	ol, ul {
@@ -55,4 +55,4 @@ export const GlobalStyle = createGlobalStyle`
 		border-spacing: 0;
 	}
 
-`
+`;
