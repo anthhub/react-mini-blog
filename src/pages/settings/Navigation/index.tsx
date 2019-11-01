@@ -7,8 +7,6 @@ const Navigation: React.FC = (props) => {
 	// 被选中的导航栏标签（由父组件传入）第一项默认 false 第二项为 true
 	const { flag, setFalse, setTrue } = useFlag(false);
 
-	// console.log({ flag });
-
 	return (
 		<Wrapper>
 			<ul className="nav-list">
