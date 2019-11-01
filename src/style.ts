@@ -37,7 +37,11 @@ export const GlobalStyle = createGlobalStyle`
     	font-family: -apple-system, SF UI Text, PingFang SC, Hiragino Sans GB, Microsoft YaHei, WenQuanYi Micro Hei, Helvetica Neue, Helvetica,Arial, sans-serif;
     	color: #333;
 		// 掘金 body 背景色是灰色
+<<<<<<< HEAD
 		background-color: #f4f5f5 !important;
+=======
+		background-color: #f4f5f5;
+>>>>>>> why white background
 	}
 	ol, ul {
 		list-style: none;

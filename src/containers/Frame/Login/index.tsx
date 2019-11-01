@@ -10,7 +10,7 @@ interface IProps {
 
 const Login: React.FC<IProps> = ({ onClose }) => {
 	return (
-		<Wrapper style={{ display: 'none' }}>
+		<Wrapper>
 			<form className="login-box">
 				<i className="close-btn" onClick={onClose} />
 				<div className="input-panel">
