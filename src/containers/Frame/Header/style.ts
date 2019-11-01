@@ -135,6 +135,7 @@ export const Wrapper = styled.div`
 			}
 
 			.menu {
+				position: relative;
 				padding-right: 0;
 				cursor: pointer;
 
@@ -143,6 +144,25 @@ export const Wrapper = styled.div`
 					height: 32px;
 					border-radius: 50%;
 					background: url(${avatarPic}) no-repeat center/Contain;
+				}
+
+				.dropdown-list {
+					/* display: none; */
+					position: absolute;
+					top: 100%;
+					right: 0;
+					width: 158px;
+					padding: 12px;
+					background: #fff;
+					border: 1px solid rgba(177, 180, 185, .45);
+					border-radius: 4px;
+					box-shadow: 0 1px 2px 0 rgba(0, 0, 0, .1);
+					.menu-item {
+						display: flex;
+						padding: 6px 12px;
+						font-size: 16px;
+						color: #71777c;
+					}
 				}
 			}
 
