@@ -5,6 +5,8 @@ export class ArticleEntity extends CommonEntity {
 
   content!: string
 
+  html!: string
+
   title!: string
 
   screenshot!: string
