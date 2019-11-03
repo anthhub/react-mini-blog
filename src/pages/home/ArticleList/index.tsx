@@ -1,7 +1,7 @@
 import { getArticles } from '@/Api/article'
-import { ArticleEntity } from '@/entities/article.entity'
+import { ArticleEntity } from '@/modal/entities/article.entity'
 import useFetch from '@/hooks/useFetch'
-import { IPage } from '@/interfaces/common.interface'
+import { IPage } from '@/modal/interfaces/common.interface'
 import React from 'react'
 // import { connect } from 'react-redux';
 import Article from '../Article'
@@ -11,7 +11,7 @@ const ArticleList: React.FC = props => {
   const { data } = useFetch(getArticles)
   console.log('%c%s', 'color: #20bd08;font-size:15px', '===TQY===: data', data)
 
-  const list = (data && (data as IPage<ArticleEntity>).edges) || []
+  const list = (data && data.edges) || []
 
   return (
     <Wrapper>
@@ -33,7 +33,7 @@ const ArticleList: React.FC = props => {
 
       <ul>
         {list.map((item: ArticleEntity) => (
-          <Article {...item} key={item._id} />
+          <Article {...item} key={item.id} />
         ))}
       </ul>
     </Wrapper>
