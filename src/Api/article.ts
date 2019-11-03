@@ -3,7 +3,7 @@ import { ArticleEntity } from '@/modal/entities/article.entity'
 import { IPage } from '@/modal/interfaces/common.interface'
 import axios from 'axios'
 
-const baseUrl = 'http://101.132.79.152/api/v1'
+const baseUrl = process.env.NODE_ENV === 'development' ? 'http://0.0.0.0:3003/api/v1' : 'http://101.132.79.152/api/v1'
 
 const article = {
   query: `/article/query`,

@@ -7,7 +7,7 @@ import { Wrapper } from './style'
 
 interface IProps extends ArticleEntity {}
 
-const Article: React.FC<IProps> = ({ update_at, content, author, title }) => {
+const Article: React.FC<IProps> = ({ update_at, content, author, title, html }) => {
   return (
     <Wrapper>
       <div className="author">
@@ -32,7 +32,7 @@ const Article: React.FC<IProps> = ({ update_at, content, author, title }) => {
       </div>
       <h1 className="article-title">{title}</h1>
       <div className="article-content">
-        <div className="article-detail" dangerouslySetInnerHTML={{ __html: translateMarkdown(content || '') }} />
+        <div className="article-detail" dangerouslySetInnerHTML={{ __html: html || translateMarkdown(content || '') }} />
       </div>
     </Wrapper>
   )

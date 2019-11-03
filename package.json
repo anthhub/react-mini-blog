@@ -26,6 +26,7 @@
     "camelcase": "^5.2.0",
     "case-sensitive-paths-webpack-plugin": "2.2.0",
     "codemirror": "^5.49.2",
+    "cross-env": "^6.0.3",
     "css-loader": "2.1.1",
     "custom-tslint-rules-collection": "^1.2.0",
     "dotenv": "6.2.0",
@@ -88,7 +89,9 @@
     "xss": "^1.0.6"
   },
   "scripts": {
-    "start": "node scripts/start.js",
+    "start": "cross-env NODE_ENV=development node scripts/start.js",
+    "start-test": "cross-env NODE_ENV=test node scripts/start.js",
+    "start-prod": "cross-env NODE_ENV=production node scripts/start.js",
     "build": "node scripts/build.js",
     "test": "node scripts/test.js"
   },
