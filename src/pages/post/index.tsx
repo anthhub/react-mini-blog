@@ -1,5 +1,5 @@
 import { getArticle } from '@/Api/article'
-import { ArticleEntity } from '@/entities/article.entity'
+import { ArticleEntity } from '@/modal/entities/article.entity'
 import useFetch from '@/hooks/useFetch'
 import { BackTop } from 'antd'
 import React from 'react'

@@ -4,7 +4,7 @@ const routes: IRoute[] = [
   {
     path: '/editor',
     exact: true,
-    component: 'Test',
+    component: 'Demo',
   },
   {
     path: '/',

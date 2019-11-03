@@ -1,4 +1,4 @@
-import { ArticleEntity } from '@/entities/article.entity'
+import { ArticleEntity } from '@/modal/entities/article.entity'
 import React, { memo } from 'react'
 import { Link } from 'react-router-dom'
 // import { connect } from 'react-redux';
@@ -6,12 +6,12 @@ import { Wrapper } from './style'
 
 interface IProps extends ArticleEntity {}
 
-const Article: React.FC<IProps> = ({ title, update_at, author, type, screenshot, _id }) => {
+const Article: React.FC<IProps> = ({ title, update_at, author, type, screenshot, id }) => {
   console.log('%c%s', 'color: #20bd08;font-size:15px', '===TQY===: screenshot', screenshot)
   return (
     <Wrapper screenshot={screenshot}>
       <li>
-        <Link to={`/post/${_id}`}>
+        <Link to={`/post/${id}`}>
           <section className="content">
             <div className="info-box">
               <div>
