@@ -35,6 +35,7 @@ const Demo: React.FC = () => {
     const data = createArticle({
       author: '测试创建c',
       content: content.markdown,
+      html: content.html,
       title: '测试创建 标题',
       screenshot: 'https://imgphoto.gmw.cn/attachement/jpg/site2/20191103/f44d3075890f1f28a06e01.JPG',
       type: '测试创建 js',

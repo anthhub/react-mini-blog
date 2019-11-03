@@ -1,6 +1,7 @@
 // import { connect } from 'react-redux';
 // import { Button, Input } from 'antd';
 import useFlag from '@/hooks/useFlag'
+import { useIsLogin, useSelector } from '@/redux/context'
 import React, { useCallback, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import Login from '../Login'
@@ -8,13 +9,17 @@ import { Wrapper } from './style'
 
 // 登录状态 true
 // 退出状态 false
-const loginStatus = true
+// const loginStatus = true
 // const loginStatus: boolean = false;
 
 const Header: React.FC = props => {
   // 是否显示 Login 组件
   const { flag, setFalse, setTrue } = useFlag(false)
   const [showDropdown, setDropdown] = useState(false)
+
+  const isLogin = useIsLogin()
+
+  console.log('%c%s', 'color: #20bd08;font-size:15px', '===TQY===: isLogin', isLogin, useSelector(l => l))
 
   const hideDropdown = useCallback((e: any) => {
     console.log(e, { showDropdown })
@@ -65,13 +70,12 @@ const Header: React.FC = props => {
             <li className="nav-item write">
               <button className="write-btn">写文章</button>
             </li>
-            {loginStatus ? (
+            {isLogin ? (
               <li className="nav-item menu">
                 <div
                   className="avatar"
                   onClick={e => {
                     e.nativeEvent.stopImmediatePropagation()
-
                     setDropdown(true)
                   }}
                 />
@@ -105,7 +109,7 @@ const Header: React.FC = props => {
           </ul>
         </nav>
       </header>
-      {flag && <Login onClose={setFalse} />}
+      {flag && !isLogin && <Login onClose={setFalse} />}
     </Wrapper>
   )
 }

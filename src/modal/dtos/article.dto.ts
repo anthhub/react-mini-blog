@@ -3,6 +3,8 @@ export class CreateArticleDto {
 
   readonly content!: string
 
+  readonly html!: string
+
   readonly title!: string
 
   readonly screenshot!: string
