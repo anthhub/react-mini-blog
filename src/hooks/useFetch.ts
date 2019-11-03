@@ -1,8 +1,6 @@
 import { useEffect, useState } from 'react'
 
-type promiseCb = (args: any) => Promise<any>
-
-export default function useFetch<U, V, T>(request: V & promiseCb, initialRequestParam?: T, initialData?: U) {
+export default function useFetch<T, V>(request: (args: T) => Promise<V>, initialRequestParam?: T, initialData?: V) {
   const [data, setData] = useState(initialData)
   const [isLoading, setIsLoading] = useState(false)
   const [isError, setIsError] = useState(false)
@@ -14,7 +12,7 @@ export default function useFetch<U, V, T>(request: V & promiseCb, initialRequest
     setIsLoading(true)
     async function fetchData() {
       try {
-        const result = await request(param)
+        const result = await request(param as T)
 
         if (!didCancel) {
           setData(result)
