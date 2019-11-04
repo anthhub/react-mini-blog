@@ -25,7 +25,7 @@ export const useDispatch = () => {
   return dispatch
 }
 
-export const useSelector = <T>(cb: (store: IStore) => T) => cb(useContext(Store))
+export const useSelector = <T>(cb: (store: IStore) => T | IStore = arg => arg) => cb(useContext(Store))
 
 export const useIsLogin = () => !!useContext(Store).user
 
