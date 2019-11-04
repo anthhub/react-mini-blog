@@ -5,7 +5,9 @@ import { useIsLogin, useSelector } from '@/redux/context';
 import React, { useCallback, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Login from '../Login';
+import Register from '../Register';
 import { Wrapper } from './style';
+import useToggle from '@/hooks/useToggle';
 
 // 登录状态 true
 // 退出状态 false
@@ -15,11 +17,15 @@ import { Wrapper } from './style';
 const Header: React.FC = (props) => {
 	// 是否显示 Login 组件
 	const { flag, setFalse, setTrue } = useFlag(false);
+
+	const { flag: flag2, setFalse: setFalse2, setTrue: setTrue2 } = useFlag(false);
+
+	// 是否显示下拉菜单
 	const [ showDropdown, setDropdown ] = useState(false);
 
 	const isLogin = useIsLogin();
 
-	console.log('%c%s', 'color: #20bd08;font-size:15px', '===TQY===: isLogin', isLogin, useSelector((l) => l));
+	console.log('%c%s', 'color: #20bd08; font-size:15px', '===TQY===: isLogin', isLogin, useSelector((l: any) => l));
 
 	const hideDropdown = useCallback((e: any) => {
 		console.log(e, { showDropdown });
@@ -32,6 +38,10 @@ const Header: React.FC = (props) => {
 			document.removeEventListener('click', hideDropdown);
 		};
 	}, []);
+
+	const confirmLogout = () => {
+		alert('确定登出吗？每一片贫瘠的土地都需要坚定的挖掘者！');
+	};
 
 	return (
 		<Wrapper>
@@ -89,13 +99,13 @@ const Header: React.FC = (props) => {
 									<ul className="dropdown-list">
 										<li>
 											<a className="menu-item" href="/settings">
-												<i className='setting-icon icon'/>
+												<i className="setting-icon icon" />
 												<span>设置</span>
 											</a>
 										</li>
 										<li>
-											<a className="menu-item">
-												<i className='logout-icon icon'/>
+											<a className="menu-item" onClick={confirmLogout}>
+												<i className="logout-icon icon" />
 												<span>登出</span>
 											</a>
 										</li>
@@ -107,7 +117,7 @@ const Header: React.FC = (props) => {
 								<span className="login" onClick={setTrue}>
 									登录
 								</span>
-								<span className="register" onClick={setTrue}>
+								<span className="register" onClick={setTrue2}>
 									注册
 								</span>
 							</li>
@@ -116,6 +126,7 @@ const Header: React.FC = (props) => {
 				</nav>
 			</header>
 			{flag && !isLogin && <Login onClose={setFalse} />}
+			{flag2 && !isLogin && <Register onClose={setFalse2} />}
 		</Wrapper>
 	);
 };
