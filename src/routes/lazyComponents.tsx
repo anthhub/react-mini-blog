@@ -20,5 +20,5 @@ export const lazyComponents = {
   Settings: withSuspense(lazy(() => import('../pages/settings'))),
   Editor: withSuspense(lazy(() => import('../pages/editor'))),
   Test: withSuspense(lazy(() => import('../pages/test'))),
-  Demo: withSuspense(lazy(() => import('../components/EditMarkdown'))),
+  EditMarkdown: withSuspense(lazy(() => import('../components/EditMarkdown'))),
 }

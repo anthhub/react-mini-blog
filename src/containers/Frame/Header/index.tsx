@@ -1,7 +1,7 @@
 // import { connect } from 'react-redux';
 // import { Button, Input } from 'antd';
 import useFlag from '@/hooks/useFlag';
-import { useIsLogin, useSelector } from '@/redux/context';
+import { useIsLogin, useSelector, useDispatch } from '@/redux/context';
 import React, { useCallback, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Login from '../Login';
@@ -27,6 +27,8 @@ const Header: React.FC = (props) => {
 
 	console.log('%c%s', 'color: #20bd08; font-size:15px', '===TQY===: isLogin', isLogin, useSelector((l: any) => l));
 
+	const dispatch = useDispatch();
+
 	const hideDropdown = useCallback((e: any) => {
 		console.log(e, { showDropdown });
 		setDropdown(false);
@@ -40,7 +42,10 @@ const Header: React.FC = (props) => {
 	}, []);
 
 	const confirmLogout = () => {
-		alert('确定登出吗？每一片贫瘠的土地都需要坚定的挖掘者！');
+		if (window.confirm('确定登出吗？每一片贫瘠的土地都需要坚定的挖掘者！')) {
+			dispatch({ type: 'LOGOUT' });
+		} else {
+		}
 	};
 
 	return (

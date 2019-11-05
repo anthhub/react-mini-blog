@@ -1,8 +1,8 @@
-import React from 'react';
-import Demo from '../../components/EditMarkdown';
+import React from 'react'
+import EditMarkdown from '../../components/EditMarkdown'
 
 const Editor: React.FC = (props) => {
-	return <Demo />;
-};
+	return <EditMarkdown />
+}
 
-export default Editor;
+export default Editor

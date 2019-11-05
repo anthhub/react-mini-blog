@@ -14,7 +14,7 @@ import 'codemirror/mode/markdown/markdown';
 import arrowIcon from '../../statics/arrow-down.svg';
 import avatarPic from '../../statics/avatar.png';
 
-const Demo: React.FC = () => {
+const EditMarkdown: React.FC = () => {
 	const contentRef = useRef<HTMLDivElement>(null);
 
 	const [ content, setContent ] = useState({ markdown: '', html: '' });
@@ -188,4 +188,4 @@ const Demo: React.FC = () => {
 	);
 };
 
-export default Demo;
+export default EditMarkdown;
