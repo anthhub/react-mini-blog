@@ -41,7 +41,13 @@ const Register: React.FC<IProps> = ({ onClose, onSwitch }) => {
 					<button className="commit-btn" onClick={onLogin}>
 						注册
 					</button>
-					<div className="switch" onClick={onSwitch}>
+					<div
+						className="switch"
+						onClick={(e) => {
+							onClose(e)
+							onSwitch(e)
+						}}
+					>
 						已有账号登录
 					</div>
 				</div>

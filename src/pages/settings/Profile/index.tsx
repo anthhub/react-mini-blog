@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 // import { connect } from 'react-redux';
 import { Wrapper } from './style';
 
 // 是否处于被编辑状态
 // const editStatus: boolean = true;
 const editStatus: boolean = false;
+// const [false,setEdit]=useState(false)
 
 const getBtn = (status: boolean) => {
 	return status ? (
@@ -35,6 +36,7 @@ const Profile: React.FC = (props) => {
 							<div className="upload">
 								<div className="hint">支持 jpg、png 格式大小 5M 以内的图片</div>
 								<button className="upload-btn">点击上传</button>
+								<input type='file' className='hidden-input'/>
 							</div>
 						</div>
 					</li>

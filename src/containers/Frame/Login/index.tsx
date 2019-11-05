@@ -39,7 +39,13 @@ const Login: React.FC<IProps> = ({ onClose, onSwitch }) => {
 					<button className="commit-btn" onClick={onLogin}>
 						登陆
 					</button>
-					<div className="switch" onClick={onSwitch}>
+					<div
+						className="switch"
+						onClick={(e) => {
+							onClose(e)
+							onSwitch(e)
+						}}
+					>
 						没有账号？注册
 					</div>
 				</div>

@@ -4,9 +4,9 @@
 
 // `
 
-import styled from 'styled-components';
-import avatarPic from '../../../statics/avatar.png';
-import editIcon from '../../../statics/edit.svg';
+import styled from 'styled-components'
+import avatarPic from '../../../statics/avatar.png'
+import editIcon from '../../../statics/edit.svg'
 
 export const Wrapper = styled.div`
 	width: 696px;
@@ -55,6 +55,7 @@ export const Wrapper = styled.div`
 			}
 
 			.upload {
+				position: relative;
 				margin-left: 12px;
 
 				.hint {
@@ -65,12 +66,25 @@ export const Wrapper = styled.div`
 
 				.upload-btn {
 					padding: 6px 16px;
+					line-height: 1.2;
+					font-size: 12px;
 					color: #fff;
 					background: #007fff;
 					border-radius: 2px;
 					border: none;
 					outline: none;
 					cursor: pointer;
+				}
+
+				.hidden-input {
+					position: absolute;
+					left: 0;
+					width: 80px;
+					height: 26px;
+					/* font-size: 0; 才能使得 cursor 生效 */
+					font-size: 0;
+					cursor: pointer;
+					opacity: 0;
 				}
 			}
 		}
@@ -134,4 +148,4 @@ export const Wrapper = styled.div`
 			}
 		}
 	}
-`;
+`
