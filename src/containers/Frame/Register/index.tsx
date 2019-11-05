@@ -10,14 +10,14 @@ interface IProps {
 	onClose(e: any): void;
 }
 
-const Login: React.FC<IProps> = ({ onClose }) => {
-	const { value: phonrNumber, onInputEvent: onChangenumber } = useInputEvent('');
+const Register: React.FC<IProps> = ({ onClose }) => {
+	const { value: phoneNumber, onInputEvent: onChangeNumber } = useInputEvent('');
 	const { value: password, onInputEvent: onChangePassword } = useInputEvent('');
 
 	const dispatch = useDispatch();
 
 	const onLogin = () => {
-		dispatch({ type: 'LOGIN', payload: { user: { phonrNumber, password } } });
+		dispatch({ type: 'LOGIN', payload: { user: { phoneNumber, password } } });
 	};
 
 	return (
@@ -25,9 +25,10 @@ const Login: React.FC<IProps> = ({ onClose }) => {
 			<form className="login-box">
 				<i className="close-btn" onClick={onClose} />
 				<div className="input-panel">
-					<h1 className="title">登陆</h1>
+					<h1 className="title">注册</h1>
 					<div className="input-group">
-						<input className="input" placeholder="请输入手机号" value={phonrNumber} onChange={onChangenumber} />
+						<input className="input" placeholder="请输入用户名" />
+						<input className="input" placeholder="请输入手机号" value={phoneNumber} onChange={onChangeNumber} />
 						<input
 							type="password"
 							className="input"
@@ -36,9 +37,9 @@ const Login: React.FC<IProps> = ({ onClose }) => {
 							onChange={onChangePassword}
 						/>
 					</div>
-					<button className="commit-btn" onClick={onLogin}>登陆</button>
-					<div className="switch" onClick={onLogin}>
-						没有账号？注册
+					<button className="commit-btn" onClick={onLogin}>注册</button>
+					<div className="switch" >
+						已有账号登录
 					</div>
 				</div>
 			</form>
@@ -46,4 +47,4 @@ const Login: React.FC<IProps> = ({ onClose }) => {
 	);
 };
 
-export default Login;
+export default Register;

@@ -1308,7 +1308,7 @@
   dependencies:
     "@babel/types" "^7.3.0"
 
-"@types/codemirror@^0.0.79":
+"@types/codemirror@0.0.79":
   version "0.0.79"
   resolved "https://registry.npm.taobao.org/@types/codemirror/download/@types/codemirror-0.0.79.tgz#914ff1723d3bb858c3639b428c33db28fb6bb426"
   integrity sha1-kU/xcj07uFjDY5tCjDPbKPtrtCY=
@@ -1426,10 +1426,18 @@
   dependencies:
     "@types/react" "*"
 
-"@types/react@*", "@types/react@^16.9.9":
+"@types/react@*":
   version "16.9.9"
   resolved "https://registry.npm.taobao.org/@types/react/download/@types/react-16.9.9.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40types%2Freact%2Fdownload%2F%40types%2Freact-16.9.9.tgz#a62c6f40f04bc7681be5e20975503a64fe783c3a"
   integrity sha1-pixvQPBLx2gb5eIJdVA6ZP54PDo=
+  dependencies:
+    "@types/prop-types" "*"
+    csstype "^2.2.0"
+
+"@types/react@^16.9.11":
+  version "16.9.11"
+  resolved "https://registry.npm.taobao.org/@types/react/download/@types/react-16.9.11.tgz?cache=0&sync_timestamp=1572464320120&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40types%2Freact%2Fdownload%2F%40types%2Freact-16.9.11.tgz#70e0b7ad79058a7842f25ccf2999807076ada120"
+  integrity sha1-cOC3rXkFinhC8lzPKZmAcHatoSA=
   dependencies:
     "@types/prop-types" "*"
     csstype "^2.2.0"
