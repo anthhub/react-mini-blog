@@ -1,24 +1,25 @@
 // 右侧 下载客户端小卡片
 
-import useInputEvent from '@/hooks/useInputEvent';
-import { useDispatch } from '@/redux/context';
-import React from 'react';
+import useInputEvent from '@/hooks/useInputEvent'
+import { useDispatch } from '@/redux/context'
+import React from 'react'
 // import { connect } from 'react-redux';
-import { Wrapper } from './style';
+import { Wrapper } from './style'
 
 interface IProps {
-	onClose(e: any): void;
+	onClose(e: any): void
+	onSwitch(e: any): void
 }
 
-const Register: React.FC<IProps> = ({ onClose }) => {
-	const { value: phoneNumber, onInputEvent: onChangeNumber } = useInputEvent('');
-	const { value: password, onInputEvent: onChangePassword } = useInputEvent('');
+const Register: React.FC<IProps> = ({ onClose, onSwitch }) => {
+	const { value: phoneNumber, onInputEvent: onChangeNumber } = useInputEvent('')
+	const { value: password, onInputEvent: onChangePassword } = useInputEvent('')
 
-	const dispatch = useDispatch();
+	const dispatch = useDispatch()
 
 	const onLogin = () => {
-		dispatch({ type: 'LOGIN', payload: { user: { phoneNumber, password } } });
-	};
+		dispatch({ type: 'LOGIN', payload: { user: { phoneNumber, password } } })
+	}
 
 	return (
 		<Wrapper>
@@ -37,14 +38,16 @@ const Register: React.FC<IProps> = ({ onClose }) => {
 							onChange={onChangePassword}
 						/>
 					</div>
-					<button className="commit-btn" onClick={onLogin}>注册</button>
-					<div className="switch" >
+					<button className="commit-btn" onClick={onLogin}>
+						注册
+					</button>
+					<div className="switch" onClick={onSwitch}>
 						已有账号登录
 					</div>
 				</div>
 			</form>
 		</Wrapper>
-	);
-};
+	)
+}
 
-export default Register;
+export default Register
