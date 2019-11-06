@@ -1,13 +1,13 @@
 // import { connect } from 'react-redux';
 // import { Button, Input } from 'antd';
-import useFlag from '@/hooks/useFlag';
-import { useIsLogin, useSelector, useDispatch } from '@/redux/context';
-import React, { useCallback, useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import Login from '../Login';
-import Register from '../Register';
-import { Wrapper } from './style';
-import useToggle from '@/hooks/useToggle';
+import useFlag from '@/hooks/useFlag'
+import { useIsLogin, useSelector, useDispatch } from '@/redux/context'
+import React, { useCallback, useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
+import Login from '../Login'
+import Register from '../Register'
+import { Wrapper } from './style'
+import useToggle from '@/hooks/useToggle'
 
 // 登录状态 true
 // 退出状态 false
@@ -16,37 +16,37 @@ import useToggle from '@/hooks/useToggle';
 
 const Header: React.FC = (props) => {
 	// 是否显示 Login 组件
-	const { flag, setFalse, setTrue } = useFlag(false);
+	const { flag, setFalse, setTrue } = useFlag(false)
 
-	const { flag: flag2, setFalse: setFalse2, setTrue: setTrue2 } = useFlag(false);
+	const { flag: flag2, setFalse: setFalse2, setTrue: setTrue2 } = useFlag(false)
 
 	// 是否显示下拉菜单
-	const [ showDropdown, setDropdown ] = useState(false);
+	const [ showDropdown, setDropdown ] = useState(false)
 
-	const isLogin = useIsLogin();
+	const isLogin = useIsLogin()
 
-	console.log('%c%s', 'color: #20bd08; font-size:15px', '===TQY===: isLogin', isLogin, useSelector((l: any) => l));
+	console.log('%c%s', 'color: #20bd08; font-size:15px', '===TQY===: isLogin', isLogin, useSelector((l: any) => l))
 
-	const dispatch = useDispatch();
+	const dispatch = useDispatch()
 
 	const hideDropdown = useCallback((e: any) => {
-		console.log(e, { showDropdown });
-		setDropdown(false);
-	}, []);
+		console.log(e, { showDropdown })
+		setDropdown(false)
+	}, [])
 
 	useEffect(() => {
-		document.addEventListener('click', hideDropdown);
+		document.addEventListener('click', hideDropdown)
 		return () => {
-			document.removeEventListener('click', hideDropdown);
-		};
-	}, []);
+			document.removeEventListener('click', hideDropdown)
+		}
+	}, [])
 
+	// 登出确定框
 	const confirmLogout = () => {
 		if (window.confirm('确定登出吗？每一片贫瘠的土地都需要坚定的挖掘者！')) {
-			dispatch({ type: 'LOGOUT' });
-		} else {
+			dispatch({ type: 'LOGOUT' })
 		}
-	};
+	}
 
 	return (
 		<Wrapper>
@@ -96,8 +96,8 @@ const Header: React.FC = (props) => {
 								<div
 									className="avatar"
 									onClick={(e) => {
-										e.nativeEvent.stopImmediatePropagation();
-										setDropdown(true);
+										e.nativeEvent.stopImmediatePropagation()
+										setDropdown(true)
 									}}
 								/>
 								{showDropdown && (
@@ -130,10 +130,10 @@ const Header: React.FC = (props) => {
 					</ul>
 				</nav>
 			</header>
-			{flag && !isLogin && <Login onClose={setFalse} />}
-			{flag2 && !isLogin && <Register onClose={setFalse2} />}
+			{flag && !isLogin && <Login onClose={setFalse} onSwitch={setTrue2} />}
+			{flag2 && !isLogin && <Register onClose={setFalse2} onSwitch={setTrue} />}
 		</Wrapper>
-	);
-};
+	)
+}
 
-export default Header;
+export default Header

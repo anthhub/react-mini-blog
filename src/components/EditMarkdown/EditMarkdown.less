@@ -217,22 +217,6 @@
 	flex: 1 1 50%;
 }
 
-// 设置 placeholer 颜色
-// .editor::-webkit-input-placeholder {
-// 	background: #f8f9fa;
-// }
-// .editor:-moz-placeholder {
-// 	background: #f8f9fa;
-// }
-
-// .editor::-moz-placeholder {
-// 	background: #f8f9fa;
-// }
-
-// .editor:-ms-input-placeholder {
-// 	background: #f8f9fa;
-// }
-
 .markdown {
 	display: flex;
 	align-items: center;
@@ -273,8 +257,16 @@
 		cursor: pointer;
 	}
 
-	#img-selector {
+	.img-selector {
+		position: absolute;
+		left: 0;
+		width: 46px;
+		height: 42px;
 		// display: none;
+		// visibility: hidden; 不可点击
+		opacity: 0;
+		cursor: pointer;
+		font-size: 0;
 	}
 
 	.footer-title {
