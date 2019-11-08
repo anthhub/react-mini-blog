@@ -131,15 +131,7 @@ const EditMarkdown: React.FC = () => {
 								}}
 							/>
 						</div>
-
-						<Publish
-							// onShow={()=>{
-
-							// 	// setPublish(true)
-							// 	// setDropdown(false)
-							// }
-							// }
-						/>
+						<Publish />
 						<Menu />
 					</div>
 				</div>
@@ -172,9 +164,7 @@ const EditMarkdown: React.FC = () => {
 					</div>
 
 					<div id="preview" className={'preview'}>
-						{/* <div id="content" className={'content'}> */}
 						<div ref={contentRef} className={'content'} />
-						{/* </div> */}
 						<div className={'footer'}>
 							<label className="footer-title">预览</label>
 							<label className="word-count">字数</label>
@@ -193,5 +183,7 @@ export default EditMarkdown
 标签循环 写死
 编辑padding
 外部高度
-字数
+统计字数
+添加文件
+富文本（小程序
 */

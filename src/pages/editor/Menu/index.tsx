@@ -55,8 +55,12 @@ const Menu: React.FC = () => {
 	const [ showDropdown, setDropdown ] = useState(false)
 
 	const hideDropdown = useCallback((e: any) => {
-		// console.log(e, { showDropdown })
-		setDropdown(false)
+
+		if(e.target.className !== 'avatar'){
+	// console.log(e, { showDropdown })
+	setDropdown(false)
+		}
+	
 	}, [])
 
 	useEffect(() => {

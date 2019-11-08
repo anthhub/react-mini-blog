@@ -2,9 +2,8 @@ import styled from 'styled-components'
 // @import headPicIcon from '../../'
 
 export const Wrapper = styled.div`
-
 	.CodeMirror {
-		min-height: calc(100vh - 100px);
+		min-height: calc(100vh - 106px);
 		box-shadow: none;
 	}
 
@@ -13,11 +12,14 @@ export const Wrapper = styled.div`
 	}
 
 	.topBar {
+		position: fixed;
+		top: 0;
+		left: 0;
+		right: 0;
+		z-index: 100;
 		display: flex;
 		align-items: center;
-		position: relative;
-		z-index: 100;
-		height: 63px;
+		height: 64px;
 		padding: 0 17px;
 		background-color: #fff;
 		border-bottom: 1px solid #ddd;
@@ -211,6 +213,10 @@ export const Wrapper = styled.div`
 	}
 
 	.main {
+		position: fixed;
+		top: 64px;
+		left: 0;
+		right: 0;
 		display: flex;
 	}
 
@@ -219,14 +225,14 @@ export const Wrapper = styled.div`
 	}
 
 	.markdown {
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		height: calc(100vh - 100px);
+		height: calc(100vh - 106px);
 		border-right: 1px solid #ddd;
+		background: #f8f9fa;
 	}
 
 	.codeMirror {
+		/* padding: 36px 30px 42px; */
+		bottom: 42px;
 		width: 100%;
 		background: #f8f9fa;
 	}
@@ -237,12 +243,16 @@ export const Wrapper = styled.div`
 	}
 
 	.content {
-		height: calc(100vh - 100px);
-		padding: 20px;
+		height: calc(100vh - 106px);
+		padding: 50px 40px 0;
 		overflow-y: auto;
 	}
 
 	.footer {
+		/* position: fixed;
+		bottom: 0;
+		left: 0;
+		right: 50%; */
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
@@ -275,6 +285,12 @@ export const Wrapper = styled.div`
 		.word-count {
 			color: #ddd;
 		}
+	}
+
+	.preview .footer {
+		/* left: 50%;
+		right: 0; */
+		border-right: none;
 	}
 
 	article {
@@ -336,7 +352,7 @@ export const Wrapper = styled.div`
 
 	table {
 		max-width: 100%;
-		/* overflow: auto; */
+		overflow: auto;
 		font-size: 14px;
 		border: 1px solid #f6f6f6;
 		border-collapse: collapse;

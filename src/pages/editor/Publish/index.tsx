@@ -70,28 +70,31 @@ const Publish: React.FC = () => {
 	// 发布文章面板显隐
 	const [ showPublish, setPublish ] = useState(false)
 
-	const hidePublish = useCallback((e: any) => {
-		// console.log(e, { showPublish })
-		if (
-			![
-				'publish',
-				'publish-title',
-				'arrow-down',
-				'panel',
-				'panel-title',
-				'tag-box',
-				'sub-title',
-				'tag-list',
-				'item',
-				'publish-btn'
-			].includes(e.target.className)
-			//  ||
-			// showPublish &&
-			// [ 'publish', 'publish-title', 'arrow-down' ].includes(e.target.className)
-		) {
-			setPublish(false)
-		}
-	}, [])
+	const hidePublish = useCallback(
+		(e: any) => {
+			console.log('自定义', e.target.className, { showPublish })
+			if (
+				![
+					'publish',
+					'publish-title',
+					'arrow-down',
+					'panel',
+					'panel-title',
+					'tag-box',
+					'sub-title',
+					'tag-list',
+					'item',
+					'publish-btn'
+				].includes(e.target.className) ||
+				(showPublish && [ 'publish', 'publish-title', 'arrow-down' ].includes(e.target.className))
+			) {
+				console.log(222222222222222222)
+
+				setPublish(false)
+			}
+		},
+		[ showPublish ]
+	)
 
 	useEffect(() => {
 		document.addEventListener('click', hidePublish)
@@ -134,8 +137,12 @@ const Publish: React.FC = () => {
 					className="publish"
 					onClick={(e) => {
 						// e.nativeEvent.stopImmediatePropagation()
-						setPublish(true)
-						console.log({ showPublish })
+						if (showPublish) {
+							setPublish(false)
+						} else {
+							setPublish(true)
+						}
+						// console.log('合成', { showPublish })
 					}}
 				>
 					<span className="publish-title">发布</span>
