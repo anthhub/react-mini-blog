@@ -16,6 +16,9 @@ import arrowIcon from '../../statics/arrow-down.svg'
 import avatarPic from '../../statics/avatar.png'
 import { useDispatch } from '@/redux/context'
 
+import Publish from './Publish'
+import Menu from './Menu'
+
 const EditMarkdown: React.FC = () => {
 	const contentRef = useRef<HTMLDivElement>(null)
 
@@ -55,34 +58,34 @@ const EditMarkdown: React.FC = () => {
 	}
 
 	// 头像下拉菜单显隐
-	const [ showDropdown, setDropdown ] = useState(false)
+	// const [ showDropdown, setDropdown ] = useState(false)
 
-	const hideDropdown = useCallback((e: any) => {
-		console.log(e, { showDropdown })
-		setDropdown(false)
-	}, [])
+	// const hideDropdown = useCallback((e: any) => {
+	// 	console.log(e, { showDropdown })
+	// 	setDropdown(false)
+	// }, [])
 
-	useEffect(() => {
-		document.addEventListener('click', hideDropdown)
-		return () => {
-			document.removeEventListener('click', hideDropdown)
-		}
-	}, [])
+	// useEffect(() => {
+	// 	document.addEventListener('click', hideDropdown)
+	// 	return () => {
+	// 		document.removeEventListener('click', hideDropdown)
+	// 	}
+	// }, [])
 
 	// 发布文章面板显隐
-	const [ showPublish, setPublish ] = useState(false)
+	// const [ showPublish, setPublish ] = useState(false)
 
-	const hidePublish = useCallback((e: any) => {
-		console.log(e, { showPublish })
-		setPublish(false)
-	}, [])
+	// const hidePublish = useCallback((e: any) => {
+	// 	console.log(e, { showPublish })
+	// 	setPublish(false)
+	// }, [])
 
-	useEffect(() => {
-		document.addEventListener('click', hidePublish)
-		return () => {
-			document.removeEventListener('click', hidePublish)
-		}
-	}, [])
+	// useEffect(() => {
+	// 	document.addEventListener('click', hidePublish)
+	// 	return () => {
+	// 		document.removeEventListener('click', hidePublish)
+	// 	}
+	// }, [])
 
 	// 登出确定框
 	const dispatch = useDispatch()
@@ -114,6 +117,7 @@ const EditMarkdown: React.FC = () => {
 	return (
 		<Wrapper>
 			<div className={'articleEdit'}>
+				{/* 1.topBar */}
 				<div className={'topBar'}>
 					<Input className={'title'} placeholder="输入文章标题..." />
 					<div className="right-box">
@@ -128,77 +132,19 @@ const EditMarkdown: React.FC = () => {
 							/>
 						</div>
 
-						<div className="with-padding">
-							<div
-								className="publish"
-								onClick={(e) => {
-									e.nativeEvent.stopImmediatePropagation()
-									setPublish(true)
-								}}
-							>
-								<span className="publish-title">发布</span>
-								<i
-									className="arrow-down"
-									style={{
-										background: `url(${arrowIcon}) no-repeat center/contain`,
-										backgroundSize: '85%'
-									}}
-								/>
-							</div>
-							{showPublish && (
-								<div className="panel">
-									<div className="panel-title">发布文章</div>
-									<div className="tag-box">
-										<div className="sub-title">标签</div>
-										<ul className="tag-list">
-											{tagList.map((item) => (
-												<li
-													onClick={(e) => changeActiveList(e, item)}
-													className={activeList.includes(item) ? 'item active' : 'item'}
-													key={item}
-												>
-													{item}
-												</li>
-											))}
-										</ul>
-									</div>
-									<button className="publish-btn" onClick={onSave}>
-										确定并发布
-									</button>
-								</div>
-							)}
-						</div>
+						<Publish
+							// onShow={()=>{
 
-						<nav className="with-padding navigation">
-							<div
-								className="avatar"
-								style={{
-									background: `url(${avatarPic}) no-repeat center/Contain`
-								}}
-								onClick={(e) => {
-									e.nativeEvent.stopImmediatePropagation()
-									setDropdown(true)
-								}}
-							/>
-							{showDropdown && (
-								<ul className="dropdown-list">
-									<li>
-										<a className="menu-item" href="/settings">
-											<span>设置</span>
-										</a>
-									</li>
-									<li>
-										<a className="menu-item" onClick={confirmLogout}>
-											<span>登出</span>
-										</a>
-									</li>
-								</ul>
-							)}
-						</nav>
-						{/* <Button onClick={onSave}>保存 </Button> */}
+							// 	// setPublish(true)
+							// 	// setDropdown(false)
+							// }
+							// }
+						/>
+						<Menu />
 					</div>
 				</div>
 
+				{/* 2.main */}
 				<div className={'main'}>
 					<div className={'editor'}>
 						<div className={'markdown'}>
