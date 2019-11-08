@@ -40,18 +40,18 @@ const EditMarkdown: React.FC = () => {
 			)
 		)
 	}
-
-	// const onSave = () => {
-	// 	const data = createArticle({
-	// 		author: '测试创建c',
-	// 		content: content.markdown,
-	// 		html: content.html,
-	// 		title: '测试创建 标题',
-	// 		screenshot: 'https://imgphoto.gmw.cn/attachement/jpg/site2/20191103/f44d3075890f1f28a06e01.JPG',
-	// 		type: '测试创建 js'
-	// 	});
-	// 	console.log('%c%s', 'color: #20bd08;font-size:15px', '===TQY===: onSave -> data', data);
-	// };
+ 
+	const onSave = () => {
+		const data = createArticle({
+			author: '测试创建c',
+			content: content.markdown,
+			html: content.html,
+			title: '测试创建 标题',
+			screenshot: 'https://imgphoto.gmw.cn/attachement/jpg/site2/20191103/f44d3075890f1f28a06e01.JPG',
+			type: '测试创建 js'
+		});
+		console.log('%c%s', 'color: #20bd08;font-size:15px', '===TQY===: onSave -> data', data);
+	};
 
 	// 头像下拉菜单显隐
 	const [ showDropdown, setDropdown ] = useState(false)
@@ -141,7 +141,9 @@ const EditMarkdown: React.FC = () => {
 										<li className="item">阅读</li>
 									</ul>
 								</div>
-								<button className="publish-btn">确定并发布</button>
+								<button className="publish-btn" onClick={onSave}>
+									确定并发布
+								</button>
 							</div>
 						)}
 					</div>
