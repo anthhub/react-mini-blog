@@ -235,6 +235,9 @@ export const Wrapper = styled.div`
 		bottom: 42px;
 		width: 100%;
 		background: #f8f9fa;
+		.CodeMirror-sizer {
+			padding: 30px !important;
+		}
 	}
 
 	.preview {
@@ -244,7 +247,7 @@ export const Wrapper = styled.div`
 
 	.content {
 		height: calc(100vh - 106px);
-		padding: 50px 40px 0;
+		padding: 30px;
 		overflow-y: auto;
 	}
 
