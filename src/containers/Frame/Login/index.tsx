@@ -11,13 +11,13 @@ interface IProps {
 }
 
 const Login: React.FC<IProps> = ({ onClose, onSwitch }) => {
-	const { value: phonrNumber, onInputEvent: onChangenumber } = useInputEvent('')
+	const { value: phoneNumber, onInputEvent: onChangenumber } = useInputEvent('')
 	const { value: password, onInputEvent: onChangePassword } = useInputEvent('')
 
 	const dispatch = useDispatch()
 
 	const onLogin = () => {
-		dispatch({ type: 'LOGIN', payload: { user: { phonrNumber, password } } })
+		dispatch({ type: 'LOGIN', payload: { user: { phoneNumber, password } } })
 	}
 
 	return (
@@ -27,7 +27,7 @@ const Login: React.FC<IProps> = ({ onClose, onSwitch }) => {
 				<div className="input-panel">
 					<h1 className="title">登录</h1>
 					<div className="input-group">
-						<input className="input" placeholder="请输入手机号" value={phonrNumber} onChange={onChangenumber} />
+						<input className="input" placeholder="请输入手机号" value={phoneNumber} onChange={onChangenumber} />
 						<input
 							type="password"
 							className="input"
@@ -55,3 +55,45 @@ const Login: React.FC<IProps> = ({ onClose, onSwitch }) => {
 }
 
 export default Login
+
+// // 请求路径
+// var httpurl = '/api2/ddgl/login'
+// // 数据请求
+// function myClick() {
+// 	var usernamestr = document.getElementById('username').value
+// 	var passwordstr = document.getElementById('password').value
+// 	if (usernamestr == '' || usernamestr == null) {
+// 		alert('用户名为空')
+// 		return
+// 	}
+// 	if (passwordstr == '' || passwordstr == null) {
+// 		alert('密码为空')
+// 		return
+// 	}
+
+// 	$.ajax({
+// 		url: httpurl, //请求的url地址
+// 		type: 'post', //设置请求的http方式，method也可以
+// 		dataType: 'json', //将服务器端返回的数据直接认定为是这个格式，然后会做一些自动的处理(如果是json字符串，会自动转化为js对象),服务器返回的默认格式是text/html格式
+// 		data: {
+// 			//向服务器端发送的数据
+// 			username: usernamestr,
+// 			password: passwordstr,
+// 			uniqueDeviceIdentifier: 2
+// 		},
+// 		success: function(data, textStatus, jqXHR) {
+// 			//请求成功之后执行的回调函数
+// 			if (data.resultCode != 200) {
+// 				alert('用户名或密码错误')
+// 				return
+// 			}
+// 			var token = data.extras.token
+// 			console.log(token)
+// 			location.href = 'Listview1.html?' + 'token=' + token + '&&' + usernamestr
+// 		},
+// 		error: function(jqXHR, textStatus, errorThrown) {
+// 			//请求失败之后执行的回调函数
+// 			console.log(errorThrown)
+// 		}
+// 	})
+// }
