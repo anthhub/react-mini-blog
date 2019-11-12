@@ -3,7 +3,7 @@ import styled from 'styled-components'
 export const Wrapper = styled.div`
 	/* height: 500px; */
 	padding: 0 0 20px;
-	background: #fff;
+	/* background: #fff; */
 
 	.article-title {
 		padding: 0 15px;

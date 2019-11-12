@@ -125,7 +125,7 @@ const EditMarkdown: React.FC = () => {
 						<div ref={contentRef} className={'content'} />
 						<div className={'footer'}>
 							<label className="footer-title">预览</label>
-							<label className="word-count">字数</label>
+							{/* <label className="word-count">字数</label> */}
 						</div>
 					</div>
 				</div>

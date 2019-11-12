@@ -246,6 +246,7 @@ export const Wrapper = styled.div`
 	}
 
 	.content {
+		min-height: 0;
 		height: calc(100vh - 106px);
 		padding: 30px;
 		overflow-y: auto;
