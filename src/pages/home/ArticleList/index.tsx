@@ -1,9 +1,7 @@
 import { getArticles } from '@/Api/article'
 import { ArticleEntity } from '@/modal/entities/article.entity'
 import useFetch from '@/hooks/useFetch'
-import { IPage } from '@/modal/interfaces/common.interface'
 import React from 'react'
-// import { connect } from 'react-redux';
 import Article from '../Article'
 import { Wrapper } from './style'
 

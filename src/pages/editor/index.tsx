@@ -45,48 +45,6 @@ const EditMarkdown: React.FC = () => {
 		)
 	}
 
-	const onSave = () => {
-		const data = createArticle({
-			author: '测试创建c',
-			content: content.markdown,
-			html: content.html,
-			title: '测试创建 标题',
-			screenshot: 'https://imgphoto.gmw.cn/attachement/jpg/site2/20191103/f44d3075890f1f28a06e01.JPG',
-			type: '测试创建 js'
-		})
-		console.log('%c%s', 'color: #20bd08;font-size:15px', '===TQY===: onSave -> data', data)
-	}
-
-	// 头像下拉菜单显隐
-	// const [ showDropdown, setDropdown ] = useState(false)
-
-	// const hideDropdown = useCallback((e: any) => {
-	// 	console.log(e, { showDropdown })
-	// 	setDropdown(false)
-	// }, [])
-
-	// useEffect(() => {
-	// 	document.addEventListener('click', hideDropdown)
-	// 	return () => {
-	// 		document.removeEventListener('click', hideDropdown)
-	// 	}
-	// }, [])
-
-	// 发布文章面板显隐
-	// const [ showPublish, setPublish ] = useState(false)
-
-	// const hidePublish = useCallback((e: any) => {
-	// 	console.log(e, { showPublish })
-	// 	setPublish(false)
-	// }, [])
-
-	// useEffect(() => {
-	// 	document.addEventListener('click', hidePublish)
-	// 	return () => {
-	// 		document.removeEventListener('click', hidePublish)
-	// 	}
-	// }, [])
-
 	// 登出确定框
 	const dispatch = useDispatch()
 
@@ -186,4 +144,5 @@ export default EditMarkdown
 统计字数
 添加文件
 富文本（小程序
+登陆
 */

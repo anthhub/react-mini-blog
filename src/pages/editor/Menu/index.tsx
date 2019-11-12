@@ -70,20 +70,6 @@ const Menu: React.FC = () => {
 		}
 	}, [])
 
-	// 发布文章面板显隐
-	// const [ showPublish, setPublish ] = useState(false)
-
-	// const hidePublish = useCallback((e: any) => {
-	// 	console.log(e, { showPublish })
-	// 	setPublish(false)
-	// }, [])
-
-	// useEffect(() => {
-	// 	document.addEventListener('click', hidePublish)
-	// 	return () => {
-	// 		document.removeEventListener('click', hidePublish)
-	// 	}
-	// }, [])
 
 	// 登出确定框
 	const dispatch = useDispatch()

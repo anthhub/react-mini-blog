@@ -1,7 +1,6 @@
 import { ArticleEntity } from '@/modal/entities/article.entity'
 import React, { memo } from 'react'
 import { Link } from 'react-router-dom'
-// import { connect } from 'react-redux';
 import { Wrapper } from './style'
 
 interface IProps extends ArticleEntity {}

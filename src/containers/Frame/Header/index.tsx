@@ -9,10 +9,6 @@ import Register from '../Register'
 import { Wrapper } from './style'
 import useToggle from '@/hooks/useToggle'
 
-// 登录状态 true
-// 退出状态 false
-// const loginStatus = true
-// const loginStatus: boolean = false;
 
 const Header: React.FC = (props) => {
 	// 是否显示 Login 组件

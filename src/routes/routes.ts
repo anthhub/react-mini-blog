@@ -1,6 +1,11 @@
-import { TLazyComponentsKeys } from './lazyComponents';
+import { TLazyComponentsKeys } from './lazyComponents'
 
 const routes: IRoute[] = [
+	{
+		path: '/mobi/post',
+		exact: true,
+		component: 'MobilePost'
+	},
 	{
 		path: '/editor',
 		exact: true,
@@ -20,13 +25,13 @@ const routes: IRoute[] = [
 			// { path: 'article/:id', component: Article }
 		]
 	}
-];
+]
 
-export default routes;
+export default routes
 
 export interface IRoute {
-	path: string;
-	exact?: boolean;
-	component: TLazyComponentsKeys;
-	childRoutes?: IRoute[];
+	path: string
+	exact?: boolean
+	component: TLazyComponentsKeys
+	childRoutes?: IRoute[]
 }
