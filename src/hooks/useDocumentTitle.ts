@@ -6,5 +6,5 @@ export default function useDocumentTitle(title: string, defaultTile = 'juejin') 
     return () => {
       document.title = defaultTile
     }
-  }, [title])
+  }, [])
 }
