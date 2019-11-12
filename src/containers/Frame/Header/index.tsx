@@ -9,7 +9,6 @@ import Register from '../Register'
 import { Wrapper } from './style'
 import useToggle from '@/hooks/useToggle'
 
-
 const Header: React.FC = (props) => {
 	// 是否显示 Login 组件
 	const { flag, setFalse, setTrue } = useFlag(false)
@@ -83,9 +82,13 @@ const Header: React.FC = (props) => {
 							</form>
 						</li>
 						<li className="nav-item write">
-							<Link to="/editor">
+							{isLogin ? (
+								<Link to="/editor">
+									<button className="write-btn">写文章</button>
+								</Link>
+							) : (
 								<button className="write-btn">写文章</button>
-							</Link>
+							)}
 						</li>
 						{isLogin ? (
 							<li className="nav-item menu">
