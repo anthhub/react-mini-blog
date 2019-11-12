@@ -1,23 +1,23 @@
+import { SignInDto } from '@/modal/dtos/signIn.dto'
+import { SignUpDto } from '@/modal/dtos/signUp.dto'
 import axios from 'axios'
-import { AccountDto } from '@/modal/dtos/account.dto'
-
-const baseUrl = 'http://101.132.79.152/api/v1'
+import { baseUrl } from './url'
 
 console.log({ baseUrl })
 
 const account = {
-	signUp: `​/signUp`,
-	signIn: `/signIn`
+  signUp: `​/signUp`,
+  signIn: `/signIn`,
 }
 
-export const signUp = (data: { phoneNumber: number; password: any }) => {
-	return axios.post(baseUrl + account.signUp, data).then((res) => {
-		return res.data.data
-	})
+export const signUp = (data: SignUpDto) => {
+  return axios.post(baseUrl + '/signUp', data).then(res => {
+    return res.data.data
+  })
 }
 
-export const signIn = (data: { phoneNumber: number; password: any }) => {
-	return axios.post(baseUrl + account.signIn, data).then((res) => {
-		return res.data.data
-	})
+export const signIn = (data: SignInDto) => {
+  return axios.post(baseUrl + account.signIn, data).then(res => {
+    return res.data.data
+  })
 }
