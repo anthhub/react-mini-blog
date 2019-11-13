@@ -4,8 +4,9 @@ import useFetch from '@/hooks/useFetch'
 import React, { useState } from 'react'
 import Article from '../Article'
 import { Wrapper } from './style'
-import { useParams, useRouteMatch, useLocation } from 'react-router'
+import { useLocation } from 'react-router'
 import { Link } from 'react-router-dom'
+import { useIsLogin } from '@/redux/context'
 
 const ArticleList: React.FC = (props) => {
 	const query = useLocation()
@@ -19,6 +20,9 @@ const ArticleList: React.FC = (props) => {
 
 	const [ active, setActive ] = useState(0)
 
+	// 是否登陆
+	const isLogin = useIsLogin()
+
 	return (
 		<Wrapper>
 			<header className="header">
@@ -27,9 +31,12 @@ const ArticleList: React.FC = (props) => {
 						<li className={active === 0 ? 'nav-item active' : 'nav-item'} onClick={() => setActive(0)}>
 							<Link to={{ pathname: '', search: 'sort=all' }}>全部</Link>
 						</li>
-						<li className={active === 1 ? 'nav-item active' : 'nav-item'} onClick={() => setActive(1)}>
-							<Link to={{ pathname: '', search: 'sort=mine' }}>我的</Link>
-						</li>
+
+						{isLogin && (
+							<li className={active === 1 ? 'nav-item mine active' : 'nav-item mine'} onClick={() => setActive(1)}>
+								<Link to={{ pathname: '', search: 'sort=mine' }}>我的</Link>
+							</li>
+						)}
 					</ul>
 				</nav>
 			</header>

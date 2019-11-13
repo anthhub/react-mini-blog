@@ -17,6 +17,11 @@ export const Wrapper = styled.div`
 		.nav-list {
 			display: flex;
 			flex-direction: row;
+			margin-bottom: 0;
+
+			.mine {
+				border-left: 1px solid hsla(0, 0%, 59.2%, .2);
+			}
 
 			.nav-item a {
 				padding: 0 14px;

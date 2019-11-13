@@ -16,12 +16,6 @@ const Header: React.FC = (props) => {
 	// 是否显示下拉菜单
 	const [ showDropdown, setDropdown ] = useState(false)
 
-	const isLogin = useIsLogin()
-
-	console.log('%c%s', 'color: #20bd08; font-size:15px', '===TQY===: isLogin', isLogin, useSelector((l: any) => l))
-
-	const dispatch = useDispatch()
-
 	const hideDropdown = useCallback((e: any) => {
 		console.log(e, { showDropdown })
 		setDropdown(false)
@@ -34,7 +28,14 @@ const Header: React.FC = (props) => {
 		}
 	}, [])
 
+	// 是否登陆
+	const isLogin = useIsLogin()
+
+	console.log('%c%s', 'color: #20bd08; font-size:15px', '===TQY===: isLogin', isLogin, useSelector((l: any) => l))
+
 	// 登出确定框
+	const dispatch = useDispatch()
+
 	const confirmLogout = () => {
 		if (window.confirm('确定登出吗？每一片贫瘠的土地都需要坚定的挖掘者！')) {
 			dispatch({ type: 'LOGOUT' })
