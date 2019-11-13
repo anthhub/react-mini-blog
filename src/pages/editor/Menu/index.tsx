@@ -37,6 +37,8 @@ const Menu: React.FC = () => {
 	const confirmLogout = () => {
 		if (window.confirm('确定登出吗？每一片贫瘠的土地都需要坚定的挖掘者！')) {
 			dispatch({ type: 'LOGOUT' })
+			// 跳转到 home page
+			window.location.href = '/'
 		}
 	}
 

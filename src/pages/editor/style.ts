@@ -66,11 +66,26 @@ export const Wrapper = styled.div`
 			cursor: pointer;
 		}
 
+		.upload-img {
+			position: relative;
+		}
+
 		.cover-img {
 			display: block;
 			width: 28px;
 			height: 28px;
 			cursor: pointer;
+		}
+
+		.img-selector {
+			position: absolute;
+			left: 0;
+			top: 0;
+			width: 56px;
+			height: 28px;
+			opacity: 0;
+			cursor: pointer;
+			font-size: 0;
 		}
 
 		.publish {
