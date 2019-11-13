@@ -24,6 +24,10 @@ export const Wrapper = styled.div`
 		color: #333;
 	}
 
+	.setting-list {
+		margin-bottom: 0;
+	}
+
 	.item {
 		display: flex;
 		align-items: center;
@@ -79,6 +83,7 @@ export const Wrapper = styled.div`
 				.hidden-input {
 					position: absolute;
 					left: 0;
+					z-index: 1;
 					width: 80px;
 					height: 26px;
 					/* font-size: 0; 才能使得 cursor 生效 */

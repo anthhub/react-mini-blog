@@ -1,14 +1,15 @@
-import styled from 'styled-components';
+import styled from 'styled-components'
 
-import avatarPic from '../../../statics/avatar.png';
-import logoPic from '../../../statics/logo.svg';
-import settingIcon from '../../../statics/setting.svg';
-import logoutIcon from '../../../statics/logout.svg';
+import avatarPic from '../../../statics/avatar.png'
+import logoPic from '../../../statics/logo.svg'
+import settingIcon from '../../../statics/setting.svg'
+import logoutIcon from '../../../statics/logout.svg'
 
 export const Wrapper = styled.div`
 	position: fixed;
 	top: 0;
 	left: 0;
+	z-index: 100;
 	width: 100%;
 	height: 60px;
 	/* // border-bottom: 1px solid #f1f1f1; */
@@ -155,6 +156,7 @@ export const Wrapper = styled.div`
 					position: absolute;
 					top: 100%;
 					right: 0;
+					z-index: 200;
 					width: 158px;
 					padding: 12px 0;
 					background: #fff;
@@ -207,4 +209,4 @@ export const Wrapper = styled.div`
 			}
 		}
 	}
-`;
+`

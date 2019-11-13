@@ -13,7 +13,7 @@ interface IProps {
 const Register: React.FC<IProps> = ({ onClose, onSwitch }) => {
 	const { value: username, onInputEvent: onChangeUsername } = useInputEvent('')
 	const { value: phoneNumber, onInputEvent: onChangeNumber } = useInputEvent('')
-	const { value: password, onInputEvent: onChangePassword } = useInputEvent('')
+	const { value: password, onInputEvent: onChangePassword } = useInputEvent('') 
 
 	const onRegister = useCallback(
 		() => {
