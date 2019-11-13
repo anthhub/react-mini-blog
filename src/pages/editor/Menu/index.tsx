@@ -14,53 +14,14 @@ import avatarPic from '../../../statics/avatar.png'
 import { useDispatch } from '@/redux/context'
 
 const Menu: React.FC = () => {
-	const contentRef = useRef<HTMLDivElement>(null)
-
-	const [ content, setContent ] = useState({ markdown: '', html: '' })
-
-	// 内容变化回调
-	const onContentChange = (editor: Editor, data: EditorChange, value: string) => {
-		console.log('%c%s', 'color: #20bd08;font-size:15px', '===TQY===: onContentChange -> data', data, value)
-		const html = translateMarkdown(value)
-		setContent({ markdown: value, html })
-		contentRef.current!.innerHTML = html
-	}
-
-	// 监听左右侧上下滑动
-	const onEditorScroll = (editor: Editor, scrollInfo: ScrollInfo) => {
-		console.log('%c%s', 'color: #20bd08;font-size:15px', '===TQY===: onEditorScroll -> scrollInfo', scrollInfo)
-		contentRef.current!.scrollTo(
-			0,
-			Math.round(
-				scrollInfo.top /
-					scrollInfo.height *
-					(contentRef.current!.scrollHeight + contentRef.current!.clientHeight)
-			)
-		)
-	}
-
-	const onSave = () => {
-		const data = createArticle({
-			author: '测试创建c',
-			content: content.markdown,
-			html: content.html,
-			title: '测试创建 标题',
-			screenshot: 'https://imgphoto.gmw.cn/attachement/jpg/site2/20191103/f44d3075890f1f28a06e01.JPG',
-			type: '测试创建 js'
-		})
-		console.log('%c%s', 'color: #20bd08;font-size:15px', '===TQY===: onSave -> data', data)
-	}
-
 	// 头像下拉菜单显隐
 	const [ showDropdown, setDropdown ] = useState(false)
 
 	const hideDropdown = useCallback((e: any) => {
-
-		if(e.target.className !== 'avatar'){
-	// console.log(e, { showDropdown })
-	setDropdown(false)
+		if (e.target.className !== 'avatar') {
+			// console.log(e, { showDropdown })
+			setDropdown(false)
 		}
-	
 	}, [])
 
 	useEffect(() => {
@@ -69,7 +30,6 @@ const Menu: React.FC = () => {
 			document.removeEventListener('click', hideDropdown)
 		}
 	}, [])
-
 
 	// 登出确定框
 	const dispatch = useDispatch()

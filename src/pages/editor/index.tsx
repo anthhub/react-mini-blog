@@ -8,13 +8,10 @@ import '../../../node_modules/codemirror/theme/eclipse.css'
 import { Wrapper } from './style'
 
 // 引入CodeMirror样式
-import { createArticle } from '@/Api/article'
 import { translateMarkdown } from '@/lib/utils/markdown'
 import { Editor, EditorChange, ScrollInfo } from 'codemirror'
 import 'codemirror/mode/markdown/markdown'
-import arrowIcon from '../../statics/arrow-down.svg'
-import avatarPic from '../../statics/avatar.png'
-import { useDispatch } from '@/redux/context'
+
 
 import Publish from './Publish'
 import Menu from './Menu'
@@ -44,33 +41,6 @@ const EditMarkdown: React.FC = () => {
 			)
 		)
 	}
-
-	// 登出确定框
-	const dispatch = useDispatch()
-
-	const confirmLogout = () => {
-		if (window.confirm('确定登出吗？每一片贫瘠的土地都需要坚定的挖掘者！')) {
-			dispatch({ type: 'LOGOUT' })
-		}
-	}
-
-	const tagList = [ '后端', '前端', 'Android', 'iOS', '人工智能', '开发工具', '代码人生', '阅读' ]
-
-	const [ activeList, setActiveList ] = useState<string[]>([])
-
-	const changeActiveList = useCallback(
-		(e: any, item: string) => {
-			e.nativeEvent.stopImmediatePropagation()
-			if (activeList.includes(item)) {
-				const tmp = [ ...activeList ]
-				tmp.splice(activeList.indexOf(item), 1)
-				setActiveList(tmp)
-			} else {
-				setActiveList([ ...activeList, item ])
-			}
-		},
-		[ activeList ]
-	)
 
 	return (
 		<Wrapper>

@@ -4,7 +4,7 @@
 
 // `
 
-import styled from 'styled-components';
+import styled from 'styled-components'
 
 export const Wrapper = styled.div`
 	width: 700px;
@@ -23,7 +23,8 @@ export const Wrapper = styled.div`
 				font-size: 14px;
 				color: #909090;
 			}
-			.active a {
+			.active a,
+			.nav-item:hover a {
 				color: #007fff;
 			}
 		}
@@ -38,4 +39,4 @@ export const Wrapper = styled.div`
 			background-color: #fff;
 		}
 	}
-`;
+`

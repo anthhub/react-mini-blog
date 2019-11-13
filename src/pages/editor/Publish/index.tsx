@@ -7,38 +7,14 @@ import { Wrapper } from './style'
 
 // 引入CodeMirror样式
 import { createArticle } from '@/Api/article'
-import { translateMarkdown } from '@/lib/utils/markdown'
-import { Editor, EditorChange, ScrollInfo } from 'codemirror'
 import 'codemirror/mode/markdown/markdown'
 import arrowIcon from '../../../statics/arrow-down.svg'
-import avatarPic from '../../../statics/avatar.png'
 import { useDispatch } from '@/redux/context'
 
 const Publish: React.FC = () => {
 	const contentRef = useRef<HTMLDivElement>(null)
 
 	const [ content, setContent ] = useState({ markdown: '', html: '' })
-
-	// 内容变化回调
-	const onContentChange = (editor: Editor, data: EditorChange, value: string) => {
-		console.log('%c%s', 'color: #20bd08;font-size:15px', '===TQY===: onContentChange -> data', data, value)
-		const html = translateMarkdown(value)
-		setContent({ markdown: value, html })
-		contentRef.current!.innerHTML = html
-	}
-
-	// 监听左右侧上下滑动
-	const onEditorScroll = (editor: Editor, scrollInfo: ScrollInfo) => {
-		console.log('%c%s', 'color: #20bd08; font-size:15px', '===TQY===: onEditorScroll -> scrollInfo', scrollInfo)
-		contentRef.current!.scrollTo(
-			0,
-			Math.round(
-				scrollInfo.top /
-					scrollInfo.height *
-					(contentRef.current!.scrollHeight + contentRef.current!.clientHeight)
-			)
-		)
-	}
 
 	const onSave = useCallback(
 		() => {
@@ -54,21 +30,6 @@ const Publish: React.FC = () => {
 		},
 		[ content ]
 	)
-
-	// 头像下拉菜单显隐
-	// const [ showDropdown, setDropdown ] = useState(false)
-
-	// const hideDropdown = useCallback((e: any) => {
-	// 	console.log(e, { showDropdown })
-	// 	setDropdown(false)
-	// }, [])
-
-	// useEffect(() => {
-	// 	document.addEventListener('click', hideDropdown)
-	// 	return () => {
-	// 		document.removeEventListener('click', hideDropdown)
-	// 	}
-	// }, [])
 
 	// 发布文章面板显隐
 	const [ showPublish, setPublish ] = useState(false)
@@ -105,15 +66,6 @@ const Publish: React.FC = () => {
 			document.removeEventListener('click', hidePublish)
 		}
 	}, [])
-
-	// 登出确定框
-	const dispatch = useDispatch()
-
-	const confirmLogout = () => {
-		if (window.confirm('确定登出吗？每一片贫瘠的土地都需要坚定的挖掘者！')) {
-			dispatch({ type: 'LOGOUT' })
-		}
-	}
 
 	const tagList = [ '后端', '前端', 'Android', 'iOS', '人工智能', '开发工具', '代码人生', '阅读' ]
 
@@ -167,7 +119,7 @@ const Publish: React.FC = () => {
 								{tagList.map((item) => (
 									<li
 										onClick={(e) => changeActiveList(e, item)}
-										className={activeList.includes(item) ? 'item active' : 'item'} 
+										className={activeList.includes(item) ? 'item active' : 'item'}
 										key={item}
 									>
 										{item}
@@ -187,8 +139,4 @@ const Publish: React.FC = () => {
 
 export default Publish
 
-/*
-問題：
-再次點擊 發佈 不隱藏
-點擊頭像 不出現下拉菜單
-*/
+
