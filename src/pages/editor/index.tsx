@@ -12,25 +12,30 @@ import { translateMarkdown } from '@/lib/utils/markdown'
 import { Editor, EditorChange, ScrollInfo } from 'codemirror'
 import 'codemirror/mode/markdown/markdown'
 
-
 import Publish from './Publish'
 import Menu from './Menu'
+import useInputEvent from '@/hooks/useInputEvent'
 
 const EditMarkdown: React.FC = () => {
 	const contentRef = useRef<HTMLDivElement>(null)
 
+	const { value: title, onInputEvent } = useInputEvent('')
+
 	const [ content, setContent ] = useState({ markdown: '', html: '' })
 
 	// 内容变化回调
-	const onContentChange = (editor: Editor, data: EditorChange, value: string) => {
-		console.log('%c%s', 'color: #20bd08;font-size:15px', '===TQY===: onContentChange -> data', data, value)
-		const html = translateMarkdown(value)
-		setContent({ markdown: value, html })
-		contentRef.current!.innerHTML = html
-	}
-
+	const onContentChange = useCallback(
+		(editor: Editor, data: EditorChange, value: string) => {
+			console.log('%c%s', 'color: #20bd08;font-size:15px', '===TQY===: onContentChange -> data', data, value)
+			const html = translateMarkdown(value)
+			setContent({ markdown: value, html })
+			contentRef.current!.innerHTML = html
+		},
+		[ content ]
+	)
+	
 	// 监听左右侧上下滑动
-	const onEditorScroll = (editor: Editor, scrollInfo: ScrollInfo) => {
+	const onEditorScroll = useCallback((editor: Editor, scrollInfo: ScrollInfo) => {
 		console.log('%c%s', 'color: #20bd08;font-size:15px', '===TQY===: onEditorScroll -> scrollInfo', scrollInfo)
 		contentRef.current!.scrollTo(
 			0,
@@ -40,14 +45,14 @@ const EditMarkdown: React.FC = () => {
 					(contentRef.current!.scrollHeight + contentRef.current!.clientHeight)
 			)
 		)
-	}
+	}, [])
 
 	return (
 		<Wrapper>
 			<div className={'articleEdit'}>
 				{/* 1.topBar */}
 				<div className={'topBar'}>
-					<Input className={'title'} placeholder="输入文章标题..." />
+					<Input className={'title'} placeholder="输入文章标题..." value={title} onChange={onInputEvent} />
 					<div className="right-box">
 						<div className="with-padding">
 							<i
@@ -59,7 +64,7 @@ const EditMarkdown: React.FC = () => {
 								}}
 							/>
 						</div>
-						<Publish />
+						<Publish content={content} title={title} />
 						<Menu />
 					</div>
 				</div>
@@ -107,12 +112,6 @@ const EditMarkdown: React.FC = () => {
 export default EditMarkdown
 
 /* 
-// 滚动条
-标签循环 写死
-编辑padding
-外部高度
-统计字数
 添加文件
-富文本（小程序
-登陆
+时间格式化
 */

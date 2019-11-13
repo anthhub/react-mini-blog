@@ -1,5 +1,5 @@
 export class CreateArticleDto {
-  readonly author!: string
+  readonly author!: string 
 
   readonly content!: string
 

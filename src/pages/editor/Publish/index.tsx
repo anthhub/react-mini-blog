@@ -11,24 +11,33 @@ import 'codemirror/mode/markdown/markdown'
 import arrowIcon from '../../../statics/arrow-down.svg'
 import { useDispatch } from '@/redux/context'
 
-const Publish: React.FC = () => {
-	const contentRef = useRef<HTMLDivElement>(null)
+interface IProps {
+	title: string
+	content: {
+		markdown: string
+		html: string
+	}
+}
 
-	const [ content, setContent ] = useState({ markdown: '', html: '' })
+const Publish: React.FC<IProps> = ({ content, title }) => {
+	// const contentRef = useRef<HTMLDivElement>(null)
+
+	// const [ content, setContent ] = useState({ title: '', markdown: '', html: '' })
 
 	const onSave = useCallback(
 		() => {
-			console.log('%c%s', 'color: #20bd08;font-size:15px', '===TQY===: onSave -> data', content)
+			console.log('%c%s', 'color: #20bd08; font-size: 15px', '===TQY===: onSave -> data', content)
 			const data = createArticle({
 				author: '测试创建c',
 				content: content.markdown,
 				html: content.html,
-				title: '测试创建 标题',
+				title,
 				screenshot: 'https://imgphoto.gmw.cn/attachement/jpg/site2/20191103/f44d3075890f1f28a06e01.JPG',
 				type: '测试创建 js'
 			})
+			console.log('%c%s', 'color: #20bd08; font-size: 15px', '===TQY===: onSave -> data', content)
 		},
-		[ content ]
+		[ content, title ]
 	)
 
 	// 发布文章面板显隐
@@ -52,8 +61,7 @@ const Publish: React.FC = () => {
 				].includes(e.target.className) ||
 				(showPublish && [ 'publish', 'publish-title', 'arrow-down' ].includes(e.target.className))
 			) {
-				console.log(222222222222222222)
-
+				console.log('隐藏 publish 面板')
 				setPublish(false)
 			}
 		},
@@ -67,6 +75,7 @@ const Publish: React.FC = () => {
 		}
 	}, [])
 
+	// publish 面板标签
 	const tagList = [ '后端', '前端', 'Android', 'iOS', '人工智能', '开发工具', '代码人生', '阅读' ]
 
 	const [ activeList, setActiveList ] = useState<string[]>([])
@@ -138,5 +147,3 @@ const Publish: React.FC = () => {
 }
 
 export default Publish
-
-

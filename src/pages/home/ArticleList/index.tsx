@@ -46,5 +46,4 @@ export default ArticleList
 添加图片功能
 添加小程序小图标
 检查标题不为空
-写文章按钮权限
 */

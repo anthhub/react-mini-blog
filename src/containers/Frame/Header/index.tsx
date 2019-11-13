@@ -1,5 +1,3 @@
-// import { connect } from 'react-redux';
-// import { Button, Input } from 'antd';
 import useFlag from '@/hooks/useFlag'
 import { useIsLogin, useSelector, useDispatch } from '@/redux/context'
 import React, { useCallback, useEffect, useState } from 'react'
@@ -7,12 +5,12 @@ import { Link } from 'react-router-dom'
 import Login from '../Login'
 import Register from '../Register'
 import { Wrapper } from './style'
-import useToggle from '@/hooks/useToggle'
 
 const Header: React.FC = (props) => {
 	// 是否显示 Login 组件
 	const { flag, setFalse, setTrue } = useFlag(false)
 
+	// 是否显示 Register 组件
 	const { flag: flag2, setFalse: setFalse2, setTrue: setTrue2 } = useFlag(false)
 
 	// 是否显示下拉菜单
@@ -87,7 +85,9 @@ const Header: React.FC = (props) => {
 									<button className="write-btn">写文章</button>
 								</Link>
 							) : (
-								<button className="write-btn">写文章</button>
+								<button className="write-btn" onClick={setTrue2}>
+									写文章
+								</button>
 							)}
 						</li>
 						{isLogin ? (
