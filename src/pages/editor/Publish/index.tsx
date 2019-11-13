@@ -9,7 +9,6 @@ import { Wrapper } from './style'
 import { createArticle } from '@/Api/article'
 import 'codemirror/mode/markdown/markdown'
 import arrowIcon from '../../../statics/arrow-down.svg'
-import { useDispatch } from '@/redux/context'
 
 interface IProps {
 	title: string
@@ -20,13 +19,10 @@ interface IProps {
 }
 
 const Publish: React.FC<IProps> = ({ content, title }) => {
-	// const contentRef = useRef<HTMLDivElement>(null)
-
-	// const [ content, setContent ] = useState({ title: '', markdown: '', html: '' })
 
 	const onSave = useCallback(
 		() => {
-			console.log('%c%s', 'color: #20bd08; font-size: 15px', '===TQY===: onSave -> data', content)
+			console.log('%c%s', 'color: #20bd08; font-size: 15px', '===TQY===: onSave -> data', title, content)
 			const data = createArticle({
 				author: '测试创建c',
 				content: content.markdown,
@@ -35,7 +31,6 @@ const Publish: React.FC<IProps> = ({ content, title }) => {
 				screenshot: 'https://imgphoto.gmw.cn/attachement/jpg/site2/20191103/f44d3075890f1f28a06e01.JPG',
 				type: '测试创建 js'
 			})
-			console.log('%c%s', 'color: #20bd08; font-size: 15px', '===TQY===: onSave -> data', content)
 		},
 		[ content, title ]
 	)

@@ -85,7 +85,8 @@ const Header: React.FC = (props) => {
 									<button className="write-btn">写文章</button>
 								</Link>
 							) : (
-								<button className="write-btn" onClick={setTrue2}>
+								// 没登陆时 点击写文章按钮弹出登陆面板
+								<button className="write-btn" onClick={setTrue}>
 									写文章
 								</button>
 							)}
