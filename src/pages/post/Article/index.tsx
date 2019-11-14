@@ -23,7 +23,7 @@ const Article: React.FC<IProps> = ({ update_at, content, author, title, html }) 
           <div>
             <a className="author-name">{author}</a>
             <div className="article-info">
-              <time>{update_at}</time>
+              <time>{update_at}</time> 
               {/* <span className="views">阅读 1367</span> */}
             </div>
           </div>

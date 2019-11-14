@@ -13,6 +13,7 @@ const Profile: React.FC = (props) => {
 		const formData = new FormData()
 		const file = e.target.files[0]
 		formData.append('file', file)
+		
 	}
 
 	const getBtn = (status: boolean) => {

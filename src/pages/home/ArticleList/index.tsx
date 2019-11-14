@@ -6,15 +6,20 @@ import Article from '../Article'
 import { Wrapper } from './style'
 import { useLocation } from 'react-router'
 import { Link } from 'react-router-dom'
-import { useIsLogin } from '@/redux/context'
+import { useIsLogin, useSelector } from '@/redux/context'
+import useQuery from '@/hooks/useQuery'
 
-const ArticleList: React.FC = (props) => {
-	const query = useLocation()
+const ArticleList: React.FC = () => {
+	// const { search } = useLocation()
+
+	const query: any = useQuery()
 
 	console.log('111', query)
 
-	const { data } = useFetch(getArticles)
-	console.log('%c%s', 'color: #20bd08;font-size:15px', '===TQY===: data', data)
+	// const data = {}
+
+	const { data } = useFetch(() => getArticles(query), [ query ])
+	console.log('%c%s', 'color: #20bd08;font-size:15px', '===TQY===: data')
 
 	const list = (data && data.edges) || []
 
@@ -33,7 +38,10 @@ const ArticleList: React.FC = (props) => {
 						</li>
 
 						{isLogin && (
-							<li className={active === 1 ? 'nav-item mine active' : 'nav-item mine'} onClick={() => setActive(1)}>
+							<li
+								className={active === 1 ? 'nav-item mine active' : 'nav-item mine'}
+								onClick={() => setActive(1)}
+							>
 								<Link to={{ pathname: '', search: 'sort=mine' }}>我的</Link>
 							</li>
 						)}
@@ -55,4 +63,6 @@ export default ArticleList
 添加小程序小图标
 小程序登陆功能 搜索功能
 检查标题不为空
+登陆失败提醒
+一些index拆分成组件
 */

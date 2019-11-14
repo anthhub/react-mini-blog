@@ -87,6 +87,11 @@ export const Wrapper = styled.div`
 					border-radius: 2px;
 					background-color: rgba(227, 231, 236, 0.2);
 
+					&.active {
+						border-color: #007fff;
+						background: #fff;
+					}
+
 					.search-input {
 						padding: 6px 12px;
 						width: 120px;

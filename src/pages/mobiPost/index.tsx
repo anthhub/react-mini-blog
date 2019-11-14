@@ -10,19 +10,19 @@ import Article from './Article'
 import useDocumentTitle from '@/hooks/useDocumentTitle'
 import { Wrapper } from './style'
 
-const Post: React.FC = props => {
-  const { id = '' } = useParams()
-  useDocumentTitle('文章详情')
+const Post: React.FC = (props) => {
+	const { id = '' } = useParams()
+	useDocumentTitle('文章详情')
 
-  const { data } = useFetch(getArticle, id)
+	const { data } = useFetch(() => getArticle(id))
 
-  const item: ArticleEntity = data && data[0]
+	const item: ArticleEntity = data && data[0]
 
-  return (
-    <Wrapper>
-      <Article {...item} />
-    </Wrapper>
-  )
+	return (
+		<Wrapper>
+			<Article {...item} />
+		</Wrapper>
+	)
 }
 
 export default Post

@@ -7,6 +7,9 @@ import Register from '../Register'
 import { Wrapper } from './style'
 
 const Header: React.FC = (props) => {
+	// 搜索框聚焦
+	const [ active, setActive ] = useState(false)
+
 	// 是否显示 Login 组件
 	const { flag, setFalse, setTrue } = useFlag(false)
 
@@ -70,9 +73,16 @@ const Header: React.FC = (props) => {
 							</ul>
 						</li> */}
 						<li className="nav-item search">
-							<form className="search-form">
+							<form className={active ? 'search-form active' : 'search-form'}>
 								{/* <Input style={{ width: 156, height: 32 }} /> */}
-								<input className="search-input" placeholder="搜索" />
+								<input
+									className="search-input"
+									placeholder="搜索"
+									onFocus={() => setActive(true)}
+									onBlur={() => {
+										setActive(false)
+									}}
+								/>
 								<img
 									alt="search"
 									className="search-icon"

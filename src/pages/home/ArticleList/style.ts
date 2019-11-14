@@ -17,6 +17,7 @@ export const Wrapper = styled.div`
 		.nav-list {
 			display: flex;
 			flex-direction: row;
+			align-items: center;
 			margin-bottom: 0;
 
 			.mine {
@@ -24,7 +25,9 @@ export const Wrapper = styled.div`
 			}
 
 			.nav-item a {
+				display: block;
 				padding: 0 14px;
+				line-height: 14px;
 				font-size: 14px;
 				color: #909090;
 			}

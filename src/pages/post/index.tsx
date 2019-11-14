@@ -11,26 +11,26 @@ import Catalog from './Catalog'
 // import { connect } from 'react-redux';
 import { Wrapper } from './style'
 
-const Post: React.FC = props => {
-  const { id = '' } = useParams()
+const Post: React.FC = (props) => {
+	const { id = '' } = useParams()
 
-  const { data } = useFetch(getArticle, id)
+	const { data } = useFetch(() => getArticle(id))
 
-  const item: ArticleEntity = data && data[0]
+	const item: ArticleEntity = data && data[0]
 
-  return (
-    <Wrapper>
-      <div className="left">
-        <Article {...item} />
-      </div>
-      <div className="right">
-        <Author />
-        <AppDownload />
-        <Catalog />
-      </div>
-      <BackTop />
-    </Wrapper>
-  )
+	return (
+		<Wrapper>
+			<div className="left">
+				<Article {...item} />
+			</div>
+			<div className="right">
+				<Author />
+				<AppDownload />
+				<Catalog />
+			</div>
+			<BackTop />
+		</Wrapper>
+	)
 }
 
 export default Post
