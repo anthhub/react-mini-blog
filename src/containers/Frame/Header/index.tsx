@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom'
 import Login from '../Login'
 import Register from '../Register'
 import { Wrapper } from './style'
+import useInputEvent from '@/hooks/useInputEvent'
 
 const Header: React.FC = (props) => {
 	// 搜索框聚焦
@@ -45,6 +46,8 @@ const Header: React.FC = (props) => {
 		}
 	}
 
+	const { value: search, onInputEvent } = useInputEvent('')
+
 	return (
 		<Wrapper>
 			<header className="header">
@@ -74,7 +77,6 @@ const Header: React.FC = (props) => {
 						</li> */}
 						<li className="nav-item search">
 							<form className={active ? 'search-form active' : 'search-form'}>
-								{/* <Input style={{ width: 156, height: 32 }} /> */}
 								<input
 									className="search-input"
 									placeholder="搜索"
@@ -82,12 +84,17 @@ const Header: React.FC = (props) => {
 									onBlur={() => {
 										setActive(false)
 									}}
+									value={search}
+									onChange={onInputEvent}
 								/>
-								<img
-									alt="search"
-									className="search-icon"
-									src="https://b-gold-cdn.xitu.io/v3/static/img/juejin-search-icon.6f8ba1b.svg"
-								/>
+								{/* 改 pathname */}
+								<Link to={{ pathname: '', search: 'query=' + search }}>
+									<img
+										alt="search"
+										className="search-icon"
+										src="https://b-gold-cdn.xitu.io/v3/static/img/juejin-search-icon.6f8ba1b.svg"
+									/>
+								</Link>
 							</form>
 						</li>
 						<li className="nav-item write">
