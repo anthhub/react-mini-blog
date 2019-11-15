@@ -54,7 +54,7 @@ methods.forEach(v => {
         if (msg) {
           message.destroy()
           if (code === 0) {
-            message.success(msg)
+            // message.success(msg)
           } else {
             message.error(msg)
           }
