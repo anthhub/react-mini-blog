@@ -1,12 +1,14 @@
-import useFlag from '@/hooks/useFlag'
-import { useIsLogin, useSelector, useDispatch } from '@/redux/context'
 import React, { useCallback, useEffect, useState } from 'react'
 import { Link, useHistory } from 'react-router-dom'
+
+import useFlag from '@/hooks/useFlag'
+import useInputEvent from '@/hooks/useInputEvent'
+import useQuery from '@/hooks/useQuery'
+import { useDispatch, useIsLogin, useSelector } from '@/redux/context'
+
 import Login from '../Login'
 import Register from '../Register'
 import { Wrapper } from './style'
-import useInputEvent from '@/hooks/useInputEvent'
-import useQuery from '@/hooks/useQuery'
 
 const Header: React.FC = (props) => {
 	// 搜索框聚焦
@@ -22,7 +24,7 @@ const Header: React.FC = (props) => {
 	const [ showDropdown, setDropdown ] = useState(false)
 
 	const hideDropdown = useCallback((e: any) => {
-		console.log(e, { showDropdown })
+		// console.log(e, { showDropdown })
 		setDropdown(false)
 	}, [])
 
@@ -47,7 +49,7 @@ const Header: React.FC = (props) => {
 
 	const { query, setQuery } = useQuery()
 
-	const { value: search, onInputEvent } = useInputEvent(query.search)
+	const { value: search, onInputEvent } = useInputEvent(query.search || '')
 
 	const onSearch = useCallback(
 		() => {

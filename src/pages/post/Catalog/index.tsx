@@ -39,8 +39,10 @@ const { Link } = Anchor
 // interface IProps extends ArticleEntity {}
 
 // const Catalog: React.FC<IProps> = ({ content }) => {
+// 	// 根据content生成锚点列表
 // 	const list = getAnchorList(content)
-// 	function renderLink({ href: any, title: any, children: any }) {
+// 	// 把锚点列表中的每项转成链接
+// 	function renderLink({ href, title, children }) {
 // 		return (
 // 			<Link key={href} href={href} title={title}>
 // 				{children.length > 0 && children.map((sub: any) => renderLink(sub))}
@@ -57,22 +59,15 @@ const { Link } = Anchor
 
 // export default Catalog
 
-
 interface IProps extends ArticleEntity {}
 const Catalog: React.FC<IProps> = ({ content }) => {
-
-  
-  	return (
-  		<Wrapper>
-    {/* 
+	return <Wrapper>{/*
     拿到文章
     找到標題 hn
     給標題添加id
-    按順序生成鏈接目錄 點擊后跳到對應id
+    按順序生成鏈接目錄（點擊后跳到對應id）
     標題要分級
-    */}
-  		</Wrapper>
-  	)
-  }
-  
-  export default Catalog
+    */}</Wrapper>
+}
+
+export default Catalog
