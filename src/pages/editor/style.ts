@@ -2,11 +2,6 @@ import styled from 'styled-components'
 // @import headPicIcon from '../../'
 
 export const Wrapper = styled.div`
-	.CodeMirror {
-		min-height: calc(100vh - 106px);
-		box-shadow: none;
-	}
-
 	.articleEdit {
 		height: 100vh;
 	}
@@ -249,6 +244,8 @@ export const Wrapper = styled.div`
 		/* padding: 36px 30px 42px; */
 		bottom: 42px;
 		width: 100%;
+		min-height: calc(100vh - 106px);
+		box-shadow: none;
 		background: #f8f9fa;
 		.CodeMirror-sizer {
 			padding: 30px !important;
@@ -272,6 +269,8 @@ export const Wrapper = styled.div`
 		bottom: 0;
 		left: 0;
 		right: 50%; */
+		position: relative;
+		z-index: 1;
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
