@@ -85,7 +85,7 @@ const Header: React.FC = (props) => {
 						</li> */}
 						{/* 搜索框 */}
 						<li className="nav-item search">
-							<div className={active ? 'search-form active' : 'search-form'}>
+							<div className={active ? 'search-box active' : 'search-box'}>
 								<input
 									type="text"
 									className="search-input"
@@ -98,7 +98,7 @@ const Header: React.FC = (props) => {
 									onChange={onInputEvent}
 									onKeyDown={(event) => {
 										let e = event || window.event
-										if (e && e.keyCode == 13) {
+										if (e && e.keyCode == 13 && search !== '') {
 											onSearch()
 										}
 									}}

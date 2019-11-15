@@ -31,6 +31,6 @@ export const useDispatch = () => {
 
 export const useSelector = <T>(cb: (store: IStore) => T | IStore = (arg) => arg) => cb(useContext(Store))
 
-export const useIsLogin = () => !useContext(Store).user
+export const useIsLogin = () => !!useContext(Store).user
 
 export default Store

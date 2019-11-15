@@ -79,7 +79,7 @@ export const Wrapper = styled.div`
 				justify-content: flex-end;
 				flex: 1 1 auto;
 
-				.search-form {
+				.search-box {
 					display: flex;
 					justify-content: center;
 					align-items: center;

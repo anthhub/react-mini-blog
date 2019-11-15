@@ -24,16 +24,17 @@ export const Wrapper = styled.div`
 				border-left: 1px solid hsla(0, 0%, 59.2%, .2);
 			}
 
-			.nav-item a {
-				display: block;
+			.nav-item {
 				padding: 0 14px;
 				line-height: 14px;
 				font-size: 14px;
 				color: #909090;
-			}
-			.active a,
-			.nav-item:hover a {
-				color: #007fff;
+				cursor: pointer;
+
+				&.active,
+				:hover {
+					color: #007fff;
+				}
 			}
 		}
 	}

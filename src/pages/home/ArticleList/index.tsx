@@ -15,12 +15,10 @@ const ArticleList: React.FC = () => {
 	// console.log(query)
 	const { setQuery, query } = useQuery()
 
-	// const { data } = useFetch(() => getArticles(query), [ query ])
+	const { data } = useFetch(() => getArticles(query), [ query ])
 
 	// 文章列表
-	const list: any[] = []
-
-	// (data && data.edges) || []
+	const list = (data && data.edges) || []
 
 	// 所有 or 我的
 	// const [ active, setActive ] = useState(0)
@@ -37,8 +35,7 @@ const ArticleList: React.FC = () => {
 							className={query.own === 'all' || !query.own ? 'nav-item active' : 'nav-item'}
 							onClick={() => setQuery({ own: 'all' })}
 						>
-							{/* 不跳转 在现在的 url 后添加 search */}
-							<a>全部</a>
+							全部
 						</li>
 
 						{isLogin && (
@@ -46,7 +43,7 @@ const ArticleList: React.FC = () => {
 								className={query.own === 'mine' ? 'nav-item mine active' : 'nav-item mine'}
 								onClick={() => setQuery({ own: 'mine' })}
 							>
-								<a>我的</a>
+								我的
 							</li>
 						)}
 					</ul>
