@@ -1,17 +1,9 @@
-import { Input } from 'antd'
-import React, { useRef, useState, useCallback, useEffect } from 'react'
-import { UnControlled as CodeMirror } from 'react-codemirror2'
+import React, { useState, useCallback, useEffect } from 'react'
+import { useDispatch } from '@/redux/context'
 
 // 引入样式
 import { Wrapper } from './style'
-
-// 引入CodeMirror样式
-import { createArticle } from '@/Api/article'
-import { translateMarkdown } from '@/lib/utils/markdown'
-import { Editor, EditorChange, ScrollInfo } from 'codemirror'
-import 'codemirror/mode/markdown/markdown'
 import avatarPic from '../../../statics/avatar.png'
-import { useDispatch } from '@/redux/context'
 
 const Menu: React.FC = () => {
 	// 头像下拉菜单显隐
@@ -19,7 +11,6 @@ const Menu: React.FC = () => {
 
 	const hideDropdown = useCallback((e: any) => {
 		if (e.target.className !== 'avatar') {
-			// console.log(e, { showDropdown })
 			setDropdown(false)
 		}
 	}, [])

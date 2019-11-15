@@ -1,11 +1,12 @@
 import useFlag from '@/hooks/useFlag'
 import { useIsLogin, useSelector, useDispatch } from '@/redux/context'
 import React, { useCallback, useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import Login from '../Login'
 import Register from '../Register'
 import { Wrapper } from './style'
 import useInputEvent from '@/hooks/useInputEvent'
+import useQuery from '@/hooks/useQuery'
 
 const Header: React.FC = (props) => {
 	// 搜索框聚焦
@@ -35,8 +36,6 @@ const Header: React.FC = (props) => {
 	// 是否登陆
 	const isLogin = useIsLogin()
 
-	console.log('%c%s', 'color: #20bd08; font-size:15px', '===TQY===: isLogin', isLogin, useSelector((l: any) => l))
-
 	// 登出确定框
 	const dispatch = useDispatch()
 
@@ -46,7 +45,16 @@ const Header: React.FC = (props) => {
 		}
 	}
 
-	const { value: search, onInputEvent } = useInputEvent('')
+	const { query, setQuery } = useQuery()
+
+	const { value: search, onInputEvent } = useInputEvent(query.search)
+
+	const onSearch = useCallback(
+		() => {
+			setQuery({ search })
+		},
+		[ search ]
+	)
 
 	return (
 		<Wrapper>
@@ -75,9 +83,11 @@ const Header: React.FC = (props) => {
 								</a>
 							</ul>
 						</li> */}
+						{/* 搜索框 */}
 						<li className="nav-item search">
-							<form className={active ? 'search-form active' : 'search-form'}>
+							<div className={active ? 'search-form active' : 'search-form'}>
 								<input
+									type="text"
 									className="search-input"
 									placeholder="搜索"
 									onFocus={() => setActive(true)}
@@ -86,17 +96,23 @@ const Header: React.FC = (props) => {
 									}}
 									value={search}
 									onChange={onInputEvent}
+									onKeyDown={(event) => {
+										let e = event || window.event
+										if (e && e.keyCode == 13) {
+											onSearch()
+										}
+									}}
 								/>
-								{/* 改 pathname */}
-								<Link to={{ pathname: '', search: 'query=' + search }}>
+								<div onClick={onSearch}>
 									<img
 										alt="search"
 										className="search-icon"
 										src="https://b-gold-cdn.xitu.io/v3/static/img/juejin-search-icon.6f8ba1b.svg"
 									/>
-								</Link>
-							</form>
+								</div>
+							</div>
 						</li>
+						{/* 写文章按钮 根据登陆状态有不同跳转 */}
 						<li className="nav-item write">
 							{isLogin ? (
 								<Link to="/editor">
@@ -109,6 +125,7 @@ const Header: React.FC = (props) => {
 								</button>
 							)}
 						</li>
+						{/* 根据登陆状态 决定显示用户头像还是登陆注册选项 */}
 						{isLogin ? (
 							<li className="nav-item menu">
 								<div
@@ -118,6 +135,7 @@ const Header: React.FC = (props) => {
 										setDropdown(true)
 									}}
 								/>
+								{/* 头像下拉菜单 */}
 								{showDropdown && (
 									<ul className="dropdown-list">
 										<li>

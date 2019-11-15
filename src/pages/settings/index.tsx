@@ -4,7 +4,7 @@ import Profile from './Profile';
 import Password from './Password';
 import { Wrapper } from './style';
 
-// 被选中的导航栏标签序号（从 0 开始）默认为 0
+// 被选中的导航栏标签序号（从 0 开始）默认为 0 (暂时写死)
 const activeTag: number = 0;
 
 const getView = (tag: number) => {

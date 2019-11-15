@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React, { useRef, useEffect, useCallback } from 'react'
 import useToggle from '@/hooks/useToggle'
 import { Wrapper } from './style'
 
@@ -6,19 +6,30 @@ const Profile: React.FC = (props) => {
 	// 个人信息是否处于被编辑状态
 	// const editFlag: boolean = true
 	// const editFlag: boolean = false
-
 	const { flag: editFlag, onToggle: toggleEditFlag } = useToggle(false)
 
+	useEffect(
+		() => {
+			if (editFlag) {
+				document.addEventListener('click', toggleEditFlag)
+				return () => {
+					document.removeEventListener('click', toggleEditFlag)
+				}
+			}
+		},
+		[ editFlag ]
+	)
+
+	// 上传图片
 	const onUpload = (e: any) => {
 		const formData = new FormData()
 		const file = e.target.files[0]
 		formData.append('file', file)
-		
 	}
 
 	const getBtn = (status: boolean) => {
 		return status ? (
-			<div className="edit-box" onClick={toggleEditFlag}>
+			<div className="edit-box">
 				<button className="confirm-btn">保存</button>
 				<button className="cancel-btn">取消</button>
 			</div>

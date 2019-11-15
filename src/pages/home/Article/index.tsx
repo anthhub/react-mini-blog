@@ -7,12 +7,34 @@ interface IProps extends ArticleEntity {}
 
 const Article: React.FC<IProps> = ({ title, update_at, author, type, screenshot, id }) => {
 	console.log('%c%s', 'color: #20bd08;font-size:15px', '===TQY===: screenshot', screenshot)
-  console.log({update_at},typeof update_at)
-  
-// const formatDate=(update_at)=>{
-//   if update_at
-// }
+	console.log({ update_at }, typeof update_at)
 
+	// const formatDate=(update_at)=>{
+	//   if update_at
+	/*
+	
+	const dt = new Date()
+	const msNow = dt.getTime()
+
+	然后把 update_at 转为毫秒 相减得到 diff
+	if(diff>1年毫秒数){
+		return Math.floor(diff/每年毫秒数31536000000)+'年前'
+	}else if(1月<diff<1年) {
+		return Math.floor(diff/每月毫秒数 2592000000)+'月前'
+	}else if(1天<diff<1月) {
+		return Math.floor(diff/每天毫秒数 86400000)+'月前'
+	}else if(1小时<diff<1天) {
+		return Math.floor(diff/每小时毫秒数 3600000)+'月前'
+	}else if(1分钟<diff<1小时) {
+		return Math.floor(diff/分钟毫秒数 60000)+'月前'
+	}else{
+		return "刚刚"
+	}
+
+	
+	*/
+
+	// }
 
 	return (
 		<Wrapper screenshot={screenshot}>

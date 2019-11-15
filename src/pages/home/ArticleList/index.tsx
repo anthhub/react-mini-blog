@@ -8,42 +8,45 @@ import { Link } from 'react-router-dom'
 import { useIsLogin } from '@/redux/context'
 import useQuery from '@/hooks/useQuery'
 
-
 const ArticleList: React.FC = () => {
 	// search 是地址栏 ? 开始的内容
 	// query 是 ? 之后内容拆成的对象
-	const query: any = useQuery()
-	console.log(query)
+	// const { query }: any = useQuery()
+	// console.log(query)
+	const { setQuery, query } = useQuery()
 
-	const { data } = useFetch(() => getArticles(query), [ query ])
-	console.log('%c%s', 'color: #20bd08;font-size:15px', '===TQY===: data')
+	// const { data } = useFetch(() => getArticles(query), [ query ])
 
 	// 文章列表
-	const list = (data && data.edges) || []
+	const list: any[] = []
+
+	// (data && data.edges) || []
 
 	// 所有 or 我的
-	const [ active, setActive ] = useState(0)
+	// const [ active, setActive ] = useState(0)
 
 	// 是否登陆
 	const isLogin = useIsLogin()
-
 
 	return (
 		<Wrapper>
 			<header className="header">
 				<nav className="nav">
 					<ul className="nav-list">
-						<li className={active === 0 ? 'nav-item active' : 'nav-item'} onClick={() => setActive(0)}>
+						<li
+							className={query.own === 'all' || !query.own ? 'nav-item active' : 'nav-item'}
+							onClick={() => setQuery({ own: 'all' })}
+						>
 							{/* 不跳转 在现在的 url 后添加 search */}
-							<Link to={{ pathname: '', search: 'sort=all' }}>全部</Link>
+							<a>全部</a>
 						</li>
 
 						{isLogin && (
 							<li
-								className={active === 1 ? 'nav-item mine active' : 'nav-item mine'}
-								onClick={() => setActive(1)}
+								className={query.own === 'mine' ? 'nav-item mine active' : 'nav-item mine'}
+								onClick={() => setQuery({ own: 'mine' })}
 							>
-								<Link to={{ pathname: '', search: 'sort=mine' }}>我的</Link>
+								<a>我的</a>
 							</li>
 						)}
 					</ul>
@@ -64,8 +67,9 @@ export default ArticleList
 小程序登陆功能 搜索功能
 检查标题不为空
 登陆失败提醒
-一些index拆分成组件
-pathname 搜索框
+一些index拆分成小组件
+搜索框 pathname
 回车搜索
 退出不了
+预览 最小高度 
 */
