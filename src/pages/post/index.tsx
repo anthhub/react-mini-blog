@@ -26,7 +26,7 @@ const Post: React.FC = (props) => {
 			<div className="right">
 				<Author />
 				<AppDownload />
-				<Catalog />
+				<Catalog {...item} />
 			</div>
 			<BackTop />
 		</Wrapper>

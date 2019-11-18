@@ -8,6 +8,7 @@
     "@types/jest": "24.0.19",
     "@types/marked": "^0.6.5",
     "@types/node": "12.11.1",
+    "@types/qs": "^6.9.0",
     "@types/react-dom": "16.9.2",
     "@types/react-router-dom": "^5.1.0",
     "@types/showdown": "^1.9.3",
