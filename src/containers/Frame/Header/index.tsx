@@ -30,9 +30,7 @@ const Header: React.FC = (props) => {
 
 	useEffect(() => {
 		document.addEventListener('click', hideDropdown)
-		return () => {
-			document.removeEventListener('click', hideDropdown)
-		}
+		return () => document.removeEventListener('click', hideDropdown)
 	}, [])
 
 	// 是否登陆

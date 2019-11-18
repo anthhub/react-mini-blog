@@ -6,7 +6,7 @@ import React, { useContext } from 'react'
 interface IStore {
 	count: number
 
-	user: { email: string; password: string } | null
+	user: any
 	query: {
 		search: string
 		sort: string
@@ -17,7 +17,7 @@ interface IStore {
 
 const Store = React.createContext<IStore>({
 	count: 1,
-	user: null,
+	user: {},
 	query: { search: '', sort: '' },
 	dispatch: (arg) => arg
 })
@@ -31,6 +31,6 @@ export const useDispatch = () => {
 
 export const useSelector = <T>(cb: (store: IStore) => T | IStore = (arg) => arg) => cb(useContext(Store))
 
-export const useIsLogin = () => !!useContext(Store).user
+export const useIsLogin = () => !!Object.keys(useContext(Store).user).length
 
 export default Store

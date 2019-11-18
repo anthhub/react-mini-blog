@@ -60,7 +60,7 @@ const ArticleList: React.FC = () => {
 export default ArticleList
 
 /*
-添加图片功能 包括设置页 写文章页
+添加 预览图片功能 包括设置页 写文章页 
 设置页拿到用户信息 修改
 添加小程序小图标
 小程序登陆功能 搜索功能
@@ -70,5 +70,5 @@ export default ArticleList
 搜索框 pathname
 回车搜索
 退出不了
-预览 最小高度 
+
 */

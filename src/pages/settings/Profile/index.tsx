@@ -1,12 +1,29 @@
 import React from 'react'
 import useToggle from '@/hooks/useToggle'
 import { Wrapper } from './style'
+import ButtonGroup from '../InfoGroup'
+import InfoGroup from '../InfoGroup'
+
+const infoList: Array<{
+	title: string
+	field: string
+	placeholder?: string
+}> = [
+	{ title: '用户名', field: 'username' },
+	{ title: '职位', field: 'jobTitle' },
+	{ title: '公司', field: 'company' },
+	{
+		title: '个人介绍',
+		field: 'selfDescription',
+		placeholder: '填写职业技能、擅长的事情、喜欢的事情等'
+	},
+	{ title: '个人主页', field: 'blogAddress' }
+]
 
 const Profile: React.FC = (props) => {
 	// 个人信息是否处于被编辑状态
 	// const editFlag: boolean = true
 	// const editFlag: boolean = false
-	const { flag: editFlag, onToggle: toggleEditFlag } = useToggle(false)
 
 	// useEffect(
 	// 	() => {
@@ -25,22 +42,6 @@ const Profile: React.FC = (props) => {
 		const formData = new FormData()
 		const file = e.target.files[0]
 		formData.append('file', file)
-	}
-
-	const getBtn = (status: boolean) => {
-		return status ? (
-			<div className="edit-box" onClick={toggleEditFlag}>
-				<button className="confirm-btn">保存</button>
-				<button className="cancel-btn">取消</button>
-			</div>
-		) : (
-			<div className="edit-box" onClick={toggleEditFlag}>
-				<button className="edit-btn">
-					<i className="edit-icon" />
-					<span>修改</span>
-				</button>
-			</div>
-		)
 	}
 
 	return (
@@ -65,17 +66,12 @@ const Profile: React.FC = (props) => {
 							</div>
 						</div>
 					</li>
-					<li className="item">
-						<span className="item-title">
-							{/* value={username} */}
-							用户名
-						</span>
-						<div className="input-box">
-							<input className="input" placeholder="填写你的用户名" />
-							{getBtn(editFlag)}
-						</div>
-					</li>
-					<li className="item">
+					{infoList.map((item) => (
+						<li className="item" key={item.title}>
+							<InfoGroup item={item} />
+						</li>
+					))}
+					{/* <li className="item">
 						<span className="item-title">手机号</span>
 						<div className="input-box">
 							<input className="input" placeholder="填写你的手机号" />
@@ -88,7 +84,7 @@ const Profile: React.FC = (props) => {
 							<input className="input" placeholder="填写你的 GitHub" />
 							{getBtn(editFlag)}
 						</div>
-					</li>
+					</li> */}
 				</ul>
 			</div>
 		</Wrapper>
