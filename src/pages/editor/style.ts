@@ -236,6 +236,7 @@ export const Wrapper = styled.div`
 
 	.markdown {
 		height: calc(100vh - 106px);
+		font-size: 14px;
 		border-right: 1px solid #ddd;
 		background: #f8f9fa;
 	}
@@ -244,7 +245,7 @@ export const Wrapper = styled.div`
 		/* padding: 36px 30px 42px; */
 		bottom: 42px;
 		width: 100%;
-		min-height: calc(100vh - 106px);
+		/* min-height: calc(100vh - 106px); */
 		box-shadow: none;
 		background: #f8f9fa;
 		.CodeMirror-sizer {
@@ -252,9 +253,15 @@ export const Wrapper = styled.div`
 		}
 	}
 
+	.CodeMirror {
+		height: calc(100vh - 106px);
+		background: #f8f9fa;
+	}
+
 	.preview {
 		/* position: relative; */
 		flex: 1 1 50%;
+		font-size: 16px;
 		background: #fff;
 	}
 
