@@ -253,13 +253,14 @@ export const Wrapper = styled.div`
 	}
 
 	.preview {
+		/* position: relative; */
 		flex: 1 1 50%;
 		background: #fff;
 	}
 
 	.content {
-		min-height: 0;
-		height: calc(100vh - 106px);
+		/* min-height: 0; */
+		/* height: calc(100vh - 106px); */
 		padding: 30px;
 		overflow-y: auto;
 	}
@@ -270,6 +271,7 @@ export const Wrapper = styled.div`
 		left: 0;
 		right: 50%; */
 		position: relative;
+		bottom: 0;
 		z-index: 1;
 		display: flex;
 		justify-content: space-between;
@@ -301,13 +303,15 @@ export const Wrapper = styled.div`
 
 		.footer-title,
 		.word-count {
+			font-size: 14px;
 			color: #ddd;
 		}
 	}
 
 	.preview .footer {
-		/* left: 50%;
-		right: 0; */
+		position: absolute;
+		bottom: 0;
+		width: 100%;
 		border-right: none;
 	}
 

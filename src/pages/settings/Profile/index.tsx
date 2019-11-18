@@ -76,9 +76,9 @@ const Profile: React.FC = (props) => {
 						</div>
 					</li>
 					<li className="item">
-						<span className="item-title">邮箱</span>
+						<span className="item-title">手机号</span>
 						<div className="input-box">
-							<input className="input" placeholder="填写你的邮箱" />
+							<input className="input" placeholder="填写你的手机号" />
 							{getBtn(editFlag)}
 						</div>
 					</li>
