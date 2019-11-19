@@ -14,6 +14,11 @@ interface IProps {
 	}
 }
 
+const setFocus = (id: string) => {
+	const input = document.getElementById(id)
+	input && input.focus()
+}
+
 const InfoGroup: React.FC<IProps> = ({ item: { field, title, placeholder } }) => {
 	// 是否为编辑状态
 	const { user = {} } = useSelector()
@@ -56,12 +61,18 @@ const InfoGroup: React.FC<IProps> = ({ item: { field, title, placeholder } }) =>
 						<button className="cancel-btn">取消</button>
 					</div>
 				) : (
-					<label className="edit-box" htmlFor={field} onClick={() => setEditFlag(true)}>
+					<div
+						className="edit-box"
+						onClick={() => {
+							setEditFlag(true)
+							setFocus(field)
+						}}
+					>
 						<button className="edit-btn">
 							<i className="edit-icon" />
 							<span>修改</span>
 						</button>
-					</label>
+					</div>
 				)}
 			</div>
 		</Wrapper>

@@ -245,7 +245,6 @@ export const Wrapper = styled.div`
 		/* padding: 36px 30px 42px; */
 		bottom: 42px;
 		width: 100%;
-		/* min-height: calc(100vh - 106px); */
 		box-shadow: none;
 		background: #f8f9fa;
 		.CodeMirror-sizer {
@@ -267,7 +266,7 @@ export const Wrapper = styled.div`
 
 	.content {
 		/* min-height: 0; */
-		/* height: calc(100vh - 106px); */
+		height: calc(100vh - 106px);
 		padding: 30px;
 		overflow-y: auto;
 	}
