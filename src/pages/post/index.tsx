@@ -8,7 +8,6 @@ import AppDownload from '../../components/AppDownload'
 import Article from './Article'
 import Author from './Author'
 import Catalog from './Catalog'
-// import { connect } from 'react-redux';
 import { Wrapper } from './style'
 
 const Post: React.FC = (props) => {
@@ -16,7 +15,10 @@ const Post: React.FC = (props) => {
 
 	const { data } = useFetch(() => getArticle(id))
 
-	const item: ArticleEntity = data && data[0]
+	const item: ArticleEntity = data
+	// && data[0]
+
+	console.log(item, '444')
 
 	return (
 		<Wrapper>

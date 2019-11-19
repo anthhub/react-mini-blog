@@ -7,7 +7,7 @@ import { Wrapper } from './style'
 
 interface IProps extends ArticleEntity {}
 
-const Article: React.FC<IProps> = ({ content, title, html }) => {
+const Article: React.FC<IProps> = ({ content, html }) => {
 	return (
 		<Wrapper>
 			<h1 className="article-title">9个项目助你在2020年成为前端大神！</h1>

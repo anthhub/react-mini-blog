@@ -59,7 +59,7 @@ const Article: React.FC<IProps> = ({ title, update_at, author, type, screenshot,
 								<div className="title-link">{title}</div>
 							</div>
 
-							<div>
+							{/* <div>
 								<ul className="info-row">
 									<li>
 										<a className="little-box like">
@@ -80,7 +80,7 @@ const Article: React.FC<IProps> = ({ title, update_at, author, type, screenshot,
 										</a>
 									</li>
 								</ul>
-							</div>
+							</div> */}
 						</div>
 
 						<div className="thumb" />

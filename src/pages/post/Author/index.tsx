@@ -1,8 +1,8 @@
 // 详情页 右侧 作者简介卡片
 
-import React from 'react';
+import React from 'react'
 // import { connect } from 'react-redux';
-import { Wrapper } from './style';
+import { Wrapper } from './style'
 
 const Author: React.FC = (props) => {
 	return (
@@ -22,17 +22,17 @@ const Author: React.FC = (props) => {
 						<span className="author-intro">程序员 | 公众号: 山月行</span>
 					</div>
 				</a>
-				<div className="agree">
+				{/* <div className="agree">
 					<span>获得点赞</span>
 					<span className='count'>7,113</span>
 				</div>
 				<div className="views">
 					<span>文章被阅读</span>
 					<span className='count'>179,331</span>
-				</div>
+				</div> */}
 			</div>
 		</Wrapper>
-	);
-};
+	)
+}
 
-export default Author;
+export default Author

@@ -44,9 +44,9 @@ interface IProps extends ArticleEntity {}
 const Catalog: React.FC<IProps> = ({ html, content }) => {
 	// 根据content生成锚点列表
 	const list = getAnchorList(html || translateMarkdown(content || ''))
-	// 把锚点列表中的每项转成链接
 	console.log(list, '222')
 
+	// 把锚点列表中的每项转成链接
 	const renderLink = useCallback(({ href, title, children }: { href: string; title: string; children: any[] }) => {
 		return (
 			<Link key={href} href={href} title={title}>
