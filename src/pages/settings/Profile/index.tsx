@@ -1,5 +1,5 @@
 import React from 'react'
-import useToggle from '@/hooks/useToggle'
+import useToggle from '@/lib/hooks/useToggle'
 import { Wrapper } from './style'
 import ButtonGroup from '../InfoGroup'
 import InfoGroup from '../InfoGroup'

@@ -1,4 +1,4 @@
-import useFlag from '@/hooks/useFlag'
+import useFlag from '@/lib/hooks/useFlag'
 import React from 'react'
 // import { connect } from 'react-redux';
 import { Wrapper } from './style'

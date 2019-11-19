@@ -8,7 +8,7 @@ import { Wrapper } from './style'
 interface IProps extends ArticleEntity {}
 
 const Article: React.FC<IProps> = ({ update_at, content, author, title, html }) => {
-	console.log(content, '333')
+	// console.log(content, '333')
 	return (
 		<Wrapper>
 			<div className="author">

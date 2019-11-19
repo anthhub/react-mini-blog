@@ -1,10 +1,12 @@
 // 详情页 右侧 作者简介卡片
 
 import React from 'react'
-// import { connect } from 'react-redux';
 import { Wrapper } from './style'
+import { ArticleEntity } from '@/modal/entities/article.entity'
 
-const Author: React.FC = (props) => {
+interface IProps extends ArticleEntity {}
+
+const Author: React.FC<IProps> = ({ author }) => {
 	return (
 		<Wrapper>
 			<header className="author-title">关于作者</header>
@@ -18,7 +20,7 @@ const Author: React.FC = (props) => {
 						}}
 					/>
 					<div className="info">
-						<span className="author-name">shanyue</span>
+						<span className="author-name">{author}</span>
 						<span className="author-intro">程序员 | 公众号: 山月行</span>
 					</div>
 				</a>

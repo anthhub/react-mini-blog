@@ -1,6 +1,6 @@
 import { getArticle } from '@/Api/article'
-import useDocumentTitle from '@/hooks/useDocumentTitle'
-import useFetch from '@/hooks/useFetch'
+import useDocumentTitle from '@/lib/hooks/useDocumentTitle'
+import useFetch from '@/lib/hooks/useFetch'
 import { ArticleEntity } from '@/modal/entities/article.entity'
 import React from 'react'
 import { useParams } from 'react-router'

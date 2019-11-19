@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react'
-import useToggle from '@/hooks/useToggle'
+import useToggle from '@/lib/hooks/useToggle'
 import { Wrapper } from './style'
-import useEventFetch from '@/hooks/useEventFetch'
+import useEventFetch from '@/lib/hooks/useEventFetch'
 import { userUpdate } from '@/Api/user'
-import useInputEvent from '@/hooks/useInputEvent'
+import useInputEvent from '@/lib/hooks/useInputEvent'
 import { useSelector } from '@/redux/context'
 
 interface IProps {

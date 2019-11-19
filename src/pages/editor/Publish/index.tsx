@@ -9,6 +9,9 @@ import { Wrapper } from './style'
 import { createArticle } from '@/Api/article'
 import 'codemirror/mode/markdown/markdown'
 import arrowIcon from '../../../statics/arrow-down.svg'
+import { useSelector } from '@/redux/context'
+import { useHistory } from 'react-router'
+import { async } from 'q'
 
 interface IProps {
 	title: string
@@ -19,18 +22,20 @@ interface IProps {
 }
 
 const Publish: React.FC<IProps> = ({ content, title }) => {
+	const { user: { username } } = useSelector()
 
 	const onSave = useCallback(
-		() => {
+		async () => {
 			console.log('%c%s', 'color: #20bd08; font-size: 15px', '===TQY===: onSave -> data', title, content)
-			const data = createArticle({
-				author: '测试创建c',
+			const { id } = await createArticle({
+				author: username,
 				content: content.markdown,
 				html: content.html,
 				title,
 				screenshot: 'https://imgphoto.gmw.cn/attachement/jpg/site2/20191103/f44d3075890f1f28a06e01.JPG',
 				type: '测试创建 js'
 			})
+			history.replace(`post/${id}`)
 		},
 		[ content, title ]
 	)
@@ -88,6 +93,8 @@ const Publish: React.FC<IProps> = ({ content, title }) => {
 		},
 		[ activeList ]
 	)
+
+	const history = useHistory()
 
 	return (
 		<Wrapper>

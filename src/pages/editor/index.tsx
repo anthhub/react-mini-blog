@@ -14,9 +14,12 @@ import 'codemirror/mode/markdown/markdown'
 
 import Publish from './Publish'
 import Menu from './Menu'
-import useInputEvent from '@/hooks/useInputEvent'
+import useInputEvent from '@/lib/hooks/useInputEvent'
+import useAuthLogin from '@/lib/hooks/useAuthLogin'
 
 const EditMarkdown: React.FC = () => {
+	useAuthLogin()
+
 	const contentRef = useRef<HTMLDivElement>(null)
 
 	const { value: title, onInputEvent } = useInputEvent('')

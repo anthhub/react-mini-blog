@@ -1,7 +1,7 @@
 // 右侧 下载客户端小卡片
 
 import { signUp } from '@/Api/account'
-import useInputEvent from '@/hooks/useInputEvent'
+import useInputEvent from '@/lib/hooks/useInputEvent'
 import React, { useCallback } from 'react'
 import { Wrapper } from './style'
 

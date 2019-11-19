@@ -48,7 +48,7 @@ export const Wrapper = styled.div`
 
 		.panel-title {
 			margin-bottom: 18px;
-			font-size: 18px;
+			font-size: 19px;
 			font-weight: 700;
 			color: hsla(218, 9%, 51%, .8);
 		}
@@ -92,6 +92,7 @@ export const Wrapper = styled.div`
 			margin: 0 auto;
 			padding: 7px 14px;
 			color: #007fff;
+			font-size: 14px;
 			background: #fff;
 			border: 1px solid currentColor;
 			border-radius: 2px;

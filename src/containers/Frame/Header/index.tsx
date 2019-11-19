@@ -1,9 +1,9 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import { Link, useHistory } from 'react-router-dom'
 
-import useFlag from '@/hooks/useFlag'
-import useInputEvent from '@/hooks/useInputEvent'
-import useQuery from '@/hooks/useQuery'
+import useFlag from '@/lib/hooks/useFlag'
+import useInputEvent from '@/lib/hooks/useInputEvent'
+import useQuery from '@/lib/hooks/useQuery'
 import { useDispatch, useIsLogin, useSelector } from '@/redux/context'
 
 import Login from '../Login'

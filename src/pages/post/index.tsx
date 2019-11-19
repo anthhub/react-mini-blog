@@ -1,6 +1,6 @@
 import { getArticle } from '@/Api/article'
 import { ArticleEntity } from '@/modal/entities/article.entity'
-import useFetch from '@/hooks/useFetch'
+import useFetch from '@/lib/hooks/useFetch'
 import { BackTop } from 'antd'
 import React from 'react'
 import { useParams } from 'react-router'
@@ -18,7 +18,7 @@ const Post: React.FC = (props) => {
 	const item: ArticleEntity = data
 	// && data[0]
 
-	console.log(item, '444')
+	// console.log(item, '444')
 
 	return (
 		<Wrapper>
@@ -26,7 +26,7 @@ const Post: React.FC = (props) => {
 				<Article {...item} />
 			</div>
 			<div className="right">
-				<Author />
+				<Author {...item} />
 				<AppDownload />
 				<Catalog {...item} />
 			</div>

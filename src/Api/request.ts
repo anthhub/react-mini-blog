@@ -64,8 +64,10 @@ methods.forEach((v) => {
 				return Promise.resolve(res)
 			})
 			.catch((err) => {
+				console.log({ err: err })
+
 				message.destroy()
-				message.error(err.response || err.msg || err.message || err.stack || '未知错误')
+				message.error(err.msg || err.message || err.stack || '未知错误')
 
 				return Promise.reject({ err, stack: err.msg || err.stack || '' })
 			})

@@ -1,4 +1,4 @@
-import { usePersistedContext, usePersistedReducer } from '@/hooks/usePersist'
+import { usePersistedContext, usePersistedReducer } from '@/lib/hooks/usePersist'
 import React, { useContext, useReducer } from 'react'
 
 import Store from './redux/context'
