@@ -3,32 +3,32 @@ import React, { memo } from 'react'
 import { Link } from 'react-router-dom'
 import { Wrapper } from './style'
 
-interface IProps extends ArticleEntity {}
-
-const formatDate = (time: number) => {
+export const formatDate = (time: number) => {
 	const dt = new Date()
 	const ms = dt.getTime()
-	console.log(ms)
-	// if()
-	// 然后把 update_at 转为毫秒 相减得到 diff
-	// if(diff>1年毫秒数){
-	// 	return Math.floor(diff/每年毫秒数31536000000)+'年前'
-	// }else if(1月<diff<1年) {
-	// 	return Math.floor(diff/每月毫秒数 2592000000)+'月前'
-	// }else if(1天<diff<1月) {
-	// 	return Math.floor(diff/每天毫秒数 86400000)+'月前'
-	// }else if(1小时<diff<1天) {
-	// 	return Math.floor(diff/每小时毫秒数 3600000)+'月前'
-	// }else if(1分钟<diff<1小时) {
-	// 	return Math.floor(diff/分钟毫秒数 60000)+'月前'
-	// }else{
-	return '刚刚'
-	// }
+	// console.log(ms)
+	const diff = ms - time
+	// 1年的毫秒数：31536000000
+	if (diff >= 31536000000) {
+		return Math.floor(diff / 31536000000) + '年前'
+	} else if (diff >= 2592000000 && diff < 31536000000) {
+		return Math.floor(diff / 2592000000) + '月前'
+	} else if (diff >= 86400000 && diff < 2592000000) {
+		return Math.floor(diff / 86400000) + '天前'
+	} else if (diff >= 3600000 && diff < 86400000) {
+		return Math.floor(diff / 3600000) + '小时前'
+	} else if (diff >= 60000 && diff < 3600000) {
+		return Math.floor(diff / 60000) + '分钟前'
+	} else {
+		return '刚刚'
+	}
 }
+
+interface IProps extends ArticleEntity {}
 
 const Article: React.FC<IProps> = ({ title, update_at, author, type, content, screenshot, id }) => {
 	console.log('%c%s', 'color: #20bd08;font-size:15px', '===TQY===: screenshot', screenshot)
-	console.log({ update_at }, typeof update_at)
+	// console.log({ update_at }, typeof update_at)
 	return (
 		<Wrapper screenshot={screenshot}>
 			<li>

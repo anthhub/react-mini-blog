@@ -17,7 +17,7 @@ export const Wrapper = styled.div`
 			height: 0;
 		}
 
-		/* 位置刻度 */
+		/* 左侧刻度轴隐藏 */
 		.ant-anchor-ink {
 			display: none;
 		}
