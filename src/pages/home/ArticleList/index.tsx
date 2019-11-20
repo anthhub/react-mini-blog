@@ -60,12 +60,13 @@ const ArticleList: React.FC = () => {
 export default ArticleList
 
 /*
+
 添加 预览图片功能 包括设置页 写文章页 
 设置页拿到用户信息 修改
 修改失败提醒
 添加小程序小图标
 小程序登陆功能 搜索功能
-检查标题不为空
+检查标题 内容不为空
 登陆失败提醒
 一些index拆分成小组件
 目录不显示

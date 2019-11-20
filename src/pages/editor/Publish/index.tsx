@@ -26,16 +26,20 @@ const Publish: React.FC<IProps> = ({ content, title }) => {
 
 	const onSave = useCallback(
 		async () => {
-			console.log('%c%s', 'color: #20bd08; font-size: 15px', '===TQY===: onSave -> data', title, content)
-			const { id } = await createArticle({
-				author: username,
-				content: content.markdown,
-				html: content.html,
-				title,
-				screenshot: 'https://imgphoto.gmw.cn/attachement/jpg/site2/20191103/f44d3075890f1f28a06e01.JPG',
-				type: '测试创建 js'
-			})
-			history.replace(`post/${id}`)
+			if (title === '') {
+				alert('標題沒填啊！')
+			} else {
+				console.log('%c%s', 'color: #20bd08; font-size: 15px', '===TQY===: onSave -> data', title, content)
+				const { id } = await createArticle({
+					author: username,
+					content: content.markdown,
+					html: content.html,
+					title,
+					screenshot: 'https://imgphoto.gmw.cn/attachement/jpg/site2/20191103/f44d3075890f1f28a06e01.JPG',
+					type: '测试创建 js'
+				})
+				history.replace(`post/${id}`)
+			}
 		},
 		[ content, title ]
 	)
@@ -47,6 +51,7 @@ const Publish: React.FC<IProps> = ({ content, title }) => {
 		(e: any) => {
 			console.log('自定义', e.target.className, { showPublish })
 			if (
+				// 点击下列区域以外区域 或 面板打开时点击了这 3 个地方 会收起面板
 				![
 					'publish',
 					'publish-title',
