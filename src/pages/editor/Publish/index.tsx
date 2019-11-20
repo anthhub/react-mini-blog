@@ -113,7 +113,7 @@ const Publish: React.FC<IProps> = ({ content, title }) => {
 				>
 					<span className="publish-title">发布</span>
 					<i
-						className="arrow-down"
+						className={showPublish ? 'arrow-up' : 'arrow-down'}
 						style={{
 							background: `url(${arrowIcon}) no-repeat center/contain`,
 							backgroundSize: '85%'

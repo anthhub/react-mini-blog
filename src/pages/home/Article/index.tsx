@@ -26,7 +26,7 @@ const formatDate = (time: number) => {
 	// }
 }
 
-const Article: React.FC<IProps> = ({ title, update_at, author, type, screenshot, id }) => {
+const Article: React.FC<IProps> = ({ title, update_at, author, type, content, screenshot, id }) => {
 	console.log('%c%s', 'color: #20bd08;font-size:15px', '===TQY===: screenshot', screenshot)
 	console.log({ update_at }, typeof update_at)
 	return (
@@ -49,7 +49,11 @@ const Article: React.FC<IProps> = ({ title, update_at, author, type, screenshot,
 							</div>
 
 							<div className="title">
-								<div className="title-link">{title}</div>
+								<span className="title-link">{title}</span>
+							</div>
+
+							<div className="abstract">
+								<span>{content}</span>
 							</div>
 
 							{/* 暂时不需要点赞等互动功能 */}

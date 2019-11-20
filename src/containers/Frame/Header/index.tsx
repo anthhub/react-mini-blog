@@ -139,10 +139,10 @@ const Header: React.FC = (props) => {
 								{showDropdown && (
 									<ul className="dropdown-list">
 										<li>
-											<a className="menu-item" href="/settings">
+											<Link className="menu-item" to="/settings">
 												<i className="setting-icon icon" />
 												<span>设置</span>
-											</a>
+											</Link>
 										</li>
 										<li>
 											<a className="menu-item" onClick={confirmLogout}>

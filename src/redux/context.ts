@@ -31,6 +31,8 @@ export const useDispatch = () => {
 
 export const useSelector = <T>(cb: (store: IStore) => T | IStore = (arg) => arg) => cb(useContext(Store))
 
-export const useIsLogin = () => !!Object.keys(useContext(Store).user).length
-
+export const useIsLogin = () => {
+	const store = useRedux()
+	return !!Object.keys(store.user).length
+}
 export default Store

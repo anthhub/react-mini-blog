@@ -25,11 +25,16 @@ export const Wrapper = styled.div`
 			color: #007fff;
 		}
 
-		.arrow-down {
+		.arrow-down,
+		.arrow-up {
 			flex: 0 0 auto;
 			margin: 0 14px 0 6px;
 			width: 16px;
 			height: 16px;
+		}
+
+		.arrow-up {
+			transform: rotate(180deg);
 		}
 	}
 
