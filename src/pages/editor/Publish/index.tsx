@@ -1,4 +1,4 @@
-import { Input } from 'antd'
+import { message } from 'antd'
 import React, { useRef, useState, useCallback, useEffect } from 'react'
 import { UnControlled as CodeMirror } from 'react-codemirror2'
 
@@ -11,7 +11,6 @@ import 'codemirror/mode/markdown/markdown'
 import arrowIcon from '../../../statics/arrow-down.svg'
 import { useSelector } from '@/redux/context'
 import { useHistory } from 'react-router'
-import { async } from 'q'
 
 interface IProps {
 	title: string
@@ -24,10 +23,33 @@ interface IProps {
 const Publish: React.FC<IProps> = ({ content, title }) => {
 	const { user: { username } } = useSelector()
 
+	// publish 面板标签
+	const tagList = [ '后端', '前端', 'Android', 'iOS', '人工智能', '开发工具', '代码人生', '阅读' ]
+
+	const [ activeList, setActiveList ] = useState<string[]>([])
+
+	const changeActiveList = useCallback(
+		(e: any, item: string) => {
+			e.nativeEvent.stopImmediatePropagation()
+			if (activeList.includes(item)) {
+				const tmp = [ ...activeList ]
+				tmp.splice(activeList.indexOf(item), 1)
+				setActiveList(tmp)
+			} else {
+				setActiveList([ ...activeList, item ])
+			}
+		},
+		[ activeList ]
+	)
+
 	const onSave = useCallback(
 		async () => {
-			if (title === '') {
-				alert('標題沒填啊！')
+			if (activeList.length === 0) {
+				message.warning('至少选择一个标签')
+			} else if (title === '') {
+				message.warning('标题不能为空')
+			} else if (content.markdown === '' && content.html === '') {
+				message.warning('内容不能为空')
 			} else {
 				console.log('%c%s', 'color: #20bd08; font-size: 15px', '===TQY===: onSave -> data', title, content)
 				const { id } = await createArticle({
@@ -41,7 +63,7 @@ const Publish: React.FC<IProps> = ({ content, title }) => {
 				history.replace(`post/${id}`)
 			}
 		},
-		[ content, title ]
+		[ content, title, activeList ]
 	)
 
 	// 发布文章面板显隐
@@ -79,25 +101,6 @@ const Publish: React.FC<IProps> = ({ content, title }) => {
 			document.removeEventListener('click', hidePublish)
 		}
 	}, [])
-
-	// publish 面板标签
-	const tagList = [ '后端', '前端', 'Android', 'iOS', '人工智能', '开发工具', '代码人生', '阅读' ]
-
-	const [ activeList, setActiveList ] = useState<string[]>([])
-
-	const changeActiveList = useCallback(
-		(e: any, item: string) => {
-			e.nativeEvent.stopImmediatePropagation()
-			if (activeList.includes(item)) {
-				const tmp = [ ...activeList ]
-				tmp.splice(activeList.indexOf(item), 1)
-				setActiveList(tmp)
-			} else {
-				setActiveList([ ...activeList, item ])
-			}
-		},
-		[ activeList ]
-	)
 
 	const history = useHistory()
 
