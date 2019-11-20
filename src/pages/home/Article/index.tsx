@@ -1,8 +1,13 @@
-import { ArticleEntity } from '@/modal/entities/article.entity'
 import React, { memo } from 'react'
 import { Link } from 'react-router-dom'
+
+import { ArticleEntity } from '@/modal/entities/article.entity'
+import { translateMarkdown } from '@/lib/utils/markdown'
+import { matchReg } from '@/pages/post/Catalog'
+
 import { Wrapper } from './style'
 
+// 格式化时间
 export const formatDate = (time: number) => {
 	const dt = new Date()
 	const ms = dt.getTime()
@@ -26,7 +31,7 @@ export const formatDate = (time: number) => {
 
 interface IProps extends ArticleEntity {}
 
-const Article: React.FC<IProps> = ({ title, update_at, author, type, content, screenshot, id }) => {
+const Article: React.FC<IProps> = ({ title, update_at, author, type, content, html, screenshot, id }) => {
 	console.log('%c%s', 'color: #20bd08;font-size:15px', '===TQY===: screenshot', screenshot)
 	// console.log({ update_at }, typeof update_at)
 	return (
@@ -39,11 +44,16 @@ const Article: React.FC<IProps> = ({ title, update_at, author, type, content, sc
 								<ul className="info-row">
 									<li className="column info-item">专栏</li>
 									<li className="info-item">
-										<a className="user-link">{author}</a>
+										{/* object 标签实现 a 标签的嵌套 */}
+										<object>
+											<a className="user-link">{author}</a>
+										</object>
 									</li>
 									<li className="info-item">{formatDate(update_at)}</li>
 									<li className="">
-										<a className="tag-link">{type}</a>
+										<object>
+											<a className="tag-link">{type}</a>
+										</object>
 									</li>
 								</ul>
 							</div>
@@ -53,7 +63,9 @@ const Article: React.FC<IProps> = ({ title, update_at, author, type, content, sc
 							</div>
 
 							<div className="abstract">
-								<span>{content}</span>
+								{/* 摘抄 */}
+								{/* 去掉 html 中的标签 */}
+								<span>{matchReg(html || translateMarkdown(content || ''))}</span>
 							</div>
 
 							{/* 暂时不需要点赞等互动功能 */}
