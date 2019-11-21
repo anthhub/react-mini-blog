@@ -49,7 +49,9 @@ const Header: React.FC = props => {
 
   const { value: search, onInputEvent } = useInputEvent(query.search || '')
 
+  const history = useHistory()
   const onSearch = useCallback(() => {
+    history.replace('/')
     setQuery({ search })
   }, [search])
 
@@ -95,7 +97,7 @@ const Header: React.FC = props => {
                   onChange={onInputEvent}
                   onKeyDown={event => {
                     let e = event || window.event
-                    if (e && e.keyCode == 13) {
+                    if (e && e.keyCode === 13) {
                       onSearch()
                     }
                   }}
