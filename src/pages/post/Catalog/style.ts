@@ -64,8 +64,12 @@ export const Wrapper = styled.div`
 			}
 
 			/* 三级目录链接小圆点 */
-			.ant-anchor-link > .ant-anchor-link > .ant-anchor-link > .ant-anchor-link-title ::before {
-				left: 39px;
+			.ant-anchor-link > .ant-anchor-link > .ant-anchor-link > .ant-anchor-link-title {
+				padding: 4px 0 4px 51px;
+
+				::before {
+					left: 39px;
+				}
 			}
 
 			/* 被選中的一級目錄 */

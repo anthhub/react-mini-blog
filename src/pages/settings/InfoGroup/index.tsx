@@ -21,7 +21,7 @@ const setFocus = (id: string) => {
 const InfoGroup: React.FC<IProps> = ({ item: { field, title, placeholder } }) => {
 	// 是否为编辑状态
 	const { user = {} } = useSelector()
-	console.log(user)
+	console.log('user对象', user)
 
 	const [ editFlag, setEditFlag ] = useState(false)
 	const { value, onInputEvent, setValue } = useInputEvent('')
