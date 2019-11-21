@@ -1,6 +1,5 @@
 import styled from 'styled-components'
 
-import avatarPic from '../../../statics/avatar.png'
 import logoPic from '../../../statics/logo.svg'
 import settingIcon from '../../../statics/setting.svg'
 import logoutIcon from '../../../statics/logout.svg'
@@ -153,7 +152,8 @@ export const Wrapper = styled.div`
 					width: 32px;
 					height: 32px;
 					border-radius: 50%;
-					background: url(${avatarPic}) no-repeat center/Contain;
+					background: ${({ avatarLarge }: { avatarLarge: string }) =>
+						`url(${avatarLarge}) no-repeat center/cover`};
 				}
 
 				.dropdown-list {

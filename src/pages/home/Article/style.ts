@@ -103,7 +103,7 @@ export const Wrapper = styled.div`
 			height: 60px;
 			border-radius: 2px;
 			background-color: #fff;
-			background: ${({ screenshot }: { screenshot: string }) => `url('${screenshot}') no-repeat center/cover`};
+			background: ${({ screenshot }: { screenshot: string }) => `url(${screenshot}) no-repeat center/cover`};
 			box-sizing: content-box;
 		}
 	}

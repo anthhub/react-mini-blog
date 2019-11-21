@@ -36,7 +36,7 @@ const Profile: React.FC = (props) => {
 	// 	[ editFlag ]
 	// )
 
-	// 拿到 store 中的 user
+	// 拿到 store 中的 user (默认值为 {})
 	// const { user = {} } = useSelector()
 
 	// 上传图片
