@@ -4,9 +4,9 @@
 
 // `
 
-import styled from 'styled-components';
-import closePicGray from '../../../statics/close-gray.png';
-import closePicBlack from '../../../statics/close-black.png';
+import styled from 'styled-components'
+import closePicGray from '../../../statics/close-gray.png'
+import closePicBlack from '../../../statics/close-black.png'
 
 export const Wrapper = styled.div`
 	position: fixed;
@@ -81,12 +81,14 @@ export const Wrapper = styled.div`
 		}
 		.commit-btn {
 			width: 100%;
-			height: 28px;
+			height: 40px;
+			padding: 6px 16px;
 			color: #fff;
 			background: #007fff;
 			border-radius: 2px;
 			border: none;
 			outline: none;
+			box-sizing: border-box;
 			cursor: pointer;
 		}
 
@@ -98,4 +100,4 @@ export const Wrapper = styled.div`
 			cursor: pointer;
 		}
 	}
-`;
+`

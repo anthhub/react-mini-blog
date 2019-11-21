@@ -58,7 +58,7 @@ export const Wrapper = styled.div`
 			color: hsla(218, 9%, 51%, .8);
 		}
 
-		.tag-box {
+		.type-box {
 			margin-bottom: 18px;
 			.sub-title {
 				margin-bottom: 12px;
@@ -66,7 +66,7 @@ export const Wrapper = styled.div`
 				color: #909090;
 			}
 
-			.tag-list {
+			.type-list {
 				display: flex;
 				margin: 0;
 				flex-wrap: wrap;

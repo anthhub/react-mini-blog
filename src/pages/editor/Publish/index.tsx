@@ -85,9 +85,9 @@ const Publish: React.FC<IProps> = ({ title, content }) => {
 						'arrow-up',
 						'panel',
 						'panel-title',
-						'tag-box',
+						'type-box',
 						'sub-title',
-						'tag-list',
+						'type-list',
 						'item',
 						'item active',
 						'publish-btn'
@@ -138,9 +138,9 @@ const Publish: React.FC<IProps> = ({ title, content }) => {
 				{showPublish && (
 					<div className="panel">
 						<div className="panel-title">发布文章</div>
-						<div className="tag-box">
-							<div className="sub-title">标签</div>
-							<ul className="tag-list">
+						<div className="type-box">
+							<div className="sub-title">分类</div>
+							<ul className="type-list">
 								{typeList.map((item) => (
 									<li
 										// onClick={(e) => changeActiveList(e, item)}

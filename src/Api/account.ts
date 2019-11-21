@@ -6,10 +6,10 @@ import http from './request'
 
 console.log({ baseUrl })
 
-const account = {
-	signUp: `​/signUp`,
-	signIn: `/signIn`
-}
+// const account = {
+// 	signUp: `​/signUp`,
+// 	signIn: `/signIn`
+// }
 
 export const signUp = (data: SignUpDto) => {
 	return http.post(`http://101.132.79.152/api/v1/signUp`, data).then((res) => {
