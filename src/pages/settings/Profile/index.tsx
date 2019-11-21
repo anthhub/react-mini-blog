@@ -1,8 +1,7 @@
 import React from 'react'
-import useToggle from '@/lib/hooks/useToggle'
 import { Wrapper } from './style'
-import ButtonGroup from '../InfoGroup'
 import InfoGroup from '../InfoGroup'
+import { useSelector } from '@/redux/context'
 
 const infoList: Array<{
 	title: string
@@ -36,6 +35,9 @@ const Profile: React.FC = (props) => {
 	// 	},
 	// 	[ editFlag ]
 	// )
+
+	// 拿到 store 中的 user
+	// const { user = {} } = useSelector()
 
 	// 上传图片
 	const onUpload = (e: any) => {
@@ -71,20 +73,6 @@ const Profile: React.FC = (props) => {
 							<InfoGroup item={item} />
 						</li>
 					))}
-					{/* <li className="item">
-						<span className="item-title">手机号</span>
-						<div className="input-box">
-							<input className="input" placeholder="填写你的手机号" />
-							{getBtn(editFlag)}
-						</div>
-					</li>
-					<li className="item">
-						<span className="item-title">GitHub</span>
-						<div className="input-box">
-							<input className="input" placeholder="填写你的 GitHub" />
-							{getBtn(editFlag)}
-						</div>
-					</li> */}
 				</ul>
 			</div>
 		</Wrapper>

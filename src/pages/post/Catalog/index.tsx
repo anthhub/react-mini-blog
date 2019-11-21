@@ -6,7 +6,7 @@ import { Anchor } from 'antd'
 import { translateMarkdown } from '@/lib/utils/markdown'
 const { Link } = Anchor
 
-function matchReg(str: string) {
+export function matchReg(str: string) {
 	let reg = /<\/?.+?\/?>/g
 	return str.replace(reg, '')
 }

@@ -5,11 +5,13 @@ export class ArticleEntity extends CommonEntity {
 
   content!: string
 
-  html!: string
+  html!: string 
 
   title!: string
 
   screenshot!: string
+
+  tag!:string[]
 
   type!: string
 }

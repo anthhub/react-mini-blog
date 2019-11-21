@@ -2,6 +2,7 @@ import React from 'react'
 
 import { translateMarkdown } from '@/lib/utils/markdown'
 import { ArticleEntity } from '@/modal/entities/article.entity'
+import { formatDate } from '@/pages/home/Article'
 
 import { Wrapper } from './style'
 
@@ -25,7 +26,7 @@ const Article: React.FC<IProps> = ({ update_at, content, author, title, html }) 
 					<div>
 						<a className="author-name">{author}</a>
 						<div className="article-info">
-							<time>{update_at}</time>
+							<time>{formatDate(update_at)}</time>
 							{/* <span className="views">阅读 1367</span> */}
 						</div>
 					</div>
