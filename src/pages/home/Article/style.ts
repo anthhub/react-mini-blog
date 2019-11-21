@@ -18,7 +18,7 @@ export const Wrapper = styled.div`
 
 		.info-box {
 			flex: 1 1 auto;
-			width: 100%;
+			width: 568px;
 			height: 100%;
 			display: flex;
 			flex-direction: column;
@@ -97,12 +97,14 @@ export const Wrapper = styled.div`
 		}
 
 		.thumb {
+			flex: 0 0 auto;
 			margin-left: 24px;
 			width: 60px;
 			height: 60px;
 			border-radius: 2px;
 			background-color: #fff;
 			background: ${({ screenshot }: { screenshot: string }) => `url('${screenshot}') no-repeat center/cover`};
+			box-sizing: content-box;
 		}
 	}
 `

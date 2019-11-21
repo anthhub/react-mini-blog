@@ -34,7 +34,7 @@ const objectToQuery = (obj: any) => {
 }
 
 export default function useQuery<T>() {
-  // search 是地址栏 ? 开始的内容
+  // search 是地址栏中 ? 开始的内容
   const history = useHistory()
   const { search } = useLocation()
   const queryRef = useRef({} as any)

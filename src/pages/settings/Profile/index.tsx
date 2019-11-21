@@ -1,6 +1,7 @@
 import React from 'react'
 import { Wrapper } from './style'
 import InfoGroup from '../InfoGroup'
+import { useSelector } from '@/redux/context'
 
 const infoList: Array<{
 	title: string
@@ -34,6 +35,9 @@ const Profile: React.FC = (props) => {
 	// 	},
 	// 	[ editFlag ]
 	// )
+
+	// 拿到 store 中的 user
+	// const { user = {} } = useSelector()
 
 	// 上传图片
 	const onUpload = (e: any) => {

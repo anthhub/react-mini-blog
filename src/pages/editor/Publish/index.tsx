@@ -20,31 +20,34 @@ interface IProps {
 	}
 }
 
-const Publish: React.FC<IProps> = ({ content, title }) => {
+const Publish: React.FC<IProps> = ({ title, content }) => {
 	const { user: { username } } = useSelector()
 
 	// publish 面板标签
-	const tagList = [ '后端', '前端', 'Android', 'iOS', '人工智能', '开发工具', '代码人生', '阅读' ]
+	const typeList = [ '后端', '前端', 'Android', 'iOS', '人工智能', '开发工具', '代码人生', '阅读' ]
 
-	const [ activeList, setActiveList ] = useState<string[]>([])
+	const [ active, setActive ] = useState('')
 
-	const changeActiveList = useCallback(
-		(e: any, item: string) => {
-			e.nativeEvent.stopImmediatePropagation()
-			if (activeList.includes(item)) {
-				const tmp = [ ...activeList ]
-				tmp.splice(activeList.indexOf(item), 1)
-				setActiveList(tmp)
-			} else {
-				setActiveList([ ...activeList, item ])
-			}
-		},
-		[ activeList ]
-	)
+	// 多选 tags
+	// const [ activeList, setActiveList ] = useState<string[]>([])
+
+	// const changeActiveList = useCallback(
+	// 	(e: any, item: string) => {
+	// 		e.nativeEvent.stopImmediatePropagation()
+	// 		if (activeList.includes(item)) {
+	// 			const tmp = [ ...activeList ]
+	// 			tmp.splice(activeList.indexOf(item), 1)
+	// 			setActiveList(tmp)
+	// 		} else {
+	// 			setActiveList([ ...activeList, item ])
+	// 		}
+	// 	},
+	// 	[ activeList ]
+	// )
 
 	const onSave = useCallback(
 		async () => {
-			if (activeList.length === 0) {
+			if (active === '') {
 				message.warning('至少选择一个标签')
 			} else if (title === '') {
 				message.warning('标题不能为空')
@@ -58,12 +61,13 @@ const Publish: React.FC<IProps> = ({ content, title }) => {
 					html: content.html,
 					title,
 					screenshot: 'https://imgphoto.gmw.cn/attachement/jpg/site2/20191103/f44d3075890f1f28a06e01.JPG',
-					type: '测试创建 js'
+					type: active,
+					tag: []
 				})
 				history.replace(`post/${id}`)
 			}
 		},
-		[ content, title, activeList ]
+		[ content, title, active ]
 	)
 
 	// 发布文章面板显隐
@@ -71,24 +75,26 @@ const Publish: React.FC<IProps> = ({ content, title }) => {
 
 	const hidePublish = useCallback(
 		(e: any) => {
-			console.log('自定义', e.target.className, { showPublish })
+			console.log('点击时是否显示面板', e.target.className, { showPublish })
 			if (
 				// 点击下列区域以外区域 或 面板打开时点击了这 3 个地方 会收起面板
-				![
-					'publish',
-					'publish-title',
-					'arrow-down',
-					'panel',
-					'panel-title',
-					'tag-box',
-					'sub-title',
-					'tag-list',
-					'item',
-					'publish-btn'
-				].includes(e.target.className) ||
+				(!showPublish &&
+					![
+						'publish',
+						'publish-title',
+						'arrow-up',
+						'panel',
+						'panel-title',
+						'tag-box',
+						'sub-title',
+						'tag-list',
+						'item',
+						'item active',
+						'publish-btn'
+					].includes(e.target.className)) ||
 				(showPublish && [ 'publish', 'publish-title', 'arrow-down' ].includes(e.target.className))
 			) {
-				console.log('隐藏 publish 面板')
+				console.log('隐藏 publish 面板', { showPublish })
 				setPublish(false)
 			}
 		},
@@ -135,10 +141,12 @@ const Publish: React.FC<IProps> = ({ content, title }) => {
 						<div className="tag-box">
 							<div className="sub-title">标签</div>
 							<ul className="tag-list">
-								{tagList.map((item) => (
+								{typeList.map((item) => (
 									<li
-										onClick={(e) => changeActiveList(e, item)}
-										className={activeList.includes(item) ? 'item active' : 'item'}
+										// onClick={(e) => changeActiveList(e, item)}
+										// className={activeList.includes(item) ? 'item active' : 'item'}
+										onClick={() => setActive(item)}
+										className={item === active ? 'item active' : 'item'}
 										key={item}
 									>
 										{item}
