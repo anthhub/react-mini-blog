@@ -2,11 +2,17 @@
 
 import React from 'react'
 import { Wrapper } from './style'
-import { ArticleEntity } from '@/modal/entities/article.entity'
 
-interface IProps extends ArticleEntity {}
+interface IProps {
+	user: {
+		username: string
+		jobTitle: string
+		company: string
+	}
+}
 
-const Author: React.FC<IProps> = ({ author }) => {
+const Author: React.FC<IProps> = ({ user: { username = '', jobTitle = '', company = '' } = {} }) => {
+	console.log(username, jobTitle, company)
 	return (
 		<Wrapper>
 			<header className="author-title">关于作者</header>
@@ -20,8 +26,18 @@ const Author: React.FC<IProps> = ({ author }) => {
 						}}
 					/>
 					<div className="info">
-						<span className="author-name">{author}</span>
-						<span className="author-intro">程序员 | 公众号: 山月行</span>
+						<span className="author-name">{username}</span>
+						<span className="author-intro" style={!jobTitle && !company ? { display: 'none' } : {}}>
+							{jobTitle && company ? (
+								jobTitle + ' @ ' + company
+							) : jobTitle ? (
+								jobTitle
+							) : company ? (
+								company
+							) : (
+								'暂无简介'
+							)}
+						</span>
 					</div>
 				</a>
 				{/* <div className="agree">

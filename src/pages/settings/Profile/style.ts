@@ -5,7 +5,6 @@
 // `
 
 import styled from 'styled-components'
-import avatarPic from '../../../statics/avatar.png'
 import editIcon from '../../../statics/edit.svg'
 
 export const Wrapper = styled.div`
@@ -55,7 +54,8 @@ export const Wrapper = styled.div`
 				width: 72px;
 				height: 72px;
 				margin-right: 12px;
-				background: #eee url(${avatarPic}) no-repeat center/cover;
+				background: ${({ avatarLarge }: { avatarLarge: string }) =>
+					`#eee url(${avatarLarge}) no-repeat center/cover`};
 			}
 
 			.upload {

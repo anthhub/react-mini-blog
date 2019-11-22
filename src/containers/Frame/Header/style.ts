@@ -153,7 +153,7 @@ export const Wrapper = styled.div`
 					height: 32px;
 					border-radius: 50%;
 					background: ${({ avatarLarge }: { avatarLarge: string }) =>
-						`url(${avatarLarge}) no-repeat center/cover`};
+						`#eee url(${avatarLarge}) no-repeat center/cover`};
 				}
 
 				.dropdown-list {

@@ -6,21 +6,47 @@ import { message } from 'antd'
 
 console.log({ baseUrl })
 
-// const user = {
-// 	update: '​/user/update'
+// const calledWhenDiffParams = (fn: Function) => {
+// 	let pre: any
+// 	return (arg: any) => {
+// 		if (arg === pre) {
+// 			return
+// 		}
+// 		pre = arg
+// 		return fn(arg)
+// 	}
 // }
+
+const user = {
+	update: '/user/update',
+	info: '/user/info'
+}
 
 export const userUpdate = (data: UserUpdateDto) => {
 	return http
-		.patch(`http://101.132.79.152/api/v1/user/update`, data)
+		.patch(baseUrl + user.update, data)
 		.then((res) => {
 			// message.warning('保存成功')
-			console.log('uuu-suc', res)
+			console.log('userUpdate==suc==', res)
 			return res.data.data
 		})
 		.catch((res) => {
-			console.log('uuu-err', res.data.data)
-			message.warning('保存失败，请稍后重试')
+			// message.warning('保存失败，请稍后重试')
+			console.log('==err==', res)
+			return res.data.data
+		})
+}
+
+export const getUserInfo = () => {
+	return http
+		.get(baseUrl + user.info)
+		.then((res) => {
+			console.log('getUserInfo==suc==', res)
+			return res.data.data
+		})
+		.catch((res) => {
+			// console.log('uuu-err', res.data.data)
+			// message.warning('保存失败，请稍后重试')
 			return res.data.data
 		})
 }

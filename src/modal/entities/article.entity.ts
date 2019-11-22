@@ -14,4 +14,6 @@ export class ArticleEntity extends CommonEntity {
   tag!:string[]
 
   type!: string
+
+  user!:any
 }

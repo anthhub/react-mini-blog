@@ -5,9 +5,13 @@
 // `
 
 import styled from 'styled-components'
+import dotPic from '../../../statics/dot.svg'
+import dotHoverPic from '../../../statics/dot-hover.svg'
 
 export const Wrapper = styled.div`
+	position: relative;
 	border-bottom: 1px solid rgba(178, 186, 194, 0.15);
+
 	.content {
 		display: flex;
 		flex-direction: row;
@@ -94,6 +98,12 @@ export const Wrapper = styled.div`
 				overflow: hidden;
 				text-overflow: ellipsis;
 			}
+
+			.action-row {
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+			}
 		}
 
 		.thumb {
@@ -105,6 +115,50 @@ export const Wrapper = styled.div`
 			background-color: #fff;
 			background: ${({ screenshot }: { screenshot: string }) => `url(${screenshot}) no-repeat center/cover`};
 			box-sizing: content-box;
+		}
+	}
+
+	.show-more {
+		.more-icon {
+			position: absolute;
+			z-index: 100;
+			bottom: 3px;
+			right: 24px;
+			display: block;
+			width: 16px;
+			height: 16px;
+			background: url(${dotPic}) no-repeat center/contain;
+			cursor: pointer;
+
+			:hover {
+				background: url(${dotHoverPic}) no-repeat center/contain;
+			}
+		}
+
+		.menu {
+			position: absolute;
+			z-index: 100;
+			top: 100%;
+			right: 0;
+			width: 120px;
+			padding: 12px 0;
+			background: #fff;
+			border: 1px solid #f1f1f1;
+			border-radius: 2px;
+			box-shadow: 0 1px 2px 1px hsla(0, 0%, 94.5%, .5);
+			list-style: none;
+
+			.menu-item {
+				display: flex;
+				padding: 7px 24px;
+				font-size: 12px;
+				color: #8b8b8b;
+				cursor: pointer;
+			}
+
+			.menu-item:hover {
+				background: #f8f9fa;
+			}
 		}
 	}
 `

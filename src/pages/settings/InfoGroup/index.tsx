@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import { Wrapper } from './style'
 import useEventFetch from '@/lib/hooks/useEventFetch'
-import { userUpdate } from '@/Api/user'
+import { userUpdate, getUserInfo } from '@/Api/user'
 import useInputEvent from '@/lib/hooks/useInputEvent'
-import { useSelector } from '@/redux/context'
+import { useSelector, useDispatch } from '@/redux/context'
+import { userInfo } from 'os'
+import { async } from 'q'
 
 interface IProps {
 	item: {
@@ -26,11 +28,25 @@ const InfoGroup: React.FC<IProps> = ({ item: { field, title, placeholder } }) =>
 	const [ editFlag, setEditFlag ] = useState(false)
 	const { value, onInputEvent, setValue } = useInputEvent('')
 	console.log({ field, value }, user[field])
+
+	const dispatch = useDispatch()
+
 	const { onEvent: onSave } = useEventFetch(
-		() =>
-			userUpdate({
+		async () => {
+			// 第一步：请求更新用户信息
+			await userUpdate({
 				[field]: value
-			}),
+			})
+			// 第二步：拿到服务器用户信息
+			const userInfo = await getUserInfo()
+			console.log(userInfo, '==userInfo==')
+			// 第三步：用服务器拿到的数据覆盖 store 中的数据
+			dispatch({
+				type: 'UPDATE_USER',
+				payload: { user: { ...userInfo } }
+			})
+			return userInfo
+		},
 		[ value ]
 	)
 
@@ -56,7 +72,7 @@ const InfoGroup: React.FC<IProps> = ({ item: { field, title, placeholder } }) =>
 				{/* 输入框右侧根据编辑状态显示不同按钮 */}
 				{editFlag ? (
 					<div className="edit-box" onClick={() => setEditFlag(false)}>
-						<button className="confirm-btn" onClick={() => onSave()}>
+						<button className="confirm-btn" onClick={onSave}>
 							保存
 						</button>
 						<button className="cancel-btn">取消</button>

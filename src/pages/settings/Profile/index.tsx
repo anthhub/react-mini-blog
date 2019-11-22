@@ -1,7 +1,10 @@
-import React from 'react'
+import React, { useCallback } from 'react'
 import { Wrapper } from './style'
 import InfoGroup from '../InfoGroup'
-import { useSelector } from '@/redux/context'
+import { useSelector, useDispatch } from '@/redux/context'
+import { uploadFile } from '@/Api/file'
+import avatarPic from '../../../statics/avatar.png'
+import { userUpdate, getUserInfo } from '@/Api/user'
 
 const infoList: Array<{
 	title: string
@@ -40,14 +43,41 @@ const Profile: React.FC = (props) => {
 	// const { user = {} } = useSelector()
 
 	// 上传图片
-	const onUpload = (e: any) => {
+	// const onUpload = (e: any) => {
+	// 	const formData = new FormData()
+	// 	const file = e.target.files[0]
+	// 	formData.append('file', file)
+	// }
+
+	const dispatch = useDispatch()
+
+	const onUpload = useCallback(async (e: any) => {
 		const formData = new FormData()
 		const file = e.target.files[0]
 		formData.append('file', file)
-	}
+		// console.log(formData.get('file'))
+		// 上传文件并拿到 url
+		const { url } = await uploadFile(formData)
+		console.log(url, '==url==')
+		// 更新用户信息中的头像路径
+		await userUpdate({
+			avatarLarge: url
+		})
+		// 拿到服务器用户信息
+		const userInfo = await getUserInfo()
+		console.log(userInfo, '==userInfo==')
+		// 用服务器数据覆盖 store 的用户信息
+		dispatch({
+			type: 'UPDATE_USER',
+			payload: { user: { ...userInfo } }
+		})
+	}, [])
+
+	// 拿到用户头像 默认值为本地头像
+	const { user: { avatarLarge = avatarPic } } = useSelector()
 
 	return (
-		<Wrapper>
+		<Wrapper avatarLarge={avatarLarge}>
 			<div>
 				<h1 className="title">个人资料</h1>
 				<ul className="setting-list">

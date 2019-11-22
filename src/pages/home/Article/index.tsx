@@ -1,4 +1,4 @@
-import React, { memo } from 'react'
+import React, { memo, useState, useCallback, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 
 import { ArticleEntity } from '@/modal/entities/article.entity'
@@ -6,6 +6,7 @@ import { translateMarkdown } from '@/lib/utils/markdown'
 import { matchReg } from '@/pages/post/Catalog'
 
 import { Wrapper } from './style'
+import useQuery from '@/lib/hooks/useQuery'
 
 // 格式化时间
 export const formatDate = (time: number) => {
@@ -32,8 +33,28 @@ export const formatDate = (time: number) => {
 interface IProps extends ArticleEntity {}
 
 const Article: React.FC<IProps> = ({ title, update_at, author, type, content, html, screenshot, id }) => {
+	// query.own 是 'mine' 才顯示文章預覽右下角的小圓點
+	const { query } = useQuery()
+
+	// 點擊小圓點顯示更多显隐
+	const [ showMore, setMore ] = useState(false)
+
+	const hideMore = useCallback((e: any) => {
+		if (e.target.className !== 'more-icon') {
+			setMore(false)
+		}
+	}, [])
+
+	useEffect(() => {
+		document.addEventListener('click', hideMore)
+		return () => {
+			document.removeEventListener('click', hideMore)
+		}
+	}, [])
+
 	console.log('%c%s', 'color: #20bd08;font-size:15px', '===TQY===: screenshot', screenshot)
 	// console.log({ update_at }, typeof update_at)
+
 	return (
 		<Wrapper screenshot={screenshot}>
 			<li>
@@ -62,15 +83,15 @@ const Article: React.FC<IProps> = ({ title, update_at, author, type, content, ht
 								<span className="title-link">{title}</span>
 							</div>
 
+							{/* 摘抄 */}
+							{/* 去掉 html 中的标签 */}
 							<div className="abstract">
-								{/* 摘抄 */}
-								{/* 去掉 html 中的标签 */}
 								<span>{matchReg(html || translateMarkdown(content || ''))}</span>
 							</div>
 
-							{/* 暂时不需要点赞等互动功能 */}
-							{/* <div>
-								<ul className="info-row">
+							<div className="action-row">
+								{/* 暂时不需要点赞等互动功能 */}
+								{/* <ul className="info-row">
 									<li>
 										<a className="little-box like">
 											<img
@@ -89,13 +110,34 @@ const Article: React.FC<IProps> = ({ title, update_at, author, type, content, ht
 											<span className="count">7</span>
 										</a>
 									</li>
-								</ul>
-							</div> */}
+								</ul> */}
+
+								{/* 互動按鈕沒加時，暫時把小圓點移到外面 */}
+								{/* <i className="more-icon" /> */}
+							</div>
 						</div>
 
 						<div className="thumb" />
 					</section>
 				</Link>
+				
+				<div className="show-more">
+					{query.own === 'mine' && <i className="more-icon" onClick={() => setMore(true)} />}
+					{showMore && (
+						<ul className="menu">
+							<li>
+								<div className="menu-item">
+									<span>编辑</span>
+								</div>
+							</li>
+							<li>
+								<div className="menu-item">
+									<span>删除</span>
+								</div>
+							</li>
+						</ul>
+					)}
+				</div>
 			</li>
 		</Wrapper>
 	)

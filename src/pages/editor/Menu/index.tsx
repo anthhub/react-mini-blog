@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from '@/redux/context'
 // 引入样式
 import { Wrapper } from './style'
 import avatarPic from '../../../statics/avatar.png'
+import { Link } from 'react-router-dom'
 
 const Menu: React.FC = () => {
 	// 头像下拉菜单显隐
@@ -50,14 +51,14 @@ const Menu: React.FC = () => {
 				{showDropdown && (
 					<ul className="dropdown-list">
 						<li>
-							<a className="menu-item" href="/settings">
+							<Link className="menu-item" to="/settings">
 								<span>设置</span>
-							</a>
+							</Link>
 						</li>
 						<li>
-							<a className="menu-item" onClick={confirmLogout}>
+							<div className="menu-item" onClick={confirmLogout}>
 								<span>登出</span>
-							</a>
+							</div>
 						</li>
 					</ul>
 				)}

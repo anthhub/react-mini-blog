@@ -10,6 +10,9 @@ export default function reducer(state: any, action: any) {
 		case 'LOGIN':
 			return { ...state, ...action.payload }
 
+		case 'UPDATE_USER':
+			return { ...state, user: { ...state.user, ...action.payload.user } }
+
 		case 'LOGOUT':
 			return { ...state, user: {} }
 		default:

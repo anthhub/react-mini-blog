@@ -14,7 +14,8 @@ export const Wrapper = styled.div`
 			width: 32px;
 			height: 32px;
 			border-radius: 50%;
-			background: ${({ avatarLarge }: { avatarLarge: string }) => `url(${avatarLarge}) no-repeat center/cover`};
+			background: ${({ avatarLarge }: { avatarLarge: string }) =>
+				`#eee url(${avatarLarge}) no-repeat center/cover`};
 		}
 
 		.dropdown-list {
