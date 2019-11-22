@@ -1,5 +1,5 @@
 import React, { memo, useState, useCallback, useEffect } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 
 import { ArticleEntity } from '@/modal/entities/article.entity'
 import { translateMarkdown } from '@/lib/utils/markdown'
@@ -7,6 +7,8 @@ import { matchReg } from '@/pages/post/Catalog'
 
 import { Wrapper } from './style'
 import useQuery from '@/lib/hooks/useQuery'
+import useFetch from '@/lib/hooks/useFetch'
+import { getArticle } from '@/Api/article'
 
 // 格式化时间
 export const formatDate = (time: number) => {
@@ -51,6 +53,11 @@ const Article: React.FC<IProps> = ({ title, update_at, author, type, content, ht
 			document.removeEventListener('click', hideMore)
 		}
 	}, [])
+
+	// 拿到文章 id
+	// const { id = '' } = useParams()
+	// const { data } = useFetch(() => getArticle(id))
+	// console.log('id=============', id)
 
 	console.log('%c%s', 'color: #20bd08;font-size:15px', '===TQY===: screenshot', screenshot)
 	// console.log({ update_at }, typeof update_at)
@@ -120,7 +127,7 @@ const Article: React.FC<IProps> = ({ title, update_at, author, type, content, ht
 						<div className="thumb" />
 					</section>
 				</Link>
-				
+
 				<div className="show-more">
 					{query.own === 'mine' && <i className="more-icon" onClick={() => setMore(true)} />}
 					{showMore && (
