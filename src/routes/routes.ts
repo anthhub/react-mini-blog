@@ -20,8 +20,8 @@ const routes: IRoute[] = [
 			{ path: '/timeline', component: 'Home' },
 			{ path: '/post/:id', component: 'Post' },
 			{ path: '/settings', component: 'Settings' },
-			// { path: '/editor/:id', component: 'Editor' },
-			{ path: '/editor', component: 'Editor' }
+			{ path: '/editor/:id', component: 'Editor' }
+			// { path: '/editor', component: 'Editor' }
 			// { path: 'article/:id', component: Article }
 		]
 	}

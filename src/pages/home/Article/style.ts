@@ -107,13 +107,14 @@ export const Wrapper = styled.div`
 		}
 
 		.thumb {
+			display: ${({ screenshot }: { screenshot: string }) => (screenshot ? 'block' : 'none')};
 			flex: 0 0 auto;
 			margin-left: 24px;
 			width: 60px;
 			height: 60px;
 			border-radius: 2px;
 			background-color: #fff;
-			background: ${({ screenshot }: { screenshot: string }) => `url(${screenshot}) no-repeat center/cover`};
+			background: ${({ screenshot }) => `url(${screenshot}) no-repeat center/cover`};
 			box-sizing: content-box;
 		}
 	}
@@ -123,10 +124,10 @@ export const Wrapper = styled.div`
 			position: absolute;
 			z-index: 100;
 			bottom: 0;
-			right: 22px;
+			right: 24px;
 			display: block;
-			width: 25px;
-			height: 25px;
+			width: 24px;
+			height: 24px;
 			background: #fff url(${dotPic}) no-repeat center/contain;
 			background-size: 60%;
 			cursor: pointer;

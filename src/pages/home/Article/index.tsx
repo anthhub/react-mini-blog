@@ -36,7 +36,7 @@ export const formatDate = (time: number) => {
 
 interface IProps extends ArticleEntity {}
 
-const Article: React.FC<IProps> = ({ title, update_at, author, type, content, html, screenshot, id }) => {
+const Article: React.FC<IProps> = ({ title, update_at, author, type, content, html, screenshot = '', id }) => {
 	const history = useHistory()
 
 	// query.own 是 'mine' 才顯示文章預覽右下角的小圓點
@@ -70,9 +70,11 @@ const Article: React.FC<IProps> = ({ title, update_at, author, type, content, ht
 	// console.log({ update_at }, typeof update_at)
 
 	const onDelete = useCallback(async () => {
-		await deleteArticle(id)
-		// 删掉 list
-		dispatch({ type: 'DELETE_ARTICLE', payload: { id } })
+		if (window.confirm('删除专栏文章会扣除相应的掘力值，且文章不可恢复。')) {
+			await deleteArticle(id)
+			// 删掉 store 中的數據
+			dispatch({ type: 'DELETE_ARTICLE', payload: { id } })
+		}
 	}, [])
 
 	const onReedit = useCallback(async () => {
