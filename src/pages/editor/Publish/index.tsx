@@ -144,7 +144,7 @@ const Publish: React.FC<IProps> = ({ title, content, type, id }) => {
 					<i
 						className={showPublish ? 'arrow-up' : 'arrow-down'}
 						style={{
-							background: `url(${arrowIcon}) no-repeat center/contain`,
+							background: `#fff url(${arrowIcon}) no-repeat center/contain`,
 							backgroundSize: '85%'
 						}}
 					/>

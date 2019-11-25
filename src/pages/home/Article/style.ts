@@ -122,16 +122,18 @@ export const Wrapper = styled.div`
 		.more-icon {
 			position: absolute;
 			z-index: 100;
-			bottom: 3px;
-			right: 24px;
+			bottom: 0;
+			right: 22px;
 			display: block;
-			width: 16px;
-			height: 16px;
-			background: url(${dotPic}) no-repeat center/contain;
+			width: 25px;
+			height: 25px;
+			background: #fff url(${dotPic}) no-repeat center/contain;
+			background-size: 60%;
 			cursor: pointer;
 
 			:hover {
-				background: url(${dotHoverPic}) no-repeat center/contain;
+				background: #fff url(${dotHoverPic}) no-repeat center/contain;
+				background-size: 60%;
 			}
 		}
 
