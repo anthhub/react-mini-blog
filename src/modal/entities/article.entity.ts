@@ -16,4 +16,8 @@ export class ArticleEntity extends CommonEntity {
   type!: string
 
   user!:any
+
+  _id!:string
+
+  id!:string
 }

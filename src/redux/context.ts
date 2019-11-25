@@ -16,16 +16,7 @@ interface IStore {
 const Store = React.createContext<IStore>({
 	user: {},
 	query: { search: '', sort: '' },
-	articleList: [
-		{
-			author: 'XIAOHUANG',
-			content: '内容	',
-			html: 'string',
-			title: '标题',
-			screenshot: '图片',
-			type: '分类'
-		}
-	],
+	articleList: [],
 	dispatch: (arg) => arg
 })
 

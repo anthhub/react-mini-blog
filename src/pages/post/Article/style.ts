@@ -4,7 +4,7 @@
 
 // `
 
-import styled from 'styled-components';
+import styled from 'styled-components'
 
 export const Wrapper = styled.div`
 	width: 700px;
@@ -38,12 +38,25 @@ export const Wrapper = styled.div`
 			}
 
 			.article-info {
+				display: flex;
 				margin-top: 4px;
 				font-size: 13px;
 				color: #909090;
 
 				.views {
 					margin-left: 7px;
+				}
+
+				.dot {
+					margin: 0 6px;
+				}
+
+				.edit-btn {
+					color: #1264b6;
+					cursor: pointer;
+					:hover {
+						text-decoration: underline;
+					}
 				}
 			}
 		}
@@ -60,6 +73,14 @@ export const Wrapper = styled.div`
 		}
 	}
 
+	.cover-img {
+		display: ${({ screenshot }: { screenshot: string }) => (screenshot ? 'block' : 'none')};
+		margin-bottom: 24px;
+		width: 100%;
+		height: 367px;
+		background: ${({ screenshot }) => `#fff url(${screenshot}) no-repeat center/cover`};
+	}
+
 	.article-title {
 		margin: 20px 0;
 		line-height: 1.5;
@@ -67,4 +88,4 @@ export const Wrapper = styled.div`
 		font-weight: 700;
 		color: #333;
 	}
-`;
+`
