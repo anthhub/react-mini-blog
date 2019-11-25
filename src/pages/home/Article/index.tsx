@@ -1,5 +1,5 @@
 import React, { memo, useState, useCallback, useEffect } from 'react'
-import { Link, useParams } from 'react-router-dom'
+import { Link, useParams, useHistory } from 'react-router-dom'
 
 import { ArticleEntity } from '@/modal/entities/article.entity'
 import { translateMarkdown } from '@/lib/utils/markdown'
@@ -7,8 +7,10 @@ import { matchReg } from '@/pages/post/Catalog'
 
 import { Wrapper } from './style'
 import useQuery from '@/lib/hooks/useQuery'
+import { deleteArticle } from '@/Api/article'
 import useFetch from '@/lib/hooks/useFetch'
-import { getArticle } from '@/Api/article'
+import { async } from 'q'
+import { useDispatch } from '@/redux/context'
 
 // 格式化时间
 export const formatDate = (time: number) => {
@@ -35,8 +37,12 @@ export const formatDate = (time: number) => {
 interface IProps extends ArticleEntity {}
 
 const Article: React.FC<IProps> = ({ title, update_at, author, type, content, html, screenshot, id }) => {
+	const history = useHistory()
+
 	// query.own 是 'mine' 才顯示文章預覽右下角的小圓點
 	const { query } = useQuery()
+
+	const dispatch = useDispatch()
 
 	// 點擊小圓點顯示更多显隐
 	const [ showMore, setMore ] = useState(false)
@@ -57,10 +63,21 @@ const Article: React.FC<IProps> = ({ title, update_at, author, type, content, ht
 	// 拿到文章 id
 	// const { id = '' } = useParams()
 	// const { data } = useFetch(() => getArticle(id))
-	// console.log('id=============', id)
+	// 直接传入文章 id
+	console.log('id=============', id)
 
 	console.log('%c%s', 'color: #20bd08;font-size:15px', '===TQY===: screenshot', screenshot)
 	// console.log({ update_at }, typeof update_at)
+
+	const onDelete = useCallback(async () => {
+		await deleteArticle(id)
+		// 删掉 list
+		dispatch({ type: 'DELETE_ARTICLE', payload: { id } })
+	}, [])
+
+	const onReedit = useCallback(async () => {
+		history.push('/editor/' + id)
+	}, [])
 
 	return (
 		<Wrapper screenshot={screenshot}>
@@ -133,12 +150,12 @@ const Article: React.FC<IProps> = ({ title, update_at, author, type, content, ht
 					{showMore && (
 						<ul className="menu">
 							<li>
-								<div className="menu-item">
+								<div className="menu-item" onClick={onReedit}>
 									<span>编辑</span>
 								</div>
 							</li>
 							<li>
-								<div className="menu-item">
+								<div className="menu-item" onClick={onDelete}>
 									<span>删除</span>
 								</div>
 							</li>

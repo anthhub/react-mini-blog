@@ -6,7 +6,7 @@ import { UnControlled as CodeMirror } from 'react-codemirror2'
 import { Wrapper } from './style'
 
 // 引入CodeMirror样式
-import { createArticle } from '@/Api/article'
+import { createArticle, reeditArticle } from '@/Api/article'
 import 'codemirror/mode/markdown/markdown'
 import arrowIcon from '../../../statics/arrow-down.svg'
 import { useSelector } from '@/redux/context'
@@ -18,15 +18,17 @@ interface IProps {
 		markdown: string
 		html: string
 	}
+	type: string
+	id: string | undefined
 }
 
-const Publish: React.FC<IProps> = ({ title, content }) => {
+const Publish: React.FC<IProps> = ({ title, content, type, id }) => {
 	const { user: { username } } = useSelector()
 
 	// publish 面板标签
 	const typeList = [ '后端', '前端', 'Android', 'iOS', '人工智能', '开发工具', '代码人生', '阅读' ]
 
-	const [ active, setActive ] = useState('')
+	const [ active, setActive ] = useState(type || '')
 
 	// 多选 tags
 	// const [ activeList, setActiveList ] = useState<string[]>([])
@@ -45,7 +47,7 @@ const Publish: React.FC<IProps> = ({ title, content }) => {
 	// 	[ activeList ]
 	// )
 
-	const onSave = useCallback(
+	const onPublish = useCallback(
 		async () => {
 			if (active === '') {
 				message.warning('至少选择一个标签')
@@ -55,16 +57,29 @@ const Publish: React.FC<IProps> = ({ title, content }) => {
 				message.warning('内容不能为空')
 			} else {
 				console.log('%c%s', 'color: #20bd08; font-size: 15px', '===TQY===: onSave -> data', title, content)
-				const { id } = await createArticle({
-					author: username,
-					content: content.markdown,
-					html: content.html,
-					title,
-					screenshot: 'https://imgphoto.gmw.cn/attachement/jpg/site2/20191103/f44d3075890f1f28a06e01.JPG',
-					type: active,
-					tag: []
-				})
-				history.replace(`post/${id}`)
+				if (id) {
+					await reeditArticle(id, {
+						author: username,
+						content: content.markdown,
+						html: content.html,
+						title,
+						screenshot: 'https://imgphoto.gmw.cn/attachement/jpg/site2/20191103/f44d3075890f1f28a06e01.JPG',
+						type: active,
+						tag: []
+					})
+					history.replace(`/post/${id}`)
+				} else {
+					const { id } = await createArticle({
+						author: username,
+						content: content.markdown,
+						html: content.html,
+						title,
+						screenshot: 'https://imgphoto.gmw.cn/attachement/jpg/site2/20191103/f44d3075890f1f28a06e01.JPG',
+						type: active,
+						tag: []
+					})
+					history.replace(`/post/${id}`)
+				}
 			}
 		},
 		[ content, title, active ]
@@ -154,7 +169,7 @@ const Publish: React.FC<IProps> = ({ title, content }) => {
 								))}
 							</ul>
 						</div>
-						<button className="publish-btn" onClick={onSave}>
+						<button className="publish-btn" onClick={onPublish}>
 							确定并发布
 						</button>
 					</div>

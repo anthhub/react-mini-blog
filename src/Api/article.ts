@@ -10,7 +10,9 @@ import { baseUrl } from './url'
 const article = {
 	query: `/article/query`,
 	detail: `/article/`,
-	create: `/article`
+	create: `/article`,
+	reedit: `/article/`,
+	delete: `/article`
 }
 
 export const getArticles = (data?: any) => {
@@ -27,6 +29,18 @@ export const getArticle = (id: string) => {
 
 export const createArticle = (data: CreateArticleDto) => {
 	return http.post(baseUrl + article.create, data).then((res) => {
+		return res.data.data
+	})
+}
+
+export const reeditArticle = (id: string, data: CreateArticleDto) => {
+	return http.patch(baseUrl + article.reedit + id, data).then((res) => {
+		return res.data.data
+	})
+}
+
+export const deleteArticle = (id: string) => {
+	return http.delete(baseUrl + article.delete + `?id=` + id).then((res) => {
 		return res.data.data
 	})
 }

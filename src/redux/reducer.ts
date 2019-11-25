@@ -1,17 +1,18 @@
 export default function reducer(state: any, action: any) {
+	const { payload } = action
 	console.log('%c%s', 'color: #20bd08;font-size:15px', '===TQY===: reducer -> action', action)
 	switch (action.type) {
-		case 'ADD':
-			return { ...state, count: state.count + 1 }
-
-		case 'SUB':
-			return { ...state, count: state.count - 1 }
-
 		case 'LOGIN':
-			return { ...state, ...action.payload }
+			return { ...state, ...payload }
+
+		case 'CHANGE_ARTICLE_LIST':
+			return { ...state, ...payload }
+
+		case 'DELETE_ARTICLE':
+			return { ...state, articleList: state.articleList.filter((item: any) => item.id !== payload.id) }
 
 		case 'UPDATE_USER':
-			return { ...state, user: { ...state.user, ...action.payload.user } }
+			return { ...state, user: { ...state.user, ...payload.user } }
 
 		case 'LOGOUT':
 			return { ...state, user: {} }

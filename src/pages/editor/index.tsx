@@ -16,20 +16,40 @@ import Publish from './Publish'
 import Menu from './Menu'
 import useInputEvent from '@/lib/hooks/useInputEvent'
 import useAuthLogin from '@/lib/hooks/useAuthLogin'
+import { useParams } from 'react-router'
+import { useSelector } from '@/redux/context'
+import useFetch from '@/lib/hooks/useFetch'
+import { getArticle } from '@/Api/article'
 
 const EditMarkdown: React.FC = () => {
 	useAuthLogin()
+	// 拿到 url 中的 id
+	const { id = '' } = useParams()
+
+	const { articleList = [] } = useSelector()
+
+	// 从 store 中的文章列表中找到 url 中 id 对应的文章
+	const article = articleList.find((item) => id === item.id) || {}
+
+	const { data = article } = useFetch(() => getArticle(id))
 
 	const contentRef = useRef<HTMLDivElement>(null)
 
-	const { value: title, onInputEvent } = useInputEvent('')
+	const { value: title, onInputEvent } = useInputEvent(data.title || '')
 
-	const [ content, setContent ] = useState({ markdown: '', html: '' })
+	const [ content, setContent ] = useState({ markdown: data.content || '', html: data.html || '' })
 
 	// 内容变化回调
 	const onContentChange = useCallback(
 		(editor: Editor, data: EditorChange, value: string) => {
-			console.log('%c%s', 'color: #20bd08;font-size:15px', '===TQY===: onContentChange -> data', data, value)
+			console.log(
+				'%c%s',
+				'color: #20bd08; font-size:15px',
+				'===TQY===: onContentChange -> data',
+				editor,
+				data,
+				value
+			)
 			const html = translateMarkdown(value)
 			setContent({ markdown: value, html })
 			contentRef.current!.innerHTML = html
@@ -68,7 +88,7 @@ const EditMarkdown: React.FC = () => {
 							/>
 							<input type="file" accept="image/*" className="img-selector" title="添加封面大图" />
 						</div>
-						<Publish content={content} title={title} />
+						<Publish content={content} title={title} type={article.type} id={id} />
 						<Menu />
 					</div>
 				</div>

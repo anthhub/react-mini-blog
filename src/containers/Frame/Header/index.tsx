@@ -11,7 +11,6 @@ import Register from '../Register'
 import { Wrapper } from './style'
 import avatarPic from '../../../statics/avatar.png'
 
-
 const Header: React.FC = (props) => {
 	// 搜索框聚焦
 	const [ active, setActive ] = useState(false)

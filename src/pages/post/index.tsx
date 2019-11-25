@@ -9,11 +9,17 @@ import Article from './Article'
 import Author from './Author'
 import Catalog from './Catalog'
 import { Wrapper } from './style'
+import { useSelector } from '@/redux/context'
 
 const Post: React.FC = (props) => {
 	const { id = '' } = useParams()
 
-	const { data } = useFetch(() => getArticle(id))
+	const { articleList = [] } = useSelector()
+
+	// 从 store 中的文章列表中找到 url 中 id 对应的文章
+	const article = articleList.find((item) => id === item.id) || {}
+
+	const { data = article } = useFetch(() => getArticle(id))
 
 	const item: ArticleEntity = data
 	// && data[0]

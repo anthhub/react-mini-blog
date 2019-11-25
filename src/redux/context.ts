@@ -4,21 +4,28 @@ import React, { useContext } from 'react'
 // Store Context is the global context that is managed by reducers.
 
 interface IStore {
-	count: number
-
 	user: any
 	query: {
 		search: string
 		sort: string
 	}
-
+	articleList: any[]
 	dispatch(action: { type: string; payload?: any }): void
 }
 
 const Store = React.createContext<IStore>({
-	count: 1,
 	user: {},
 	query: { search: '', sort: '' },
+	articleList: [
+		{
+			author: 'XIAOHUANG',
+			content: '内容	',
+			html: 'string',
+			title: '标题',
+			screenshot: '图片',
+			type: '分类'
+		}
+	],
 	dispatch: (arg) => arg
 })
 
