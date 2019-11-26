@@ -21,7 +21,6 @@ import { useSelector, useDispatch } from '@/redux/context'
 import useFetch from '@/lib/hooks/useFetch'
 import { getArticle } from '@/Api/article'
 import { uploadFile } from '@/Api/file'
-import { userUpdate, getUserInfo } from '@/Api/user'
 
 const EditMarkdown: React.FC = () => {
 	useAuthLogin()
@@ -86,6 +85,7 @@ const EditMarkdown: React.FC = () => {
 	console.log(article, data, data.screenshot, '==ss==')
 
 	const onUpload = useCallback(async (e: any) => {
+		debugger
 		const formData = new FormData()
 		const file = e.target.files[0]
 		// console.log(file)

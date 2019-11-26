@@ -2,7 +2,6 @@ import { UserUpdateDto } from '@/modal/dtos/userUpdate.dto'
 
 import http from './request'
 import { baseUrl } from './url'
-import { message } from 'antd'
 
 console.log({ baseUrl })
 
@@ -20,6 +19,7 @@ console.log({ baseUrl })
 const user = {
 	update: '/user/update',
 	info: '/user/info'
+	// article: '/user/${id}/article'
 }
 
 export const userUpdate = (data: UserUpdateDto) => {
@@ -37,11 +37,27 @@ export const userUpdate = (data: UserUpdateDto) => {
 		})
 }
 
+// 拿到当前登录用户的信息
 export const getUserInfo = () => {
 	return http
 		.get(baseUrl + user.info)
 		.then((res) => {
 			console.log('getUserInfo==suc==', res)
+			return res.data.data
+		})
+		.catch((res) => {
+			// console.log('uuu-err', res.data.data)
+			// message.warning('保存失败，请稍后重试')
+			return res.data.data
+		})
+}
+
+// 拿到指定 id 的用户的文章
+export const getUserArticles = (id: string) => {
+	return http
+		.get(baseUrl + '/user/' + id + '/article')
+		.then((res) => {
+			console.log('getUserArticle==suc==', res)
 			return res.data.data
 		})
 		.catch((res) => {
