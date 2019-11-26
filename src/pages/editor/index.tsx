@@ -21,6 +21,7 @@ import { useSelector, useDispatch } from '@/redux/context'
 import useFetch from '@/lib/hooks/useFetch'
 import { getArticle } from '@/Api/article'
 import { uploadFile } from '@/Api/file'
+import { async } from 'q'
 
 const EditMarkdown: React.FC = () => {
 	useAuthLogin()
@@ -32,7 +33,7 @@ const EditMarkdown: React.FC = () => {
 	// 从 store 中的文章列表中找到 url 中 id 对应的文章
 	const article = articleList.find((item) => id === item.id) || {}
 	// 从服务器中拿 默认值是 store 中的数据
-	const { data = article, setData } = useFetch(() => getArticle(id))
+	const [ data, setData ] = useState(article)
 
 	const contentRef = useRef<HTMLDivElement>(null)
 
@@ -40,13 +41,17 @@ const EditMarkdown: React.FC = () => {
 
 	const [ content, setContent ] = useState({ markdown: data.content || '', html: data.html || '' })
 
-	// 重新编辑时更新 title 和 content
 	useEffect(
 		() => {
-			setValue(data.title || '')
-			setContent({ markdown: data.content || '', html: data.html || '' })
+			if (id) {
+				getArticle(id).then((data) => {
+					setData(data)
+					setValue(data.title || '')
+					setContent({ markdown: data.content || '', html: data.html || '' })
+				})
+			}
 		},
-		[ data ]
+		[ id ]
 	)
 
 	// 内容变化回调
@@ -85,7 +90,7 @@ const EditMarkdown: React.FC = () => {
 	console.log(article, data, data.screenshot, '==ss==')
 
 	const onUpload = useCallback(async (e: any) => {
-		debugger
+		// debugger
 		const formData = new FormData()
 		const file = e.target.files[0]
 		// console.log(file)
