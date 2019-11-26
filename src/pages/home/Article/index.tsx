@@ -1,5 +1,5 @@
 import React, { memo, useState, useCallback, useEffect } from 'react'
-import { Link, useParams, useHistory } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 
 import { ArticleEntity } from '@/modal/entities/article.entity'
 import { translateMarkdown } from '@/lib/utils/markdown'
@@ -8,8 +8,6 @@ import { matchReg } from '@/pages/post/Catalog'
 import { Wrapper } from './style'
 import useQuery from '@/lib/hooks/useQuery'
 import { deleteArticle } from '@/Api/article'
-import useFetch from '@/lib/hooks/useFetch'
-import { async } from 'q'
 import { useDispatch } from '@/redux/context'
 
 // 格式化时间
@@ -41,6 +39,11 @@ const Article: React.FC<IProps> = ({ title, update_at, author, type, content, ht
 
 	// query.own 是 'mine' 才顯示文章預覽右下角的小圓點
 	const { query } = useQuery()
+
+	const { search = '' } = query
+
+	console.log({ search })
+	console.log(title.match('/' + search + '/gi'))
 
 	const dispatch = useDispatch()
 
@@ -106,13 +109,25 @@ const Article: React.FC<IProps> = ({ title, update_at, author, type, content, ht
 							</div>
 
 							<div className="title">
-								<span className="title-link">{title}</span>
+								<span
+									className="title-link"
+									dangerouslySetInnerHTML={{
+										__html: title.replace(new RegExp(search, 'gi'), `<em>${search}</em>`)
+									}}
+								/>
 							</div>
 
 							{/* 摘抄 */}
 							{/* 去掉 html 中的标签 */}
 							<div className="abstract">
-								<span>{matchReg(html || translateMarkdown(content || ''))}</span>
+								<span
+									dangerouslySetInnerHTML={{
+										__html: matchReg(html || translateMarkdown(content || '')).replace(
+											new RegExp(search, 'gi'),
+											`<em>${search}</em>`
+										)
+									}}
+								/>
 							</div>
 
 							<div className="action-row">

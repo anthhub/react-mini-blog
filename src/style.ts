@@ -56,5 +56,9 @@ export const GlobalStyle = createGlobalStyle`
 		border-collapse: collapse;
 		border-spacing: 0;
 	}
+	/* 搜索结果被高亮的文字 */
+	em {
+		color: #e8001c;
+	}
 
 `

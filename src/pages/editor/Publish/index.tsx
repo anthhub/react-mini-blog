@@ -19,10 +19,11 @@ interface IProps {
 		html: string
 	}
 	type: string
+	screenshot: string
 	id: string | undefined
 }
 
-const Publish: React.FC<IProps> = ({ title, content, type, id }) => {
+const Publish: React.FC<IProps> = ({ title, content, type, screenshot, id }) => {
 	const { user: { username } } = useSelector()
 
 	// publish 面板标签

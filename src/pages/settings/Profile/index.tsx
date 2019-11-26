@@ -23,32 +23,6 @@ const infoList: Array<{
 ]
 
 const Profile: React.FC = (props) => {
-	// 个人信息是否处于被编辑状态
-	// const editFlag: boolean = true
-	// const editFlag: boolean = false
-
-	// useEffect(
-	// 	() => {
-	// 		if (editFlag) {
-	// 			document.addEventListener('click', toggleEditFlag)
-	// 			return () => {
-	// 				document.removeEventListener('click', toggleEditFlag)
-	// 			}
-	// 		}
-	// 	},
-	// 	[ editFlag ]
-	// )
-
-	// 拿到 store 中的 user (默认值为 {})
-	// const { user = {} } = useSelector()
-
-	// 上传图片
-	// const onUpload = (e: any) => {
-	// 	const formData = new FormData()
-	// 	const file = e.target.files[0]
-	// 	formData.append('file', file)
-	// }
-
 	const dispatch = useDispatch()
 
 	const onUpload = useCallback(async (e: any) => {
@@ -73,7 +47,7 @@ const Profile: React.FC = (props) => {
 		})
 	}, [])
 
-	// 拿到用户头像 默认值为本地头像
+	// 拿到用户头像 没有设置则使用默认头像
 	const { user: { avatarLarge = avatarPic } } = useSelector()
 
 	return (
