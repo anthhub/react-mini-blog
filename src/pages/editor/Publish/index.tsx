@@ -23,13 +23,21 @@ interface IProps {
 	id: string | undefined
 }
 
-const Publish: React.FC<IProps> = ({ title, content, type, screenshot, id }) => {
+const Publish: React.FC<IProps> = ({ title, content, type, screenshot = '', id }) => {
 	const { user: { username } } = useSelector()
 
 	// publish 面板标签
 	const typeList = [ '后端', '前端', 'Android', 'iOS', '人工智能', '开发工具', '代码人生', '阅读' ]
 
 	const [ active, setActive ] = useState(type || '')
+
+	// 重新编辑时更新 type
+	useEffect(
+		() => {
+			setActive(type)
+		},
+		[ type ]
+	)
 
 	// 多选 tags
 	// const [ activeList, setActiveList ] = useState<string[]>([])
@@ -58,24 +66,27 @@ const Publish: React.FC<IProps> = ({ title, content, type, screenshot, id }) => 
 				message.warning('内容不能为空')
 			} else {
 				console.log('%c%s', 'color: #20bd08; font-size: 15px', '===TQY===: onSave -> data', title, content)
+				console.log('是不是！！！', screenshot)
+				// id 存在，即重新编辑已存在的文章
 				if (id) {
 					await reeditArticle(id, {
 						author: username,
 						content: content.markdown,
 						html: content.html,
 						title,
-						screenshot: 'https://imgphoto.gmw.cn/attachement/jpg/site2/20191103/f44d3075890f1f28a06e01.JPG',
+						screenshot: screenshot,
 						type: active,
 						tag: []
 					})
 					history.replace(`/post/${id}`)
 				} else {
+					// id 不存在，即新建文章
 					const { id } = await createArticle({
 						author: username,
 						content: content.markdown,
 						html: content.html,
 						title,
-						screenshot: 'https://imgphoto.gmw.cn/attachement/jpg/site2/20191103/f44d3075890f1f28a06e01.JPG',
+						screenshot: screenshot,
 						type: active,
 						tag: []
 					})
@@ -83,7 +94,7 @@ const Publish: React.FC<IProps> = ({ title, content, type, screenshot, id }) => 
 				}
 			}
 		},
-		[ content, title, active ]
+		[ content, title, active, screenshot ]
 	)
 
 	// 发布文章面板显隐

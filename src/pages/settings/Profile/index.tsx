@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from '@/redux/context'
 import { uploadFile } from '@/Api/file'
 import avatarPic from '../../../statics/avatar.png'
 import { userUpdate, getUserInfo } from '@/Api/user'
+import { message } from 'antd'
 
 const infoList: Array<{
 	title: string
@@ -28,6 +29,11 @@ const Profile: React.FC = (props) => {
 	const onUpload = useCallback(async (e: any) => {
 		const formData = new FormData()
 		const file = e.target.files[0]
+		// console.log(file)
+		// 上传文件不大于 5M
+		if (file.size > 5 * Math.pow(1024, 2)) {
+			return message.warning('图片过大')
+		}
 		formData.append('file', file)
 		// console.log(formData.get('file'))
 		// 上传文件并拿到 url
@@ -40,7 +46,7 @@ const Profile: React.FC = (props) => {
 		// 拿到服务器用户信息
 		const userInfo = await getUserInfo()
 		console.log(userInfo, '==userInfo==')
-		// 用服务器数据覆盖 store 的用户信息
+		// 用服务器数据覆盖 store 的用户信息（本地与服务器同步）
 		dispatch({
 			type: 'UPDATE_USER',
 			payload: { user: { ...userInfo } }

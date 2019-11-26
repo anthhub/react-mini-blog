@@ -24,7 +24,7 @@ const Post: React.FC = (props) => {
 	const item: ArticleEntity = data
 	// && data[0]
 
-	// console.log(item, '444')
+	console.log(data, '444')
 
 	return (
 		<Wrapper>

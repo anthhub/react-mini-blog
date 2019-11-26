@@ -12,14 +12,17 @@ interface IProps extends ArticleEntity {}
 
 const Article: React.FC<IProps> = ({ update_at, content, author, title, html, screenshot = '', id }) => {
 	// console.log(content, '333')
-	// console.log('/editor/' + id, '333')
+	console.log('/editor/' + id, { content }, '333')
 
 	const isLogin = useIsLogin()
 	const { user: { username } } = useSelector()
 	const history = useHistory()
-	const onReedit = useCallback(async () => {
-		history.push('/editor/' + id)
-	}, [])
+	const onReedit = useCallback(
+		async () => {
+			history.push('/editor/' + id)
+		},
+		[ id ]
+	)
 
 	return (
 		<Wrapper screenshot={screenshot}>

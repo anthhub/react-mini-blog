@@ -80,9 +80,12 @@ const Article: React.FC<IProps> = ({ title, update_at, author, type, content, ht
 		}
 	}, [])
 
-	const onReedit = useCallback(async () => {
-		history.push('/editor/' + id)
-	}, [])
+	const onReedit = useCallback(
+		async () => {
+			history.push('/editor/' + id)
+		},
+		[ id ]
+	)
 
 	return (
 		<Wrapper screenshot={screenshot}>
