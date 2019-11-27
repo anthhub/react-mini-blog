@@ -100,7 +100,7 @@ const Header: React.FC = (props) => {
 								<input
 									type="text"
 									className="search-input"
-									placeholder="搜索"
+									placeholder="搜索掘金"
 									onFocus={() => setActive(true)}
 									onBlur={() => {
 										setActive(false)

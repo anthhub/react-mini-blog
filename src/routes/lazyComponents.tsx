@@ -20,5 +20,6 @@ export const lazyComponents = {
 	MobilePost: withSuspense(lazy(() => import('../pages/mobiPost'))),
 	Settings: withSuspense(lazy(() => import('../pages/settings'))),
 	Editor: withSuspense(lazy(() => import('../pages/editor'))),
+	User: withSuspense(lazy(() => import('../pages/user'))),
 	// EditMarkdown: withSuspense(lazy(() => import('../components/EditMarkdown'))),
 }

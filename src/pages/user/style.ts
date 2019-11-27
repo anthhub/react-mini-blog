@@ -1,0 +1,27 @@
+// import styled from 'styled-components';
+
+// export const Wrapper = styled.div`
+
+// `
+
+import styled from 'styled-components'
+
+export const Wrapper = styled.div`
+	display: flex;
+	justify-content: space-between;
+	width: 960px;
+	height: 1000px;
+	margin: 82px auto 0;
+
+	.left {
+		width: 708px;
+		// height:200px;
+		// background:#fff;
+	}
+
+	.right {
+		width: 240px;
+		// height:200px;
+		// background:#fff;
+	}
+`
