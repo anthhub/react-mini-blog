@@ -10,8 +10,9 @@ import Author from './Author'
 import Catalog from './Catalog'
 import { Wrapper } from './style'
 import { useSelector } from '@/redux/context'
+import InfoBlock from './InfoBlock'
 
-const Post: React.FC = (props) => {
+const User: React.FC = (props) => {
 	const { id = '' } = useParams()
 
 	const { articleList = [] } = useSelector()
@@ -29,16 +30,19 @@ const Post: React.FC = (props) => {
 	return (
 		<Wrapper>
 			<div className="left">
-				<Article {...item} />
+				<InfoBlock {...item} />
+				{/* <ListBlock {...item} /> */}
 			</div>
 			<div className="right">
-				<Author {...item} />
-				<AppDownload />
-				<Catalog {...item} />
+				<div className="sticky-wrap">
+					{/* <StatBlock {...item} />
+					<FallowBlock {...item} />
+					<MoreBLock {...item} /> */}
+				</div>
 			</div>
 			<BackTop />
 		</Wrapper>
 	)
 }
 
-export default Post
+export default User

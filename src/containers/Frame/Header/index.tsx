@@ -51,6 +51,10 @@ const Header: React.FC = (props) => {
 	const { value: search, onInputEvent } = useInputEvent(query.search || '')
 
 	const history = useHistory()
+
+	const { articleList } = useSelector()
+	console.log({ articleList })
+
 	const onSearch = useCallback(
 		() => {
 			history.replace('/')
@@ -59,7 +63,7 @@ const Header: React.FC = (props) => {
 		[ search ]
 	)
 
-	// 拿到用户信息
+	// 拿到用户信息 头像
 	const { user: { avatarLarge = avatarPic } } = useSelector()
 
 	return (
@@ -89,13 +93,14 @@ const Header: React.FC = (props) => {
 								</a>
 							</ul>
 						</li> */}
+
 						{/* 搜索框 */}
 						<li className="nav-item search">
 							<div className={active ? 'search-box active' : 'search-box'}>
 								<input
 									type="text"
 									className="search-input"
-									placeholder="搜索"
+									placeholder="搜索掘金"
 									onFocus={() => setActive(true)}
 									onBlur={() => {
 										setActive(false)
@@ -109,13 +114,12 @@ const Header: React.FC = (props) => {
 										}
 									}}
 								/>
-								<div onClick={onSearch}>
-									<img
-										alt="search"
-										className="search-icon"
-										src="https://b-gold-cdn.xitu.io/v3/static/img/juejin-search-icon.6f8ba1b.svg"
-									/>
-								</div>
+								<img
+									alt="search"
+									className="search-icon"
+									src="https://b-gold-cdn.xitu.io/v3/static/img/juejin-search-icon.6f8ba1b.svg"
+									onClick={onSearch}
+								/>
 							</div>
 						</li>
 						{/* 写文章按钮 根据登陆状态有不同跳转 */}

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 
 import { getArticles } from '@/Api/article'
 import useFetch from '@/lib/hooks/useFetch'
@@ -10,6 +10,7 @@ import { useIsLogin, useDispatch, useSelector } from '@/redux/context'
 import Article from '../Article'
 import { Wrapper } from './style'
 import { async } from 'q'
+import { getUserInfo, getUserArticles } from '@/Api/user'
 
 const ArticleList: React.FC = () => {
 	// search 是地址栏 ? 开始的内容
@@ -18,11 +19,26 @@ const ArticleList: React.FC = () => {
 	// console.log(query)
 	const { setQuery, query } = useQuery()
 
+	const isLogin = useIsLogin()
+
+	const history = useHistory()
+
+	// 未登录状态 手动输入 http://localhost:3000/?own=mine 无效
+	useEffect(() => {
+		const { own } = query
+		if (!isLogin && own === 'mine') {
+			history.replace('/')
+		}
+	}, [])
+
+	console.log(query.own, '========Query========')
 	const dispatch = useDispatch()
+	const { user: { id } } = useSelector()
+	console.log('abc', id)
 
 	const { data } = useFetch(
 		async () => {
-			const rs = await getArticles(query)
+			const rs = query.own === 'mine' ? await getUserArticles(id) : await getArticles(query)
 			const list = (rs && rs.edges) || []
 			dispatch({
 				type: 'CHANGE_ARTICLE_LIST',
@@ -41,9 +57,6 @@ const ArticleList: React.FC = () => {
 
 	// 所有 or 我的
 	// const [ active, setActive ] = useState(0)
-
-	// 是否登陆
-	const isLogin = useIsLogin()
 
 	return (
 		<Wrapper>

@@ -11,6 +11,13 @@ export default function reducer(state: any, action: any) {
 		case 'DELETE_ARTICLE':
 			return { ...state, articleList: state.articleList.filter((item: any) => item.id !== payload.id) }
 
+		case 'UPDATE_ARTICLE':
+			return {
+				...state,
+				articleList: (state.articleList.filter((item: any) => item.id === payload.id).screenshot =
+					payload.screenshot)
+			}
+
 		case 'UPDATE_USER':
 			return { ...state, user: { ...state.user, ...payload.user } }
 

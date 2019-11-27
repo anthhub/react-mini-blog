@@ -92,9 +92,9 @@ export const Wrapper = styled.div`
 					}
 
 					.search-input {
-						padding: 6px 12px;
+						padding: 7px 12px;
 						width: 120px;
-						font-size: 14px;
+						font-size: 13px;
 						color: #666;
 						border: none;
 						outline: none;
@@ -104,22 +104,22 @@ export const Wrapper = styled.div`
 						/* 设置 placeholder 字体 */
 						::-webkit-input-placeholder {
 							color: #aaa;
-							font-size: 14px;
+							font-size: 13px;
 						}
 
 						:-moz-placeholder {
 							color: #aaa;
-							font-size: 14px;
+							font-size: 13px;
 						}
 
 						::-moz-placeholder {
 							color: #aaa;
-							font-size: 14px;
+							font-size: 13px;
 						}
 
 						:-ms-input-placeholder {
 							color: #aaa;
-							font-size: 14px;
+							font-size: 13px;
 						}
 					}
 

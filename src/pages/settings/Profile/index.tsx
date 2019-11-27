@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from '@/redux/context'
 import { uploadFile } from '@/Api/file'
 import avatarPic from '../../../statics/avatar.png'
 import { userUpdate, getUserInfo } from '@/Api/user'
+import { message } from 'antd'
 
 const infoList: Array<{
 	title: string
@@ -23,37 +24,16 @@ const infoList: Array<{
 ]
 
 const Profile: React.FC = (props) => {
-	// 个人信息是否处于被编辑状态
-	// const editFlag: boolean = true
-	// const editFlag: boolean = false
-
-	// useEffect(
-	// 	() => {
-	// 		if (editFlag) {
-	// 			document.addEventListener('click', toggleEditFlag)
-	// 			return () => {
-	// 				document.removeEventListener('click', toggleEditFlag)
-	// 			}
-	// 		}
-	// 	},
-	// 	[ editFlag ]
-	// )
-
-	// 拿到 store 中的 user (默认值为 {})
-	// const { user = {} } = useSelector()
-
-	// 上传图片
-	// const onUpload = (e: any) => {
-	// 	const formData = new FormData()
-	// 	const file = e.target.files[0]
-	// 	formData.append('file', file)
-	// }
-
 	const dispatch = useDispatch()
 
 	const onUpload = useCallback(async (e: any) => {
 		const formData = new FormData()
 		const file = e.target.files[0]
+		// console.log(file)
+		// 上传文件不大于 5M
+		if (file.size > 5 * Math.pow(1024, 2)) {
+			return message.warning('图片过大')
+		}
 		formData.append('file', file)
 		// console.log(formData.get('file'))
 		// 上传文件并拿到 url
@@ -66,14 +46,14 @@ const Profile: React.FC = (props) => {
 		// 拿到服务器用户信息
 		const userInfo = await getUserInfo()
 		console.log(userInfo, '==userInfo==')
-		// 用服务器数据覆盖 store 的用户信息
+		// 用服务器数据覆盖 store 的用户信息（本地与服务器同步）
 		dispatch({
 			type: 'UPDATE_USER',
 			payload: { user: { ...userInfo } }
 		})
 	}, [])
 
-	// 拿到用户头像 默认值为本地头像
+	// 拿到用户头像 没有设置则使用默认头像
 	const { user: { avatarLarge = avatarPic } } = useSelector()
 
 	return (
