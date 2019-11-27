@@ -12,13 +12,13 @@ console.log({ baseUrl })
 // }
 
 export const signUp = (data: SignUpDto) => {
-	return http.post(`http://101.132.79.152/api/v1/signUp`, data).then((res) => {
-		return res.data.data
-	})
+  return http.post(`${baseUrl}/signUp`, data).then(res => {
+    return res.data.data
+  })
 }
 
 export const signIn = (data: SignInDto) => {
-	return http.post(`http://101.132.79.152/api/v1/signIn`, data).then((res) => {
-		return res.data.data
-	})
+  return http.post(`${baseUrl}/signIn`, data).then(res => {
+    return res.data.data
+  })
 }

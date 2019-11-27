@@ -75,6 +75,7 @@
     "showdown": "^1.9.1",
     "style-loader": "1.0.0",
     "styled-components": "^4.4.0",
+    "swr": "^0.1.12",
     "tank-utils": "^2.1.5",
     "terser-webpack-plugin": "1.4.1",
     "ts-pnp": "1.1.4",
