@@ -10,18 +10,21 @@ export const Wrapper = styled.div`
 	display: flex;
 	justify-content: space-between;
 	width: 960px;
-	height: 1000px;
+	/* height: 1000px; */
 	margin: 82px auto 0;
 
 	.left {
-		width: 708px;
-		// height:200px;
-		// background:#fff;
+		flex: 1 1 auto;
 	}
 
 	.right {
+		flex: 0 0 auto;
 		width: 240px;
-		// height:200px;
-		// background:#fff;
+		margin-left: 12px;
+
+		.sticky-wrap{
+			position:fixed;
+			top:82px;
+		}
 	}
 `

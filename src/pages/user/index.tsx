@@ -4,13 +4,13 @@ import useFetch from '@/lib/hooks/useFetch'
 import { BackTop } from 'antd'
 import React from 'react'
 import { useParams } from 'react-router'
-import AppDownload from '../../components/AppDownload'
-import Article from './Article'
-import Author from './Author'
-import Catalog from './Catalog'
 import { Wrapper } from './style'
 import { useSelector } from '@/redux/context'
 import InfoBlock from './InfoBlock'
+import ListBlock from './ListBlock'
+import StatBlock from './StatBlock'
+import FallowBlock from './FallowBlock'
+import MoreBLock from './MoreBLock'
 
 const User: React.FC = (props) => {
 	const { id = '' } = useParams()
@@ -31,13 +31,13 @@ const User: React.FC = (props) => {
 		<Wrapper>
 			<div className="left">
 				<InfoBlock {...item} />
-				{/* <ListBlock {...item} /> */}
+				<ListBlock {...item}/>
 			</div>
 			<div className="right">
 				<div className="sticky-wrap">
-					{/* <StatBlock {...item} />
+					<StatBlock {...item} />
 					<FallowBlock {...item} />
-					<MoreBLock {...item} /> */}
+					<MoreBLock {...item} />
 				</div>
 			</div>
 			<BackTop />
