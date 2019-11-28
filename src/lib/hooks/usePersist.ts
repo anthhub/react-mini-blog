@@ -1,9 +1,9 @@
 import axios from 'axios'
 import { useEffect } from 'react'
 export function usePersistedContext<T>(context: T, key = 'state', flag = true): T {
-  if (!flag) {
-    return context
-  }
+  // if (!flag) {
+  //   return context
+  // }
 
   const persistedContext = JSON.parse(localStorage.getItem(key) || '') || {}
 
