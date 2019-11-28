@@ -42,7 +42,7 @@ const ArticleList: React.FC = () => {
 			const list = (rs && rs.edges) || []
 			dispatch({
 				type: 'CHANGE_ARTICLE_LIST',
-				payload: { articleList: [ ...list ] }
+				payload: { articleList: [ ...list ] } 
 			})
 			return rs
 		},

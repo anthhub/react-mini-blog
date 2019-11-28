@@ -11,7 +11,7 @@ export const Wrapper = styled.div`
 	justify-content: space-between;
 	width: 960px;
 	/* height: 1000px; */
-	margin: 82px auto 0;
+	margin: 82px auto 72px;
 
 	.left {
 		flex: 1 1 auto;
@@ -22,9 +22,9 @@ export const Wrapper = styled.div`
 		width: 240px;
 		margin-left: 12px;
 
-		.sticky-wrap{
-			position:fixed;
-			top:82px;
+		.sticky-wrap {
+			position: fixed;
+			top: 82px;
 		}
 	}
 `

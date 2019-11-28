@@ -11,11 +11,21 @@ interface IProps {
 		username: string
 		jobTitle: string
 		company: string
+		selfDescription: string
 	}
 }
 
-const InfoBlock: React.FC<IProps> = ({ user: { username = '', jobTitle = '', company = '' } = {} }) => {
-	// console.log(username, jobTitle, company)
+const InfoBlock: React.FC<IProps> = ({
+	user: { username = '', jobTitle = '', company = '', selfDescription = '' }
+}) => {
+	console.log(
+		username,
+		jobTitle,
+		company,
+		selfDescription,
+		'======================================================================='
+	)
+	// 因为要保证所有用户的都能拿到，不应该从 store 中拿
 	const { user: { avatarLarge = avatarPic } } = useSelector()
 	const history = useHistory()
 	const onSetting = useCallback(async () => {

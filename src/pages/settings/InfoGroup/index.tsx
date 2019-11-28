@@ -38,7 +38,7 @@ const InfoGroup: React.FC<IProps> = ({ item: { field, title, placeholder } }) =>
 				[field]: value
 			})
 			// 第二步：拿到服务器用户信息
-			const userInfo = await getUserInfo()
+			const userInfo = await getUserInfo(user.id)
 			console.log(userInfo, '==userInfo==')
 			// 第三步：用服务器拿到的数据覆盖 store 中的数据
 			dispatch({

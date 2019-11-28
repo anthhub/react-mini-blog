@@ -119,49 +119,5 @@ export const Wrapper = styled.div`
 		}
 	}
 
-	.show-more {
-		.more-icon {
-			position: absolute;
-			z-index: 100;
-			bottom: 0;
-			right: 24px;
-			display: block;
-			width: 24px;
-			height: 24px;
-			background: #fff url(${dotPic}) no-repeat center/contain;
-			background-size: 60%;
-			cursor: pointer;
 
-			:hover {
-				background: #fff url(${dotHoverPic}) no-repeat center/contain;
-				background-size: 60%;
-			}
-		}
-
-		.menu {
-			position: absolute;
-			z-index: 100;
-			top: 100%;
-			right: 0;
-			width: 120px;
-			padding: 12px 0;
-			background: #fff;
-			border: 1px solid #f1f1f1;
-			border-radius: 2px;
-			box-shadow: 0 1px 2px 1px hsla(0, 0%, 94.5%, .5);
-			list-style: none;
-
-			.menu-item {
-				display: flex;
-				padding: 7px 24px;
-				font-size: 12px;
-				color: #8b8b8b;
-				cursor: pointer;
-			}
-
-			.menu-item:hover {
-				background: #f8f9fa;
-			}
-		}
-	}
 `

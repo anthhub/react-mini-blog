@@ -124,17 +124,62 @@ const ListBody: React.FC = () => {
 						<div className="user-info-row">
 							<Link to={'/user/' + id}>
 								<div className="avatar" />
-								<span>{item.author}
-								{/* :after */}
+								<span>
+									{item.author}作者名字
+									{/* :after */}
 								</span>
 							</Link>
 							<time>{formatDate(item.update_at)}</time>
 						</div>
-						<div className="abstract-row" >
-							<Link to='' className='title'></Link>
-							<Link to='' className='abstract'></Link>
+						<div className="abstract-row">
+							<Link to="" className="title">
+								another test
+							</Link>
+							<Link to="" className="abstract">
+								his project was bootstrapped with Create React App. Available Scripts In the project
+								directory, you can run: yarn start Runs the app in the development mode. Open
+								http://localhost:3000 to view it in the browser.
+							</Link>
 						</div>
-						<div className="action-row" />
+						<div className="action-row">
+							<div className="show-more">
+								<ul className="info-row">
+									<li>
+										<a className="little-box like">
+											<img
+												className="icon"
+												src="https://b-gold-cdn.xitu.io/v3/static/img/zan.e9d7698.svg"
+											/>
+											<span className="count">27</span>
+										</a>
+									</li>
+									<li>
+										<a className="little-box comment">
+											<img
+												className="icon"
+												src="https://b-gold-cdn.xitu.io/v3/static/img/comment.4d5744f.svg"
+											/>
+											<span className="count">7</span>
+										</a>
+									</li>
+								</ul>
+								{query.own === 'mine' && <i className="more-icon" onClick={() => setMore(true)} />}
+								{showMore && (
+									<ul className="menu">
+										<li>
+											<div className="menu-item" onClick={onReedit}>
+												<span>编辑</span>
+											</div>
+										</li>
+										<li>
+											<div className="menu-item" onClick={onDelete}>
+												<span>删除</span>
+											</div>
+										</li>
+									</ul>
+								)}
+							</div>
+						</div>
 					</li>
 				))}
 			</ul>

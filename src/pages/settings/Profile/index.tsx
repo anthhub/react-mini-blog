@@ -26,6 +26,9 @@ const infoList: Array<{
 const Profile: React.FC = (props) => {
 	const dispatch = useDispatch()
 
+	// 拿到用户头像 没有设置则使用默认头像
+	const { user = {} } = useSelector()
+
 	const onUpload = useCallback(async (e: any) => {
 		const formData = new FormData()
 		const file = e.target.files[0]
@@ -44,7 +47,7 @@ const Profile: React.FC = (props) => {
 			avatarLarge: url
 		})
 		// 拿到服务器用户信息
-		const userInfo = await getUserInfo()
+		const userInfo = await getUserInfo(user.id)
 		console.log(userInfo, '==userInfo==')
 		// 用服务器数据覆盖 store 的用户信息（本地与服务器同步）
 		dispatch({
@@ -53,11 +56,8 @@ const Profile: React.FC = (props) => {
 		})
 	}, [])
 
-	// 拿到用户头像 没有设置则使用默认头像
-	const { user: { avatarLarge = avatarPic } } = useSelector()
-
 	return (
-		<Wrapper avatarLarge={avatarLarge}>
+		<Wrapper avatarLarge={user.avatarLarge}>
 			<div>
 				<h1 className="title">个人资料</h1>
 				<ul className="setting-list">

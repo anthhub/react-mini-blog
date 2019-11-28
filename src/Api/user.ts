@@ -18,7 +18,7 @@ console.log({ baseUrl })
 
 const user = {
 	update: '/user/update',
-	info: '/user/info'
+	info: '/user/'
 	// article: '/user/${id}/article'
 }
 
@@ -38,9 +38,9 @@ export const userUpdate = (data: UserUpdateDto) => {
 }
 
 // 拿到当前登录用户的信息
-export const getUserInfo = () => {
+export const getUserInfo = (id: string) => {
 	return http
-		.get(baseUrl + user.info)
+		.get(baseUrl + user.info + id + '/info')
 		.then((res) => {
 			console.log('getUserInfo==suc==', res)
 			return res.data.data
@@ -55,7 +55,7 @@ export const getUserInfo = () => {
 // 拿到指定 id 的用户的文章
 export const getUserArticles = (id: string) => {
 	return http
-		.get(baseUrl + '/user/' + id + '/article')
+		.get(baseUrl + '/user/' + id + '/articles')
 		.then((res) => {
 			console.log('getUserArticle==suc==', res)
 			return res.data.data

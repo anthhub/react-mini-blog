@@ -6,5 +6,5 @@ export class UserUpdateDto {
 	company?: 'string'
 	jobTitle?: 'string'
 	selfDescription?: 'string'
-	username?: 'string'
+	username?: 'string' 
 }

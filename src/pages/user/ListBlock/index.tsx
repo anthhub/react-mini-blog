@@ -13,7 +13,15 @@ import { getUserInfo, getUserArticles } from '@/Api/user'
 import ListBody from '../ListBody'
 import ListHeader from '../ListHeader'
 
-const ListBlock: React.FC = () => {
+interface IProps {
+	user: {
+		username: string
+		jobTitle: string
+		company: string
+	}
+}
+
+const ListBlock: React.FC<IProps> = ({ user: { username = '', jobTitle = '', company = '' } = {} }) => {
 	// search 是地址栏 ? 开始的内容
 	// query 是 ? 之后内容拆成的对象
 	// const { query }: any = useQuery()
