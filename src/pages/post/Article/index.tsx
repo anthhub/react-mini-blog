@@ -2,17 +2,36 @@ import React, { useCallback } from 'react'
 
 import { translateMarkdown } from '@/lib/utils/markdown'
 import { ArticleEntity } from '@/modal/entities/article.entity'
-import { formatDate } from '@/pages/home/Article'
 
 import { Wrapper } from './style'
 import { useIsLogin, useSelector } from '@/redux/context'
 import { useHistory } from 'react-router'
+import { Link } from 'react-router-dom'
 
-interface IProps extends ArticleEntity {}
+const formatDate = (milliseconds: number) => {
+	const data = new Date(milliseconds)
+	const year = data.getFullYear()
+	const month = data.getMonth() + 1
+	const day = data.getDate()
+	return year + '年' + month + '月' + day + '日'
+}
 
-const Article: React.FC<IProps> = ({ update_at, content, author, title, html, screenshot = '', id }) => {
-	// console.log(content, '333')
-	console.log('/editor/' + id, { content }, '333')
+interface IProps extends ArticleEntity {
+	// user: { avatarLarge: string }
+}
+
+const Article: React.FC<IProps> = ({
+	update_at,
+	content,
+	author,
+	title,
+	html,
+	screenshot = '',
+	id,
+	user: { avatarLarge = '', id: userId }
+}) => {
+	// console.log(avatarLarge, '333')
+	// console.log('/editor/' + id, { content }, '333')
 
 	const isLogin = useIsLogin()
 	const { user: { username } } = useSelector()
@@ -25,21 +44,17 @@ const Article: React.FC<IProps> = ({ update_at, content, author, title, html, sc
 	)
 
 	return (
-		<Wrapper screenshot={screenshot}>
+		<Wrapper screenshot={screenshot} avatarLarge={avatarLarge}>
 			{/* 作者及文章简介 */}
 			<div className="author">
 				<div className="author-info">
-					<a>
-						<div
-							className="avatar"
-							style={{
-								background:
-									"url('https://leancloud-gold-cdn.xitu.io/bdfecd06f90e24f88946.jpeg?imageView2/1/w/100/h/100/q/85/format/webp/interlace/1') no-repeat center/cover"
-							}}
-						/>
-					</a>
+					<Link to={'/user/' + userId}>
+						<div className="avatar" />
+					</Link>
 					<div>
-						<a className="author-name">{author}</a>
+						<Link className="author-name" to={'/user/' + userId}>
+							{author}
+						</Link>
 						<div className="article-info">
 							<time>{formatDate(update_at)}</time>
 							{/* <span className="views">阅读 1367</span> */}

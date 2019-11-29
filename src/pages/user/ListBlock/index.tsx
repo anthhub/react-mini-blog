@@ -7,12 +7,21 @@ import useQuery from '@/lib/hooks/useQuery'
 import { ArticleEntity } from '@/modal/entities/article.entity'
 import { useIsLogin, useDispatch, useSelector } from '@/redux/context'
 
-import Article from '../Article'
 import { Wrapper } from './style'
 import { async } from 'q'
 import { getUserInfo, getUserArticles } from '@/Api/user'
+import ListBody from '../ListBody'
+import ListHeader from '../ListHeader'
 
-const ArticleList: React.FC = () => {
+interface IProps {
+	user: {
+		username: string
+		jobTitle: string
+		company: string
+	}
+}
+
+const ListBlock: React.FC<IProps> = ({ user: { username = '', jobTitle = '', company = '' } = {} }) => {
 	// search 是地址栏 ? 开始的内容
 	// query 是 ? 之后内容拆成的对象
 	// const { query }: any = useQuery()
@@ -42,7 +51,7 @@ const ArticleList: React.FC = () => {
 			const list = (rs && rs.edges) || []
 			dispatch({
 				type: 'CHANGE_ARTICLE_LIST',
-				payload: { articleList: [ ...list ] } 
+				payload: { articleList: [ ...list ] }
 			})
 			return rs
 		},
@@ -60,31 +69,10 @@ const ArticleList: React.FC = () => {
 
 	return (
 		<Wrapper>
-			<header className="header">
-				<nav className="nav">
-					<ul className="nav-list">
-						<li
-							className={query.own === 'all' || !query.own ? 'nav-item active' : 'nav-item'}
-							onClick={() => setQuery({ own: 'all' })}
-						>
-							全部
-						</li>
-
-						{isLogin && (
-							<li
-								className={query.own === 'mine' ? 'nav-item mine active' : 'nav-item mine'}
-								onClick={() => setQuery({ own: 'mine' })}
-							>
-								我的
-							</li>
-						)}
-					</ul>
-				</nav>
-			</header>
-
-			<ul>{articleList.map((item: ArticleEntity) => <Article {...item} key={item.id} />)}</ul>
+			<ListHeader />
+			<ListBody />
 		</Wrapper>
 	)
 }
 
-export default ArticleList
+export default ListBlock

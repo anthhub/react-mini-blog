@@ -134,8 +134,7 @@ const Article: React.FC<IProps> = ({ title, update_at, author, type, content, ht
 							</div>
 
 							<div className="action-row">
-								{/* 暂时不需要点赞等互动功能 */}
-								{/* <ul className="info-row">
+								<ul className="info-row">
 									<li>
 										<a className="little-box like">
 											<img
@@ -154,34 +153,13 @@ const Article: React.FC<IProps> = ({ title, update_at, author, type, content, ht
 											<span className="count">7</span>
 										</a>
 									</li>
-								</ul> */}
-
-								{/* 互動按鈕沒加時，暫時把小圓點移到外面 */}
-								{/* <i className="more-icon" /> */}
+								</ul>
 							</div>
 						</div>
 
 						<div className="thumb" />
 					</section>
 				</Link>
-
-				<div className="show-more">
-					{query.own === 'mine' && <i className="more-icon" onClick={() => setMore(true)} />}
-					{showMore && (
-						<ul className="menu">
-							<li>
-								<div className="menu-item" onClick={onReedit}>
-									<span>编辑</span>
-								</div>
-							</li>
-							<li>
-								<div className="menu-item" onClick={onDelete}>
-									<span>删除</span>
-								</div>
-							</li>
-						</ul>
-					)}
-				</div>
 			</li>
 		</Wrapper>
 	)

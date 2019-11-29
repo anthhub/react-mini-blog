@@ -7,12 +7,12 @@ import useQuery from '@/lib/hooks/useQuery'
 import { ArticleEntity } from '@/modal/entities/article.entity'
 import { useIsLogin, useDispatch, useSelector } from '@/redux/context'
 
-import Article from '../Article'
 import { Wrapper } from './style'
 import { async } from 'q'
 import { getUserInfo, getUserArticles } from '@/Api/user'
+import ListBody from '../ListBody'
 
-const ArticleList: React.FC = () => {
+const ListHeader: React.FC = () => {
 	// search 是地址栏 ? 开始的内容
 	// query 是 ? 之后内容拆成的对象
 	// const { query }: any = useQuery()
@@ -42,7 +42,7 @@ const ArticleList: React.FC = () => {
 			const list = (rs && rs.edges) || []
 			dispatch({
 				type: 'CHANGE_ARTICLE_LIST',
-				payload: { articleList: [ ...list ] } 
+				payload: { articleList: [ ...list ] }
 			})
 			return rs
 		},
@@ -60,31 +60,41 @@ const ArticleList: React.FC = () => {
 
 	return (
 		<Wrapper>
-			<header className="header">
+			<header className="list-header">
 				<nav className="nav">
 					<ul className="nav-list">
-						<li
-							className={query.own === 'all' || !query.own ? 'nav-item active' : 'nav-item'}
-							onClick={() => setQuery({ own: 'all' })}
-						>
-							全部
-						</li>
-
-						{isLogin && (
+						<Link to={'/user/' + id + '/posts'}>
+							<li
+								className={query.own === 'all' || !query.own ? 'nav-item active' : 'nav-item'}
+								onClick={() => setQuery({ own: 'all' })}
+							>
+								<span className="item-title">专栏</span>
+								<span className="item-count">2</span>
+							</li>
+						</Link >
+						<Link to={'/user/' + id + '/likes'}>
 							<li
 								className={query.own === 'mine' ? 'nav-item mine active' : 'nav-item mine'}
 								onClick={() => setQuery({ own: 'mine' })}
 							>
-								我的
+								<span className="item-title">关注</span>
+								<span className="item-count">50</span>
 							</li>
-						)}
+						</Link>
+						<Link to={'/user/' + id + '/'}>
+							<li
+								className={query.own === 'mine' ? 'nav-item mine active' : 'nav-item mine'}
+								onClick={() => setQuery({ own: 'mine' })}
+							>
+								<span className="item-title">赞</span>
+								<span className="item-count">17</span>
+							</li>
+						</Link>
 					</ul>
 				</nav>
 			</header>
-
-			<ul>{articleList.map((item: ArticleEntity) => <Article {...item} key={item.id} />)}</ul>
 		</Wrapper>
 	)
 }
 
-export default ArticleList
+export default ListHeader

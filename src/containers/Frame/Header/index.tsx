@@ -64,12 +64,12 @@ const Header: React.FC = (props) => {
 	)
 
 	// 拿到用户信息 头像
-	const { user: { avatarLarge = avatarPic } } = useSelector()
+	const { user: { avatarLarge = avatarPic, id } } = useSelector()
 
 	return (
 		<Wrapper avatarLarge={avatarLarge}>
 			<header className="header">
-				<Link className="logo-link" to="/home">
+				<Link className="logo-link" to="/">
 					<div className="logo" />
 				</Link>
 				<nav>
@@ -148,6 +148,12 @@ const Header: React.FC = (props) => {
 								{/* 头像下拉菜单 */}
 								{showDropdown && (
 									<ul className="dropdown-list">
+										<li>
+											<Link className="menu-item" to={'/user/' + id}>
+												<i className="person-icon icon" />
+												<span>我的主页</span>
+											</Link>
+										</li>
 										<li>
 											<Link className="menu-item" to="/settings">
 												<i className="setting-icon icon" />

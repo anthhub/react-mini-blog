@@ -4,7 +4,7 @@
 
 // `
 
-import styled from 'styled-components';
+import styled from 'styled-components'
 
 export const Wrapper = styled.div`
 	// display: flex;
@@ -39,6 +39,8 @@ export const Wrapper = styled.div`
 				height: 50px;
 				margin-right: 12px;
 				border-radius: 50%;
+				background: ${({ avatarLarge }: { avatarLarge: string }) =>
+					`#eee url(${avatarLarge}) no-repeat center/cover`};
 			}
 
 			// 右边 作者名字简介
@@ -67,6 +69,8 @@ export const Wrapper = styled.div`
 
 		.agree,
 		.views {
+			display: flex;
+			align-items: center;
 			padding: 0 16px;
 			margin-bottom: 10px;
 			font-size: 15px;
@@ -81,5 +85,13 @@ export const Wrapper = styled.div`
 			margin: 0 5px;
 			font-weight: 500;
 		}
+
+		.icon {
+			width: 25px;
+			height: 25px;
+			margin-right: 12px;
+			background: #eee;
+			border-radius: 50%;
+		}
 	}
-`;
+`

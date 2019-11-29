@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 
 import logoPic from '../../../statics/logo.svg'
+import personIcon from '../../../statics/person.svg'
 import settingIcon from '../../../statics/setting.svg'
 import logoutIcon from '../../../statics/logout.svg'
 
@@ -185,12 +186,18 @@ export const Wrapper = styled.div`
 							margin-right: 10px;
 						}
 
+						.person-icon {
+							background: url(${personIcon}) no-repeat center/contain;
+							background-size: 80%;
+
+						}
+
 						.setting-icon {
-							background: url(${settingIcon}) no-repeat center/Contain;
+							background: url(${settingIcon}) no-repeat center/contain;
 						}
 
 						.logout-icon {
-							background: url(${logoutIcon}) no-repeat center/Contain;
+							background: url(${logoutIcon}) no-repeat center/contain;
 							background-size: 80%;
 						}
 					}

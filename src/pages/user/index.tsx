@@ -4,40 +4,45 @@ import useFetch from '@/lib/hooks/useFetch'
 import { BackTop } from 'antd'
 import React from 'react'
 import { useParams } from 'react-router'
-import AppDownload from '../../components/AppDownload'
-import Article from './Article'
-import Author from './Author'
-import Catalog from './Catalog'
 import { Wrapper } from './style'
-import { useSelector } from '@/redux/context'
+import { useSelector, useDispatch } from '@/redux/context'
 import InfoBlock from './InfoBlock'
+import ListBlock from './ListBlock'
+import StatBlock from './StatBlock'
+import FallowBlock from './FallowBlock'
+import MoreBLock from './MoreBLock'
+import { getUserArticles, getUserInfo } from '@/Api/user'
 
 const User: React.FC = (props) => {
 	const { id = '' } = useParams()
+	// console.log(id, '=============id===========')
 
-	const { articleList = [] } = useSelector()
+	// 文章列表和作者信息要分开拿
+	const { data: info = {} } = useFetch(async () => {
+		const userInfo = await getUserInfo(id)
+		console.log(userInfo, 'userInfo--------------------')
+		return userInfo
+	}, [])
 
-	// 从 store 中的文章列表中找到 url 中 id 对应的文章
-	const article = articleList.find((item) => id === item.id) || {}
-
-	const { data = article } = useFetch(() => getArticle(id))
-
-	const item: ArticleEntity = data
-	// && data[0]
-
-	console.log(data, '444')
+	const { data: list = [] } = useFetch(async () => {
+		const rs = await getUserArticles(id)
+		// console.log(rs, 'rs--------------------')
+		const list = (rs && rs.edges) || []
+		// console.log(list, 'list--------------------')
+		return list
+	}, [])
 
 	return (
 		<Wrapper>
 			<div className="left">
-				<InfoBlock {...item} />
-				{/* <ListBlock {...item} /> */}
+				<InfoBlock user={info} />
+				{/* <ListBlock list={data} /> */}
 			</div>
 			<div className="right">
 				<div className="sticky-wrap">
-					{/* <StatBlock {...item} />
-					<FallowBlock {...item} />
-					<MoreBLock {...item} /> */}
+					<StatBlock />
+					<FallowBlock id={info.id} />
+					<MoreBLock user={info} />
 				</div>
 			</div>
 			<BackTop />
