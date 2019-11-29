@@ -45,12 +45,35 @@ export const Wrapper = styled.div`
 				font-size: 15px;
 				color: #4a68ad;
 				cursor: pointer;
+
+				&.filled {
+					display: flex;
+					align-items: center;
+					font-size: 14px;
+					color: #72777b;
+					overflow: hidden;
+
+					.icon {
+						width: 21px;
+						height: 21px;
+						margin-right: 7px;
+						background: #eee;
+					}
+
+					.split {
+						margin: 0 7px;
+						width: 1px;
+						height: 10px;
+						background-color: #72777b;
+						opacity: 0.5;
+					}
+				}
 			}
 
 			.user-position {
 				margin-top: 12px;
 			}
-			
+
 			.user-intro {
 				margin-top: 5px;
 			}

@@ -42,8 +42,8 @@ const Article: React.FC<IProps> = ({ title, update_at, author, type, content, ht
 
 	const { search = '' } = query
 
-	console.log({ search })
-	console.log(title.match('/' + search + '/gi'))
+	// console.log({ search })
+	// console.log(title.match('/' + search + '/gi'))
 
 	const dispatch = useDispatch()
 
@@ -67,7 +67,7 @@ const Article: React.FC<IProps> = ({ title, update_at, author, type, content, ht
 	// const { id = '' } = useParams()
 	// const { data } = useFetch(() => getArticle(id))
 	// 直接传入文章 id
-	console.log('id=============', id)
+	// console.log('id=============', id)
 
 	console.log('%c%s', 'color: #20bd08;font-size:15px', '===TQY===: screenshot', screenshot)
 	// console.log({ update_at }, typeof update_at)
@@ -90,26 +90,26 @@ const Article: React.FC<IProps> = ({ title, update_at, author, type, content, ht
 	return (
 		<Wrapper screenshot={screenshot}>
 			<li>
-				<Link to={`/post/${id}`}>
+				<Link to={`/post/${id}`} target="_blank">
 					<section className="content">
 						<div className="info-box">
-							<div>
-								<ul className="info-row">
-									<li className="column info-item">专栏</li>
-									<li className="info-item">
-										{/* object 标签实现 a 标签的嵌套 */}
-										<object>
-											<a className="user-link">{author}</a>
-										</object>
-									</li>
-									<li className="info-item">{formatDate(update_at)}</li>
-									<li className="">
-										<object>
-											<a className="tag-link">{type}</a>
-										</object>
-									</li>
-								</ul>
-							</div>
+							<ul className="info-row">
+								<li className="column info-item">专栏</li>
+								<li className="info-item">
+									去掉object
+									{/* object 标签实现 a 标签的嵌套 */}
+									{/* <object>
+										<a className="user-link">{author}</a>
+									</object> */}
+								</li>
+								<li className="info-item">{formatDate(update_at)}</li>
+								<li className="info-item">
+									去掉object
+									{/* <object>
+										<a className="tag-link">{type}</a>
+									</object> */}
+								</li>
+							</ul>
 
 							<div className="title">
 								<span

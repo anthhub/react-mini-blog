@@ -10,7 +10,7 @@ interface IProps {
 const AuthRoute: React.FC<IProps> = ({ children, needLogin = false }) => {
 	const history = useHistory()
 	const isLogin = useIsLogin()
-	console.log({ needLogin })
+	// console.log({ needLogin })
 
 	if (needLogin && !isLogin) {
 		return <Redirect to={'/'} />

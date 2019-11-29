@@ -87,7 +87,7 @@ const EditMarkdown: React.FC = () => {
 
 	// 文章添加图片
 	const dispatch = useDispatch()
-	console.log(article, data, data.screenshot, '==ss==')
+	// console.log(article, data, data.screenshot, '==ss==')
 
 	const onUpload = useCallback(async (e: any) => {
 		// debugger

@@ -28,26 +28,26 @@ export const Wrapper = styled.div`
 			flex-direction: column;
 			justify-content: center;
 
-			.info-item {
-				::after {
-					content: '·';
-					color: #b2bac2;
-					margin: 0 5px;
-				}
-			}
-
 			.info-row {
 				display: flex;
 				color: #b2bac2;
 
-				.user-link,
-				.tag-link {
-					color: #b2bac2;
-				}
+				.info-item {
+					:not(:last-child)::after {
+						content: '·';
+						color: #b2bac2;
+						margin: 0 5px;
+					}
 
-				.column {
-					color: #b71ed7;
-					font-weight: 500;
+					&.column {
+						color: #b71ed7;
+						font-weight: 500;
+					}
+
+					.user-link,
+					.tag-link {
+						color: #b2bac2;
+					}
 				}
 
 				.little-box {
@@ -117,6 +117,4 @@ export const Wrapper = styled.div`
 			box-sizing: content-box;
 		}
 	}
-
-
 `

@@ -66,7 +66,7 @@ const Publish: React.FC<IProps> = ({ title, content, type, screenshot = '', id }
 				message.warning('内容不能为空')
 			} else {
 				console.log('%c%s', 'color: #20bd08; font-size: 15px', '===TQY===: onSave -> data', title, content)
-				console.log('是不是！！！', screenshot)
+				// console.log('是不是！！！', screenshot)
 				// id 存在，即重新编辑已存在的文章
 				if (id) {
 					await reeditArticle(id, {
@@ -102,7 +102,7 @@ const Publish: React.FC<IProps> = ({ title, content, type, screenshot = '', id }
 
 	const hidePublish = useCallback(
 		(e: any) => {
-			console.log('点击时是否显示面板', e.target.className, { showPublish })
+			// console.log('点击时是否显示面板', e.target.className, { showPublish })
 			if (
 				// 点击下列区域以外区域 或 面板打开时点击了这 3 个地方 会收起面板
 				(!showPublish &&
@@ -121,7 +121,7 @@ const Publish: React.FC<IProps> = ({ title, content, type, screenshot = '', id }
 					].includes(e.target.className)) ||
 				(showPublish && [ 'publish', 'publish-title', 'arrow-down' ].includes(e.target.className))
 			) {
-				console.log('隐藏 publish 面板', { showPublish })
+				// console.log('隐藏 publish 面板', { showPublish })
 				setPublish(false)
 			}
 		},

@@ -19,7 +19,7 @@ const formatDate = (milliseconds: string) => {
 }
 
 const MoreBLock: React.FC<IProps> = ({ user: { create_at = '' } }) => {
-	console.log('create_at', create_at)
+	// console.log('create_at', create_at)
 	return (
 		<Wrapper>
 			<div className="more-item">

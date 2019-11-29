@@ -4,7 +4,7 @@ import { SignUpDto } from '@/modal/dtos/signUp.dto'
 import { baseUrl } from './url'
 import http from './request'
 
-console.log({ baseUrl })
+// console.log({ baseUrl })
 
 // const account = {
 // 	signUp: `​/signUp`,

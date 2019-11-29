@@ -64,7 +64,7 @@ methods.forEach((v) => {
 				return Promise.resolve(res)
 			})
 			.catch((err) => {
-				console.log({ err: err })
+				// console.log({ err: err })
 
 				message.destroy()
 				message.error(err.msg || err.message || err.stack || '未知错误')

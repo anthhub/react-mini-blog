@@ -48,11 +48,11 @@ const Article: React.FC<IProps> = ({
 			{/* 作者及文章简介 */}
 			<div className="author">
 				<div className="author-info">
-					<Link to={'/user/' + userId}>
+					<Link to={'/user/' + userId} target="_blank">
 						<div className="avatar" />
 					</Link>
 					<div>
-						<Link className="author-name" to={'/user/' + userId}>
+						<Link className="author-name" to={'/user/' + userId} target="_blank">
 							{author}
 						</Link>
 						<div className="article-info">

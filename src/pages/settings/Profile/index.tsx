@@ -41,14 +41,14 @@ const Profile: React.FC = (props) => {
 		// console.log(formData.get('file'))
 		// 上传文件并拿到 url
 		const { url } = await uploadFile(formData)
-		console.log(url, '==url==')
+		// console.log(url, '==url==')
 		// 更新用户信息中的头像路径
 		await userUpdate({
 			avatarLarge: url
 		})
 		// 拿到服务器用户信息
 		const userInfo = await getUserInfo(id)
-		console.log(userInfo, '==userInfo==')
+		// console.log(userInfo, '==userInfo==')
 		// 用服务器数据覆盖 store 的用户信息（本地与服务器同步）
 		dispatch({
 			type: 'UPDATE_USER',

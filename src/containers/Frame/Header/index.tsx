@@ -53,7 +53,7 @@ const Header: React.FC = (props) => {
 	const history = useHistory()
 
 	const { articleList } = useSelector()
-	console.log({ articleList })
+	// console.log({ articleList })
 
 	const onSearch = useCallback(
 		() => {
@@ -69,7 +69,7 @@ const Header: React.FC = (props) => {
 	return (
 		<Wrapper avatarLarge={avatarLarge}>
 			<header className="header">
-				<Link className="logo-link" to="/">
+				<Link className="logo-link" to="/home">
 					<div className="logo" />
 				</Link>
 				<nav>

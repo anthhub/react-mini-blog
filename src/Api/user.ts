@@ -3,7 +3,7 @@ import { UserUpdateDto } from '@/modal/dtos/userUpdate.dto'
 import http from './request'
 import { baseUrl } from './url'
 
-console.log({ baseUrl })
+// console.log({ baseUrl })
 
 // const calledWhenDiffParams = (fn: Function) => {
 // 	let pre: any
@@ -27,12 +27,12 @@ export const userUpdate = (data: UserUpdateDto) => {
 		.patch(baseUrl + user.update, data)
 		.then((res) => {
 			// message.warning('保存成功')
-			console.log('userUpdate==suc==', res)
+			// console.log('userUpdate==suc==', res)
 			return res.data.data
 		})
 		.catch((res) => {
 			// message.warning('保存失败，请稍后重试')
-			console.log('==err==', res)
+			// console.log('==err==', res)
 			return res.data.data
 		})
 }
@@ -42,7 +42,7 @@ export const getUserInfo = (id: string) => {
 	return http
 		.get(baseUrl + user.info + id + '/info')
 		.then((res) => {
-			console.log('getUserInfo==suc==', res)
+			// console.log('getUserInfo==suc==', res)
 			return res.data.data
 		})
 		.catch((res) => {
@@ -57,7 +57,7 @@ export const getUserArticles = (id: string) => {
 	return http
 		.get(baseUrl + '/user/' + id + '/articles')
 		.then((res) => {
-			console.log('getUserArticle==suc==', res)
+			// console.log('getUserArticle==suc==', res)
 			return res.data.data
 		})
 		.catch((res) => {

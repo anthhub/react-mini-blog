@@ -16,90 +16,29 @@ import { title } from 'process'
 interface IProps extends ArticleEntity {}
 
 const ListBody: React.FC = () => {
-	// search 是地址栏 ? 开始的内容
-	// query 是 ? 之后内容拆成的对象
-	// const { query }: any = useQuery()
-	// console.log(query)
-	const { setQuery, query } = useQuery()
+	const { id = '' } = useParams()
+	// console.log(id, '=============id===========')
 
-	const isLogin = useIsLogin()
+	const { data: list = [] } = useFetch(async () => {
+		const rs = await getUserArticles(id)
+		// console.log(rs, 'rs--------------------')
+		const list = (rs && rs.edges) || []
+		// console.log(list, 'list--------------------')
+		return list
+	}, [])
 
+	// 编辑
 	const history = useHistory()
 
-	// 未登录状态 手动输入 http://localhost:3000/?own=mine 无效
-	useEffect(() => {
-		const { own } = query
-		if (!isLogin && own === 'mine') {
-			history.replace('/')
-		}
-	}, [])
-
-	// console.log(query.own, '========Query========')
-	const dispatch = useDispatch()
-	// const { user: { id } } = useSelector()
-	const { id = '' } = useParams()
-	console.log('abc', id)
-
-	const { data } = useFetch(
+	const onReedit = useCallback(
 		async () => {
-			const rs = await getUserArticles(id)
-			const list = (rs && rs.edges) || []
-			dispatch({
-				type: 'CHANGE_ARTICLE_LIST',
-				payload: { articleList: [ ...list ] }
-			})
-			return rs
+			history.push('/editor/' + id)
 		},
-		[ query ]
+		[ id ]
 	)
 
-	// 文章列表
-	// const list = (data && data.edges) || []
-
-	// 用 store 的数据渲染页面
-	const { articleList } = useSelector()
-
-	// 所有 or 我的
-	// const [ active, setActive ] = useState(0)
-
-	// ---------------------------------------------------------------------------------------------------------------------------
-
-	// const history = useHistory()
-
-	// query.own 是 'mine' 才顯示文章預覽右下角的小圓點
-	// const { query } = useQuery()
-
-	const { search = '' } = query
-
-	// console.log({ search })
-	// console.log(title.match('/' + search + '/gi'))
-
-	// const dispatch = useDispatch()
-
-	// 點擊小圓點顯示更多显隐
-	const [ showMore, setMore ] = useState(false)
-
-	const hideMore = useCallback((e: any) => {
-		if (e.target.className !== 'more-icon') {
-			setMore(false)
-		}
-	}, [])
-
-	useEffect(() => {
-		document.addEventListener('click', hideMore)
-		return () => {
-			document.removeEventListener('click', hideMore)
-		}
-	}, [])
-
-	// 拿到文章 id
-	// const { id = '' } = useParams()
-	// const { data } = useFetch(() => getArticle(id))
-	// 直接传入文章 id
-	// console.log('id=============', id)
-
-	// console.log('%c%s', 'color: #20bd08;font-size:15px', '===TQY===: screenshot', screenshot)
-	// console.log({ update_at }, typeof update_at)
+	// 删除
+	const dispatch = useDispatch()
 
 	const onDelete = useCallback(async () => {
 		if (window.confirm('删除专栏文章会扣除相应的掘力值，且文章不可恢复。')) {
@@ -109,18 +48,14 @@ const ListBody: React.FC = () => {
 		}
 	}, [])
 
-	const onReedit = useCallback(
-		async () => {
-			history.push('/editor/' + id)
-		},
-		[ id ]
-	)
-
 	return (
 		<Wrapper>
+			{/* <ul>{articleList.map((item: ArticleEntity) => <Article {...item} key={item.id} />)}</ul> */}
+
 			<ul className="list-group">
-				{articleList.map((item: ArticleEntity) => (
+				{list.map((item: ArticleEntity) => (
 					<li className="list-item" key={item.id}>
+						{/* 第一行 */}
 						<div className="user-info-row">
 							<Link to={'/user/' + id}>
 								<div className="avatar" />
@@ -131,6 +66,8 @@ const ListBody: React.FC = () => {
 							</Link>
 							<time>{formatDate(item.update_at)}</time>
 						</div>
+
+						{/* 第二行 */}
 						<div className="abstract-row">
 							<Link to="" className="title">
 								another test
@@ -141,30 +78,35 @@ const ListBody: React.FC = () => {
 								http://localhost:3000 to view it in the browser.
 							</Link>
 						</div>
+
+						{/* 第三行 */}
 						<div className="action-row">
-							<div className="show-more">
-								<ul className="info-row">
-									<li>
-										<a className="little-box like">
-											<img
-												className="icon"
-												src="https://b-gold-cdn.xitu.io/v3/static/img/zan.e9d7698.svg"
-											/>
-											<span className="count">27</span>
-										</a>
+							<ul className="action-left">
+								<li className="action like">
+									<img
+										className="icon"
+										src="https://b-gold-cdn.xitu.io/v3/static/img/zan.e9d7698.svg"
+									/>
+									<span className="count">27</span>
+								</li>
+								<Link to="">
+									<li className="action comment">
+										<img
+											className="icon"
+											src="https://b-gold-cdn.xitu.io/v3/static/img/comment.4d5744f.svg"
+										/>
+										<span className="count">7</span>
 									</li>
-									<li>
-										<a className="little-box comment">
-											<img
-												className="icon"
-												src="https://b-gold-cdn.xitu.io/v3/static/img/comment.4d5744f.svg"
-											/>
-											<span className="count">7</span>
-										</a>
-									</li>
-								</ul>
-								{query.own === 'mine' && <i className="more-icon" onClick={() => setMore(true)} />}
-								{showMore && (
+								</Link>
+							</ul>
+
+							<div className="action-right">
+								<div className="read-action">
+									<span>阅读</span>
+									<span className="view-count">51</span>
+								</div>
+								<div className="more-action">
+									<i className="more-icon" />
 									<ul className="menu">
 										<li>
 											<div className="menu-item" onClick={onReedit}>
@@ -177,14 +119,12 @@ const ListBody: React.FC = () => {
 											</div>
 										</li>
 									</ul>
-								)}
+								</div>
 							</div>
 						</div>
 					</li>
 				))}
 			</ul>
-
-			{/* <ul>{articleList.map((item: ArticleEntity) => <Article {...item} key={item.id} />)}</ul> */}
 		</Wrapper>
 	)
 }

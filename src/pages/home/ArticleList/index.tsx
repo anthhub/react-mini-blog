@@ -31,32 +31,27 @@ const ArticleList: React.FC = () => {
 		}
 	}, [])
 
-	console.log(query.own, '========Query========')
+	// console.log(query.own, '========Query========')
 	const dispatch = useDispatch()
 	const { user: { id } } = useSelector()
-	console.log('abc', id)
+	// console.log('abc', id)
 
-	const { data } = useFetch(
+	const { data = [] } = useFetch(
 		async () => {
 			const rs = query.own === 'mine' ? await getUserArticles(id) : await getArticles(query)
 			const list = (rs && rs.edges) || []
+			// console.log('mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm',rs)
 			dispatch({
 				type: 'CHANGE_ARTICLE_LIST',
-				payload: { articleList: [ ...list ] } 
+				payload: { articleList: [ ...list ] }
 			})
-			return rs
+			return list
 		},
 		[ query ]
 	)
 
-	// 文章列表
-	// const list = (data && data.edges) || []
-
 	// 用 store 的数据渲染页面
 	const { articleList } = useSelector()
-
-	// 所有 or 我的
-	// const [ active, setActive ] = useState(0)
 
 	return (
 		<Wrapper>

@@ -31,10 +31,10 @@ const ListHeader: React.FC = () => {
 		}
 	}, [])
 
-	console.log(query.own, '========Query========')
+	// console.log(query.own, '========Query========')
 	const dispatch = useDispatch()
 	const { user: { id } } = useSelector()
-	console.log('abc', id)
+	// console.log('abc', id)
 
 	const { data } = useFetch(
 		async () => {
@@ -64,28 +64,19 @@ const ListHeader: React.FC = () => {
 				<nav className="nav">
 					<ul className="nav-list">
 						<Link to={'/user/' + id + '/posts'}>
-							<li
-								className={query.own === 'all' || !query.own ? 'nav-item active' : 'nav-item'}
-								onClick={() => setQuery({ own: 'all' })}
-							>
+							<li className={query.own === 'all' || !query.own ? 'nav-item active' : 'nav-item'}>
 								<span className="item-title">专栏</span>
 								<span className="item-count">2</span>
 							</li>
-						</Link >
-						<Link to={'/user/' + id + '/likes'}>
-							<li
-								className={query.own === 'mine' ? 'nav-item mine active' : 'nav-item mine'}
-								onClick={() => setQuery({ own: 'mine' })}
-							>
+						</Link>
+						<Link to={'/user/' + id + '/following'}>
+							<li className={query.own === 'mine' ? 'nav-item mine active' : 'nav-item mine'}>
 								<span className="item-title">关注</span>
 								<span className="item-count">50</span>
 							</li>
 						</Link>
-						<Link to={'/user/' + id + '/'}>
-							<li
-								className={query.own === 'mine' ? 'nav-item mine active' : 'nav-item mine'}
-								onClick={() => setQuery({ own: 'mine' })}
-							>
+						<Link to={'/user/' + id + '/likes'}>
+							<li className={query.own === 'mine' ? 'nav-item mine active' : 'nav-item mine'}>
 								<span className="item-title">赞</span>
 								<span className="item-count">17</span>
 							</li>

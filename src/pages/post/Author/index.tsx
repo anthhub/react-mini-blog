@@ -15,12 +15,12 @@ interface IProps {
 }
 
 const Author: React.FC<IProps> = ({ user: { username = '', jobTitle = '', company = '', avatarLarge = '', id } }) => {
-	console.log(username, jobTitle, company)
+	// console.log(username, jobTitle, company)
 	return (
 		<Wrapper avatarLarge={avatarLarge}>
 			<header className="author-title">关于作者</header>
 			<div className="author-info">
-				<Link className="author-desc" to={'/user/' + id}>
+				<Link className="author-desc" to={'/user/' + id} target="_blank">
 					<div className="avatar" />
 					<div className="info">
 						<span className="author-name">{username}</span>

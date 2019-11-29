@@ -23,11 +23,11 @@ const setFocus = (id: string) => {
 const InfoGroup: React.FC<IProps> = ({ item: { field, title, placeholder } }) => {
 	// 是否为编辑状态
 	const { user = {} } = useSelector()
-	console.log('user对象', user)
+	// console.log('user对象', user)
 
 	const [ editFlag, setEditFlag ] = useState(false)
 	const { value, onInputEvent, setValue } = useInputEvent('')
-	console.log({ field, value }, user[field])
+	// console.log({ field, value }, user[field])
 
 	const dispatch = useDispatch()
 
@@ -39,7 +39,7 @@ const InfoGroup: React.FC<IProps> = ({ item: { field, title, placeholder } }) =>
 			})
 			// 第二步：拿到服务器用户信息
 			const userInfo = await getUserInfo(user.id)
-			console.log(userInfo, '==userInfo==')
+			// console.log(userInfo, '==userInfo==')
 			// 第三步：用服务器拿到的数据覆盖 store 中的数据
 			dispatch({
 				type: 'UPDATE_USER',

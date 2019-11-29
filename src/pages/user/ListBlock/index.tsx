@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Link, useHistory } from 'react-router-dom'
+import { Link, useHistory, useParams } from 'react-router-dom'
 
 import { getArticles } from '@/Api/article'
 import useFetch from '@/lib/hooks/useFetch'
@@ -13,60 +13,16 @@ import { getUserInfo, getUserArticles } from '@/Api/user'
 import ListBody from '../ListBody'
 import ListHeader from '../ListHeader'
 
-interface IProps {
-	user: {
-		username: string
-		jobTitle: string
-		company: string
-	}
-}
+// interface IProps {
+// 	user: {
+// 		username: string
+// 		jobTitle: string
+// 		company: string
+// 	}
+// }
 
-const ListBlock: React.FC<IProps> = ({ user: { username = '', jobTitle = '', company = '' } = {} }) => {
-	// search 是地址栏 ? 开始的内容
-	// query 是 ? 之后内容拆成的对象
-	// const { query }: any = useQuery()
-	// console.log(query)
-	const { setQuery, query } = useQuery()
-
-	const isLogin = useIsLogin()
-
-	const history = useHistory()
-
-	// 未登录状态 手动输入 http://localhost:3000/?own=mine 无效
-	useEffect(() => {
-		const { own } = query
-		if (!isLogin && own === 'mine') {
-			history.replace('/')
-		}
-	}, [])
-
-	console.log(query.own, '========Query========')
-	const dispatch = useDispatch()
-	const { user: { id } } = useSelector()
-	console.log('abc', id)
-
-	const { data } = useFetch(
-		async () => {
-			const rs = query.own === 'mine' ? await getUserArticles(id) : await getArticles(query)
-			const list = (rs && rs.edges) || []
-			dispatch({
-				type: 'CHANGE_ARTICLE_LIST',
-				payload: { articleList: [ ...list ] }
-			})
-			return rs
-		},
-		[ query ]
-	)
-
-	// 文章列表
-	// const list = (data && data.edges) || []
-
-	// 用 store 的数据渲染页面
-	const { articleList } = useSelector()
-
-	// 所有 or 我的
-	// const [ active, setActive ] = useState(0)
-
+// const ListBlock: React.FC<IProps> = ({ user: { username = '', jobTitle = '', company = '' } = {} }) => {
+const ListBlock: React.FC = (props) => {
 	return (
 		<Wrapper>
 			<ListHeader />

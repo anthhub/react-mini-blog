@@ -20,7 +20,7 @@ const User: React.FC = (props) => {
 	// 文章列表和作者信息要分开拿
 	const { data: info = {} } = useFetch(async () => {
 		const userInfo = await getUserInfo(id)
-		console.log(userInfo, 'userInfo--------------------')
+		// console.log(userInfo, 'userInfo--------------------')
 		return userInfo
 	}, [])
 
@@ -36,7 +36,7 @@ const User: React.FC = (props) => {
 		<Wrapper>
 			<div className="left">
 				<InfoBlock user={info} />
-				{/* <ListBlock list={data} /> */}
+				<ListBlock  />
 			</div>
 			<div className="right">
 				<div className="sticky-wrap">

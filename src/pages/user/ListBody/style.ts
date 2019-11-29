@@ -10,6 +10,7 @@ export const Wrapper = styled.div`
 		padding: 30px;
 		border-bottom: 1px solid hsla(0, 0%, 59.2%, .1);
 
+		/* 第一行 */
 		.user-info-row {
 			display: flex;
 			align-items: center;
@@ -18,6 +19,7 @@ export const Wrapper = styled.div`
 			color: #8b8b8b;
 		}
 
+		/* 第二行 */
 		.abstract-row {
 			display: flex;
 			flex-direction: column;
@@ -27,10 +29,14 @@ export const Wrapper = styled.div`
 				margin-bottom: 10px;
 				font-size: 24px;
 				font-weight: 600;
-				color: #8b8b8b;
+				color: #000;
 				word-break: break-word;
 				word-wrap: break-word;
 				letter-spacing: 0.5px;
+
+				:visited {
+					color: #8b8b8b;
+				}
 			}
 
 			.abstract {
@@ -43,39 +49,38 @@ export const Wrapper = styled.div`
 			}
 		}
 
+		/* 第三行 */
 		.action-row {
 			display: flex;
 			justify-content: space-between;
 			align-items: center;
 			margin-top: 18px;
 
-			.info-row {
+			.action-left {
 				display: flex;
-				color: #b2bac2;
 
-				.user-link,
-				.tag-link {
-					color: #b2bac2;
-				}
-
-				.column {
-					color: #b71ed7;
-					font-weight: 500;
-				}
-
-				.little-box {
+				.action {
 					display: flex;
 					justify-content: center;
 					align-items: center;
-					height: 26px;
-					padding: 0 10px;
+					height: 25px;
+					padding: 0 12px;
 					color: #b2bac2;
 					font-weight: 700;
-					border: 1px solid #edeeef;
+					white-space: nowrap;
+					border: 1px solid #f1f1f1;
 					border-radius: 1px;
+					cursor: pointer;
+					transition: color, background 0.3s;
+}
 
 					&.comment {
 						margin-left: -1px;
+					}
+
+					:hover {
+						color: #9f9f9f;
+						background: hsla(0, 0%, 94.5%, 0.3);
 					}
 
 					.count {
