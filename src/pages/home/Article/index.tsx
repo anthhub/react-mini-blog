@@ -154,16 +154,12 @@ const Article: React.FC<IProps> = ({ title, update_at, author, type, content, ht
 										</a>
 									</li>
 								</ul>
-
-								{/* <i className="more-icon" /> */}
 							</div>
 						</div>
 
 						<div className="thumb" />
 					</section>
 				</Link>
-
-			
 			</li>
 		</Wrapper>
 	)

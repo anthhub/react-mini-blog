@@ -29,6 +29,7 @@ export const Wrapper = styled.div`
 				height: 40px;
 				margin-right: 12px;
 				border-radius: 50%;
+				background: ${({ avatarLarge }) => `#eee url(${avatarLarge}) no-repeat center/cover`};
 			}
 
 			.author-name {
@@ -74,7 +75,7 @@ export const Wrapper = styled.div`
 	}
 
 	.cover-img {
-		display: ${({ screenshot }: { screenshot: string }) => (screenshot ? 'block' : 'none')};
+		display: ${({ screenshot }: { screenshot: string; avatarLarge: string }) => (screenshot ? 'block' : 'none')};
 		margin-bottom: 24px;
 		width: 100%;
 		height: 367px;

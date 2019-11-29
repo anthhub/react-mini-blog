@@ -16,6 +16,11 @@ export const Wrapper = styled.div`
 		font-size: 16px;
 		font-weight: 500;
 		color: #31445b;
+		cursor: pointer;
+
+		:hover {
+			color: #5a697c;
+		}
 
 		.item-count {
 			margin-top: 6px;

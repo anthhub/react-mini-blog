@@ -17,7 +17,7 @@ export const Wrapper = styled.div`
 		flex-direction: row;
 		justify-content: space-between;
 		align-items: center;
-		height: 116px;
+		/* height: 116px; */
 		padding: 18px 24px;
 
 		.info-box {
@@ -89,8 +89,7 @@ export const Wrapper = styled.div`
 			}
 
 			.abstract {
-				/* 没有点赞功能时暂不需要 margin-bottom */
-				/* margin-bottom: 12px; */
+				margin-bottom: 12px;
 				font-size: 13px;
 				color: #5b6169;
 				/* color: #909090; */

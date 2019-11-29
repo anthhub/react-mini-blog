@@ -69,7 +69,7 @@ const Header: React.FC = (props) => {
 	return (
 		<Wrapper avatarLarge={avatarLarge}>
 			<header className="header">
-				<Link className="logo-link" to="/home">
+				<Link className="logo-link" to="/">
 					<div className="logo" />
 				</Link>
 				<nav>

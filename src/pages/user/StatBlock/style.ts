@@ -1,9 +1,3 @@
-// import styled from 'styled-components';
-
-// export const Wrapper = styled.div`
-
-// `
-
 import styled from 'styled-components'
 
 export const Wrapper = styled.div`
@@ -22,20 +16,30 @@ export const Wrapper = styled.div`
 	}
 
 	.block-body {
-		display: flex;
-		align-items: center;
 		padding: 16px;
 		font-size: 15px;
 		color: #000;
 
-		.icon {
-			margin-right: 14px;
-			width: 25px;
-			height: 25px;
-		}
+		.stat-item {
+			display: flex;
+			align-items: center;
 
-		.count {
-			margin-left: 5px;
+			:not(:last-child) {
+				margin-bottom: 10px;
+			}
+
+			.icon {
+				margin-right: 14px;
+				width: 25px;
+				height: 25px;
+				background: #eee;
+				border-radius: 25%;
+			}
+
+			.count {
+				margin: 0 5px;
+				font-weight: 500;
+			}
 		}
 	}
 `

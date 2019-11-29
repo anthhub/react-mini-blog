@@ -32,6 +32,7 @@ export const Wrapper = styled.div`
 			flex-direction: column;
 			flex: 1 1 auto;
 			margin-right: 24px;
+
 			.user-name {
 				font-size: 26px;
 				font-weight: 600;
@@ -48,6 +49,10 @@ export const Wrapper = styled.div`
 
 			.user-position {
 				margin-top: 12px;
+			}
+			
+			.user-intro {
+				margin-top: 5px;
 			}
 		}
 
