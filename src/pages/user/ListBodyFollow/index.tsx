@@ -73,86 +73,16 @@ const ListBodyFollow: React.FC = () => {
 			<ul className="list-group">
 				{list.map((item: ArticleEntity) => (
 					<li className="list-item" key={item.id}>
-						{/* 第一行 */}
-						<div className="user-info-row">
-							<Link to={'/user/' + id} className="user-info" target="_blank">
-								<div
-									className="avatar"
-									style={{
-										background: `#eee url(${item.user.avatarLarge}) no-repeat center/cover`
-									}}
-								/>
-								<span className="author-name">{item.author}</span>
-							</Link>
-							<time>{formatDate(item.update_at)}</time>
-						</div>
-
-						{/* 第二行 */}
-						<div className="abstract-row">
-							<Link to={`/post/${item.id}`} className="title" target="_blank">
-								{item.title}
-							</Link>
-							<Link
-								to={`/post/${item.id}`}
-								className="abstract"
-								target="_blank"
-								dangerouslySetInnerHTML={{
-									__html: matchReg(item.html || translateMarkdown(item.content || ''))
-								}}
-							/>
-						</div>
-
-						{/* 第三行 */}
-						<div className="action-row">
-							<ul className="action-left">
-								<li className="action like">
-									<img
-										className="icon"
-										src="https://b-gold-cdn.xitu.io/v3/static/img/zan.e9d7698.svg"
-									/>
-									<span className="count">27</span>
-								</li>
-								<Link to="">
-									<li className="action comment">
-										<img
-											className="icon"
-											src="https://b-gold-cdn.xitu.io/v3/static/img/comment.4d5744f.svg"
-										/>
-										<span className="count">7</span>
-									</li>
-								</Link>
-							</ul>
-
-							<div className="action-right">
-								<div className="read-action">
-									<span>阅读 </span>
-									<span className="view-count">51</span>
-								</div>
-								<div className="more-action">
-									<i
-										className="more-icon"
-										onClick={(e) => {
-											e.nativeEvent.stopImmediatePropagation()
-											setShowMenu(true)
-										}}
-									/>
-									{showMenu && (
-										<ul className="menu">
-											<li>
-												<div className="menu-item" onClick={onReedit}>
-													<span>编辑</span>
-												</div>
-											</li>
-											<li>
-												<div className="menu-item" onClick={onDelete}>
-													<span>删除</span>
-												</div>
-											</li>
-										</ul>
-									)}
-								</div>
+						<Link to="" target="_blank" className="user-link">
+							<div className="avatar" />
+							<div className="info-box">
+								<div className="username">小黄</div>
+								<div className="detail">服务端研发 | 微信公众号 @ 编程拯救世界</div>
 							</div>
-						</div>
+							<button type="button" className="follow-btn">
+								已关注
+							</button>
+						</Link>
 					</li>
 				))}
 			</ul>

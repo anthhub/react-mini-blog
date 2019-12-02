@@ -4,8 +4,8 @@ import { Link, useHistory, useParams } from 'react-router-dom'
 import { Wrapper } from './style'
 import ListHeader from '../ListHeader'
 import ListBodyPosts from '../ListBodyPosts'
-import ListBodyLikes from '../ListBodyLikes'
 import ListBodyFollow from '../ListBodyFollow'
+import ListBodyLikes from '../ListBodyLikes'
 
 // interface IProps {
 // 	user: {
@@ -24,11 +24,11 @@ const ListBlock: React.FC = (props) => {
 		<Wrapper>
 			<ListHeader />
 			{item === 'following' || item === 'followers' ? (
-				<ListBodyPosts />
+				<ListBodyFollow />
 			) : item === 'likes' ? (
 				<ListBodyLikes />
 			) : (
-				<ListBodyFollow />
+				<ListBodyPosts />
 			)}
 		</Wrapper>
 	)
