@@ -17,6 +17,28 @@ export const Wrapper = styled.div`
 			padding: 4px 0 16px;
 			font-size: 14px;
 			color: #8b8b8b;
+
+			.user-info {
+				display: flex;
+				align-items: center;
+				font-size: 14px;
+				color: #8b8b8b;
+
+				.avatar {
+					margin-right: 12px;
+					width: 30px;
+					height: 30px;
+					border-radius: 50%;
+					background: #eee;
+				}
+
+				.author-name {
+					::after {
+						content: "·";
+						margin: 0 6px;
+					}
+				}
+			}
 		}
 
 		/* 第二行 */
@@ -24,6 +46,7 @@ export const Wrapper = styled.div`
 			display: flex;
 			flex-direction: column;
 			align-items: flex-start;
+			cursor: pointer;
 
 			.title {
 				margin-bottom: 10px;
@@ -35,17 +58,26 @@ export const Wrapper = styled.div`
 				letter-spacing: 0.5px;
 
 				:visited {
-					color: #8b8b8b;
+					color: #909090;
+				}
+
+				:hover {
+					color: #007fff;
 				}
 			}
 
 			.abstract {
+				width: 100%;
 				max-height: 94px;
 				font-size: 16px;
+				line-height: 1.5;
 				color: #8b8b8b;
 				letter-spacing: 0.5px;
+				display: -webkit-box;
 				overflow: hidden;
-				cursor: pointer;
+				text-overflow: ellipsis;
+				-webkit-line-clamp: 4;
+				-webkit-box-orient: vertical;
 			}
 		}
 
@@ -72,7 +104,6 @@ export const Wrapper = styled.div`
 					border-radius: 1px;
 					cursor: pointer;
 					transition: color, background 0.3s;
-}
 
 					&.comment {
 						margin-left: -1px;
@@ -89,48 +120,60 @@ export const Wrapper = styled.div`
 				}
 			}
 
-			.show-more {
-				.more-icon {
-					position: absolute;
-					z-index: 100;
-					bottom: 0;
-					right: 24px;
-					display: block;
-					width: 24px;
-					height: 24px;
-					background: #fff url(${dotPic}) no-repeat center/contain;
-					background-size: 60%;
-					cursor: pointer;
+			.action-right {
+				display: flex;
+				align-items: center;
+				font-size: 12px;
+				color: rgba(24, 37, 50, .3);
 
-					:hover {
-						background: #fff url(${dotHoverPic}) no-repeat center/contain;
-						background-size: 60%;
-					}
+				read-action,
+				.more-action {
+					margin-left: 24px;
 				}
 
-				.menu {
-					position: absolute;
-					z-index: 100;
-					top: 100%;
-					right: 0;
-					width: 120px;
-					padding: 12px 0;
-					background: #fff;
-					border: 1px solid #f1f1f1;
-					border-radius: 2px;
-					box-shadow: 0 1px 2px 1px hsla(0, 0%, 94.5%, .5);
-					list-style: none;
+				.read-action:hover {
+					color: #8b8b8b;
+				}
 
-					.menu-item {
-						display: flex;
-						padding: 7px 24px;
-						font-size: 12px;
-						color: #8b8b8b;
+				.more-action {
+					.more-icon {
+						display: block;
+						width: 24px;
+						height: 24px;
+						background: #fff url(${dotPic}) no-repeat center/contain;
+						background-size: 60%;
 						cursor: pointer;
+
+						:hover {
+							background: #fff url(${dotHoverPic}) no-repeat center/contain;
+							background-size: 60%;
+						}
 					}
 
-					.menu-item:hover {
-						background: #f8f9fa;
+					.menu {
+						position: absolute;
+						z-index: 100;
+						bottom: 60px;
+						right: 0;
+						width: 120px;
+						padding: 12px 0;
+						background: #fff;
+						border: 1px solid #f1f1f1;
+						border-radius: 2px;
+						box-shadow: 0 1px 2px 1px hsla(0, 0%, 94.5%, .5);
+						list-style: none;
+
+						.menu-item {
+							display: flex;
+							padding: 7px 24px;
+							font-size: 12px;
+							color: #8b8b8b;
+							cursor: pointer;
+						}
+
+						.menu-item:hover {
+							background: #f8f9fa;
+						}
 					}
 				}
 			}

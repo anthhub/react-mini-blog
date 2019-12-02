@@ -12,6 +12,8 @@ import { async } from 'q'
 import { getUserInfo, getUserArticles } from '@/Api/user'
 import { formatDate } from '@/pages/home/Article'
 import { title } from 'process'
+import { matchReg } from '@/pages/post/Catalog'
+import { translateMarkdown } from '@/lib/utils/markdown'
 
 interface IProps extends ArticleEntity {}
 
@@ -19,11 +21,16 @@ const ListBody: React.FC = () => {
 	const { id = '' } = useParams()
 	// console.log(id, '=============id===========')
 
+	const dispatch = useDispatch()
 	const { data: list = [] } = useFetch(async () => {
 		const rs = await getUserArticles(id)
 		// console.log(rs, 'rs--------------------')
 		const list = (rs && rs.edges) || []
 		// console.log(list, 'list--------------------')
+		dispatch({
+			type: 'CHANGE_ARTICLE_LIST',
+			payload: { articleList: [ ...list ] }
+		})
 		return list
 	}, [])
 
@@ -38,7 +45,6 @@ const ListBody: React.FC = () => {
 	)
 
 	// 删除
-	const dispatch = useDispatch()
 
 	const onDelete = useCallback(async () => {
 		if (window.confirm('删除专栏文章会扣除相应的掘力值，且文章不可恢复。')) {
@@ -46,6 +52,18 @@ const ListBody: React.FC = () => {
 			// 删掉 store 中的數據
 			dispatch({ type: 'DELETE_ARTICLE', payload: { id } })
 		}
+	}, [])
+
+	// 是否显示 more-action 的 menu
+	const [ showMenu, setShowMenu ] = useState(false)
+
+	const hideMenu = useCallback(() => {
+		setShowMenu(false)
+	}, [])
+
+	useEffect(() => {
+		document.addEventListener('click', hideMenu)
+		return () => document.removeEventListener('click', hideMenu)
 	}, [])
 
 	return (
@@ -57,10 +75,15 @@ const ListBody: React.FC = () => {
 					<li className="list-item" key={item.id}>
 						{/* 第一行 */}
 						<div className="user-info-row">
-							<Link to={'/user/' + id}>
-								<div className="avatar" />
-								<span>
-									{item.author}作者名字
+							<Link to={'/user/' + id} className="user-info" target="_blank">
+								<div
+									className="avatar"
+									style={{
+										background: `#eee url(${item.user.avatarLarge}) no-repeat center/cover`
+									}}
+								/>
+								<span className="author-name">
+									{item.author}
 									{/* :after */}
 								</span>
 							</Link>
@@ -69,14 +92,17 @@ const ListBody: React.FC = () => {
 
 						{/* 第二行 */}
 						<div className="abstract-row">
-							<Link to="" className="title">
-								another test
+							<Link to={`/post/${item.id}`} className="title" target="_blank">
+								{item.title}
 							</Link>
-							<Link to="" className="abstract">
-								his project was bootstrapped with Create React App. Available Scripts In the project
-								directory, you can run: yarn start Runs the app in the development mode. Open
-								http://localhost:3000 to view it in the browser.
-							</Link>
+							<Link
+								to={`/post/${item.id}`}
+								className="abstract"
+								target="_blank"
+								dangerouslySetInnerHTML={{
+									__html: matchReg(item.html || translateMarkdown(item.content || ''))
+								}}
+							/>
 						</div>
 
 						{/* 第三行 */}
@@ -102,23 +128,31 @@ const ListBody: React.FC = () => {
 
 							<div className="action-right">
 								<div className="read-action">
-									<span>阅读</span>
+									<span>阅读 </span>
 									<span className="view-count">51</span>
 								</div>
 								<div className="more-action">
-									<i className="more-icon" />
-									<ul className="menu">
-										<li>
-											<div className="menu-item" onClick={onReedit}>
-												<span>编辑</span>
-											</div>
-										</li>
-										<li>
-											<div className="menu-item" onClick={onDelete}>
-												<span>删除</span>
-											</div>
-										</li>
-									</ul>
+									<i
+										className="more-icon"
+										onClick={(e) => {
+											e.nativeEvent.stopImmediatePropagation()
+											setShowMenu(true)
+										}}
+									/>
+									{showMenu && (
+										<ul className="menu">
+											<li>
+												<div className="menu-item" onClick={onReedit}>
+													<span>编辑</span>
+												</div>
+											</li>
+											<li>
+												<div className="menu-item" onClick={onDelete}>
+													<span>删除</span>
+												</div>
+											</li>
+										</ul>
+									)}
 								</div>
 							</div>
 						</div>

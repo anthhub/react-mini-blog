@@ -52,6 +52,7 @@ export const Wrapper = styled.div`
 					font-size: 14px;
 					color: #72777b;
 					overflow: hidden;
+					cursor: auto;
 
 					.icon {
 						width: 21px;

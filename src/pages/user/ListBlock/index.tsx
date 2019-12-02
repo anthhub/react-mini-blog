@@ -23,10 +23,13 @@ import ListHeader from '../ListHeader'
 
 // const ListBlock: React.FC<IProps> = ({ user: { username = '', jobTitle = '', company = '' } = {} }) => {
 const ListBlock: React.FC = (props) => {
+	const { item = '' } = useParams()
+	// console.log(item, 'lalala')
+
 	return (
 		<Wrapper>
 			<ListHeader />
-			<ListBody />
+			{item === 'following' ? <ListBody /> : item === 'likes' ? <ListBody /> : <ListBody />}
 		</Wrapper>
 	)
 }
