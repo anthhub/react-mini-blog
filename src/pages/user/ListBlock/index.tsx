@@ -1,17 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import { Link, useHistory, useParams } from 'react-router-dom'
 
-import { getArticles } from '@/Api/article'
-import useFetch from '@/lib/hooks/useFetch'
-import useQuery from '@/lib/hooks/useQuery'
-import { ArticleEntity } from '@/modal/entities/article.entity'
-import { useIsLogin, useDispatch, useSelector } from '@/redux/context'
-
 import { Wrapper } from './style'
-import { async } from 'q'
-import { getUserInfo, getUserArticles } from '@/Api/user'
-import ListBody from '../ListBody'
 import ListHeader from '../ListHeader'
+import ListBodyPosts from '../ListBodyPosts'
+import ListBodyLikes from '../ListBodyLikes'
+import ListBodyFollow from '../ListBodyFollow'
 
 // interface IProps {
 // 	user: {
@@ -29,7 +23,13 @@ const ListBlock: React.FC = (props) => {
 	return (
 		<Wrapper>
 			<ListHeader />
-			{item === 'following' ? <ListBody /> : item === 'likes' ? <ListBody /> : <ListBody />}
+			{item === 'following' || item === 'followers' ? (
+				<ListBodyPosts />
+			) : item === 'likes' ? (
+				<ListBodyLikes />
+			) : (
+				<ListBodyFollow />
+			)}
 		</Wrapper>
 	)
 }

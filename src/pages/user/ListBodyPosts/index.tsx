@@ -17,7 +17,7 @@ import { translateMarkdown } from '@/lib/utils/markdown'
 
 interface IProps extends ArticleEntity {}
 
-const ListBody: React.FC = () => {
+const ListBodyPosts: React.FC = () => {
 	const { id = '' } = useParams()
 	// console.log(id, '=============id===========')
 
@@ -82,10 +82,7 @@ const ListBody: React.FC = () => {
 										background: `#eee url(${item.user.avatarLarge}) no-repeat center/cover`
 									}}
 								/>
-								<span className="author-name">
-									{item.author}
-									{/* :after */}
-								</span>
+								<span className="author-name">{item.author}</span>
 							</Link>
 							<time>{formatDate(item.update_at)}</time>
 						</div>
@@ -163,4 +160,4 @@ const ListBody: React.FC = () => {
 	)
 }
 
-export default ListBody
+export default ListBodyPosts

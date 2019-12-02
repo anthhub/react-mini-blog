@@ -49,6 +49,7 @@ export const Wrapper = styled.div`
 			cursor: pointer;
 
 			.title {
+				width: 100%;
 				margin-bottom: 10px;
 				font-size: 24px;
 				font-weight: 600;

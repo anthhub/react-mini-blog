@@ -14,7 +14,9 @@ interface IProps {
 	}
 }
 
-const Author: React.FC<IProps> = ({ user: { username = '', jobTitle = '', company = '', avatarLarge = '', id } }) => {
+const Author: React.FC<IProps> = ({
+	user: { username = '', jobTitle = '', company = '', avatarLarge = '', id } = {}
+}) => {
 	// console.log(username, jobTitle, company)
 	return (
 		<Wrapper avatarLarge={avatarLarge}>

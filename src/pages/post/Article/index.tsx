@@ -28,7 +28,7 @@ const Article: React.FC<IProps> = ({
 	html,
 	screenshot = '',
 	id,
-	user: { avatarLarge = '', id: userId }
+	user: { avatarLarge = '', id: userId }={}
 }) => {
 	// console.log(avatarLarge, '333')
 	// console.log('/editor/' + id, { content }, '333')
