@@ -23,17 +23,17 @@ interface IProps extends ArticleEntity {
 const Article: React.FC<IProps> = ({
 	update_at,
 	content,
-	author,
 	title,
 	html,
 	screenshot = '',
 	id,
-	user: { avatarLarge = '', id: userId }={}
+	user: { avatarLarge = '', id: userId, username: author } = {}
 }) => {
-	// console.log(avatarLarge, '333')
+	console.log(author, '333')
 	// console.log('/editor/' + id, { content }, '333')
 
 	const isLogin = useIsLogin()
+	// 登录用户的用户名
 	const { user: { username } } = useSelector()
 	const history = useHistory()
 	const onReedit = useCallback(

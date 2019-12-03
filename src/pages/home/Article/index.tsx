@@ -35,7 +35,7 @@ export const formatDate = (time: number) => {
 
 interface IProps extends ArticleEntity {}
 
-const Article: React.FC<IProps> = ({ title, update_at, author, type, content, html, screenshot = '', id,user={} }) => {
+const Article: React.FC<IProps> = ({ title, update_at, type, content, html, screenshot = '', id, user = {} }) => {
 	const history = useHistory()
 
 	// query.own 是 'mine' 才顯示文章預覽右下角的小圓點
@@ -101,8 +101,8 @@ const Article: React.FC<IProps> = ({ title, update_at, author, type, content, ht
 							<ul className="info-row">
 								<li className="column info-item">专栏</li>
 								<li className="info-item">
-									<Link to={'/user/'+user.id} target="_blank" className="user-link">
-										{author}
+									<Link to={'/user/' + user.id} target="_blank" className="user-link">
+										{user.username}
 									</Link>
 								</li>
 								<li className="info-item">{formatDate(update_at)}</li>

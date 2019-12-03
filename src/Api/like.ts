@@ -17,3 +17,15 @@ export const addLike = (articleId: string) => {
 			return res.data.data
 		})
 }
+
+// export const getArticleLikeCount = (articleId: string) => {
+// 	return http
+// 		.get(baseUrl + '/like/' + articleId)
+// 		.then((res) => {
+// 			// console.log('addLike', res.data.data)
+// 			return res.data.data
+// 		})
+// 		.catch((res) => {
+// 			return res.data.data
+// 		})
+// }
