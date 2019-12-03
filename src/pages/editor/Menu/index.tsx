@@ -35,7 +35,7 @@ const Menu: React.FC = () => {
 	}
 
 	// 拿到用户头像 默认值为本地头像
-	const { user: { avatarLarge = avatarPic } } = useSelector()
+	const { user: { avatarLarge = avatarPic, id } } = useSelector()
 
 	return (
 		<Wrapper avatarLarge={avatarLarge}>
@@ -50,6 +50,11 @@ const Menu: React.FC = () => {
 				/>
 				{showDropdown && (
 					<ul className="dropdown-list">
+						<li>
+							<Link className="menu-item" to={'/user/' + id}>
+								<span>我的主页</span>
+							</Link>
+						</li>
 						<li>
 							<Link className="menu-item" to="/settings">
 								<span>设置</span>

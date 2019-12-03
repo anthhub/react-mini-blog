@@ -22,17 +22,6 @@ const ListBodyPosts: React.FC = () => {
 	// console.log(id, '=============id===========')
 
 	const dispatch = useDispatch()
-	const { data: list = [] } = useFetch(async () => {
-		const rs = await getUserArticles(id)
-		// console.log(rs, 'rs--------------------')
-		const list = (rs && rs.edges) || []
-		// console.log(list, 'list--------------------')
-		dispatch({
-			type: 'CHANGE_ARTICLE_LIST',
-			payload: { articleList: [ ...list ] }
-		})
-		return list
-	}, [])
 
 	// 编辑
 	const history = useHistory()
@@ -46,13 +35,16 @@ const ListBodyPosts: React.FC = () => {
 
 	// 删除
 
-	const onDelete = useCallback(async () => {
-		if (window.confirm('删除专栏文章会扣除相应的掘力值，且文章不可恢复。')) {
-			await deleteArticle(id)
-			// 删掉 store 中的數據
-			dispatch({ type: 'DELETE_ARTICLE', payload: { id } })
-		}
-	}, [])
+	const onDelete = useCallback(
+		async () => {
+			if (window.confirm('删除专栏文章会扣除相应的掘力值，且文章不可恢复。')) {
+				await deleteArticle(id)
+				// 删掉 store 中的數據
+				dispatch({ type: 'DELETE_ARTICLE', payload: { id } })
+			}
+		},
+		[ id ]
+	)
 
 	// 是否显示 more-action 的 menu
 	const [ showMenu, setShowMenu ] = useState(false)
@@ -66,12 +58,14 @@ const ListBodyPosts: React.FC = () => {
 		return () => document.removeEventListener('click', hideMenu)
 	}, [])
 
+	const { articleList } = useSelector()
+
 	return (
 		<Wrapper>
 			{/* <ul>{articleList.map((item: ArticleEntity) => <Article {...item} key={item.id} />)}</ul> */}
 
 			<ul className="list-group">
-				{list.map((item: ArticleEntity) => (
+				{articleList.map((item: ArticleEntity) => (
 					<li className="list-item" key={item.id}>
 						{/* 第一行 */}
 						<div className="user-info-row">
@@ -110,7 +104,6 @@ const ListBodyPosts: React.FC = () => {
 										className="icon"
 										src="https://b-gold-cdn.xitu.io/v3/static/img/zan.e9d7698.svg"
 									/>
-									<span className="count">27</span>
 								</li>
 								<Link to="">
 									<li className="action comment">
@@ -118,7 +111,6 @@ const ListBodyPosts: React.FC = () => {
 											className="icon"
 											src="https://b-gold-cdn.xitu.io/v3/static/img/comment.4d5744f.svg"
 										/>
-										<span className="count">7</span>
 									</li>
 								</Link>
 							</ul>

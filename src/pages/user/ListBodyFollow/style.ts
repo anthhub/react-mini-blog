@@ -50,8 +50,8 @@ export const Wrapper = styled.div`
 				flex: 0 0 auto;
 				margin-left: 12px;
 				padding: 0;
-				width: 88px;
-				height: 28px;
+				width: 90px;
+				height: 30px;
 				font-size: 12px;
 				color: #fff;
 				background-color: #92c452;

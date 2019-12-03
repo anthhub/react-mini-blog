@@ -92,6 +92,35 @@ export const Wrapper = styled.div`
 			border: 1px solid;
 			border-radius: 4px;
 			cursor: pointer;
+
+			:hover {
+				opacity: 0.8;
+			}
+		}
+
+		.follow-btn {
+			flex: 0 0 auto;
+			align-self: flex-end;
+			width: 106px;
+			height: 32px;
+			font-size: 16px;
+			font-weight: 500;
+			color: #6cbd45;
+			background: #fff;
+			border: 1px solid;
+			border-radius: 4px;
+			outline: none;
+			cursor: pointer;
+
+			:hover {
+				opacity: 0.8;
+			}
+
+			&.active {
+				color: #fff;
+				background-color: #6cbd45;
+				border-color: #6cbd45;
+			}
 		}
 	}
 `

@@ -5,9 +5,12 @@ import { Wrapper } from './style'
 import avatarPic from '../../../statics/avatar.png'
 import { useSelector } from '@/redux/context'
 import { useHistory } from 'react-router'
+import useToggle from '@/lib/hooks/useToggle'
+import { addFollow, deleteFollow } from '@/Api/follow'
 
 interface IProps {
 	user: {
+		id: string
 		avatarLarge: string
 		username: string
 		jobTitle: string
@@ -17,23 +20,30 @@ interface IProps {
 }
 
 const InfoBlock: React.FC<IProps> = ({
-	user: { avatarLarge = avatarPic, username = '', jobTitle = '', company = '', selfDescription = '' }
+	user: { id = '', avatarLarge = avatarPic, username = '', jobTitle = '', company = '', selfDescription = '' } = {}
 }) => {
-	// console.log(
-	// 	'===================================================',
-	// 	username,
-	// 	jobTitle,
-	// 	company,
-	// 	selfDescription,
-	// 	'==================================================='
-	// )
-
 	// 因为要保证所有用户的都能拿到，不应该从 store 中拿
 	// const { user: { avatarLarge = avatarPic } } = useSelector()
 	const history = useHistory()
 	const onSetting = useCallback(async () => {
 		history.push('/settings')
 	}, [])
+
+	const { flag, onToggle } = useToggle(false)
+	console.log(id)
+
+	const onFollow = useCallback(
+		async () => {
+			console.log(id, 'id')
+			flag ? await deleteFollow(id) : await addFollow(id)
+			onToggle()
+		},
+		[ flag, id ]
+	)
+
+	// 拿到当前登录用户的 id
+	const { user: { id: loginId } } = useSelector()
+	// console.log(loginId, 'loginId')
 
 	return (
 		<Wrapper avatarLarge={avatarLarge}>
@@ -76,9 +86,19 @@ const InfoBlock: React.FC<IProps> = ({
 						</div>
 					)}
 				</div>
-				<button className="setting-btn" onClick={onSetting}>
-					编辑个人资料
-				</button>
+				{loginId === id ? (
+					<button className="setting-btn" onClick={onSetting}>
+						编辑个人资料
+					</button>
+				) : flag ? (
+					<button className="follow-btn active" onClick={onFollow}>
+						已关注
+					</button>
+				) : (
+					<button className="follow-btn" onClick={onFollow}>
+						关注
+					</button>
+				)}
 			</div>
 		</Wrapper>
 	)

@@ -18,6 +18,15 @@ export default function reducer(state: any, action: any) {
 					payload.screenshot)
 			}
 
+		case 'CHANGE_LIKE_LIST':
+			return { ...state, ...payload }
+
+		case 'CHANG_FOLLOWING_LIST':
+			return { ...state, ...payload }
+
+		case 'CHANGE_FOLLOWERS_LIST':
+			return { ...state, ...payload }
+
 		case 'UPDATE_USER':
 			return { ...state, user: { ...state.user, ...payload.user } }
 

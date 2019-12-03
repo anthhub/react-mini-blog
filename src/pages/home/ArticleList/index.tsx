@@ -65,6 +65,13 @@ const ArticleList: React.FC = () => {
 							全部
 						</li>
 
+						<li
+							className={query.own === 'following' ? 'nav-item  following active' : 'nav-item following'}
+							onClick={() => setQuery({ own: 'following' })}
+						>
+							关注
+						</li>
+
 						{isLogin && (
 							<li
 								className={query.own === 'mine' ? 'nav-item mine active' : 'nav-item mine'}

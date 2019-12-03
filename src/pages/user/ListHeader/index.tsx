@@ -9,13 +9,71 @@ import { useIsLogin, useDispatch, useSelector } from '@/redux/context'
 
 import { Wrapper } from './style'
 import { async } from 'q'
-import { getUserInfo, getUserArticles } from '@/Api/user'
+import { getUserInfo, getUserArticles, getUserLikes, getUserFollowing, getUserFollowers } from '@/Api/user'
 import ListBody from '../ListBodyPosts'
 
 const ListHeader: React.FC = () => {
 	const { id = '', item = '' } = useParams()
 
-	const { articleList } = useSelector()
+	const dispatch = useDispatch()
+	// 分页部分的数据统一在 header 中拿到（因爲 header 一定會渲染），再放入 store 中供分页组件使用
+	// 根据 id 拿用户文章列表
+	const { data: articleList = [] } = useFetch(
+		async () => {
+			const rs = await getUserArticles(id)
+			// console.log(rs, 'rs--------------------')
+			const list = (rs && rs.edges) || []
+			// console.log(list, 'list--------------------')
+			dispatch({
+				type: 'CHANGE_ARTICLE_LIST',
+				payload: { articleList: [ ...list ] }
+			})
+			return list
+		},
+		[ id ]
+	)
+
+	// 根据 id 该用户关注和被关注的用户列表
+	const { data: followingList = [] } = useFetch(async () => {
+		const rs = await getUserFollowing(id)
+		// console.log(rs, 'rs--------------------')
+		const list = (rs && rs.edges) || []
+		console.log(list, 'followingList--------------------')
+		dispatch({
+			type: 'CHANG_FOLLOWING_LIST',
+			payload: { followingList: [ ...list ] }
+		})
+		return list
+	}, [])
+
+	const { data: followersList = [] } = useFetch(async () => {
+		const rs = await getUserFollowers(id)
+		// console.log(rs, 'rs--------------------')
+		const list = (rs && rs.edges) || []
+		console.log(list, 'followersList--------------------')
+		dispatch({
+			type: 'CHANGE_FOLLOWERS_LIST',
+			payload: { followersList: [ ...list ] }
+		})
+		return list
+	}, [])
+
+
+	// 根据 id 拿用户点赞的文章列表
+	const { data: likeList = [] } = useFetch(
+		async () => {
+			const rs = await getUserLikes(id)
+			// console.log(rs, 'rs--------------------')
+			const list = (rs && rs.edges) || []
+			console.log(list, 'list--------------------')
+			dispatch({
+				type: 'CHANGE_LIKE_LIST',
+				payload: { likeList: [ ...list ] }
+			})
+			return list
+		},
+		[ id ]
+	)
 
 	return (
 		<Wrapper>
@@ -36,13 +94,13 @@ const ListHeader: React.FC = () => {
 								}
 							>
 								<span className="item-title">关注</span>
-								<span className="item-count">50</span>
+								{/* <span className="item-count">50</span> */}
 							</li>
 						</Link>
 						<Link to={'/user/' + id + '/likes'}>
 							<li className={item === 'likes' ? 'nav-item active' : 'nav-item'}>
 								<span className="item-title">赞</span>
-								<span className="item-count">17</span>
+								<span className="item-count">{likeList.length}</span>
 							</li>
 						</Link>
 					</ul>

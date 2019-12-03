@@ -8,7 +8,7 @@ import { ArticleEntity } from '@/modal/entities/article.entity'
 import { useIsLogin, useDispatch, useSelector } from '@/redux/context'
 
 import { Wrapper } from './style'
-import { getUserInfo, getUserArticles } from '@/Api/user'
+import { getUserInfo, getUserArticles, getUserLikes } from '@/Api/user'
 import { formatDate } from '@/pages/home/Article'
 import { title } from 'process'
 import { translateMarkdown } from '@/lib/utils/markdown'
@@ -20,25 +20,27 @@ const ListBodyLikes: React.FC = () => {
 	const { id = '' } = useParams()
 	// console.log(id, '=============id===========')
 
-	const dispatch = useDispatch()
-	const { data: list = [] } = useFetch(async () => {
-		const rs = await getUserArticles(id)
-		// console.log(rs, 'rs--------------------')
-		const list = (rs && rs.edges) || []
-		// console.log(list, 'list--------------------')
-		dispatch({
-			type: 'CHANGE_ARTICLE_LIST',
-			payload: { articleList: [ ...list ] }
-		})
-		return list
-	}, [])
+	// const dispatch = useDispatch()
+	// const { data: list = [] } = useFetch(async () => {
+	// 	const rs = await getUserLikes(id)
+	// 	// console.log(rs, 'rs--------------------')
+	// 	const list = (rs && rs.edges) || []
+	// 	console.log(list, 'list--------------------')
+	// 	dispatch({
+	// 		type: 'CHANGE_ARTICLE_LIST',
+	// 		payload: { likeList: [ ...list ] }
+	// 	})
+	// 	return list
+	// }, [])
+
+	const { likeList } = useSelector()
 
 	return (
 		<Wrapper>
 			{/* <ul>{articleList.map((item: ArticleEntity) => <Article {...item} key={item.id} />)}</ul> */}
 
 			<ul className="list-group">
-				{list.map((item: ArticleEntity) => (
+				{likeList.map((item: ArticleEntity) => (
 					<li className="list-item" key={item.id}>
 						<Link to={`/post/${id}`} target="_blank">
 							<section className="content">

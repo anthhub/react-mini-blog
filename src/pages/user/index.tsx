@@ -18,30 +18,25 @@ const User: React.FC = (props) => {
 	// console.log(id, '=============id===========')
 
 	// 文章列表和作者信息要分开拿
-	const { data: info = {} } = useFetch(async () => {
-		const userInfo = await getUserInfo(id)
-		// console.log(userInfo, 'userInfo--------------------')
-		return userInfo
-	}, [])
-
-	const { data: list = [] } = useFetch(async () => {
-		const rs = await getUserArticles(id)
-		// console.log(rs, 'rs--------------------')
-		const list = (rs && rs.edges) || []
-		// console.log(list, 'list--------------------')
-		return list
-	}, [])
+	const { data: info = {} } = useFetch(
+		async () => {
+			const userInfo = await getUserInfo(id)
+			// console.log(userInfo, 'userInfo--------------------')
+			return userInfo
+		},
+		[ id ]
+	)
 
 	return (
 		<Wrapper>
 			<div className="left">
 				<InfoBlock user={info} />
-				<ListBlock  />
+				<ListBlock />
 			</div>
 			<div className="right">
 				<div className="sticky-wrap">
 					<StatBlock />
-					<FallowBlock id={info.id} />
+					<FallowBlock />
 					<MoreBLock user={info} />
 				</div>
 			</div>

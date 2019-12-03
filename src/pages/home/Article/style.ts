@@ -47,6 +47,9 @@ export const Wrapper = styled.div`
 					.user-link,
 					.tag-link {
 						color: #b2bac2;
+						:hover {
+							color: #007fff;
+						}
 					}
 				}
 

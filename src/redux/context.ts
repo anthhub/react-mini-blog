@@ -10,6 +10,9 @@ interface IStore {
 		sort: string
 	}
 	articleList: any[]
+	likeList: any[]
+	followingList: any[]
+	followersList: any[]
 	dispatch(action: { type: string; payload?: any }): void
 }
 
@@ -17,6 +20,9 @@ const Store = React.createContext<IStore>({
 	user: {},
 	query: { search: '', sort: '' },
 	articleList: [],
+	likeList: [],
+	followingList: [],
+	followersList: [],
 	dispatch: (arg) => arg
 })
 

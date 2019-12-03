@@ -132,7 +132,7 @@ export default Login
 // 				return
 // 			}
 // 			var token = data.extras.token
-// 			console.log(token)
+			// console.log(token)
 // 			location.href = 'Listview1.html?' + 'token=' + token + '&&' + usernamestr
 // 		},
 // 		error: function(jqXHR, textStatus, errorThrown) {

@@ -20,10 +20,6 @@ export const Wrapper = styled.div`
 			align-items: center;
 			margin-bottom: 0;
 
-			.mine {
-				border-left: 1px solid hsla(0, 0%, 59.2%, .2);
-			}
-
 			.nav-item {
 				padding: 0 14px;
 				line-height: 14px;
@@ -34,6 +30,10 @@ export const Wrapper = styled.div`
 				&.active,
 				:hover {
 					color: #007fff;
+				}
+
+				:not(:first-child) {
+					border-left: 1px solid hsla(0, 0%, 59.2%, .2);
 				}
 			}
 		}
