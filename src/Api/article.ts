@@ -12,7 +12,8 @@ const article = {
 	detail: `/article/`,
 	create: `/article`,
 	reedit: `/article/`,
-	delete: `/article`
+	delete: `/article`,
+	viewCount: `/article/`
 }
 
 export const getArticles = (data?: any) => {
@@ -21,8 +22,8 @@ export const getArticles = (data?: any) => {
 	})
 }
 
-export const getArticle = (id: string) => {
-	return http.get(baseUrl + article.detail + id).then((res) => {
+export const getArticle = (articleId: string) => {
+	return http.get(baseUrl + article.detail + articleId).then((res) => {
 		return res.data.data
 	})
 }
@@ -33,14 +34,20 @@ export const createArticle = (data: CreateArticleDto) => {
 	})
 }
 
-export const reeditArticle = (id: string, data: CreateArticleDto) => {
-	return http.patch(baseUrl + article.reedit + id, data).then((res) => {
+export const reeditArticle = (articleId: string, data: CreateArticleDto) => {
+	return http.patch(baseUrl + article.reedit + articleId, data).then((res) => {
 		return res.data.data
 	})
 }
 
-export const deleteArticle = (id: string) => {
-	return http.delete(baseUrl + article.delete + `?id=` + id).then((res) => {
+export const deleteArticle = (articleId: string) => {
+	return http.delete(baseUrl + article.delete + `?id=` + articleId).then((res) => {
+		return res.data.data
+	})
+}
+
+export const putViewCount = (articleId: string) => {
+	return http.put(baseUrl + article.viewCount + articleId + '/putViewCount').then((res) => {
 		return res.data.data
 	})
 }

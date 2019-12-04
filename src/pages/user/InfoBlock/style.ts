@@ -116,7 +116,7 @@ export const Wrapper = styled.div`
 				opacity: 0.8;
 			}
 
-			&.active {
+			&.followed {
 				color: #fff;
 				background-color: #6cbd45;
 				border-color: #6cbd45;

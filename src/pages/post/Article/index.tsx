@@ -21,11 +21,11 @@ interface IProps extends ArticleEntity {
 }
 
 const Article: React.FC<IProps> = ({
-	update_at,
+	create_at,
 	content,
 	title,
 	html,
-	screenshot = '',
+	screenshot,
 	id,
 	user: { avatarLarge = '', id: userId, username: author } = {}
 }) => {
@@ -42,7 +42,7 @@ const Article: React.FC<IProps> = ({
 		},
 		[ id ]
 	)
-
+	const isFollow = true
 	return (
 		<Wrapper screenshot={screenshot} avatarLarge={avatarLarge}>
 			{/* 作者及文章简介 */}
@@ -56,8 +56,8 @@ const Article: React.FC<IProps> = ({
 							{author}
 						</Link>
 						<div className="article-info">
-							<time>{formatDate(update_at)}</time>
-							{/* <span className="views">阅读 1367</span> */}
+							<time>{formatDate(create_at)}</time>
+							<span className="views">阅读 1367</span>
 							{isLogin &&
 							author === username && (
 								<div>
@@ -70,7 +70,11 @@ const Article: React.FC<IProps> = ({
 						</div>
 					</div>
 				</div>
-				{/* <button className="follow">关注</button> */}
+				{isFollow ? (
+					<button className="follow-btn followed">已关注</button>
+				) : (
+					<button className="follow-btn">关注</button>
+				)}
 			</div>
 
 			{/* 文章标题及内容 */}

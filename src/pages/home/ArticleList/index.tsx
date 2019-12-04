@@ -52,6 +52,7 @@ const ArticleList: React.FC = () => {
 
 	// 用 store 的数据渲染页面
 	const { articleList } = useSelector()
+	console.log('articleList', articleList)
 
 	return (
 		<Wrapper>
@@ -65,12 +66,12 @@ const ArticleList: React.FC = () => {
 							全部
 						</li>
 
-						<li
+						{/* <li
 							className={query.own === 'following' ? 'nav-item  following active' : 'nav-item following'}
 							onClick={() => setQuery({ own: 'following' })}
 						>
 							关注
-						</li>
+						</li> */}
 
 						{isLogin && (
 							<li

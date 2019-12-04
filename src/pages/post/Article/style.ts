@@ -62,7 +62,7 @@ export const Wrapper = styled.div`
 			}
 		}
 
-		.follow {
+		.follow-btn {
 			width: 55px;
 			height: 26px;
 			font-size: 13px;
@@ -71,6 +71,15 @@ export const Wrapper = styled.div`
 			border-radius: 2px;
 			background: #fff;
 			cursor: pointer;
+
+			:hover {
+				opacity: 0.8;
+			}
+
+			&.followed {
+				color: #fff;
+				background-color: #6cbd45;
+			}
 		}
 	}
 
