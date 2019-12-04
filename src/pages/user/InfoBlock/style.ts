@@ -14,7 +14,6 @@ export const Wrapper = styled.div`
 
 	.user-info {
 		display: flex;
-		align-items: flex-start;
 
 		.avatar {
 			flex: 0 0 auto;
@@ -30,6 +29,7 @@ export const Wrapper = styled.div`
 		.info-box {
 			display: flex;
 			flex-direction: column;
+			justify-content: center;
 			flex: 1 1 auto;
 			margin-right: 24px;
 

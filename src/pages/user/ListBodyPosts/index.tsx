@@ -79,7 +79,7 @@ const ListBodyPosts: React.FC = () => {
 								/>
 								<span className="author-name">{item.author}</span>
 							</Link>
-							<time>{formatDate(item.update_at)}</time>
+							<time>{formatDate(item.create_at)}</time>
 						</div>
 
 						{/* 第二行 */}
@@ -119,7 +119,7 @@ const ListBodyPosts: React.FC = () => {
 							<div className="action-right">
 								<div className="read-action">
 									<span>阅读 </span>
-									<span className="view-count">51</span>
+									<span className="view-count">{item.viewCount}</span>
 								</div>
 								<div className="more-action">
 									<i

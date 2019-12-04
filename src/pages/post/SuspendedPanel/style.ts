@@ -36,7 +36,21 @@ export const Wrapper = styled.div`
 		background: #fff url(https://b-gold-cdn.xitu.io/v3/static/img/zan.b4bb964.svg) no-repeat 53% 46%;
 
 		::after {
+			display:${({ likeCount }) => (likeCount ? 'block' : 'none')};
 			content: ${({ likeCount }: { likeCount: string }) => `'${likeCount}'`};
+	
+		}
+
+		:hover {
+			background-image: url(https://b-gold-cdn.xitu.io/v3/static/img/zan-hover.91657d6.svg);
+		}
+
+		&.active{
+			background-image: url(https://b-gold-cdn.xitu.io/v3/static/img/zan-active.337b9a0.svg);
+			
+			::after {
+				background-color: #74ca46;
+		}
 		}
 	}
 
@@ -44,7 +58,12 @@ export const Wrapper = styled.div`
 		background: #fff url(https://b-gold-cdn.xitu.io/v3/static/img/comment.7fc22c2.svg) no-repeat 50% 55%;
 
 		::after {
+			/* display:${({ likeCount }) => (likeCount ? 'block' : 'none')}; */
 			/* content: ${({ likeCount }: { likeCount: string }) => `'${likeCount}'`}; */
+		}
+
+		:hover{
+			background-image: url(https://b-gold-cdn.xitu.io/v3/static/img/comment-hover.1074e67.svg);
 		}
 	}
 `

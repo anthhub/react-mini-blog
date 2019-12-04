@@ -6,10 +6,10 @@ import { Wrapper } from './style'
 interface IProps extends ArticleEntity {}
 const SuspendedPanel: React.FC<IProps> = ({ likeCount }) => {
 	// const SuspendedPanel: React.FC = () => {
-	console.log('likeCount', typeof likeCount.toString())
+	// console.log('likeCount', typeof likeCount.toString())
 	return (
-		<Wrapper likeCount={likeCount.toString()}>
-			<div className="panel-btn like-btn" />
+		<Wrapper likeCount={(likeCount && likeCount.toString()) ||''}>
+			<div className="panel-btn like-btn active" />
 			<div className="panel-btn comment-btn" />
 		</Wrapper>
 	)
