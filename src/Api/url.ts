@@ -11,6 +11,4 @@ const VERSION = '/api/v1'
 
 const DOMAIN = 'http://101.132.79.152'
 
-export const baseUrl = DOMAIN + HOST + ENV_MAP[process.env.API_ENV] + VERSION
-
-// export const baseUrl = 'http://localhost:3003/blog-test/api/v1'
+export const baseUrl = process.env.API_ENV === 'development' ? 'http://localhost:3003/blog-test/api/v1' : DOMAIN + HOST + ENV_MAP[process.env.API_ENV] + VERSION

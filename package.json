@@ -66,6 +66,7 @@
     "react-codemirror2": "^6.0.0",
     "react-dev-utils": "^9.1.0",
     "react-dom": "^16.10.2",
+    "react-infinite-scroll-component": "^5.0.4",
     "react-markdown-editor-lite": "^0.4.5",
     "react-router-dom": "^5.1.2",
     "resolve": "1.12.0",
