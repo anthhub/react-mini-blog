@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react'
+import React, { useCallback, useState } from 'react'
 
 import { translateMarkdown } from '@/lib/utils/markdown'
 import { ArticleEntity } from '@/modal/entities/article.entity'
@@ -44,12 +44,56 @@ const Comment: React.FC<IProps> = ({
 		[ id ]
 	)
 	const isFollow = true
+
+	const [ focusFlag, setFocusFlag ] = useState(false)
 	return (
 		<Wrapper>
 			<div className="title">评论</div>
-			<div className="">1</div>
-			<div className="">1</div>
-			<div className="">1</div>
+			<div className="comment-form">
+				<div className="avatar" />
+				<div className="form-box">
+					<input
+						className={focusFlag ? 'input-comment focused' : 'input-comment'}
+						onFocus={() => {
+							setFocusFlag(true)
+						}}
+						onBlur={() => {
+							setFocusFlag(false)
+						}}
+					/>
+					<div className="action-box">
+						<div className="submit">
+							<span className="">Ctrl or ⌘ + Enter</span>
+							<button className="submit-btn">评论</button>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div className="comment-list">
+				<div className="item">
+					<div className="first-comment">
+						<div className="avatar" />
+						<div className="content-box">
+							<Link to="" className="username">
+								xiaohuang
+							</Link>
+							<div className="content">楼主，能否说下，这个头条给你发offer，薪资定的是多少？</div>
+							<div className="">1</div>
+							<div className="reply-stat">
+								<time className="">1小时前</time>
+								<div className="delete">删除</div>
+								<div className="action-box">
+									<div className="like-action">赞</div>
+									<div className="comment-like">评</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div className="more-comment">查看更多 ></div>
 		</Wrapper>
 	)
 }
