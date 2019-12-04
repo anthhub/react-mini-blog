@@ -105,6 +105,7 @@ const Article: React.FC<IProps> = ({
 	const [ likeFlag, setLikeFlag ] = useState(isLiked)
 	// likeCount2 只控制前端显示，不会影响后台数据
 	const [ likeCountNew, setLikeCountNew ] = useState(likeCount)
+	
 	const onLike = useCallback(
 		async () => {
 			if (likeFlag) {

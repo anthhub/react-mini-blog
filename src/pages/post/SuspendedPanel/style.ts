@@ -36,7 +36,7 @@ export const Wrapper = styled.div`
 		background: #fff url(https://b-gold-cdn.xitu.io/v3/static/img/zan.b4bb964.svg) no-repeat 53% 46%;
 
 		::after {
-			display:${({ likeCount }) => (likeCount ? 'block' : 'none')};
+			display:${({ likeCount }) => (likeCount !== '0' ? 'block' : 'none')};
 			content: ${({ likeCount }: { likeCount: string }) => `'${likeCount}'`};
 	
 		}
