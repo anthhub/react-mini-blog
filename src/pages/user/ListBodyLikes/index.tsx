@@ -48,13 +48,13 @@ const ListBodyLikes: React.FC = () => {
 									<ul className="info-row">
 										<li className="column info-item">专栏</li>
 										<li className="info-item">
-											去掉object 
+											去掉object
 											{/* object 标签实现 a 标签的嵌套 */}
 											{/* <object>
 										<a className="user-link">{author}</a>
 									</object> */}
 										</li>
-										<li className="info-item">{formatDate(item.update_at)}</li>
+										<li className="info-item">{formatDate(item.create_at)}</li>
 										<li className="info-item">
 											去掉object
 											{/* <object>

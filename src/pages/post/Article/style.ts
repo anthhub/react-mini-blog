@@ -8,11 +8,8 @@ import styled from 'styled-components'
 
 export const Wrapper = styled.div`
 	width: 700px;
-	margin-bottom: 18px;
-	padding: 24px 24px 36px;
-	background: #fff;
-	border-radius: 2px;
-	box-shadow: 0 1px 2px 0 rgba(0, 0, 0, .05);
+	padding: 24px 24px 0;
+	margin-bottom: 36px;
 
 	.author {
 		display: flex;

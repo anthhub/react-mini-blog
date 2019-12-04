@@ -18,6 +18,18 @@ export const addLike = (articleId: string) => {
 		})
 }
 
+export const deleteLike = (articleId: string) => {
+	return http
+		.delete(baseUrl + '/like/' + articleId)
+		.then((res) => {
+			// console.log('addLike', res.data.data)
+			return res.data.data
+		})
+		.catch((res) => {
+			return res.data.data
+		})
+}
+
 export const getArticleLikeCount = (articleId: string) => {
 	return http
 		.get(baseUrl + '/like/' + articleId + '/count')

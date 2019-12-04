@@ -27,6 +27,7 @@ const Article: React.FC<IProps> = ({
 	html,
 	screenshot,
 	id,
+	viewCount,
 	user: { avatarLarge = '', id: userId, username: author } = {}
 }) => {
 	console.log(author, '333')
@@ -57,7 +58,7 @@ const Article: React.FC<IProps> = ({
 						</Link>
 						<div className="article-info">
 							<time>{formatDate(create_at)}</time>
-							<span className="views">阅读 1367</span>
+							<span className="views">阅读 {viewCount}</span>
 							{isLogin &&
 							author === username && (
 								<div>

@@ -4,23 +4,22 @@
 
 // `
 
-import styled from 'styled-components';
+import styled from 'styled-components'
 
 export const Wrapper = styled.div`
 	display: flex;
 	justify-content: space-between;
 	width: 960px;
-	margin: 82px auto 0;
+	margin: 82px auto 24px;
 
 	.left {
 		width: 700px;
-		// height:200px;
-		// background:#fff;
+		background: #fff;
+		border-radius: 2px;
+		box-shadow: 0 1px 2px 0 rgba(0, 0, 0, .05);
 	}
 
 	.right {
 		width: 240px;
-		// height:200px;
-		// background:#fff;
 	}
-`;
+`

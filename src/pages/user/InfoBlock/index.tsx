@@ -49,15 +49,16 @@ const InfoBlock: React.FC<IProps> = ({
 			<div className="user-info">
 				<div className="avatar" />
 				<div className="info-box">
+					{/* 第一行：用户名 */}
 					<span className="user-name">{username}</span>
 
 					{/* 第二行：职位和公司 */}
-					{!jobTitle && !company ? (
-						// 都沒填
+					{/* 都沒填 */}
+					{!jobTitle && !company ? loginId === id ? (
 						<span className="user-position" title="填写职位信息" onClick={onSetting}>
 							+ 你从事什么职业？
 						</span>
-					) : jobTitle && company ? (
+					) : null : jobTitle && company ? (
 						// 都填了
 						<div className="user-position filled">
 							<i className="icon" />
@@ -74,11 +75,11 @@ const InfoBlock: React.FC<IProps> = ({
 					)}
 
 					{/* 第三行：个人介绍 */}
-					{!selfDescription ? (
+					{!selfDescription ? loginId === id ? (
 						<span className="user-intro" title="填写个人介绍" onClick={onSetting}>
 							+ 你的信仰是什么？
 						</span>
-					) : (
+					) : null : (
 						<div className="user-intro filled">
 							<i className="icon" />
 							<span>{selfDescription}</span>
