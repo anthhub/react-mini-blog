@@ -26,4 +26,8 @@ export class ArticleEntity extends CommonEntity {
   viewCount!: number
   
   likeCount!: number
+
+  commentCount!: number
+
+  isLiked!: boolean
 }

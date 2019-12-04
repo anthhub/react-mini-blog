@@ -79,7 +79,7 @@ const ListBodyPosts: React.FC = () => {
 											item.user.avatarLarge}) no-repeat center/cover`
 									}}
 								/>
-								<span className="author-name">{item.author}</span>
+								<span className="author-name">{item.user.username}</span>
 							</Link>
 							<time>{formatDate(item.create_at)}</time>
 						</div>

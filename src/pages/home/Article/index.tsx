@@ -9,35 +9,47 @@ import { Wrapper } from './style'
 import useQuery from '@/lib/hooks/useQuery'
 import { deleteArticle } from '@/Api/article'
 import { useDispatch } from '@/redux/context'
-import { addLike, getArticleLikeCount } from '@/Api/like'
+import { addLike, getArticleLikeCount, deleteLike } from '@/Api/like'
 import useFetch from '@/lib/hooks/useFetch'
 import { getFollowingCount } from '@/Api/user'
 
 // 格式化时间
 export const formatDate = (time: number) => {
-  const dt = new Date()
-  const ms = dt.getTime()
-  // console.log(ms)
-  const diff = ms - time
-  // 1年的毫秒数：31536000000
-  if (diff >= 31536000000) {
-    return Math.floor(diff / 31536000000) + '年前'
-  } else if (diff >= 2592000000 && diff < 31536000000) {
-    return Math.floor(diff / 2592000000) + '月前'
-  } else if (diff >= 86400000 && diff < 2592000000) {
-    return Math.floor(diff / 86400000) + '天前'
-  } else if (diff >= 3600000 && diff < 86400000) {
-    return Math.floor(diff / 3600000) + '小时前'
-  } else if (diff >= 60000 && diff < 3600000) {
-    return Math.floor(diff / 60000) + '分钟前'
-  } else {
-    return '刚刚'
-  }
+	const dt = new Date()
+	const ms = dt.getTime()
+	// console.log(ms)
+	const diff = ms - time
+	// 1年的毫秒数：31536000000
+	if (diff >= 31536000000) {
+		return Math.floor(diff / 31536000000) + '年前'
+	} else if (diff >= 2592000000 && diff < 31536000000) {
+		return Math.floor(diff / 2592000000) + '月前'
+	} else if (diff >= 86400000 && diff < 2592000000) {
+		return Math.floor(diff / 86400000) + '天前'
+	} else if (diff >= 3600000 && diff < 86400000) {
+		return Math.floor(diff / 3600000) + '小时前'
+	} else if (diff >= 60000 && diff < 3600000) {
+		return Math.floor(diff / 60000) + '分钟前'
+	} else {
+		return '刚刚'
+	}
 }
 
 interface IProps extends ArticleEntity {}
 
-const Article: React.FC<IProps> = ({ title, create_at, type, content, html, screenshot = '', id, user = {} }) => {
+const Article: React.FC<IProps> = ({
+	title,
+	create_at,
+	type,
+	content,
+	html,
+	screenshot = '',
+	isLiked = false,
+	likeCount,
+	commentCount,
+	id,
+	user = {}
+}) => {
 	const history = useHistory()
 
 	// query.own 是 'mine' 才顯示文章預覽右下角的小圓點
@@ -90,18 +102,31 @@ const Article: React.FC<IProps> = ({ title, create_at, type, content, html, scre
 	// 	[ id ]
 	// )
 
-	const onLike = useCallback(async () => {
-		await addLike(id)
-	}, [])
-
-	const { data: articleLikeCount = '' } = useFetch(
+	const [ likeFlag, setLikeFlag ] = useState(isLiked)
+	// likeCount2 只控制前端显示，不会影响后台数据
+	const [ likeCountNew, setLikeCountNew ] = useState(likeCount)
+	const onLike = useCallback(
 		async () => {
-			const count = await getArticleLikeCount(id)
-			// console.log(userInfo, 'userInfo--------------------')
-			return count
+			if (likeFlag) {
+				await deleteLike(id)
+				setLikeCountNew(likeCountNew - 1)
+			} else {
+				await addLike(id)
+				setLikeCountNew(likeCountNew + 1)
+			}
+			setLikeFlag(!likeFlag)
 		},
-		[ id ]
+		[ likeFlag ]
 	)
+
+	// const { data: articleLikeCount = '' } = useFetch(
+	// 	async () => {
+	// 		const count = await getArticleLikeCount(id)
+	// 		// console.log(userInfo, 'userInfo--------------------')
+	// 		return count
+	// 	},
+	// 	[ id ]
+	// )
 
 	return (
 		<Wrapper screenshot={screenshot}>
@@ -152,9 +177,24 @@ const Article: React.FC<IProps> = ({ title, create_at, type, content, html, scre
 										<Link to="" className="little-box like" onClick={onLike}>
 											<img
 												className="icon"
-												src="https://b-gold-cdn.xitu.io/v3/static/img/zan.e9d7698.svg"
+												src={
+													likeFlag ? (
+														'https://b-gold-cdn.xitu.io/v3/static/img/zan-active.930baa2.svg'
+													) : (
+														'https://b-gold-cdn.xitu.io/v3/static/img/zan.e9d7698.svg'
+													)
+												}
 											/>
-											<span className="count">{articleLikeCount}</span>
+											<span
+												className="count"
+												style={{
+													display: likeCountNew === 0 ? 'none' : 'block',
+													color: likeFlag ? '#6cbd45' : '#b2bac2'
+												}}
+											>
+												{likeCountNew}
+												{/* {likeFlag.toString()} */}
+											</span>
 										</Link>
 									</li>
 									<li>
@@ -163,7 +203,14 @@ const Article: React.FC<IProps> = ({ title, create_at, type, content, html, scre
 												className="icon"
 												src="https://b-gold-cdn.xitu.io/v3/static/img/comment.4d5744f.svg"
 											/>
-											<span className="count">7</span>
+											<span
+												className="count"
+												style={{
+													display: commentCount === 0 ? 'none' : 'block'
+												}}
+											>
+												{commentCount}
+											</span>
 										</Link>
 									</li>
 								</ul>
