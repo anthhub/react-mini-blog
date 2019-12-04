@@ -18,8 +18,10 @@ import { translateMarkdown } from '@/lib/utils/markdown'
 interface IProps extends ArticleEntity {}
 
 const ListBodyPosts: React.FC = () => {
+	// 拿用户 id
 	const { id = '' } = useParams()
 	// console.log(id, '=============id===========')
+	const { user: { id: loginId } } = useSelector()
 
 	const dispatch = useDispatch()
 
@@ -83,13 +85,25 @@ const ListBodyPosts: React.FC = () => {
 						</div>
 
 						{/* 第二行 */}
+						{item.screenshot ? (
+							<div className="thumb-row">
+								<Link to={`/post/${item.id}`} className="img-link" target="_blank">
+									<div
+										className="cover-img"
+										style={{ background: `#f8f9fa url(${item.screenshot}) no-repeat center/cover` }}
+									/>
+								</Link>
+							</div>
+						) : null}
+
+						{/* 第三行 */}
 						<div className="abstract-row">
 							<Link to={`/post/${item.id}`} className="title" target="_blank">
 								{item.title}
 							</Link>
 							<Link
 								to={`/post/${item.id}`}
-								className="abstract"
+								className={item.screenshot ? 'abstract shot' : 'abstract'}
 								target="_blank"
 								dangerouslySetInnerHTML={{
 									__html: matchReg(item.html || translateMarkdown(item.content || ''))
@@ -97,7 +111,7 @@ const ListBodyPosts: React.FC = () => {
 							/>
 						</div>
 
-						{/* 第三行 */}
+						{/* 第四行 */}
 						<div className="action-row">
 							<ul className="action-left">
 								<li className="action like">
@@ -115,36 +129,41 @@ const ListBodyPosts: React.FC = () => {
 									</li>
 								</Link>
 							</ul>
-
-							<div className="action-right">
-								<div className="read-action">
-									<span>阅读 </span>
-									<span className="view-count">{item.viewCount}</span>
+							{id === loginId ? (
+								<div className="action-right">
+									<div className="read-action">
+										<span>阅读 </span>
+										<span className="view-count">{item.viewCount}</span>
+									</div>
+									<div className="more-action">
+										<i
+											className="more-icon"
+											onClick={(e) => {
+												e.nativeEvent.stopImmediatePropagation()
+												setShowMenu(true)
+											}}
+										/>
+										{showMenu && (
+											<ul className="menu">
+												<li>
+													<div className="menu-item" onClick={onReedit}>
+														<span>编辑</span>
+													</div>
+												</li>
+												<li>
+													<div className="menu-item" onClick={onDelete}>
+														<span>删除</span>
+													</div>
+												</li>
+											</ul>
+										)}
+									</div>
 								</div>
-								<div className="more-action">
-									<i
-										className="more-icon"
-										onClick={(e) => {
-											e.nativeEvent.stopImmediatePropagation()
-											setShowMenu(true)
-										}}
-									/>
-									{showMenu && (
-										<ul className="menu">
-											<li>
-												<div className="menu-item" onClick={onReedit}>
-													<span>编辑</span>
-												</div>
-											</li>
-											<li>
-												<div className="menu-item" onClick={onDelete}>
-													<span>删除</span>
-												</div>
-											</li>
-										</ul>
-									)}
+							) : (
+								<div className="action-right">
+									<span className="read-action">阅读全文</span>
 								</div>
-							</div>
+							)}
 						</div>
 					</li>
 				))}

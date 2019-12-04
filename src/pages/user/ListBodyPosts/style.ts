@@ -42,6 +42,17 @@ export const Wrapper = styled.div`
 		}
 
 		/* 第二行 */
+		.thumb-row {
+			margin-bottom: 24px;
+
+			.cover-img {
+				width: 100%;
+				height: 216px;
+				border-radius: 3px;
+			}
+		}
+
+		/* 第三行 */
 		.abstract-row {
 			display: flex;
 			flex-direction: column;
@@ -79,10 +90,16 @@ export const Wrapper = styled.div`
 				text-overflow: ellipsis;
 				-webkit-line-clamp: 4;
 				-webkit-box-orient: vertical;
+
+				&.shot {
+					text-overflow: clip;
+					-webkit-line-clamp: 1;
+					-webkit-box-orient: vertical;
+				}
 			}
 		}
 
-		/* 第三行 */
+		/* 第四行 */
 		.action-row {
 			display: flex;
 			justify-content: space-between;
@@ -127,7 +144,7 @@ export const Wrapper = styled.div`
 				font-size: 12px;
 				color: rgba(24, 37, 50, .3);
 
-				read-action,
+				.read-action,
 				.more-action {
 					margin-left: 24px;
 				}
