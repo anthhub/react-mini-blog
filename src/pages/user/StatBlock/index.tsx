@@ -4,15 +4,23 @@ import React from 'react'
 import { Wrapper } from './style'
 import { useParams } from 'react-router'
 import useFetch from '@/lib/hooks/useFetch'
-import { getFollowingCount, getFollowersCount, getLikedCount, getViewCount } from '@/Api/user'
+import { getLikedCount, getViewCount } from '@/Api/user'
 
-// interface IProps {
-// 	user: {
-// 		username: string
-// 		jobTitle: string
-// 		company: string
-// 	}
-// }
+// 每三位数字逗号分隔
+export const toThousands = (num: string) => {
+	var result = '',
+		counter = 0
+	num = (num || 0).toString()
+	for (var i = num.length - 1; i >= 0; i--) {
+		counter++
+		result = num.charAt(i) + result
+		console.log('charat res' + result)
+		if (!(counter % 3) && i != 0) {
+			result = ',' + result
+		}
+	}
+	return result
+}
 
 const StatBlock: React.FC = () => {
 	const { id = '' } = useParams()
@@ -43,14 +51,14 @@ const StatBlock: React.FC = () => {
 					<i className="icon" />
 					<div className="content">
 						<span>获得点赞</span>
-						<span className="count">{likedCount}</span>
+						<span className="count">{toThousands(likedCount)}</span>
 					</div>
 				</div>
 				<div className="stat-item">
 					<i className="icon" />
 					<div className="content">
 						<span>文章被阅读</span>
-						<span className="count">{viewCount}</span>
+						<span className="count">{toThousands(viewCount)}</span>
 					</div>
 				</div>
 			</div>
