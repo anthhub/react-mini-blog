@@ -73,7 +73,8 @@ const ListBodyPosts: React.FC = () => {
 								<div
 									className="avatar"
 									style={{
-										background: `#eee url(${item.user.avatarLarge}) no-repeat center/cover`
+										background: `#eee url(${item.user &&
+											item.user.avatarLarge}) no-repeat center/cover`
 									}}
 								/>
 								<span className="author-name">{item.author}</span>

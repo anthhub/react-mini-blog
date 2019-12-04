@@ -53,13 +53,18 @@ export const Wrapper = styled.div`
 				width: 90px;
 				height: 30px;
 				font-size: 12px;
-				color: #fff;
-				background-color: #92c452;
+				color: #92c452;
+				background-color: #fff;
 				border: 1px solid #92c452;
 				border-radius: 2px;
 
 				:hover {
 					opacity: 0.8;
+				}
+
+				&.followed {
+					color: #fff;
+					background-color: #92c452;
 				}
 			}
 		}

@@ -20,4 +20,10 @@ export class ArticleEntity extends CommonEntity {
   _id!:string
 
   id!:string
+
+  create_at!:number
+
+  viewCount!: number
+  
+  likeCount!: number
 }

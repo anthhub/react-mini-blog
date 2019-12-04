@@ -2,7 +2,6 @@
 
 import React, { useCallback } from 'react'
 import { Wrapper } from './style'
-import avatarPic from '../../../statics/avatar.png'
 import { useSelector } from '@/redux/context'
 import { useHistory } from 'react-router'
 import useToggle from '@/lib/hooks/useToggle'
@@ -20,7 +19,7 @@ interface IProps {
 }
 
 const InfoBlock: React.FC<IProps> = ({
-	user: { id = '', avatarLarge = avatarPic, username = '', jobTitle = '', company = '', selfDescription = '' } = {}
+	user: { id = '', avatarLarge = '', username = '', jobTitle = '', company = '', selfDescription = '' } = {}
 }) => {
 	// 因为要保证所有用户的都能拿到，不应该从 store 中拿
 	// const { user: { avatarLarge = avatarPic } } = useSelector()
@@ -91,7 +90,7 @@ const InfoBlock: React.FC<IProps> = ({
 						编辑个人资料
 					</button>
 				) : flag ? (
-					<button className="follow-btn active" onClick={onFollow}>
+					<button className="follow-btn followed" onClick={onFollow}>
 						已关注
 					</button>
 				) : (

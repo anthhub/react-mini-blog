@@ -50,10 +50,10 @@ const Header: React.FC = (props) => {
 
 	const { value: search, onInputEvent } = useInputEvent(query.search || '')
 
-	const history = useHistory()
-
 	const { articleList } = useSelector()
 	// console.log({ articleList })
+
+	const history = useHistory()
 
 	const onSearch = useCallback(
 		() => {
@@ -161,10 +161,10 @@ const Header: React.FC = (props) => {
 											</Link>
 										</li>
 										<li>
-											<a className="menu-item" onClick={confirmLogout}>
+											<div className="menu-item" onClick={confirmLogout}>
 												<i className="logout-icon icon" />
 												<span>登出</span>
-											</a>
+											</div>
 										</li>
 									</ul>
 								)}

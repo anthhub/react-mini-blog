@@ -1,5 +1,5 @@
 import React, { memo, useState, useCallback, useEffect } from 'react'
-import { Link, useHistory } from 'react-router-dom'
+import { Link, useHistory, useParams } from 'react-router-dom'
 
 import { ArticleEntity } from '@/modal/entities/article.entity'
 import { translateMarkdown } from '@/lib/utils/markdown'
@@ -9,7 +9,9 @@ import { Wrapper } from './style'
 import useQuery from '@/lib/hooks/useQuery'
 import { deleteArticle } from '@/Api/article'
 import { useDispatch } from '@/redux/context'
-import { addLike } from '@/Api/like'
+import { addLike, getArticleLikeCount } from '@/Api/like'
+import useFetch from '@/lib/hooks/useFetch'
+import { getFollowingCount } from '@/Api/user'
 
 // 格式化时间
 export const formatDate = (time: number) => {
@@ -35,7 +37,7 @@ export const formatDate = (time: number) => {
 
 interface IProps extends ArticleEntity {}
 
-const Article: React.FC<IProps> = ({ title, update_at, type, content, html, screenshot = '', id, user = {} }) => {
+const Article: React.FC<IProps> = ({ title, create_at, type, content, html, screenshot = '', id, user = {} }) => {
 	const history = useHistory()
 
 	// query.own 是 'mine' 才顯示文章預覽右下角的小圓點
@@ -92,6 +94,15 @@ const Article: React.FC<IProps> = ({ title, update_at, type, content, html, scre
 		await addLike(id)
 	}, [])
 
+	const { data: articleLikeCount = '' } = useFetch(
+		async () => {
+			const count = await getArticleLikeCount(id)
+			// console.log(userInfo, 'userInfo--------------------')
+			return count
+		},
+		[ id ]
+	)
+
 	return (
 		<Wrapper screenshot={screenshot}>
 			<li>
@@ -105,7 +116,7 @@ const Article: React.FC<IProps> = ({ title, update_at, type, content, html, scre
 										{user.username}
 									</Link>
 								</li>
-								<li className="info-item">{formatDate(update_at)}</li>
+								<li className="info-item">{formatDate(create_at)}</li>
 								<li className="info-item">
 									<Link to="" className="tag-link">
 										{type}
@@ -117,7 +128,7 @@ const Article: React.FC<IProps> = ({ title, update_at, type, content, html, scre
 								<span
 									className="title-link"
 									dangerouslySetInnerHTML={{
-										__html: title.replace(new RegExp(search, 'gi'), `<em>${search}</em>`)
+										__html: title && title.replace(new RegExp(search, 'gi'), `<em>${search}</em>`)
 									}}
 								/>
 							</div>
@@ -143,7 +154,7 @@ const Article: React.FC<IProps> = ({ title, update_at, type, content, html, scre
 												className="icon"
 												src="https://b-gold-cdn.xitu.io/v3/static/img/zan.e9d7698.svg"
 											/>
-											<span className="count">27</span>
+											<span className="count">{articleLikeCount}</span>
 										</Link>
 									</li>
 									<li>

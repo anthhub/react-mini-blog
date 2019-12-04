@@ -1,17 +1,19 @@
-import { getArticle } from '@/Api/article'
+import { getArticle, putViewCount } from '@/Api/article'
 import { ArticleEntity } from '@/modal/entities/article.entity'
 import useFetch from '@/lib/hooks/useFetch'
 import { BackTop } from 'antd'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useParams } from 'react-router'
 import AppDownload from '../../components/AppDownload'
 import Article from './Article'
 import Author from './Author'
 import Catalog from './Catalog'
+import SuspendedPanel from './SuspendedPanel'
 import { Wrapper } from './style'
 import { useSelector } from '@/redux/context'
 
 const Post: React.FC = (props) => {
+	// 文章id
 	const { id = '' } = useParams()
 
 	const { articleList = [] } = useSelector()
@@ -26,10 +28,18 @@ const Post: React.FC = (props) => {
 
 	// console.log(data, '444')
 
+	useEffect(
+		() => {
+			putViewCount(id)
+		},
+		[ id ]
+	)
+
 	return (
 		<Wrapper>
 			<div className="left">
 				<Article {...item} />
+				<SuspendedPanel {...item} />
 			</div>
 			<div className="right">
 				<Author {...item} />

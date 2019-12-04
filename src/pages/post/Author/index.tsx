@@ -3,6 +3,9 @@
 import React from 'react'
 import { Wrapper } from './style'
 import { Link } from 'react-router-dom'
+import useFetch from '@/lib/hooks/useFetch'
+import { getLikedCount, getViewCount } from '@/Api/user'
+import { toThousands } from '@/pages/user/StatBlock'
 
 interface IProps {
 	user: {
@@ -15,9 +18,28 @@ interface IProps {
 }
 
 const Author: React.FC<IProps> = ({
-	user: { username = '', jobTitle = '', company = '', avatarLarge = '', id } = {}
+	user: { username = '', jobTitle = '', company = '', avatarLarge = '', id = '' } = {}
 }) => {
 	// console.log(username, jobTitle, company)
+
+	const { data: likedCount = '' } = useFetch(
+		async () => {
+			const count = await getLikedCount(id)
+			// console.log(userInfo, 'userInfo--------------------')
+			return count
+		},
+		[ id ]
+	)
+
+	const { data: viewCount = '' } = useFetch(
+		async () => {
+			const count = await getViewCount(id)
+			// console.log(userInfo, 'userInfo--------------------')
+			return count
+		},
+		[ id ]
+	)
+
 	return (
 		<Wrapper avatarLarge={avatarLarge}>
 			<header className="author-title">关于作者</header>
@@ -42,12 +64,12 @@ const Author: React.FC<IProps> = ({
 				<div className="agree">
 					<i className="icon" />
 					<span>获得点赞</span>
-					<span className="count">7,113</span>
+					<span className="count">{toThousands(likedCount)}</span>
 				</div>
 				<div className="views">
 					<i className="icon" />
 					<span>文章被阅读</span>
-					<span className="count">179,331</span>
+					<span className="count">{toThousands(viewCount)}</span>
 				</div>
 			</div>
 		</Wrapper>

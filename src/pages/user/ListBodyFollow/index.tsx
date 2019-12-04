@@ -69,7 +69,7 @@ const ListBodyFollow: React.FC = () => {
 										<div className="detail">{item.following.company}</div>
 									) : null}
 								</div>
-								<button type="button" className="follow-btn active">
+								<button type="button" className="follow-btn followed">
 									已关注
 								</button>
 							</Link>
