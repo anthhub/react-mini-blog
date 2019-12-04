@@ -5,7 +5,7 @@ import { Wrapper } from './style'
 import { addLike, deleteLike } from '@/Api/like'
 
 interface IProps extends ArticleEntity {}
-const SuspendedPanel: React.FC<IProps> = ({ id, likeCount, isLiked }) => {
+const SuspendedPanel: React.FC<IProps> = ({ id, isLiked, likeCount, commentCount }) => {
 	// console.log('likeCount', typeof likeCount.toString())
 	const [ likeFlag, setLikeFlag ] = useState(isLiked)
 	// likeCount2 只控制前端显示，不会影响后台数据
@@ -27,7 +27,7 @@ const SuspendedPanel: React.FC<IProps> = ({ id, likeCount, isLiked }) => {
 
 	return (
 		// <Wrapper likeCount={(likeCount && likeCount.toString()) || ''}>
-		<Wrapper likeCount={likeCountNew.toString()}>
+		<Wrapper likeCount={likeCountNew.toString()} commentCount={commentCount.toString()}>
 			<div className={likeFlag ? 'panel-btn like-btn active' : 'panel-btn like-btn'} onClick={onLike} />
 			<div className="panel-btn comment-btn" />
 		</Wrapper>

@@ -6,6 +6,7 @@ import React, { useEffect } from 'react'
 import { useParams } from 'react-router'
 import AppDownload from '../../components/AppDownload'
 import Article from './Article'
+import Comment from './Comment'
 import Author from './Author'
 import Catalog from './Catalog'
 import SuspendedPanel from './SuspendedPanel'
@@ -39,6 +40,7 @@ const Post: React.FC = (props) => {
 		<Wrapper>
 			<div className="left">
 				<Article {...item} />
+				<Comment {...item} />
 				<SuspendedPanel {...item} />
 			</div>
 			<div className="right">
