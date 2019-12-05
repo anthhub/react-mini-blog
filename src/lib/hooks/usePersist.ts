@@ -5,7 +5,7 @@ export function usePersistedContext<T>(context: T, key = 'state', flag = true): 
   //   return context
   // }
 
-  const persistedContext = JSON.parse(localStorage.getItem(key) || '') || {}
+  const persistedContext = JSON.parse(localStorage.getItem(key) || 'null') || {}
 
   axios.defaults.headers.common.Authorization = persistedContext!.user && persistedContext.user.access_token
 
