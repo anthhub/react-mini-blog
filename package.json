@@ -96,7 +96,7 @@
     "start:prev": "cross-env NODE_ENV=development API_ENV=preview node scripts/start.js",
     "start:prod": "cross-env NODE_ENV=development  API_ENV=production node scripts/start.js",
     "build": "cross-env API_ENV=development  node scripts/build.js",
-    "build:test": "cross-env API_ENV=development node scripts/build.js",
+    "build:test": "cross-env API_ENV=test node scripts/build.js",
     "build:prev": "cross-env API_ENV=preview node scripts/build.js",
     "build:prod": "cross-env API_ENV=production node scripts/build.js",
     "test": "node scripts/test.js"
