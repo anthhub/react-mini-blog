@@ -1,11 +1,14 @@
 import axios from 'axios'
 import { useEffect } from 'react'
+
+import { defaultStore } from '@/redux/context'
+
 export function usePersistedContext<T>(context: T, key = 'state', flag = true): T {
   // if (!flag) {
   //   return context
   // }
 
-  const persistedContext = JSON.parse(localStorage.getItem(key) || 'null') || {}
+  const persistedContext = JSON.parse(localStorage.getItem(key) || 'null') || defaultStore
 
   axios.defaults.headers.common.Authorization = persistedContext!.user && persistedContext.user.access_token
 
