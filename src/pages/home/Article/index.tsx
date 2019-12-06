@@ -53,21 +53,29 @@ const Article: React.FC<IProps> = ({ title, create_at, type, content, html, scre
     setLikeCountNew(likeCount)
   }, [likeCount])
 
-  const onLike = useCallback(async () => {
-    if (likeFlag) {
-      await deleteLike(id)
-      setLikeCountNew(likeCountNew - 1)
-    } else {
-      await addLike(id)
-      setLikeCountNew(likeCountNew + 1)
-    }
-    setLikeFlag(!likeFlag)
-  }, [likeFlag])
+  const onLike = useCallback(
+    async e => {
+      e.stopPropagation()
+      if (likeFlag) {
+        await deleteLike(id)
+        setLikeCountNew(likeCountNew - 1)
+      } else {
+        await addLike(id)
+        setLikeCountNew(likeCountNew + 1)
+      }
+      setLikeFlag(!likeFlag)
+    },
+    [likeFlag]
+  )
+
+  const toPost = () => {
+    window.open(`/post/${id}`, '_blank')
+  }
 
   return (
     <Wrapper screenshot={screenshot}>
       <li>
-        <Link to={`/post/${id}`} target="_blank">
+        <div onClick={toPost}>
           <section className="content">
             <div className="info-box">
               <ul className="info-row">
@@ -106,44 +114,46 @@ const Article: React.FC<IProps> = ({ title, create_at, type, content, html, scre
 
               <div className="action-row">
                 <ul className="info-row">
-                  <li>
-                    <Link to="" className="little-box like" onClick={onLike}>
+                  <div className="little-box like" onClick={onLike}>
+                    <li className="row">
                       <img
                         className="icon"
                         src={likeFlag ? 'https://b-gold-cdn.xitu.io/v3/static/img/zan-active.930baa2.svg' : 'https://b-gold-cdn.xitu.io/v3/static/img/zan.e9d7698.svg'}
                       />
+
                       <span
                         className="count"
                         style={{
-                          display: likeCountNew === 0 ? 'none' : 'block',
+                          display: likeCountNew === 0 ? 'none' : 'inline-block',
                           color: likeFlag ? '#6cbd45' : '#b2bac2',
                         }}
                       >
                         {likeCountNew}
                         {/* {likeFlag.toString()} */}
                       </span>
-                    </Link>
-                  </li>
-                  <li>
-                    <Link to="" className="little-box comment">
+                    </li>
+                  </div>
+                  <Link to={`/post/${id}`} className="little-box comment">
+                    <li className="row">
                       <img className="icon" src="https://b-gold-cdn.xitu.io/v3/static/img/comment.4d5744f.svg" />
+
                       <span
                         className="count"
                         style={{
-                          display: commentCount === 0 ? 'none' : 'block',
+                          display: commentCount === 0 ? 'none' : 'inline-block',
                         }}
                       >
                         {commentCount}
                       </span>
-                    </Link>
-                  </li>
+                    </li>
+                  </Link>
                 </ul>
               </div>
             </div>
 
             <div className="thumb" />
           </section>
-        </Link>
+        </div>
       </li>
     </Wrapper>
   )

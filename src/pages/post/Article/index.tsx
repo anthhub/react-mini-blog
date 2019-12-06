@@ -2,6 +2,10 @@ import React, { useCallback } from 'react'
 import { useHistory } from 'react-router'
 import { Link } from 'react-router-dom'
 
+import { addFollow, deleteFollow } from '@/Api/follow'
+import { isFollowing } from '@/Api/user'
+import useFetch from '@/lib/hooks/useFetch'
+import useToggle from '@/lib/hooks/useToggle'
 import { translateMarkdown } from '@/lib/utils/markdown'
 import { ArticleEntity } from '@/modal/entities/article.entity'
 import { useIsLogin, useSelector } from '@/redux/context'
@@ -30,7 +34,31 @@ const Article: React.FC<IProps> = ({ create_at, content, title, html, screenshot
   const onReedit = useCallback(async () => {
     history.push('/editor/' + id)
   }, [id])
-  const isFollow = true
+  // const isFollow = true
+
+  // 拿到当前登录用户的 id
+  const {
+    user: { id: loginId },
+  } = useSelector()
+
+  const { flag, onToggle, setFlag } = useToggle(false)
+
+  const onFollow = useCallback(async () => {
+    if (!id || !loginId) {
+      return
+    }
+    flag ? await deleteFollow(userId) : await addFollow(userId)
+    onToggle()
+  }, [flag, userId])
+
+  useFetch(async () => {
+    if (!userId || !loginId) {
+      return
+    }
+    // id 是查看用户, followerId是登录用户
+    const rs = await isFollowing(userId, loginId)
+    setFlag(rs)
+  }, [userId])
 
   return (
     <Wrapper screenshot={screenshot} avatarLarge={avatarLarge}>
@@ -58,7 +86,15 @@ const Article: React.FC<IProps> = ({ create_at, content, title, html, screenshot
             </div>
           </div>
         </div>
-        {isFollow ? <button className="follow-btn followed">已关注</button> : <button className="follow-btn">关注</button>}
+        {flag ? (
+          <button className="follow-btn followed" onClick={onFollow}>
+            已关注
+          </button>
+        ) : (
+          <button className="follow-btn" onClick={onFollow}>
+            关注
+          </button>
+        )}
       </div>
 
       {/* 文章标题及内容 */}

@@ -3,7 +3,7 @@
 import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 
-import { getLikedCount, getUserInfo, getViewCount } from '@/Api/user'
+import { getUserInfo } from '@/Api/user'
 import useFetch from '@/lib/hooks/useFetch'
 import { ArticleEntity } from '@/modal/entities/article.entity'
 import { toThousands } from '@/pages/user/StatBlock'

@@ -19,7 +19,7 @@ export const addFollow = (id: string) => {
 
 export const deleteFollow = (id: string) => {
   return http
-    .put(baseUrl + follow.delete + id)
+    .delete(baseUrl + follow.delete + id)
     .then(res => {
       return res
     })

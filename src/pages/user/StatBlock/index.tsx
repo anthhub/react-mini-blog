@@ -3,10 +3,14 @@
 import React from 'react'
 import { useParams } from 'react-router'
 
-import { getLikedCount, getViewCount } from '@/Api/user'
-import useFetch from '@/lib/hooks/useFetch'
-
 import { Wrapper } from './style'
+
+interface IProps {
+  user: {
+    likedCount: number
+    viewCount: number
+  }
+}
 
 // 每三位数字逗号分隔
 export const toThousands = (number: string | number) => {
@@ -24,20 +28,8 @@ export const toThousands = (number: string | number) => {
   return result
 }
 
-const StatBlock: React.FC = () => {
-  const { id = '' } = useParams()
-  // console.log(id, '啦啦啦 id')
-  const { data: likedCount = '' } = useFetch(async () => {
-    const count = await getLikedCount(id)
-    // console.log(userInfo, 'userInfo--------------------')
-    return count
-  }, [id])
-
-  const { data: viewCount = '' } = useFetch(async () => {
-    const count = await getViewCount(id)
-    // console.log(userInfo, 'userInfo--------------------')
-    return count
-  }, [id])
+const StatBlock: React.FC<IProps> = ({ user: { likedCount, viewCount } = {} }) => {
+  console.log({ likedCount, viewCount })
 
   return (
     <Wrapper>
@@ -47,14 +39,14 @@ const StatBlock: React.FC = () => {
           <i className="icon" />
           <div className="content">
             <span>获得点赞</span>
-            <span className="count">{toThousands(likedCount)}</span>
+            <span className="count">{toThousands(likedCount || 0)}</span>
           </div>
         </div>
         <div className="stat-item">
           <i className="icon" />
           <div className="content">
             <span>文章被阅读</span>
-            <span className="count">{toThousands(viewCount)}</span>
+            <span className="count">{toThousands(viewCount || 0)}</span>
           </div>
         </div>
       </div>

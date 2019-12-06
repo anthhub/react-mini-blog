@@ -19,17 +19,17 @@ import ListBodyPost from '../ListBodyPost'
 interface IProps extends ArticleEntity {}
 
 const ListBodyPosts: React.FC = () => {
-	const { articleList } = useSelector()
+  const { articleList } = useSelector()
 
-	return (
-		<Wrapper>
-			{/* <ul>{articleList.map((item: ArticleEntity) => <Article {...item} key={item.id} />)}</ul> */}
-
-			<ul className="list-group">
-				{articleList.map((item: ArticleEntity) => <ListBodyPost {...item} key={item.id} />)}
-			</ul>
-		</Wrapper>
-	)
+  return (
+    <Wrapper>
+      <ul className="list-group">
+        {articleList.map((item: ArticleEntity) => (
+          <ListBodyPost {...item} key={item.id} />
+        ))}
+      </ul>
+    </Wrapper>
+  )
 }
 
 export default ListBodyPosts
