@@ -16,7 +16,13 @@ const Header: React.FC = props => {
   const [active, setActive] = useState(false)
 
   // 是否显示 Login 组件
-  const { flag, setFalse, setTrue } = useFlag(false)
+  const { flag, setFalse, setTrue, setFlag } = useFlag(false)
+
+  const { showLogin } = useSelector()
+
+  useEffect(() => {
+    setFlag(showLogin)
+  }, [showLogin])
 
   // 是否显示 Register 组件
   const { flag: flag2, setFalse: setFalse2, setTrue: setTrue2 } = useFlag(false)

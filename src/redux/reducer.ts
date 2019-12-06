@@ -2,6 +2,9 @@ export default function reducer(state: any, action: any) {
   const { payload } = action
   console.log('%c%s', 'color: #20bd08;font-size:15px', '===TQY===: reducer -> action', action)
   switch (action.type) {
+    case 'CHANGE_SHOW_LOGIN':
+      return { ...state, ...payload }
+
     case 'LOGIN':
       return { ...state, ...payload }
 

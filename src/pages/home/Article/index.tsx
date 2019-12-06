@@ -1,229 +1,152 @@
-import React, { memo, useState, useCallback, useEffect } from 'react'
+import React, { memo, useCallback, useEffect, useState } from 'react'
 import { Link, useHistory, useParams } from 'react-router-dom'
 
-import { ArticleEntity } from '@/modal/entities/article.entity'
+import { addLike, deleteLike } from '@/Api/like'
+import useQuery from '@/lib/hooks/useQuery'
 import { translateMarkdown } from '@/lib/utils/markdown'
+import { ArticleEntity } from '@/modal/entities/article.entity'
 import { matchReg } from '@/pages/post/Catalog'
 
 import { Wrapper } from './style'
-import useQuery from '@/lib/hooks/useQuery'
-import { deleteArticle } from '@/Api/article'
-import { useDispatch } from '@/redux/context'
-import { addLike, getArticleLikeCount, deleteLike } from '@/Api/like'
-import useFetch from '@/lib/hooks/useFetch'
-import { getFollowingCount } from '@/Api/user'
 
 // 格式化时间
 export const formatDate = (time: number) => {
-	const dt = new Date()
-	const ms = dt.getTime()
-	// console.log(ms)
-	const diff = ms - time
-	// 1年的毫秒数：31536000000
-	if (diff >= 31536000000) {
-		return Math.floor(diff / 31536000000) + '年前'
-	} else if (diff >= 2592000000 && diff < 31536000000) {
-		return Math.floor(diff / 2592000000) + '月前'
-	} else if (diff >= 86400000 && diff < 2592000000) {
-		return Math.floor(diff / 86400000) + '天前'
-	} else if (diff >= 3600000 && diff < 86400000) {
-		return Math.floor(diff / 3600000) + '小时前'
-	} else if (diff >= 60000 && diff < 3600000) {
-		return Math.floor(diff / 60000) + '分钟前'
-	} else {
-		return '刚刚'
-	}
+  const dt = new Date()
+  const ms = dt.getTime()
+  // console.log(ms)
+  const diff = ms - time
+  // 1年的毫秒数：31536000000
+  if (diff >= 31536000000) {
+    return Math.floor(diff / 31536000000) + '年前'
+  } else if (diff >= 2592000000 && diff < 31536000000) {
+    return Math.floor(diff / 2592000000) + '月前'
+  } else if (diff >= 86400000 && diff < 2592000000) {
+    return Math.floor(diff / 86400000) + '天前'
+  } else if (diff >= 3600000 && diff < 86400000) {
+    return Math.floor(diff / 3600000) + '小时前'
+  } else if (diff >= 60000 && diff < 3600000) {
+    return Math.floor(diff / 60000) + '分钟前'
+  } else {
+    return '刚刚'
+  }
 }
 
 interface IProps extends ArticleEntity {}
 
-const Article: React.FC<IProps> = ({
-	title,
-	create_at,
-	type,
-	content,
-	html,
-	screenshot = '',
-	isLiked = false,
-	likeCount,
-	commentCount,
-	id,
-	user = {}
-}) => {
-	const history = useHistory()
+const Article: React.FC<IProps> = ({ title, create_at, type, content, html, screenshot = '', isLiked = false, likeCount, commentCount, id, user = {} }) => {
+  const history = useHistory()
 
-	// query.own 是 'mine' 才顯示文章預覽右下角的小圓點
-	const { query } = useQuery()
+  // query.own 是 'mine' 才顯示文章預覽右下角的小圓點
+  const { query } = useQuery()
 
-	const { search = '' } = query
+  const { search = '' } = query
 
-	// console.log({ search })
-	// console.log(title.match('/' + search + '/gi'))
+  const [likeFlag, setLikeFlag] = useState(false)
+  // likeCount2 只控制前端显示，不会影响后台数据
+  const [likeCountNew, setLikeCountNew] = useState(0)
 
-	// const dispatch = useDispatch()
+  useEffect(() => {
+    setLikeFlag(isLiked)
+  }, [isLiked])
 
-	// 點擊小圓點顯示更多显隐
-	// const [ showMore, setMore ] = useState(false)
+  useEffect(() => {
+    setLikeCountNew(likeCount)
+  }, [likeCount])
 
-	// const hideMore = useCallback((e: any) => {
-	// 	if (e.target.className !== 'more-icon') {
-	// 		setMore(false)
-	// 	}
-	// }, [])
+  const onLike = useCallback(async () => {
+    if (likeFlag) {
+      await deleteLike(id)
+      setLikeCountNew(likeCountNew - 1)
+    } else {
+      await addLike(id)
+      setLikeCountNew(likeCountNew + 1)
+    }
+    setLikeFlag(!likeFlag)
+  }, [likeFlag])
 
-	// useEffect(() => {
-	// 	document.addEventListener('click', hideMore)
-	// 	return () => {
-	// 		document.removeEventListener('click', hideMore)
-	// 	}
-	// }, [])
+  return (
+    <Wrapper screenshot={screenshot}>
+      <li>
+        <Link to={`/post/${id}`} target="_blank">
+          <section className="content">
+            <div className="info-box">
+              <ul className="info-row">
+                <li className="column info-item">专栏</li>
+                <li className="info-item">
+                  <Link to={'/user/' + user.id} target="_blank" className="user-link">
+                    {user.username}
+                  </Link>
+                </li>
+                <li className="info-item">{formatDate(create_at)}</li>
+                <li className="info-item">
+                  <Link to="" className="tag-link">
+                    {type}
+                  </Link>
+                </li>
+              </ul>
 
-	// 拿到文章 id
-	// const { id = '' } = useParams()
-	// const { data } = useFetch(() => getArticle(id))
-	// 直接传入文章 id
-	// console.log('id=============', id)
+              <div className="title">
+                <span
+                  className="title-link"
+                  dangerouslySetInnerHTML={{
+                    __html: title && title.replace(new RegExp(search, 'gi'), `<em>${search}</em>`),
+                  }}
+                />
+              </div>
 
-	console.log('%c%s', 'color: #20bd08;font-size:15px', '===TQY===: screenshot', screenshot)
-	// console.log({ update_at }, typeof update_at)
+              {/* 摘抄 */}
+              {/* 去掉 html 中的标签 */}
+              <div className="abstract">
+                <span
+                  dangerouslySetInnerHTML={{
+                    __html: matchReg(html || translateMarkdown(content || '')).replace(new RegExp(search, 'gi'), `<em>${search}</em>`),
+                  }}
+                />
+              </div>
 
-	// const onDelete = useCallback(async () => {
-	// 	if (window.confirm('删除专栏文章会扣除相应的掘力值，且文章不可恢复。')) {
-	// 		await deleteArticle(id)
-	// 		// 删掉 store 中的數據
-	// 		dispatch({ type: 'DELETE_ARTICLE', payload: { id } })
-	// 	}
-	// }, [])
+              <div className="action-row">
+                <ul className="info-row">
+                  <li>
+                    <Link to="" className="little-box like" onClick={onLike}>
+                      <img
+                        className="icon"
+                        src={likeFlag ? 'https://b-gold-cdn.xitu.io/v3/static/img/zan-active.930baa2.svg' : 'https://b-gold-cdn.xitu.io/v3/static/img/zan.e9d7698.svg'}
+                      />
+                      <span
+                        className="count"
+                        style={{
+                          display: likeCountNew === 0 ? 'none' : 'block',
+                          color: likeFlag ? '#6cbd45' : '#b2bac2',
+                        }}
+                      >
+                        {likeCountNew}
+                        {/* {likeFlag.toString()} */}
+                      </span>
+                    </Link>
+                  </li>
+                  <li>
+                    <Link to="" className="little-box comment">
+                      <img className="icon" src="https://b-gold-cdn.xitu.io/v3/static/img/comment.4d5744f.svg" />
+                      <span
+                        className="count"
+                        style={{
+                          display: commentCount === 0 ? 'none' : 'block',
+                        }}
+                      >
+                        {commentCount}
+                      </span>
+                    </Link>
+                  </li>
+                </ul>
+              </div>
+            </div>
 
-	// const onReedit = useCallback(
-	// 	async () => {
-	// 		history.push('/editor/' + id)
-	// 	},
-	// 	[ id ]
-	// )
-
-	const [ likeFlag, setLikeFlag ] = useState(isLiked)
-	// likeCount2 只控制前端显示，不会影响后台数据
-	const [ likeCountNew, setLikeCountNew ] = useState(likeCount)
-	
-	const onLike = useCallback(
-		async () => {
-			if (likeFlag) {
-				await deleteLike(id)
-				setLikeCountNew(likeCountNew - 1)
-			} else {
-				await addLike(id)
-				setLikeCountNew(likeCountNew + 1)
-			}
-			setLikeFlag(!likeFlag)
-		},
-		[ likeFlag ]
-	)
-
-	// const { data: articleLikeCount = '' } = useFetch(
-	// 	async () => {
-	// 		const count = await getArticleLikeCount(id)
-	// 		// console.log(userInfo, 'userInfo--------------------')
-	// 		return count
-	// 	},
-	// 	[ id ]
-	// )
-
-	return (
-		<Wrapper screenshot={screenshot}>
-			<li>
-				<Link to={`/post/${id}`} target="_blank">
-					<section className="content">
-						<div className="info-box">
-							<ul className="info-row">
-								<li className="column info-item">专栏</li>
-								<li className="info-item">
-									<Link to={'/user/' + user.id} target="_blank" className="user-link">
-										{user.username}
-									</Link>
-								</li>
-								<li className="info-item">{formatDate(create_at)}</li>
-								<li className="info-item">
-									<Link to="" className="tag-link">
-										{type}
-									</Link>
-								</li>
-							</ul>
-
-							<div className="title">
-								<span
-									className="title-link"
-									dangerouslySetInnerHTML={{
-										__html: title && title.replace(new RegExp(search, 'gi'), `<em>${search}</em>`)
-									}}
-								/>
-							</div>
-
-							{/* 摘抄 */}
-							{/* 去掉 html 中的标签 */}
-							<div className="abstract">
-								<span
-									dangerouslySetInnerHTML={{
-										__html: matchReg(html || translateMarkdown(content || '')).replace(
-											new RegExp(search, 'gi'),
-											`<em>${search}</em>`
-										)
-									}}
-								/>
-							</div>
-
-							<div className="action-row">
-								<ul className="info-row">
-									<li>
-										<Link to="" className="little-box like" onClick={onLike}>
-											<img
-												className="icon"
-												src={
-													likeFlag ? (
-														'https://b-gold-cdn.xitu.io/v3/static/img/zan-active.930baa2.svg'
-													) : (
-														'https://b-gold-cdn.xitu.io/v3/static/img/zan.e9d7698.svg'
-													)
-												}
-											/>
-											<span
-												className="count"
-												style={{
-													display: likeCountNew === 0 ? 'none' : 'block',
-													color: likeFlag ? '#6cbd45' : '#b2bac2'
-												}}
-											>
-												{likeCountNew}
-												{/* {likeFlag.toString()} */}
-											</span>
-										</Link>
-									</li>
-									<li>
-										<Link to="" className="little-box comment">
-											<img
-												className="icon"
-												src="https://b-gold-cdn.xitu.io/v3/static/img/comment.4d5744f.svg"
-											/>
-											<span
-												className="count"
-												style={{
-													display: commentCount === 0 ? 'none' : 'block'
-												}}
-											>
-												{commentCount}
-											</span>
-										</Link>
-									</li>
-								</ul>
-							</div>
-						</div>
-
-						<div className="thumb" />
-					</section>
-				</Link>
-			</li>
-		</Wrapper>
-	)
+            <div className="thumb" />
+          </section>
+        </Link>
+      </li>
+    </Wrapper>
+  )
 }
 
 export default memo(Article)

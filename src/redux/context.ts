@@ -4,6 +4,7 @@ import React, { useContext } from 'react'
 // Store Context is the global context that is managed by reducers.
 
 interface IStore {
+  showLogin: boolean
   user: any
   query: {
     search: string
@@ -17,6 +18,7 @@ interface IStore {
 }
 
 export const defaultStore = {
+  showLogin: false,
   user: {},
   query: { search: '', sort: '' },
   articleList: [],

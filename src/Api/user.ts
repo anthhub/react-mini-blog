@@ -28,12 +28,12 @@ export const userUpdate = (data: UserUpdateDto) => {
     .then(res => {
       // message.warning('保存成功')
       // console.log('userUpdate==suc==', res)
-      return res.data.data
+      return res
     })
     .catch(res => {
       // message.warning('保存失败，请稍后重试')
       // console.log('==err==', res)
-      return res.data.data
+      return res
     })
 }
 
@@ -43,12 +43,12 @@ export const getUserInfo = (id: string) => {
     .get(baseUrl + user.info + id + '/info')
     .then(res => {
       // console.log('getUserInfo==suc==', res)
-      return res.data.data
+      return res
     })
     .catch(res => {
-      // console.log('uuu-err', res.data.data)
+      // console.log('uuu-err', res)
       // message.warning('保存失败，请稍后重试')
-      return res.data.data
+      return res
     })
 }
 
@@ -58,12 +58,12 @@ export const getUserArticles = (data?: any) => {
     .get(baseUrl + '/user/' + (data.id || data) + '/articles', data || {})
     .then(res => {
       // console.log('getUserArticle==suc==', res)
-      return res.data.data
+      return res
     })
     .catch(res => {
-      // console.log('uuu-err', res.data.data)
+      // console.log('uuu-err', res)
       // message.warning('保存失败，请稍后重试')
-      return res.data.data
+      return res
     })
 }
 
@@ -72,11 +72,11 @@ export const getUserFollowing = (id: string) => {
   return http
     .get(baseUrl + '/user/' + id + '/following')
     .then(res => {
-      // console.log('following', res.data.data)
-      return res.data.data
+      // console.log('following', res)
+      return res
     })
     .catch(res => {
-      return res.data.data
+      return res
     })
 }
 
@@ -84,11 +84,11 @@ export const getFollowingCount = (id: string) => {
   return http
     .get(baseUrl + '/user/' + id + '/following/count')
     .then(res => {
-      console.log('followingCount', res.data.data)
-      return res.data.data
+      console.log('followingCount', res)
+      return res
     })
     .catch(res => {
-      return res.data.data
+      return res
     })
 }
 
@@ -96,11 +96,11 @@ export const getUserFollowers = (id: string) => {
   return http
     .get(baseUrl + '/user/' + id + '/followers')
     .then(res => {
-      // console.log('followers', res.data.data)
-      return res.data.data
+      // console.log('followers', res)
+      return res
     })
     .catch(res => {
-      return res.data.data
+      return res
     })
 }
 
@@ -108,11 +108,11 @@ export const getFollowersCount = (id: string) => {
   return http
     .get(baseUrl + '/user/' + id + '/followers/count')
     .then(res => {
-      // console.log('followersCount', res.data.data)
-      return res.data.data
+      // console.log('followersCount', res)
+      return res
     })
     .catch(res => {
-      return res.data.data
+      return res
     })
 }
 
@@ -121,11 +121,11 @@ export const getUserLikes = (id: string) => {
   return http
     .get(baseUrl + '/user/' + id + '/likes')
     .then(res => {
-      console.log('following', res.data.data)
-      return res.data.data
+      console.log('following', res)
+      return res
     })
     .catch(res => {
-      return res.data.data
+      return res
     })
 }
 
@@ -133,11 +133,11 @@ export const getLikesCount = (id: string) => {
   return http
     .get(baseUrl + '/user/' + id + '/likes/count')
     .then(res => {
-      // console.log('followersCount', res.data.data)
-      return res.data.data
+      // console.log('followersCount', res)
+      return res
     })
     .catch(res => {
-      return res.data.data
+      return res
     })
 }
 
@@ -145,11 +145,11 @@ export const getLikedCount = (id: string) => {
   return http
     .get(baseUrl + '/user/' + id + '/liked/count')
     .then(res => {
-      // console.log('followersCount', res.data.data)
-      return res.data.data
+      // console.log('followersCount', res)
+      return res
     })
     .catch(res => {
-      return res.data.data
+      return res
     })
 }
 
@@ -158,10 +158,10 @@ export const getViewCount = (id: string) => {
   return http
     .get(baseUrl + '/user/' + id + '/view/count')
     .then(res => {
-      // console.log('followersCount', res.data.data)
-      return res.data.data
+      // console.log('followersCount', res)
+      return res
     })
     .catch(res => {
-      return res.data.data
+      return res
     })
 }

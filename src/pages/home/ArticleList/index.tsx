@@ -14,11 +14,6 @@ import Article from '../Article'
 import { Wrapper } from './style'
 
 const ArticleList: React.FC = () => {
-  // search 是地址栏 ? 开始的内容
-  // query 是 ? 之后内容拆成的对象
-  // const { query }: any = useQuery()
-  // console.log(query)
-
   const [pageInfo, setPageInfo] = useState({ hasNextPage: true, endCursor: 0 })
 
   const { setQuery, query } = useQuery()
@@ -35,12 +30,10 @@ const ArticleList: React.FC = () => {
     }
   }, [])
 
-  // console.log(query.own, '========Query========')
   const dispatch = useDispatch()
   const {
     user: { id },
   } = useSelector()
-  // console.log('abc', id)
 
   const refresh = useCallback(async () => {
     const rs = query.own === 'mine' ? await getUserArticles({ id, endCursor: 0 }) : await getArticles({ ...query, endCursor: 0 })
@@ -55,11 +48,11 @@ const ArticleList: React.FC = () => {
     }
 
     return list
-  }, [query.own])
+  }, [query])
 
   const { data = [] } = useFetch(async () => {
     return refresh()
-  }, [query.own])
+  }, [query])
 
   const nextPage = useCallback(async () => {
     const rs = query.own === 'mine' ? await getUserArticles({ id, endCursor: pageInfo.endCursor }) : await getArticles({ ...query, endCursor: pageInfo.endCursor })

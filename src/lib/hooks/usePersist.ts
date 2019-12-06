@@ -4,7 +4,6 @@ import { useEffect } from 'react'
 import { defaultStore } from '@/redux/context'
 
 export function usePersistedContext<T>(context: T, key = 'state', flag = true): T {
-  debugger
   // if (!flag) {
   //   return context
   // }

@@ -18,42 +18,42 @@ import { CreateCommentDto } from '@/modal/dtos/comment.dto'
 // }
 
 const comment = {
-	create: `/comment`,
-	query: `/comment/`
+  create: `/comment`,
+  query: `/comment/`,
 }
 
 // export const getArticles = (data?: any) => {
 // 	return http.get(baseUrl + article.query, data || {}).then((res) => {
-// 		return res.data.data as IPage<ArticleEntity>
+// 		return res as IPage<ArticleEntity>
 // 	})
 // }
 
 export const getCommentList = (articleId: string) => {
-	return http.get(baseUrl + comment.query + articleId).then((res) => {
-		return res.data.data
-	})
+  return http.get(baseUrl + comment.query + articleId).then(res => {
+    return res
+  })
 }
 
 export const createComment = (data: CreateCommentDto) => {
-	return http.post(baseUrl + comment.create, data).then((res) => {
-		return res.data.data
-	})
+  return http.post(baseUrl + comment.create, data).then(res => {
+    return res
+  })
 }
 
 // export const reeditArticle = (articleId: string, data: CreateArticleDto) => {
 // 	return http.patch(baseUrl + article.reedit + articleId, data).then((res) => {
-// 		return res.data.data
+// 		return res
 // 	})
 // }
 
 // export const deleteArticle = (articleId: string) => {
 // 	return http.delete(baseUrl + article.delete + `?id=` + articleId).then((res) => {
-// 		return res.data.data
+// 		return res
 // 	})
 // }
 
 // export const putViewCount = (articleId: string) => {
 // 	return http.put(baseUrl + article.viewCount + articleId + '/putViewCount').then((res) => {
-// 		return res.data.data
+// 		return res
 // 	})
 // }

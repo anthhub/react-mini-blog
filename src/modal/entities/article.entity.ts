@@ -5,27 +5,29 @@ export class ArticleEntity extends CommonEntity {
 
   content!: string
 
-  html!: string 
+  html!: string
 
   title!: string
 
   screenshot!: string
 
-  tag!:string[]
+  tag!: string[]
 
   type!: string
 
-  user!:any
+  user!: any
 
-  _id!:string
+  _id!: string
 
-  id!:string
+  id!: string
 
-  create_at!:number
+  create_at!: number
 
   viewCount!: number
-  
+
   likeCount!: number
+
+  likedCount!: number
 
   commentCount!: number
 
