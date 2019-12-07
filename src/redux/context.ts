@@ -5,6 +5,7 @@ import React, { useContext } from 'react'
 
 interface IStore {
   showLogin: boolean
+  checkUser: any
   user: any
   query: {
     search: string
@@ -19,6 +20,7 @@ interface IStore {
 
 export const defaultStore = {
   showLogin: false,
+  checkUser: {},
   user: {},
   query: { search: '', sort: '' },
   articleList: [],

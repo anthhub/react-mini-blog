@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState } from 'react'
 import { Link, useHistory, useParams } from 'react-router-dom'
 
 import { addFollow, deleteFollow } from '@/Api/follow'
-import { getUserFollowers, getUserFollowing } from '@/Api/user'
+import { getUserFollowers, getUserFollowing, getUserInfo } from '@/Api/user'
 import useFetch from '@/lib/hooks/useFetch'
 import useToggle from '@/lib/hooks/useToggle'
 import { useDispatch, useIsLogin, useSelector } from '@/redux/context'
@@ -16,16 +16,6 @@ const ListBodyFollow: React.FC = () => {
   const {
     user: { id: loginId },
   } = useSelector()
-
-  const onFollow = useCallback(
-    async (followingId, isFollowing) => {
-      if (!followingId || !loginId) {
-        return
-      }
-      isFollowing ? await deleteFollow(followingId) : await addFollow(followingId)
-    },
-    [loginId]
-  )
 
   const dispatch = useDispatch()
   // // 根据 id 该用户关注和被关注的用户列表
@@ -50,6 +40,48 @@ const ListBodyFollow: React.FC = () => {
   }, [])
 
   const { followingList = [], followersList = [] } = useSelector()
+  console.log('%c%s', 'color: #20bd08;font-size:15px', '===TQY===: ListBodyFollow:React.FC -> followersList', followersList)
+  console.log('%c%s', 'color: #20bd08;font-size:15px', '===TQY===: ListBodyFollow:React.FC -> followingList', followingList)
+
+  const onFollow = useCallback(
+    async (followingId, isFollowing, type) => {
+      if (!followingId || !loginId) {
+        return
+      }
+      isFollowing ? await deleteFollow(followingId) : await addFollow(followingId)
+
+      const userInfo = await getUserInfo(id)
+      dispatch({
+        type: 'UPDATE_CHECK_USER',
+        payload: { checkUser: userInfo },
+      })
+
+      if (type === 'follower') {
+        dispatch({
+          type: 'CHANGE_FOLLOWERS_LIST',
+          payload: {
+            followersList: followersList.map(item => {
+              item.follower.isFollowing = !isFollowing
+              return item
+            }),
+          },
+        })
+      }
+
+      if (type === 'following') {
+        dispatch({
+          type: 'CHANG_FOLLOWING_LIST',
+          payload: {
+            followingList: followingList.map(item => {
+              item.following.isFollowing = !isFollowing
+              return item
+            }),
+          },
+        })
+      }
+    },
+    [loginId, followersList, followingList]
+  )
 
   return (
     <Wrapper>
@@ -82,7 +114,7 @@ const ListBodyFollow: React.FC = () => {
                       className="follow-btn followed"
                       onClick={e => {
                         e.stopPropagation()
-                        onFollow(item.follower.id, item.follower.isFollowing)
+                        onFollow(item.follower.id, item.follower.isFollowing, 'follower')
                       }}
                     >
                       已关注
@@ -93,7 +125,8 @@ const ListBodyFollow: React.FC = () => {
                       className="follow-btn"
                       onClick={e => {
                         e.stopPropagation()
-                        onFollow(item.follower.id, item.follower.isFollowing)
+                        e.preventDefault()
+                        onFollow(item.follower.id, item.follower.isFollowing, 'follower')
                       }}
                     >
                       关注
@@ -122,16 +155,32 @@ const ListBodyFollow: React.FC = () => {
                       <div className="detail">{item.following.company}</div>
                     ) : null}
                   </div>
-                  <button
-                    type="button"
-                    className="follow-btn followed"
-                    onClick={e => {
-                      e.stopPropagation()
-                      onFollow(item.following.id, item.following.isFollowing)
-                    }}
-                  >
-                    已关注
-                  </button>
+
+                  {item.following.isFollowing ? (
+                    <button
+                      type="button"
+                      className="follow-btn followed"
+                      onClick={e => {
+                        e.stopPropagation()
+                        e.preventDefault()
+                        onFollow(item.following.id, item.following.isFollowing, 'following')
+                      }}
+                    >
+                      已关注
+                    </button>
+                  ) : (
+                    <button
+                      type="button"
+                      className="follow-btn"
+                      onClick={e => {
+                        e.stopPropagation()
+                        e.preventDefault()
+                        onFollow(item.following.id, item.following.isFollowing, 'following')
+                      }}
+                    >
+                      关注
+                    </button>
+                  )}
                 </Link>
               </li>
             ))}

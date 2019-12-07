@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, memo } from 'react'
 import { Link, useHistory, useParams } from 'react-router-dom'
 
 import ListBodyFollow from '../ListBodyFollow'
@@ -18,4 +18,4 @@ const ListBlock: React.FC = props => {
   )
 }
 
-export default ListBlock
+export default memo(ListBlock)

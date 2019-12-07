@@ -1,16 +1,16 @@
 // 详情页 右侧 作者简介卡片
 
+import { async } from 'q'
 import React, { useCallback } from 'react'
 import { useHistory } from 'react-router'
 
 import { addFollow, deleteFollow } from '@/Api/follow'
+import { isFollowing } from '@/Api/user'
+import useFetch from '@/lib/hooks/useFetch'
 import useToggle from '@/lib/hooks/useToggle'
 import { useSelector } from '@/redux/context'
 
 import { Wrapper } from './style'
-import useFetch from '@/lib/hooks/useFetch'
-import { isFollowing } from '@/Api/user'
-import { async } from 'q'
 
 interface IProps {
   user: {
@@ -37,7 +37,6 @@ const InfoBlock: React.FC<IProps> = ({ user: { id = '', avatarLarge = '', userna
   } = useSelector()
 
   const { flag, onToggle, setFlag } = useToggle(false)
-
 
   const onFollow = useCallback(async () => {
     if (!id || !loginId) {

@@ -18,9 +18,16 @@ import { Wrapper } from './style'
 const User: React.FC = props => {
   const { id = '' } = useParams()
 
-  // 文章列表和作者信息要分开拿
-  const { data: info = {} } = useFetch(async () => {
+  const dispatch = useDispatch()
+  const { checkUser: info = {} } = useSelector()
+
+  useFetch(async () => {
     const userInfo = await getUserInfo(id)
+
+    dispatch({
+      type: 'UPDATE_CHECK_USER',
+      payload: { checkUser: userInfo },
+    })
     return userInfo
   }, [id])
 
