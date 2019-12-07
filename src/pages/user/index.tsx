@@ -4,6 +4,7 @@ import { useParams } from 'react-router'
 
 import { getArticle } from '@/Api/article'
 import { getUserArticles, getUserInfo } from '@/Api/user'
+import Advertising from '@/components/Advertising'
 import useFetch from '@/lib/hooks/useFetch'
 import { ArticleEntity } from '@/modal/entities/article.entity'
 import { useDispatch, useSelector } from '@/redux/context'
@@ -39,6 +40,7 @@ const User: React.FC = props => {
       </div>
       <div className="right">
         <div className="sticky-wrap">
+          <Advertising />
           <StatBlock user={info} />
           <FallowBlock user={info} />
           <MoreBLock user={info} />

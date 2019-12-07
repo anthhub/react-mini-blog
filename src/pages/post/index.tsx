@@ -14,6 +14,7 @@ import Catalog from './Catalog'
 import Comment from './Comment'
 import { Wrapper } from './style'
 import SuspendedPanel from './SuspendedPanel'
+import Advertising from '@/components/Advertising'
 
 const Post: React.FC = props => {
   // 文章id
@@ -40,6 +41,7 @@ const Post: React.FC = props => {
         <SuspendedPanel {...item} />
       </div>
       <div className="right">
+        <Advertising />
         <Author {...item} />
         <AppDownload />
         <Catalog {...item} />
