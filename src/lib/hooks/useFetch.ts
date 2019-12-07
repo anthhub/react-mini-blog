@@ -1,4 +1,4 @@
-import { useEffect, useState, useCallback } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 
 export default function useFetch<T, V>(request: (args?: T) => Promise<V>, initialRequestParam: any = [], initialData?: V) {
   const [data, setData] = useState(initialData)
@@ -17,7 +17,7 @@ export default function useFetch<T, V>(request: (args?: T) => Promise<V>, initia
     } finally {
       setIsLoading(false)
     }
-  }, [])
+  }, [...initialRequestParam])
 
   useEffect(() => {
     setIsLoading(true)
