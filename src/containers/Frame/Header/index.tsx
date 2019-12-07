@@ -1,15 +1,15 @@
-import React, { useCallback, useEffect, useState } from 'react'
-import { Link, useHistory } from 'react-router-dom'
+import React, { useCallback, useEffect, useState, } from 'react'
+import { Link, useHistory, } from 'react-router-dom'
 
 import useFlag from '@/lib/hooks/useFlag'
 import useInputEvent from '@/lib/hooks/useInputEvent'
 import useQuery from '@/lib/hooks/useQuery'
-import { useDispatch, useIsLogin, useSelector } from '@/redux/context'
+import { useDispatch, useIsLogin, useSelector, } from '@/redux/context'
 
+import avatarPic from '../../../statics/avatar.png'
 import Login from '../Login'
 import Register from '../Register'
-import { Wrapper } from './style'
-import avatarPic from '../../../statics/avatar.png'
+import { Wrapper, } from './style'
 
 const Header: React.FC = props => {
   // 搜索框聚焦
@@ -182,7 +182,15 @@ const Header: React.FC = props => {
           </ul>
         </nav>
       </header>
-      {flag && !isLogin && <Login onClose={setFalse} onSwitch={setTrue2} />}
+      {flag && !isLogin && (
+        <Login
+          onClose={e => {
+            dispatch({ type: 'CHANGE_SHOW_LOGIN', payload: { showLogin: false } })
+            setFalse(e)
+          }}
+          onSwitch={setTrue2}
+        />
+      )}
       {flag2 && !isLogin && <Register onClose={setFalse2} onSwitch={setTrue} />}
     </Wrapper>
   )

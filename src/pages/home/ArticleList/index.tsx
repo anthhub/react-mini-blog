@@ -17,7 +17,6 @@ const ArticleList: React.FC = () => {
   const [pageInfo, setPageInfo] = useState({ hasNextPage: true, endCursor: 0 })
 
   const { setQuery, query } = useQuery()
-  console.log('%c%s', 'color: #20bd08;font-size:15px', '===TQY===: ArticleList:React.FC -> query', query)
 
   const isLogin = useIsLogin()
 
@@ -37,7 +36,6 @@ const ArticleList: React.FC = () => {
   } = useSelector()
 
   const { data = [] } = useFetch(async () => {
-    console.log('%c%s', 'color: #20bd08;font-size:15px', '===TQY===: refresh:React.FC -> query', query)
     const rs = query.own === 'mine' ? await getUserArticles({ id, endCursor: 0 }) : await getArticles({ ...query, endCursor: 0 })
     const list = (rs && rs.edges) || []
 
@@ -74,7 +72,6 @@ const ArticleList: React.FC = () => {
 
   // 用 store 的数据渲染页面
   const { articleList } = useSelector()
-  console.log('articleList', articleList)
 
   return (
     <Wrapper>

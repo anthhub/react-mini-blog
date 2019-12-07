@@ -29,8 +29,6 @@ export const toThousands = (number: string | number) => {
 }
 
 const StatBlock: React.FC<IProps> = ({ user: { likedCount, viewCount } = {} }) => {
-  console.log({ likedCount, viewCount })
-
   return (
     <Wrapper>
       <header className="block-title">个人成就</header>

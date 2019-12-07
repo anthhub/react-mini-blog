@@ -422,16 +422,10 @@ const Comment: React.FC<IProps> = ({ create_at, content, title, html, screenshot
 
   const commentRef = useRef<HTMLDivElement>(null)
 
-  const history = useHistory()
-  const { hash, pathname } = useLocation()
+  const { hash } = useLocation()
 
-  const locstion = useLocation()
-  console.log('%c%s', 'color: #20bd08;font-size:15px', '===TQY===: locstion', locstion)
-  console.log('%c%s', 'color: #20bd08;font-size:15px', '===TQY===: hash', hash)
-
-  if (hash && hash.length > 1) {
-    // history.replace(pathname + hash)
-    commentRef && commentRef.current && commentRef.current.scrollIntoView()
+  if (hash && hash.length > 1 && commentRef && commentRef.current) {
+    commentRef.current.scrollIntoView()
   }
 
   return (

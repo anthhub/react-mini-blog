@@ -2,6 +2,8 @@ import { message } from 'antd'
 import axios, { AxiosRequestConfig as _AxiosRequestConfig } from 'axios'
 import * as qs from 'qs'
 
+import { bridge } from '@/App'
+
 export interface IAxiosRequestConfig extends _AxiosRequestConfig {
   startTime?: Date
 }
@@ -69,7 +71,10 @@ methods.forEach(v => {
         } = err
 
         if (status === 401) {
-          return Promise.reject()
+          console.log('%c%s', 'color: #20bd08;font-size:15px', '===TQY===: status', status)
+          bridge.dispatch({ type: 'CHANGE_SHOW_LOGIN', payload: { showLogin: true } })
+
+          return Promise.reject({})
         }
 
         message.destroy()

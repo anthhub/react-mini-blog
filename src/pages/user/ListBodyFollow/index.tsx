@@ -40,8 +40,6 @@ const ListBodyFollow: React.FC = () => {
   }, [])
 
   const { followingList = [], followersList = [] } = useSelector()
-  console.log('%c%s', 'color: #20bd08;font-size:15px', '===TQY===: ListBodyFollow:React.FC -> followersList', followersList)
-  console.log('%c%s', 'color: #20bd08;font-size:15px', '===TQY===: ListBodyFollow:React.FC -> followingList', followingList)
 
   const onFollow = useCallback(
     async (followingId, isFollowing, type) => {
