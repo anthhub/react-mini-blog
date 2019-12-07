@@ -16,7 +16,12 @@ interface IProps extends ArticleEntity {
 }
 
 const Author: React.FC<IProps> = ({ user: { username = '', jobTitle = '', company = '', avatarLarge = '', id = '' } = {} }) => {
-  const { data: author = {} } = useFetch(() => getUserInfo(id), [id])
+  const { data: author = {} } = useFetch(() => {
+    if (!id) {
+      return Promise.resolve({})
+    }
+    return getUserInfo(id)
+  }, [id])
 
   const { likedCount, viewCount } = author
 
