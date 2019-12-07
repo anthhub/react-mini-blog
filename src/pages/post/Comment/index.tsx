@@ -317,7 +317,7 @@ const Comment: React.FC<IProps> = ({ create_at, content, title, html, screenshot
   const isLogin = useIsLogin()
   // 登录用户的用户名
   const {
-    user: { username },
+    user: { username, id: loginId, avatarLarge: loginAvatarLarge },
   } = useSelector()
   const history = useHistory()
 
@@ -429,7 +429,10 @@ const Comment: React.FC<IProps> = ({ create_at, content, title, html, screenshot
         评论
       </div>
       <div className="comment-form">
-        <div className="avatar" />
+        {/* <div className="avatar" style={{ background: `#eee url(${loginAvatarLarge}) no-repeat center/cover` }} /> */}
+        <Link to={`/user/${loginId}`} className="avatar-link" target="_blank">
+          <div className="avatar" style={{ background: `#eee url(${loginAvatarLarge}) no-repeat center/cover` }} />
+        </Link>
         <div className="form-box">
           <input
             placeholder={'输入评论...'}
@@ -459,11 +462,11 @@ const Comment: React.FC<IProps> = ({ create_at, content, title, html, screenshot
           <li className="item">
             {/* 一级评论 */}
             <div className="first-comment">
-              <Link to="" className="avatar-link" target="_blank">
+              <Link to={`/user/${item.user.id}`} className="avatar-link" target="_blank">
                 <div className="avatar" style={{ background: `#eee url(${item.user.avatarLarge}) no-repeat center/cover` }} />
               </Link>
               <div className="content-box">
-                <Link to="" className="username" target="_blank">
+                <Link to={`/user/${item.user.id}`} className="username" target="_blank">
                   {item.user.username}
                 </Link>
                 <div className="content">{item.content}</div>
@@ -520,18 +523,18 @@ const Comment: React.FC<IProps> = ({ create_at, content, title, html, screenshot
                   <ul className="sub-comment-list" key={item2.id}>
                     <li className="item">
                       <div className="sub-comment">
-                        <Link to="" className="avatar-link" target="_blank">
+                        <Link to={`/user/${item2.user.id}`} className="avatar-link" target="_blank">
                           <div className="avatar" style={{ background: `#eee url(${item2.user.avatarLarge}) no-repeat center/cover` }} />
                         </Link>
                         <div className="content-box">
-                          <Link to="" className="username" target="_blank">
+                          <Link to={`/user/${item2.user.id}`} className="username" target="_blank">
                             {item2.user.username}
                           </Link>
                           <div className="content">
                             {item2.respComment !== item.id && (
                               <span>
                                 <span className="">回复</span>
-                                <Link to="" className="username-replied" target="_blank">
+                                <Link to={`/user/${item2.respUser.id}`} className="username-replied" target="_blank">
                                   {item2.respUser.username}
                                 </Link>
                                 <span className="">: </span>
@@ -598,7 +601,7 @@ const Comment: React.FC<IProps> = ({ create_at, content, title, html, screenshot
         </ul>
       ))}
 
-      <div className="more-comment">查看更多 ></div>
+      <div className="more-comment">{/* 查看更多 > */}</div>
     </Wrapper>
   )
 }
