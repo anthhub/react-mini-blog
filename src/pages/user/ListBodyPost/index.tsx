@@ -33,7 +33,7 @@ const ListBodyPost: React.FC<IProps> = ({
 }) => {
   // 拿用户 id
   const { id = '' } = useParams()
-  // console.log(id, '=============id===========')
+
   const {
     user: { id: loginId },
   } = useSelector()

@@ -36,27 +36,15 @@ export const getUserFollowing = (id: string) => {
   })
 }
 
-// id 是查看用户, followerId是登录用户
-export const isFollowing = (id: string, followerId: string) => {
-  return http.get(baseUrl + '/user/' + id + '/isFollowing/' + followerId).then(res => {
-    return res
-  })
-}
-
-export const getFollowingCount = (id: string) => {
-  return http.get(baseUrl + '/user/' + id + '/following/count').then(res => {
-    return res
-  })
-}
-
 export const getUserFollowers = (id: string) => {
   return http.get(baseUrl + '/user/' + id + '/followers').then(res => {
     return res
   })
 }
 
-export const getFollowersCount = (id: string) => {
-  return http.get(baseUrl + '/user/' + id + '/followers/count').then(res => {
+// id 是查看用户, followerId是登录用户
+export const isFollowing = (id: string, followerId: string) => {
+  return http.get(baseUrl + '/user/' + id + '/isFollowing/' + followerId).then(res => {
     return res
   })
 }

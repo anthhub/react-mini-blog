@@ -33,7 +33,7 @@ const User: React.FC = props => {
       <div className="right">
         <div className="sticky-wrap">
           <StatBlock user={info} />
-          <FallowBlock />
+          <FallowBlock user={info} />
           <MoreBLock user={info} />
         </div>
       </div>

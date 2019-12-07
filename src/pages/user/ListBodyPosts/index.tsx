@@ -1,24 +1,38 @@
-import React, { useState, useEffect, useCallback } from 'react'
+import { title } from 'process'
+import { async } from 'q'
+import React, { useCallback, useEffect, useState } from 'react'
 import { Link, useHistory, useParams } from 'react-router-dom'
 
-import { getArticles, deleteArticle } from '@/Api/article'
+import { deleteArticle, getArticles } from '@/Api/article'
+import { getUserArticles, getUserInfo } from '@/Api/user'
 import useFetch from '@/lib/hooks/useFetch'
 import useQuery from '@/lib/hooks/useQuery'
-import { ArticleEntity } from '@/modal/entities/article.entity'
-import { useIsLogin, useDispatch, useSelector } from '@/redux/context'
-
-import { Wrapper } from './style'
-import { async } from 'q'
-import { getUserInfo, getUserArticles } from '@/Api/user'
-import { formatDate } from '@/pages/home/Article'
-import { title } from 'process'
-import { matchReg } from '@/pages/post/Catalog'
 import { translateMarkdown } from '@/lib/utils/markdown'
+import { ArticleEntity } from '@/modal/entities/article.entity'
+import { formatDate } from '@/pages/home/Article'
+import { matchReg } from '@/pages/post/Catalog'
+import { useDispatch, useIsLogin, useSelector } from '@/redux/context'
+
 import ListBodyPost from '../ListBodyPost'
+import { Wrapper } from './style'
 
 interface IProps extends ArticleEntity {}
 
 const ListBodyPosts: React.FC = () => {
+  const { id = '' } = useParams()
+
+  const dispatch = useDispatch()
+  // 根据 id 拿用户文章列表
+  useFetch(async () => {
+    const rs = await getUserArticles(id)
+    const list = (rs && rs.edges) || []
+    dispatch({
+      type: 'CHANGE_ARTICLE_LIST',
+      payload: { articleList: [...list] },
+    })
+    return list
+  }, [id])
+
   const { articleList } = useSelector()
 
   return (

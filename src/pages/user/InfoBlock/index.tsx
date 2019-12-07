@@ -37,7 +37,7 @@ const InfoBlock: React.FC<IProps> = ({ user: { id = '', avatarLarge = '', userna
   } = useSelector()
 
   const { flag, onToggle, setFlag } = useToggle(false)
-  console.log(id)
+
 
   const onFollow = useCallback(async () => {
     if (!id || !loginId) {

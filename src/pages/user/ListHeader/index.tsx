@@ -3,13 +3,11 @@ import React, { useEffect, useState } from 'react'
 import { Link, useHistory, useParams } from 'react-router-dom'
 
 import { getArticles } from '@/Api/article'
-import { getUserArticles, getUserFollowers, getUserFollowing, getUserInfo, getUserLikes } from '@/Api/user'
+import { getUserArticles, getUserLikes } from '@/Api/user'
 import useFetch from '@/lib/hooks/useFetch'
-import useQuery from '@/lib/hooks/useQuery'
-import { ArticleEntity } from '@/modal/entities/article.entity'
+
 import { useDispatch, useIsLogin, useSelector } from '@/redux/context'
 
-import ListBody from '../ListBodyPosts'
 import { Wrapper } from './style'
 
 const ListHeader: React.FC = () => {
@@ -18,11 +16,9 @@ const ListHeader: React.FC = () => {
   const dispatch = useDispatch()
   // 分页部分的数据统一在 header 中拿到（因爲 header 一定會渲染），再放入 store 中供分页组件使用
   // 根据 id 拿用户文章列表
-  const { data: articleList = [] } = useFetch(async () => {
+  useFetch(async () => {
     const rs = await getUserArticles(id)
-    // console.log(rs, 'rs--------------------')
     const list = (rs && rs.edges) || []
-    // console.log(list, 'list--------------------')
     dispatch({
       type: 'CHANGE_ARTICLE_LIST',
       payload: { articleList: [...list] },
@@ -30,43 +26,18 @@ const ListHeader: React.FC = () => {
     return list
   }, [id])
 
-  // 根据 id 该用户关注和被关注的用户列表
-  const { data: followingList = [] } = useFetch(async () => {
-    const rs = await getUserFollowing(id)
-    // console.log(rs, 'rs--------------------')
-    const list = (rs && rs.edges) || []
-    console.log(list, 'followingList--------------------')
-    dispatch({
-      type: 'CHANG_FOLLOWING_LIST',
-      payload: { followingList: [...list] },
-    })
-    return list
-  }, [])
-
-  const { data: followersList = [] } = useFetch(async () => {
-    const rs = await getUserFollowers(id)
-    // console.log(rs, 'rs--------------------')
-    const list = (rs && rs.edges) || []
-    console.log(list, 'followersList--------------------')
-    dispatch({
-      type: 'CHANGE_FOLLOWERS_LIST',
-      payload: { followersList: [...list] },
-    })
-    return list
-  }, [])
-
   // 根据 id 拿用户点赞的文章列表
-  const { data: likeList = [] } = useFetch(async () => {
+  useFetch(async () => {
     const rs = await getUserLikes(id)
-    // console.log(rs, 'rs--------------------')
     const list = (rs && rs.edges) || []
-    console.log(list, 'list--------------------')
     dispatch({
       type: 'CHANGE_LIKE_LIST',
       payload: { likeList: [...list] },
     })
     return list
   }, [id])
+
+  const { likeList = [], articleList = [] } = useSelector()
 
   return (
     <Wrapper>
