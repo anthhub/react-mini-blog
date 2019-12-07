@@ -330,7 +330,10 @@ const Comment: React.FC<IProps> = ({ create_at, content, title, html, screenshot
   const { value: comment2, onInputEvent: onInputEvent2, setValue: setComment2 } = useInputEvent('')
 
   // 是否显示一级回复框
-  const [replyBox1, setReplyBox1] = useState(false)
+  const [replyBox1, setReplyBox1] = useState('')
+
+  // 是否显示二级回复框
+  const [replyBox2, setReplyBox2] = useState('')
 
   const hideReplyBox1 = useCallback(
     (e: any) => {
@@ -340,7 +343,7 @@ const Comment: React.FC<IProps> = ({ create_at, content, title, html, screenshot
         (replyBox1 && ['action-title'].includes(e.target.className))
       ) {
         // console.log('隐藏 publish 面板', { showPublish })
-        setReplyBox1(false)
+        setReplyBox1('')
       }
     },
     [replyBox1]
@@ -351,10 +354,6 @@ const Comment: React.FC<IProps> = ({ create_at, content, title, html, screenshot
     return () => document.removeEventListener('click', hideReplyBox1)
   }, [])
 
-  // 是否显示二级回复框
-
-  const [replyBox2, setReplyBox2] = useState(false)
-
   const hideReplyBox2 = useCallback(
     (e: any) => {
       if (
@@ -363,7 +362,7 @@ const Comment: React.FC<IProps> = ({ create_at, content, title, html, screenshot
         (replyBox2 && ['action-title'].includes(e.target.className))
       ) {
         // console.log('隐藏 publish 面板', { showPublish })
-        setReplyBox2(false)
+        setReplyBox2('')
       }
     },
     [replyBox2]
@@ -374,6 +373,11 @@ const Comment: React.FC<IProps> = ({ create_at, content, title, html, screenshot
     return () => document.removeEventListener('click', hideReplyBox2)
   }, [])
 
+  // 拿到文章评论
+  const { data: commentList1 = [], doFetch } = useFetch(() => getCommentList(articleId))
+  const commentList: TData = commentList1
+  console.log('%c%s', 'color: #20bd08;font-size:15px', '===TQY===: comment', commentList)
+
   // 发布评论
   const onComment = useCallback(async () => {
     await createComment({
@@ -382,36 +386,42 @@ const Comment: React.FC<IProps> = ({ create_at, content, title, html, screenshot
       content: comment,
     })
     setComment('')
+    doFetch()
   }, [userId, articleId, comment])
 
   // 回复一级评论
-  const onReply1 = useCallback(async () => {
-    await createComment({
-      // firstComment:,
-      // respComment:,
-      respUser: '',
-      articleId,
-      content: comment1,
-    })
-    setComment1('')
-  }, [userId, articleId, comment1])
+  const onReply1 = useCallback(
+    async (firstComment, respComment, respUser) => {
+      await createComment({
+        firstComment,
+        respComment,
+        respUser,
+        articleId,
+        content: comment1,
+      })
+      setComment1('')
+      setReplyBox1('')
+      doFetch()
+    },
+    [userId, articleId, comment1]
+  )
 
   // 回复二级评论
-  const onReply2 = useCallback(async () => {
-    await createComment({
-      // firstComment:,
-      // respComment:,
-      respUser: '',
-      articleId,
-      content: comment2,
-    })
-    setComment2('')
-  }, [userId, articleId, comment2])
-
-  // 拿到文章评论
-  const { data: commentList1 = [] } = useFetch(() => getCommentList(articleId))
-  const commentList: TData = commentList1
-  console.log('%c%s', 'color: #20bd08;font-size:15px', '===TQY===: comment', commentList)
+  const onReply2 = useCallback(
+    async (firstComment, respComment, respUser) => {
+      await createComment({
+        firstComment,
+        respComment,
+        respUser,
+        articleId,
+        content: comment2,
+      })
+      setComment2('')
+      setReplyBox2('')
+      doFetch()
+    },
+    [userId, articleId, comment2]
+  )
 
   return (
     <Wrapper>
@@ -471,7 +481,7 @@ const Comment: React.FC<IProps> = ({ create_at, content, title, html, screenshot
                         className="action-title"
                         onClick={e => {
                           e.nativeEvent.stopImmediatePropagation()
-                          setReplyBox1(true)
+                          setReplyBox1(item.id)
                         }}
                       >
                         回复
@@ -481,10 +491,10 @@ const Comment: React.FC<IProps> = ({ create_at, content, title, html, screenshot
                 </div>
 
                 {/* 回复一级评论 */}
-                {replyBox1 && (
+                {replyBox1 === item.id && (
                   <div className="form-box">
                     <input
-                      className={focusFlag1 ? 'input-comment focused' : 'input-comment'}
+                      className={replyBox1 === item.id ? 'input-comment focused' : 'input-comment'}
                       onFocus={() => {
                         setFocusFlag1(true)
                       }}
@@ -497,7 +507,7 @@ const Comment: React.FC<IProps> = ({ create_at, content, title, html, screenshot
                     <div className="action-box">
                       <div className="submit">
                         <span className="hint">Ctrl or ⌘ + Enter</span>
-                        <button className="submit-btn" disabled={comment1 ? false : true} onClick={onReply1}>
+                        <button className="submit-btn" disabled={comment1 ? false : true} onClick={() => onReply1(item.id, item.id, item.user.id)}>
                           评论
                         </button>
                       </div>
@@ -531,7 +541,7 @@ const Comment: React.FC<IProps> = ({ create_at, content, title, html, screenshot
                             <span className="sub-content">{item2.content}</span>
                           </div>
                           <div className="reply-stat">
-                            <time className="time">{formatDate(item.update_at)}</time>
+                            <time className="time">{formatDate(item2.update_at)}</time>
                             {/* <div className="delete">删除</div> */}
                             <div className="action-box">
                               {/* <div className="like-action action">
@@ -544,7 +554,7 @@ const Comment: React.FC<IProps> = ({ create_at, content, title, html, screenshot
                                   className="action-title"
                                   onClick={e => {
                                     e.nativeEvent.stopImmediatePropagation()
-                                    setReplyBox2(true)
+                                    setReplyBox2(item2.id)
                                   }}
                                 >
                                   回复
@@ -554,10 +564,10 @@ const Comment: React.FC<IProps> = ({ create_at, content, title, html, screenshot
                           </div>
 
                           {/* 回复二级评论 */}
-                          {replyBox2 && (
+                          {replyBox2 === item2.id && (
                             <div className="form-box">
                               <input
-                                className={focusFlag2 ? 'input-comment focused' : 'input-comment'}
+                                className={replyBox2 === item2.id ? 'input-comment focused' : 'input-comment'}
                                 onFocus={() => {
                                   setFocusFlag2(true)
                                 }}
@@ -570,7 +580,7 @@ const Comment: React.FC<IProps> = ({ create_at, content, title, html, screenshot
                               <div className="action-box">
                                 <div className="submit">
                                   <span className="hint">Ctrl or ⌘ + Enter</span>
-                                  <button className="submit-btn" disabled={comment2 ? false : true} onClick={onReply2}>
+                                  <button className="submit-btn" disabled={comment2 ? false : true} onClick={() => onReply2(item.id, item2.id, item2.user.id)}>
                                     评论
                                   </button>
                                 </div>
