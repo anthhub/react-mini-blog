@@ -501,6 +501,7 @@ const Comment: React.FC<IProps> = ({ create_at, content, title, html, screenshot
                 {replyBox1 === item.id && (
                   <div className="form-box">
                     <input
+                      placeholder={`回复${item.user.username}`}
                       className={replyBox1 === item.id ? 'input-comment focused' : 'input-comment'}
                       onFocus={() => {
                         setFocusFlag1(true)
@@ -574,6 +575,7 @@ const Comment: React.FC<IProps> = ({ create_at, content, title, html, screenshot
                           {replyBox2 === item2.id && (
                             <div className="form-box">
                               <input
+                                placeholder={`回复${item2.user.username}`}
                                 className={replyBox2 === item2.id ? 'input-comment focused' : 'input-comment'}
                                 onFocus={() => {
                                   setFocusFlag2(true)
