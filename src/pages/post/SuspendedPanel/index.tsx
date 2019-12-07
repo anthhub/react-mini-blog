@@ -8,8 +8,6 @@ import { Wrapper } from './style'
 
 interface IProps extends ArticleEntity {}
 const SuspendedPanel: React.FC<IProps> = ({ id, isLiked, likeCount = 0, commentCount = 0 }) => {
-  console.log('%c%s', 'color: #20bd08;font-size:15px', '===TQY===: isLiked', isLiked)
-  // console.log('likeCount', typeof likeCount.toString())
   const [likeFlag, setLikeFlag] = useState(false)
   // likeCount2 只控制前端显示，不会影响后台数据
   const [likeCountNew, setLikeCountNew] = useState(0)

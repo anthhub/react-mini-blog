@@ -156,7 +156,7 @@ const ListBodyPost: React.FC<IProps> = ({
                 </span>
               </li>
             </div>
-            <Link to={`/post/${articleId}`}>
+            <Link to={`/post/${articleId}#comment`} onClick={e => e.stopPropagation()}>
               <li className="action comment">
                 <img className="icon" src="https://b-gold-cdn.xitu.io/v3/static/img/comment.4d5744f.svg" />
                 <span

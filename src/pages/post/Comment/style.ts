@@ -14,6 +14,10 @@ export const Wrapper = styled.div`
     border-bottom: 1px solid #f1f1f1;
   }
 
+  .gap {
+    height: 86px;
+  }
+
   .title {
     color: #8a9aa9;
     font-size: 16px;

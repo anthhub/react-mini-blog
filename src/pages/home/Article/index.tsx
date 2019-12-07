@@ -87,7 +87,7 @@ const Article: React.FC<IProps> = ({ title, create_at, type, content, html, scre
                 </li>
                 <li className="info-item">{formatDate(create_at)}</li>
                 <li className="info-item">
-                  <Link to="" className="tag-link">
+                  <Link to={`/post/${id}`} className="tag-link">
                     {type}
                   </Link>
                 </li>
@@ -133,7 +133,7 @@ const Article: React.FC<IProps> = ({ title, create_at, type, content, html, scre
                       </span>
                     </li>
                   </div>
-                  <Link to={`/post/${id}`} className="little-box comment">
+                  <Link to={`/post/${id}#comment`} onClick={e => e.stopPropagation()} target="_blank" className="little-box comment">
                     <li className="row">
                       <img className="icon" src="https://b-gold-cdn.xitu.io/v3/static/img/comment.4d5744f.svg" />
 

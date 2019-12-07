@@ -1,5 +1,5 @@
-import React, { useCallback, useEffect, useState } from 'react'
-import { useHistory } from 'react-router'
+import React, { useCallback, useEffect, useState, useRef } from 'react'
+import { useHistory, useLocation } from 'react-router'
 import { Link } from 'react-router-dom'
 
 import { createComment, getCommentList } from '@/Api/comment'
@@ -312,14 +312,11 @@ interface IProps extends ArticleEntity {
 }
 
 const Comment: React.FC<IProps> = ({ create_at, content, title, html, screenshot, id: articleId, viewCount, user: { avatarLarge = '', id: userId, username: author } = {} }) => {
-  console.log({ userId })
-
   const isLogin = useIsLogin()
   // 登录用户的用户名
   const {
     user: { username, id: loginId, avatarLarge: loginAvatarLarge },
   } = useSelector()
-  const history = useHistory()
 
   const [focusFlag, setFocusFlag] = useState(false)
   const [focusFlag1, setFocusFlag1] = useState(false)
@@ -423,11 +420,24 @@ const Comment: React.FC<IProps> = ({ create_at, content, title, html, screenshot
     [userId, articleId, comment2]
   )
 
+  const commentRef = useRef<HTMLDivElement>(null)
+
+  const history = useHistory()
+  const { hash, pathname } = useLocation()
+
+  const locstion = useLocation()
+  console.log('%c%s', 'color: #20bd08;font-size:15px', '===TQY===: locstion', locstion)
+  console.log('%c%s', 'color: #20bd08;font-size:15px', '===TQY===: hash', hash)
+
+  if (hash && hash.length > 1) {
+    // history.replace(pathname + hash)
+    commentRef && commentRef.current && commentRef.current.scrollIntoView()
+  }
+
   return (
     <Wrapper>
-      <div className="title" id="comment">
-        评论
-      </div>
+      <div className="gap" id="comment" ref={commentRef}></div>
+      <div className="title">评论</div>
       <div className="comment-form">
         {/* <div className="avatar" style={{ background: `#eee url(${loginAvatarLarge}) no-repeat center/cover` }} /> */}
         <Link to={`/user/${loginId}`} className="avatar-link" target="_blank">
