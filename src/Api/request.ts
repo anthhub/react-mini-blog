@@ -66,9 +66,7 @@ methods.forEach(v => {
         return Promise.resolve(res.data.data)
       })
       .catch(err => {
-        const {
-          response: { status },
-        } = err
+        const status = err && err.response && err.response.status
 
         if (status === 401) {
           console.log('%c%s', 'color: #20bd08;font-size:15px', '===TQY===: status', status)

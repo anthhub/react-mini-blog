@@ -44,9 +44,9 @@ const Article: React.FC<IProps> = ({ create_at, content, title, html, screenshot
   const { flag, onToggle, setFlag } = useToggle(false)
 
   const onFollow = useCallback(async () => {
-    if (!id || !loginId) {
-      return
-    }
+    // if (!id || !loginId) {
+    //   return
+    // }
     flag ? await deleteFollow(userId) : await addFollow(userId)
     onToggle()
   }, [flag, userId])

@@ -7,23 +7,13 @@ const follow = {
 }
 
 export const addFollow = (id: string) => {
-  return http
-    .put(baseUrl + follow.add + id)
-    .then(res => {
-      return res
-    })
-    .catch(res => {
-      // return res
-    })
+  return http.put(baseUrl + follow.add + id).then(res => {
+    return res
+  })
 }
 
 export const deleteFollow = (id: string) => {
-  return http
-    .delete(baseUrl + follow.delete + id)
-    .then(res => {
-      return res
-    })
-    .catch(res => {
-      // return res
-    })
+  return http.delete(baseUrl + follow.delete + id).then(res => {
+    return res
+  })
 }

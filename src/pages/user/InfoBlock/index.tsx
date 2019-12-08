@@ -39,9 +39,9 @@ const InfoBlock: React.FC<IProps> = ({ user: { id = '', avatarLarge = '', userna
   const { flag, onToggle, setFlag } = useToggle(false)
 
   const onFollow = useCallback(async () => {
-    if (!id || !loginId) {
-      return
-    }
+    // if (!id || !loginId) {
+    //   return
+    // }
     flag ? await deleteFollow(id) : await addFollow(id)
     onToggle()
   }, [flag, id])

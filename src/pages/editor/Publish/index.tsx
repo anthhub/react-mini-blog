@@ -29,7 +29,7 @@ const Publish: React.FC<IProps> = ({ title, content, type, screenshot = '', id }
   } = useSelector()
 
   // publish 面板标签
-  const typeList = ['后端', '前端', 'Android', 'iOS', '人工智能', '开发工具', '代码人生', '阅读']
+  const typeList = ['后端', '前端', 'Android', 'iOS', '人工智能', '开发工具', '代码人生', '阅读', '运维', '勿删']
 
   const [active, setActive] = useState(type || '')
 

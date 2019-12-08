@@ -11,31 +11,11 @@ export const addLike = (articleId: string) => {
     // console.log('addLike', res)
     return res
   })
-  // .catch(res => {
-  //   return res
-  // })
 }
 
 export const deleteLike = (articleId: string) => {
-  return http
-    .delete(baseUrl + '/like/' + articleId)
-    .then(res => {
-      // console.log('addLike', res)
-      return res
-    })
-    .catch(res => {
-      return res
-    })
+  return http.delete(baseUrl + '/like/' + articleId).then(res => {
+    // console.log('addLike', res)
+    return res
+  })
 }
-
-// export const getArticleLikeCount = (articleId: string) => {
-//   return http
-//     .get(baseUrl + '/like/' + articleId + '/count')
-//     .then(res => {
-//       // console.log('addLike', res)
-//       return res
-//     })
-//     .catch(res => {
-//       return res
-//     })
-// }

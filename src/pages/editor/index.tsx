@@ -1,27 +1,27 @@
-import { Input, message } from 'antd'
-import React, { useRef, useState, useCallback, useEffect } from 'react'
-import { UnControlled as CodeMirror } from 'react-codemirror2'
-
 // 引入样式
 import '../../../node_modules/codemirror/lib/codemirror.css'
 import '../../../node_modules/codemirror/theme/eclipse.css'
-import { Wrapper } from './style'
-
-// 引入CodeMirror样式
-import { translateMarkdown } from '@/lib/utils/markdown'
-import { Editor, EditorChange, ScrollInfo } from 'codemirror'
 import 'codemirror/mode/markdown/markdown'
 
-import Publish from './Publish'
-import Menu from './Menu'
-import useInputEvent from '@/lib/hooks/useInputEvent'
-import useAuthLogin from '@/lib/hooks/useAuthLogin'
+import { Input, message } from 'antd'
+import { Editor, EditorChange, ScrollInfo } from 'codemirror'
+import { async } from 'q'
+import React, { useCallback, useEffect, useRef, useState } from 'react'
+import { UnControlled as CodeMirror } from 'react-codemirror2'
 import { useParams } from 'react-router'
-import { useSelector, useDispatch } from '@/redux/context'
-import useFetch from '@/lib/hooks/useFetch'
+
 import { getArticle } from '@/Api/article'
 import { uploadFile } from '@/Api/file'
-import { async } from 'q'
+import useAuthLogin from '@/lib/hooks/useAuthLogin'
+import useFetch from '@/lib/hooks/useFetch'
+import useInputEvent from '@/lib/hooks/useInputEvent'
+// 引入CodeMirror样式
+import { translateMarkdown } from '@/lib/utils/markdown'
+import { useDispatch, useSelector } from '@/redux/context'
+
+import Menu from './Menu'
+import Publish from './Publish'
+import { Wrapper } from './style'
 
 const EditMarkdown: React.FC = () => {
   useAuthLogin()
