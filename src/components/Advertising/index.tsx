@@ -1,18 +1,13 @@
-// 详情页 右侧 作者简介卡片
-
-import React, { useEffect } from 'react'
-import { Link } from 'react-router-dom'
+import React from 'react'
 
 import { Wrapper } from './style'
 
-interface IProps {
-  user?: any
-}
+interface IProps {}
 const avatar = 'https://user-gold-cdn.xitu.io/2019/2/10/168d577489bcbe76?imageView2/1/w/180/h/180/q/85/format/webp/interlace/1'
 
-const Advertising: React.FC<IProps> = ({ user: { username = '', jobTitle = '', company = '', avatarLarge = '', id = '' } = {} }) => {
+const Advertising: React.FC<IProps> = () => {
   return (
-    <Wrapper avatarLarge={avatarLarge}>
+    <Wrapper avatarLarge={avatar}>
       <header className="author-title" title={'由于公司经营不善...'}>
         网站作者在线求职 😂😂😂
       </header>
