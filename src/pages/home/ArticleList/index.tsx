@@ -102,7 +102,7 @@ const ArticleList: React.FC = () => {
         <InfiniteScroll
           dataLength={articleList.length} // This is important field to render the next data
           next={nextPage}
-          hasMore={pageInfo.hasNextPage || !!1}
+          hasMore={pageInfo.hasNextPage}
           loader={
             pageInfo.hasNextPage ? (
               <h5 style={{ textAlign: 'center', color: '#b2bac2' }}>加载中...</h5>

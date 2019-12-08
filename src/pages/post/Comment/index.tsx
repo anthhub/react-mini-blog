@@ -371,7 +371,7 @@ const Comment: React.FC<IProps> = ({ create_at, content, title, html, screenshot
   }, [])
 
   // 拿到文章评论
-  const { data: commentList1 = [], doFetch } = useFetch(() => getCommentList(articleId))
+  const { data: commentList1 = [], doFetch } = useFetch(() => getCommentList(articleId), [articleId])
   const commentList: TData = commentList1
   console.log('%c%s', 'color: #20bd08;font-size:15px', '===TQY===: comment', commentList)
 

@@ -10,9 +10,14 @@ import { Wrapper } from './style'
 const Home: React.FC = props => {
   return (
     <Wrapper>
-      <ArticleList />
-      <AppDownload />
-      {/* <Advertising /> */}
+      <div className="left">
+        <ArticleList />
+      </div>
+      <div className="right">
+        <Advertising />
+        <AppDownload />
+        <BackTop />
+      </div>
       <BackTop />
     </Wrapper>
   )

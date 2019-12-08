@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState, memo } from 'react'
 import { Link, useHistory, useParams } from 'react-router-dom'
 
 import { addFollow, deleteFollow } from '@/Api/follow'
@@ -59,7 +59,10 @@ const ListBodyFollow: React.FC = () => {
           type: 'CHANGE_FOLLOWERS_LIST',
           payload: {
             followersList: followersList.map(item => {
-              item.follower.isFollowing = !isFollowing
+              if (item.follower.id === followingId) {
+                item.follower.isFollowing = !isFollowing
+              }
+
               return item
             }),
           },
@@ -71,7 +74,10 @@ const ListBodyFollow: React.FC = () => {
           type: 'CHANG_FOLLOWING_LIST',
           payload: {
             followingList: followingList.map(item => {
-              item.following.isFollowing = !isFollowing
+              if (item.following.id === followingId) {
+                item.following.isFollowing = !isFollowing
+              }
+
               return item
             }),
           },
@@ -112,6 +118,7 @@ const ListBodyFollow: React.FC = () => {
                       className="follow-btn followed"
                       onClick={e => {
                         e.stopPropagation()
+                        e.preventDefault()
                         onFollow(item.follower.id, item.follower.isFollowing, 'follower')
                       }}
                     >
@@ -187,4 +194,4 @@ const ListBodyFollow: React.FC = () => {
   )
 }
 
-export default ListBodyFollow
+export default memo(ListBodyFollow)

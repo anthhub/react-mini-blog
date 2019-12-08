@@ -33,7 +33,7 @@ const ListBodyPosts: React.FC = () => {
     return list
   }, [id])
 
-  const { articleList } = useSelector()
+  const { articleList = [] } = useSelector()
 
   return (
     <Wrapper>

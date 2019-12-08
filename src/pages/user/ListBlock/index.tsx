@@ -18,4 +18,4 @@ const ListBlock: React.FC = props => {
   )
 }
 
-export default memo(ListBlock)
+export default ListBlock

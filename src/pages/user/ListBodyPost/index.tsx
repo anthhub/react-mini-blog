@@ -65,7 +65,7 @@ const ListBodyPost: React.FC<IProps> = ({
     if (window.confirm('删除专栏文章会扣除相应的掘力值，且文章不可恢复。')) {
       await deleteArticle(articleId)
       // 删掉 store 中的數據
-      dispatch({ type: 'DELETE_ARTICLE', payload: { articleId } })
+      dispatch({ type: 'DELETE_ARTICLE', payload: { id: articleId } })
     }
   }, [articleId])
 
