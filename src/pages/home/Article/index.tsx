@@ -33,7 +33,7 @@ export const formatDate = (time: number) => {
 
 interface IProps extends ArticleEntity {}
 
-const Article: React.FC<IProps> = ({ title, create_at, type, content, html, screenshot = '', isLiked = false, likeCount, commentCount, id, user = {} }) => {
+const Article: React.FC<IProps> = ({ title, create_at, type, isFeatured, content, html, screenshot = '', isLiked = false, likeCount, commentCount, id, user = {} }) => {
   const history = useHistory()
 
   // query.own 是 'mine' 才顯示文章預覽右下角的小圓點
@@ -79,6 +79,11 @@ const Article: React.FC<IProps> = ({ title, create_at, type, content, html, scre
           <section className="content">
             <div className="info-box">
               <ul className="info-row">
+                {isFeatured && (
+                  <li className="column info-item" style={{ color: 'red' }}>
+                    精选
+                  </li>
+                )}
                 <li className="column info-item">专栏</li>
                 <li className="info-item">
                   <Link to={'/user/' + user.id} target="_blank" className="user-link">

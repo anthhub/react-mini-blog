@@ -32,4 +32,6 @@ export class ArticleEntity extends CommonEntity {
   commentCount!: number
 
   isLiked!: boolean
+
+  isFeatured!: boolean
 }
