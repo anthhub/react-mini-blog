@@ -1,6 +1,6 @@
 FROM nginx
 
-RUN npm i yarn -g && yarn && yarn build:test
+RUN npm run build:test
 
 COPY build/ /usr/share/nginx/html/
 
