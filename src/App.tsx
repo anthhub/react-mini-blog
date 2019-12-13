@@ -8,11 +8,14 @@ import '@/styles/index.less'
 import AppRouter from './routes'
 import { GlobalStyle } from './style'
 
+export const bridge: any = {}
+
 const App: React.FC = () => {
   const globalStore = usePersistedContext(useContext(Store), 'state', false)
 
   const [state, dispatch] = usePersistedReducer(useReducer(reducer, globalStore), 'state')
 
+  bridge.dispatch = dispatch
   return (
     <Store.Provider value={{ ...state, dispatch }}>
       <GlobalStyle />

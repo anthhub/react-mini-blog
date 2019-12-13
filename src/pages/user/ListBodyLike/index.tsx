@@ -1,45 +1,26 @@
-import React, { memo, useCallback, useEffect, useState } from 'react'
+import { title } from 'process'
+import React, { useCallback, useEffect, useState } from 'react'
 import { Link, useHistory, useParams } from 'react-router-dom'
 
+import { deleteArticle, getArticles } from '@/Api/article'
 import { addLike, deleteLike } from '@/Api/like'
+import { getUserArticles, getUserInfo, getUserLikes } from '@/Api/user'
+import useFetch from '@/lib/hooks/useFetch'
 import useQuery from '@/lib/hooks/useQuery'
 import { translateMarkdown } from '@/lib/utils/markdown'
 import { ArticleEntity } from '@/modal/entities/article.entity'
+import { formatDate } from '@/pages/home/Article'
 import { matchReg } from '@/pages/post/Catalog'
+import { useDispatch, useIsLogin, useSelector } from '@/redux/context'
 
 import { Wrapper } from './style'
 
-// 格式化时间
-export const formatDate = (time: number) => {
-  const dt = new Date()
-  const ms = dt.getTime()
-  // console.log(ms)
-  const diff = ms - time
-  // 1年的毫秒数：31536000000
-  if (diff >= 31536000000) {
-    return Math.floor(diff / 31536000000) + '年前'
-  } else if (diff >= 2592000000 && diff < 31536000000) {
-    return Math.floor(diff / 2592000000) + '月前'
-  } else if (diff >= 86400000 && diff < 2592000000) {
-    return Math.floor(diff / 86400000) + '天前'
-  } else if (diff >= 3600000 && diff < 86400000) {
-    return Math.floor(diff / 3600000) + '小时前'
-  } else if (diff >= 60000 && diff < 3600000) {
-    return Math.floor(diff / 60000) + '分钟前'
-  } else {
-    return '刚刚'
-  }
+interface IProps {
+  item: ArticleEntity
 }
 
-interface IProps extends ArticleEntity {}
-
-const Article: React.FC<IProps> = ({ title, create_at, type, isFeatured, content, html, screenshot = '', isLiked = false, likeCount, commentCount, id, user = {} }) => {
-  const history = useHistory()
-
-  // query.own 是 'mine' 才顯示文章預覽右下角的小圓點
-  const { query } = useQuery()
-
-  const { search = '' } = query
+const ListBodyLike: React.FC<IProps> = ({ item }) => {
+  const { isLiked = false, likeCount = 0, id } = item
 
   const [likeFlag, setLikeFlag] = useState(false)
   // likeCount2 只控制前端显示，不会影响后台数据
@@ -73,28 +54,19 @@ const Article: React.FC<IProps> = ({ title, create_at, type, isFeatured, content
   }
 
   return (
-    <Wrapper screenshot={screenshot}>
-      <li>
+    <Wrapper>
+      <li className="list-item" key={item.id}>
         <div onClick={toPost}>
           <section className="content">
             <div className="info-box">
               <ul className="info-row">
-                {isFeatured && (
-                  <li className="column info-item" style={{ color: 'red' }}>
-                    精选
-                  </li>
-                )}
                 <li className="column info-item">专栏</li>
                 <li className="info-item">
-                  <Link to={'/user/' + user.id} target="_blank" className="user-link">
-                    {user.username}
-                  </Link>
+                  <a className="user-link">{item.user.username}</a>
                 </li>
-                <li className="info-item">{formatDate(create_at)}</li>
+                <li className="info-item">{formatDate(item.create_at)}</li>
                 <li className="info-item">
-                  <Link to={`/post/${id}`} className="tag-link">
-                    {type}
-                  </Link>
+                  <a className="tag-link">{item.type}</a>
                 </li>
               </ul>
 
@@ -102,7 +74,7 @@ const Article: React.FC<IProps> = ({ title, create_at, type, isFeatured, content
                 <span
                   className="title-link"
                   dangerouslySetInnerHTML={{
-                    __html: title && title.replace(new RegExp(search, 'gi'), `<em>${search}</em>`),
+                    __html: item.title,
                   }}
                 />
               </div>
@@ -112,7 +84,7 @@ const Article: React.FC<IProps> = ({ title, create_at, type, isFeatured, content
               <div className="abstract">
                 <span
                   dangerouslySetInnerHTML={{
-                    __html: matchReg(html || translateMarkdown(content || '')).replace(new RegExp(search, 'gi'), `<em>${search}</em>`),
+                    __html: matchReg(item.html || translateMarkdown(item.content || '')),
                   }}
                 />
               </div>
@@ -137,17 +109,16 @@ const Article: React.FC<IProps> = ({ title, create_at, type, isFeatured, content
                       </span>
                     </li>
                   </div>
-                  <Link to={`/post/${id}#comment`} onClick={e => e.stopPropagation()} target="_blank" className="little-box comment">
+                  <Link to={`/post/${id}#comment`} target="_blank" onClick={e => e.stopPropagation()} className="little-box comment">
                     <li className="row">
                       <img className="icon" src="https://b-gold-cdn.xitu.io/v3/static/img/comment.4d5744f.svg" />
-
                       <span
                         className="count"
                         style={{
-                          display: commentCount === 0 ? 'none' : 'inline-block',
+                          display: item.commentCount === 0 ? 'none' : 'inline-block',
                         }}
                       >
-                        {commentCount}
+                        {item.commentCount}
                       </span>
                     </li>
                   </Link>
@@ -155,7 +126,13 @@ const Article: React.FC<IProps> = ({ title, create_at, type, isFeatured, content
               </div>
             </div>
 
-            <div className="thumb" />
+            <div
+              className="thumb"
+              style={{
+                display: item.screenshot ? 'block' : 'none',
+                background: `#fff url(${item.screenshot}) no-repeat center/cover`,
+              }}
+            />
           </section>
         </div>
       </li>
@@ -163,4 +140,4 @@ const Article: React.FC<IProps> = ({ title, create_at, type, isFeatured, content
   )
 }
 
-export default memo(Article)
+export default ListBodyLike

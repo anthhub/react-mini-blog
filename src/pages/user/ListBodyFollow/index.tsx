@@ -1,84 +1,197 @@
-import React, { useState, useEffect, useCallback } from 'react'
+import React, { useCallback, useEffect, useState, memo } from 'react'
 import { Link, useHistory, useParams } from 'react-router-dom'
 
-import { useIsLogin, useDispatch, useSelector } from '@/redux/context'
+import { addFollow, deleteFollow } from '@/Api/follow'
+import { getUserFollowers, getUserFollowing, getUserInfo } from '@/Api/user'
+import useFetch from '@/lib/hooks/useFetch'
+import useToggle from '@/lib/hooks/useToggle'
+import { useDispatch, useIsLogin, useSelector } from '@/redux/context'
 
 import { Wrapper } from './style'
 
 const ListBodyFollow: React.FC = () => {
-	const { followingList, followersList } = useSelector()
-	// console.log(followingList, 'followingList')
-	console.log(followersList, 'followersList')
+  const { id = '', item = '' } = useParams()
 
-	const { item = '' } = useParams()
+  // 拿到当前登录用户的 id
+  const {
+    user: { id: loginId },
+  } = useSelector()
 
-	return (
-		<Wrapper>
-			{/* <ul>{articleList.map((item: ArticleEntity) => <Article {...item} key={item.id} />)}</ul> */}
+  const dispatch = useDispatch()
+  // // 根据 id 该用户关注和被关注的用户列表
+  useFetch(async () => {
+    const rs = await getUserFollowing(id)
+    const list = (rs && rs.edges) || []
+    dispatch({
+      type: 'CHANG_FOLLOWING_LIST',
+      payload: { followingList: [...list] },
+    })
+    return list
+  }, [])
 
-			<ul className="list-group">
-				{item === 'followers' ? (
-					followersList.map((item: any) => (
-						<li className="list-item" key={item.follower.id}>
-							<Link to={'/user/' + item.follower.id} target="_blank" className="user-link">
-								<div
-									className="avatar"
-									style={{
-										background: `#eee url(${item.follower.avatarLarge}) no-repeat center/cover`
-									}}
-								/>
-								<div className="info-box">
-									<div className="username">{item.follower.username}</div>
+  useFetch(async () => {
+    const rs = await getUserFollowers(id)
+    const list = (rs && rs.edges) || []
+    dispatch({
+      type: 'CHANGE_FOLLOWERS_LIST',
+      payload: { followersList: [...list] },
+    })
+    return list
+  }, [])
 
-									{item.follower.jobTitle && item.follower.company ? (
-										<div className="detail">
-											{item.follower.jobTitle + ' @ ' + item.follower.company}
-										</div>
-									) : item.follower.jobTitle ? (
-										<div className="detail">{item.follower.jobTitle}</div>
-									) : item.follower.company ? (
-										<div className="detail">{item.follower.company}</div>
-									) : null}
-								</div>
-								<button type="button" className="follow-btn">
-									关注
-								</button>
-							</Link>
-						</li>
-					))
-				) : (
-					followingList.map((item: any) => (
-						<li className="list-item" key={item.following.id}>
-							<Link to={'/user/' + item.following.id} target="_blank" className="user-link">
-								<div
-									className="avatar"
-									style={{
-										background: `#eee url(${item.following.avatarLarge}) no-repeat center/cover`
-									}}
-								/>
-								<div className="info-box">
-									<div className="username">{item.following.username}</div>
+  const { followingList = [], followersList = [] } = useSelector()
 
-									{item.following.jobTitle && item.following.company ? (
-										<div className="detail">
-											{item.following.jobTitle + ' @ ' + item.following.company}
-										</div>
-									) : item.following.jobTitle ? (
-										<div className="detail">{item.following.jobTitle}</div>
-									) : item.following.company ? (
-										<div className="detail">{item.following.company}</div>
-									) : null}
-								</div>
-								<button type="button" className="follow-btn followed">
-									已关注
-								</button>
-							</Link>
-						</li>
-					))
-				)}
-			</ul>
-		</Wrapper>
-	)
+  const onFollow = useCallback(
+    async (followingId, isFollowing, type) => {
+      if (!followingId || !loginId) {
+        return
+      }
+      isFollowing ? await deleteFollow(followingId) : await addFollow(followingId)
+
+      const userInfo = await getUserInfo(id)
+      dispatch({
+        type: 'UPDATE_CHECK_USER',
+        payload: { checkUser: userInfo },
+      })
+
+      if (type === 'follower') {
+        dispatch({
+          type: 'CHANGE_FOLLOWERS_LIST',
+          payload: {
+            followersList: followersList.map(item => {
+              if (item.follower.id === followingId) {
+                item.follower.isFollowing = !isFollowing
+              }
+
+              return item
+            }),
+          },
+        })
+      }
+
+      if (type === 'following') {
+        dispatch({
+          type: 'CHANG_FOLLOWING_LIST',
+          payload: {
+            followingList: followingList.map(item => {
+              if (item.following.id === followingId) {
+                item.following.isFollowing = !isFollowing
+              }
+
+              return item
+            }),
+          },
+        })
+      }
+    },
+    [loginId, followersList, followingList]
+  )
+
+  return (
+    <Wrapper>
+      <ul className="list-group">
+        {item === 'followers'
+          ? followersList.map((item: any) => (
+              <li className="list-item" key={item.id}>
+                <Link to={'/user/' + item.follower.id} target="_blank" className="user-link">
+                  <div
+                    className="avatar"
+                    style={{
+                      background: `#eee url(${item.follower.avatarLarge}) no-repeat center/cover`,
+                    }}
+                  />
+                  <div className="info-box">
+                    <div className="username">{item.follower.username}</div>
+
+                    {item.follower.jobTitle && item.follower.company ? (
+                      <div className="detail">{item.follower.jobTitle + ' @ ' + item.follower.company}</div>
+                    ) : item.follower.jobTitle ? (
+                      <div className="detail">{item.follower.jobTitle}</div>
+                    ) : item.follower.company ? (
+                      <div className="detail">{item.follower.company}</div>
+                    ) : null}
+                  </div>
+
+                  {item.follower.isFollowing ? (
+                    <button
+                      type="button"
+                      className="follow-btn followed"
+                      onClick={e => {
+                        e.stopPropagation()
+                        e.preventDefault()
+                        onFollow(item.follower.id, item.follower.isFollowing, 'follower')
+                      }}
+                    >
+                      已关注
+                    </button>
+                  ) : (
+                    <button
+                      type="button"
+                      className="follow-btn"
+                      onClick={e => {
+                        e.stopPropagation()
+                        e.preventDefault()
+                        onFollow(item.follower.id, item.follower.isFollowing, 'follower')
+                      }}
+                    >
+                      关注
+                    </button>
+                  )}
+                </Link>
+              </li>
+            ))
+          : followingList.map((item: any) => (
+              <li className="list-item" key={item.id}>
+                <Link to={'/user/' + item.following.id} target="_blank" className="user-link">
+                  <div
+                    className="avatar"
+                    style={{
+                      background: `#eee url(${item.following.avatarLarge}) no-repeat center/cover`,
+                    }}
+                  />
+                  <div className="info-box">
+                    <div className="username">{item.following.username}</div>
+
+                    {item.following.jobTitle && item.following.company ? (
+                      <div className="detail">{item.following.jobTitle + ' @ ' + item.following.company}</div>
+                    ) : item.following.jobTitle ? (
+                      <div className="detail">{item.following.jobTitle}</div>
+                    ) : item.following.company ? (
+                      <div className="detail">{item.following.company}</div>
+                    ) : null}
+                  </div>
+
+                  {item.following.isFollowing ? (
+                    <button
+                      type="button"
+                      className="follow-btn followed"
+                      onClick={e => {
+                        e.stopPropagation()
+                        e.preventDefault()
+                        onFollow(item.following.id, item.following.isFollowing, 'following')
+                      }}
+                    >
+                      已关注
+                    </button>
+                  ) : (
+                    <button
+                      type="button"
+                      className="follow-btn"
+                      onClick={e => {
+                        e.stopPropagation()
+                        e.preventDefault()
+                        onFollow(item.following.id, item.following.isFollowing, 'following')
+                      }}
+                    >
+                      关注
+                    </button>
+                  )}
+                </Link>
+              </li>
+            ))}
+      </ul>
+    </Wrapper>
+  )
 }
 
-export default ListBodyFollow
+export default memo(ListBodyFollow)

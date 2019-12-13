@@ -2,6 +2,9 @@ export default function reducer(state: any, action: any) {
   const { payload } = action
   console.log('%c%s', 'color: #20bd08;font-size:15px', '===TQY===: reducer -> action', action)
   switch (action.type) {
+    case 'CHANGE_SHOW_LOGIN':
+      return { ...state, ...payload }
+
     case 'LOGIN':
       return { ...state, ...payload }
 
@@ -31,6 +34,9 @@ export default function reducer(state: any, action: any) {
 
     case 'UPDATE_USER':
       return { ...state, user: { ...state.user, ...payload.user } }
+
+    case 'UPDATE_CHECK_USER':
+      return { ...state, checkUser: { ...state.checkUser, ...payload.checkUser } }
 
     case 'LOGOUT':
       return { ...state, user: {} }

@@ -13,12 +13,12 @@ import http from './request'
 
 export const signUp = (data: SignUpDto) => {
   return http.post(`${baseUrl}/signUp`, data).then(res => {
-    return res.data.data
+    return res
   })
 }
 
 export const signIn = (data: SignInDto) => {
   return http.post(`${baseUrl}/signIn`, data).then(res => {
-    return res.data.data
+    return res
   })
 }

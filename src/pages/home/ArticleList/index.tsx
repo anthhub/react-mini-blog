@@ -14,11 +14,6 @@ import Article from '../Article'
 import { Wrapper } from './style'
 
 const ArticleList: React.FC = () => {
-  // search 是地址栏 ? 开始的内容
-  // query 是 ? 之后内容拆成的对象
-  // const { query }: any = useQuery()
-  // console.log(query)
-
   const [pageInfo, setPageInfo] = useState({ hasNextPage: true, endCursor: 0 })
 
   const { setQuery, query } = useQuery()
@@ -35,14 +30,12 @@ const ArticleList: React.FC = () => {
     }
   }, [])
 
-  // console.log(query.own, '========Query========')
   const dispatch = useDispatch()
   const {
     user: { id },
   } = useSelector()
-  // console.log('abc', id)
 
-  const refresh = useCallback(async () => {
+  const { data = [] } = useFetch(async () => {
     const rs = query.own === 'mine' ? await getUserArticles({ id, endCursor: 0 }) : await getArticles({ ...query, endCursor: 0 })
     const list = (rs && rs.edges) || []
 
@@ -55,15 +48,15 @@ const ArticleList: React.FC = () => {
     }
 
     return list
-  }, [query.own])
-
-  const { data = [] } = useFetch(async () => {
-    return refresh()
-  }, [query.own])
+  }, [query])
 
   const nextPage = useCallback(async () => {
     const rs = query.own === 'mine' ? await getUserArticles({ id, endCursor: pageInfo.endCursor }) : await getArticles({ ...query, endCursor: pageInfo.endCursor })
     const list = (rs && rs.edges) || []
+
+    if (rs.pageInfo.endCursor <= pageInfo.endCursor) {
+      return []
+    }
 
     dispatch({
       type: 'APPEND_ARTICLE_LIST',
@@ -79,7 +72,6 @@ const ArticleList: React.FC = () => {
 
   // 用 store 的数据渲染页面
   const { articleList } = useSelector()
-  console.log('articleList', articleList)
 
   return (
     <Wrapper>
@@ -110,20 +102,14 @@ const ArticleList: React.FC = () => {
         <InfiniteScroll
           dataLength={articleList.length} // This is important field to render the next data
           next={nextPage}
-          hasMore={true}
-          loader={pageInfo.hasNextPage ? <h3 style={{ textAlign: 'center' }}>加载中...</h3> : <h3 style={{ textAlign: 'center' }}>没有更多数据了...</h3>}
-          //   scrollThreshold={300}
-          //   endMessage={
-          //     <p style={{ textAlign: 'center' }}>
-          //       <b>Yay! You have seen it all</b>
-          //     </p>
-          //   }
-          // below props only if you need pull down functionality
-          //   pullDownToRefreshThreshold={100}
-          //   refreshFunction={refresh}
-          //   pullDownToRefresh
-          //   pullDownToRefreshContent={<h3 style={{ textAlign: 'center' }}>下拉刷新...</h3>}
-          //   releaseToRefreshContent={<h3 style={{ textAlign: 'center' }}>下拉刷新..</h3>}
+          hasMore={pageInfo.hasNextPage}
+          loader={
+            pageInfo.hasNextPage ? (
+              <h5 style={{ textAlign: 'center', color: '#b2bac2' }}>加载中...</h5>
+            ) : (
+              <h5 style={{ textAlign: 'center', color: '#b2bac2' }}>没有更多数据了...</h5>
+            )
+          }
         >
           {articleList.map((item: ArticleEntity) => (
             <Article {...item} key={item.id} />
