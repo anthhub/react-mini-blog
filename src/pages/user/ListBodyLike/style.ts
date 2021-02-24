@@ -5,8 +5,6 @@
 // `
 
 import styled from 'styled-components'
-import dotPic from '../../../statics/dot.svg'
-import dotHoverPic from '../../../statics/dot-hover.svg'
 
 export const Wrapper = styled.div`
   .list-item {

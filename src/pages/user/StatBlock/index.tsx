@@ -1,7 +1,6 @@
 // 详情页 右侧 作者简介卡片
 
 import React from 'react'
-import { useParams } from 'react-router'
 
 import { Wrapper } from './style'
 

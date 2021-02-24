@@ -1,13 +1,14 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+
 import React, { useCallback, useEffect, useState, useRef } from 'react'
-import { useHistory, useLocation } from 'react-router'
+import { useLocation } from 'react-router'
 import { Link } from 'react-router-dom'
 
 import { createComment, getCommentList } from '@/Api/comment'
 import useFetch from '@/lib/hooks/useFetch'
 import useInputEvent from '@/lib/hooks/useInputEvent'
-import { translateMarkdown } from '@/lib/utils/markdown'
 import { ArticleEntity } from '@/modal/entities/article.entity'
-import { useIsLogin, useSelector } from '@/redux/context'
+import { useSelector } from '@/redux/context'
 
 import { Wrapper } from './style'
 
@@ -311,16 +312,15 @@ interface IProps extends ArticleEntity {
   // user: { avatarLarge: string }
 }
 
-const Comment: React.FC<IProps> = ({ create_at, content, title, html, screenshot, id: articleId, viewCount, user: { avatarLarge = '', id: userId, username: author } = {} }) => {
-  const isLogin = useIsLogin()
+const Comment: React.FC<IProps> = ({ id: articleId, user: { id: userId } = {} }) => {
   // 登录用户的用户名
   const {
-    user: { username, id: loginId, avatarLarge: loginAvatarLarge },
+    user: { id: loginId, avatarLarge: loginAvatarLarge },
   } = useSelector()
 
   const [focusFlag, setFocusFlag] = useState(false)
-  const [focusFlag1, setFocusFlag1] = useState(false)
-  const [focusFlag2, setFocusFlag2] = useState(false)
+  const [, setFocusFlag1] = useState(false)
+  const [, setFocusFlag2] = useState(false)
 
   const { value: comment, onInputEvent, setValue: setComment } = useInputEvent('')
   const { value: comment1, onInputEvent: onInputEvent1, setValue: setComment1 } = useInputEvent('')

@@ -1,15 +1,17 @@
-import React, { useCallback, useEffect, useState, } from 'react'
-import { Link, useHistory, } from 'react-router-dom'
+/* eslint-disable react-hooks/exhaustive-deps */
+
+import React, { useCallback, useEffect, useState } from 'react'
+import { Link, useHistory } from 'react-router-dom'
 
 import useFlag from '@/lib/hooks/useFlag'
 import useInputEvent from '@/lib/hooks/useInputEvent'
 import useQuery from '@/lib/hooks/useQuery'
-import { useDispatch, useIsLogin, useSelector, } from '@/redux/context'
+import { useDispatch, useIsLogin, useSelector } from '@/redux/context'
 
 import avatarPic from '../../../statics/avatar.png'
 import Login from '../Login'
 import Register from '../Register'
-import { Wrapper, } from './style'
+import { Wrapper } from './style'
 
 const Header: React.FC = props => {
   // 搜索框聚焦
@@ -55,9 +57,6 @@ const Header: React.FC = props => {
   const { query, setQuery } = useQuery()
 
   const { value: search, onInputEvent } = useInputEvent(query.search || '')
-
-  const { articleList } = useSelector()
-  // console.log({ articleList })
 
   const history = useHistory()
 
@@ -119,7 +118,7 @@ const Header: React.FC = props => {
                     }
                   }}
                 />
-                <img alt="search" className="search-icon" src="https://b-gold-cdn.xitu.io/v3/static/img/juejin-search-icon.6f8ba1b.svg" onClick={onSearch} />
+                <img alt="" className="search-icon" src="https://b-gold-cdn.xitu.io/v3/static/img/juejin-search-icon.6f8ba1b.svg" onClick={onSearch} />
               </div>
             </li>
             {/* 写文章按钮 根据登陆状态有不同跳转 */}

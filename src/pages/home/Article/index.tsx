@@ -1,5 +1,7 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+
 import React, { memo, useCallback, useEffect, useState } from 'react'
-import { Link, useHistory, useParams } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 import { addLike, deleteLike } from '@/Api/like'
 import useQuery from '@/lib/hooks/useQuery'
@@ -34,8 +36,6 @@ export const formatDate = (time: number) => {
 interface IProps extends ArticleEntity {}
 
 const Article: React.FC<IProps> = ({ title, create_at, type, isFeatured, content, html, screenshot = '', isLiked = false, likeCount, commentCount, id, user = {} }) => {
-  const history = useHistory()
-
   // query.own 是 'mine' 才顯示文章預覽右下角的小圓點
   const { query } = useQuery()
 
@@ -122,6 +122,7 @@ const Article: React.FC<IProps> = ({ title, create_at, type, isFeatured, content
                   <div className="little-box like" onClick={onLike}>
                     <li className="row">
                       <img
+                        alt=""
                         className="icon"
                         src={likeFlag ? 'https://b-gold-cdn.xitu.io/v3/static/img/zan-active.930baa2.svg' : 'https://b-gold-cdn.xitu.io/v3/static/img/zan.e9d7698.svg'}
                       />
@@ -139,7 +140,7 @@ const Article: React.FC<IProps> = ({ title, create_at, type, isFeatured, content
                   </div>
                   <Link to={`/post/${id}#comment`} onClick={e => e.stopPropagation()} target="_blank" className="little-box comment">
                     <li className="row">
-                      <img className="icon" src="https://b-gold-cdn.xitu.io/v3/static/img/comment.4d5744f.svg" />
+                      <img alt="" className="icon" src="https://b-gold-cdn.xitu.io/v3/static/img/comment.4d5744f.svg" />
 
                       <span
                         className="count"

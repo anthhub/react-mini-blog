@@ -1,17 +1,12 @@
-import { title } from 'process'
-import { async } from 'q'
-import React, { useCallback, useEffect, useState } from 'react'
-import { Link, useHistory, useParams } from 'react-router-dom'
+import React from 'react'
+import { useParams } from 'react-router-dom'
 
-import { deleteArticle, getArticles } from '@/Api/article'
-import { getUserArticles, getUserInfo } from '@/Api/user'
+import { getUserArticles } from '@/Api/user'
 import useFetch from '@/lib/hooks/useFetch'
-import useQuery from '@/lib/hooks/useQuery'
-import { translateMarkdown } from '@/lib/utils/markdown'
+
 import { ArticleEntity } from '@/modal/entities/article.entity'
-import { formatDate } from '@/pages/home/Article'
-import { matchReg } from '@/pages/post/Catalog'
-import { useDispatch, useIsLogin, useSelector } from '@/redux/context'
+
+import { useDispatch, useSelector } from '@/redux/context'
 
 import ListBodyPost from '../ListBodyPost'
 import { Wrapper } from './style'

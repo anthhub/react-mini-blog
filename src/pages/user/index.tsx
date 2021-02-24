@@ -2,11 +2,10 @@ import { BackTop } from 'antd'
 import React from 'react'
 import { useParams } from 'react-router'
 
-import { getArticle } from '@/Api/article'
-import { getUserArticles, getUserInfo } from '@/Api/user'
+import { getUserInfo } from '@/Api/user'
 import Advertising from '@/components/Advertising'
 import useFetch from '@/lib/hooks/useFetch'
-import { ArticleEntity } from '@/modal/entities/article.entity'
+
 import { useDispatch, useSelector } from '@/redux/context'
 
 import FallowBlock from './FallowBlock'

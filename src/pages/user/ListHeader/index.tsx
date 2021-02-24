@@ -1,17 +1,15 @@
-import { async } from 'q'
-import React, { useEffect, useState } from 'react'
-import { Link, useHistory, useParams } from 'react-router-dom'
+import React from 'react'
+import { Link, useParams } from 'react-router-dom'
 
-import { getArticles } from '@/Api/article'
 import { getUserArticles, getUserLikes } from '@/Api/user'
 import useFetch from '@/lib/hooks/useFetch'
 
-import { useDispatch, useIsLogin, useSelector } from '@/redux/context'
+import { useDispatch, useSelector } from '@/redux/context'
 
 import { Wrapper } from './style'
 
 const ListHeader: React.FC = () => {
-  const { id = '', item = '' } = useParams()
+  const { id = '', item = '' } = useParams() as any
 
   const dispatch = useDispatch()
   // 分页部分的数据统一在 header 中拿到（因爲 header 一定會渲染），再放入 store 中供分页组件使用

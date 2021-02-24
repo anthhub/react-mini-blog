@@ -1,3 +1,6 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+
+
 import React, { useCallback } from 'react'
 import { useHistory } from 'react-router'
 import { Link } from 'react-router-dom'

@@ -1,17 +1,13 @@
-import { title } from 'process'
-import React, { useCallback, useEffect, useState } from 'react'
-import { Link, useHistory, useParams } from 'react-router-dom'
+/* eslint-disable react-hooks/exhaustive-deps */
 
-import { deleteArticle, getArticles } from '@/Api/article'
+import React, { useCallback, useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 import { addLike, deleteLike } from '@/Api/like'
-import { getUserArticles, getUserInfo, getUserLikes } from '@/Api/user'
-import useFetch from '@/lib/hooks/useFetch'
-import useQuery from '@/lib/hooks/useQuery'
+
 import { translateMarkdown } from '@/lib/utils/markdown'
 import { ArticleEntity } from '@/modal/entities/article.entity'
 import { formatDate } from '@/pages/home/Article'
 import { matchReg } from '@/pages/post/Catalog'
-import { useDispatch, useIsLogin, useSelector } from '@/redux/context'
 
 import { Wrapper } from './style'
 
@@ -62,11 +58,11 @@ const ListBodyLike: React.FC<IProps> = ({ item }) => {
               <ul className="info-row">
                 <li className="column info-item">专栏</li>
                 <li className="info-item">
-                  <a className="user-link">{item.user.username}</a>
+                  <a href="#top" className="user-link">{item.user.username}</a>
                 </li>
                 <li className="info-item">{formatDate(item.create_at)}</li>
                 <li className="info-item">
-                  <a className="tag-link">{item.type}</a>
+                  <a href="#top" className="tag-link">{item.type}</a>
                 </li>
               </ul>
 
@@ -94,6 +90,7 @@ const ListBodyLike: React.FC<IProps> = ({ item }) => {
                   <div className="little-box like" onClick={onLike}>
                     <li className="row">
                       <img
+                        alt=""
                         className="icon"
                         src={likeFlag ? 'https://b-gold-cdn.xitu.io/v3/static/img/zan-active.930baa2.svg' : 'https://b-gold-cdn.xitu.io/v3/static/img/zan.e9d7698.svg'}
                       />
@@ -111,7 +108,7 @@ const ListBodyLike: React.FC<IProps> = ({ item }) => {
                   </div>
                   <Link to={`/post/${id}#comment`} target="_blank" onClick={e => e.stopPropagation()} className="little-box comment">
                     <li className="row">
-                      <img className="icon" src="https://b-gold-cdn.xitu.io/v3/static/img/comment.4d5744f.svg" />
+                      <img alt="" className="icon" src="https://b-gold-cdn.xitu.io/v3/static/img/comment.4d5744f.svg" />
                       <span
                         className="count"
                         style={{

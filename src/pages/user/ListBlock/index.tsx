@@ -1,5 +1,5 @@
-import React, { useEffect, useState, memo } from 'react'
-import { Link, useHistory, useParams } from 'react-router-dom'
+import React from 'react'
+import { useParams } from 'react-router-dom'
 
 import ListBodyFollow from '../ListBodyFollow'
 import ListBodyLikes from '../ListBodyLikes'
@@ -8,7 +8,7 @@ import ListHeader from '../ListHeader'
 import { Wrapper } from './style'
 
 const ListBlock: React.FC = props => {
-  const { item = '' } = useParams()
+  const { item = '' } = useParams() as any
 
   return (
     <Wrapper>

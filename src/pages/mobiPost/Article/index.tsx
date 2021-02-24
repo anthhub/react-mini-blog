@@ -1,3 +1,6 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+
+
 import React from 'react'
 
 import { translateMarkdown } from '@/lib/utils/markdown'
@@ -12,7 +15,7 @@ const Article: React.FC<IProps> = ({ update_at, content, author, title, html }) 
     <Wrapper>
       <div className="author">
         <div className="author-info">
-          <a>
+          <a href="#top">
             <div
               className="avatar"
               style={{
@@ -21,7 +24,7 @@ const Article: React.FC<IProps> = ({ update_at, content, author, title, html }) 
             />
           </a>
           <div>
-            <a className="author-name">{author}</a>
+            <a href="#top" className="author-name">{author}</a>
             <div className="article-info">
               <time>{update_at}</time>
               {/* <span className="views">阅读 1367</span> */}

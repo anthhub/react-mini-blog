@@ -1,6 +1,7 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+
 import { message } from 'antd'
-import React, { useRef, useState, useCallback, useEffect } from 'react'
-import { UnControlled as CodeMirror } from 'react-codemirror2'
+import React, { useState, useCallback, useEffect } from 'react'
 
 // 引入样式
 import { Wrapper } from './style'

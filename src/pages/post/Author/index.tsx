@@ -1,13 +1,12 @@
 // 详情页 右侧 作者简介卡片
 
-import React, { useEffect } from 'react'
+import React from 'react'
 import { Link } from 'react-router-dom'
 
 import { getUserInfo } from '@/Api/user'
 import useFetch from '@/lib/hooks/useFetch'
 import { ArticleEntity } from '@/modal/entities/article.entity'
 import { toThousands } from '@/pages/user/StatBlock'
-import { useSelector } from '@/redux/context'
 
 import { Wrapper } from './style'
 

@@ -1,6 +1,7 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+
 // 详情页 右侧 作者简介卡片
 
-import { async } from 'q'
 import React, { useCallback } from 'react'
 import { useHistory } from 'react-router'
 

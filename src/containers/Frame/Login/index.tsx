@@ -1,8 +1,11 @@
+
+/* eslint-disable react-hooks/exhaustive-deps */
+
 // 右侧 下载客户端小卡片
 
 import { signIn } from '@/Api/account'
 import { useDispatch } from '@/redux/context'
-import React, { useCallback, useEffect } from 'react'
+import React, { useCallback } from 'react'
 import useInputEvent from '@/lib/hooks/useInputEvent'
 import { message } from 'antd'
 

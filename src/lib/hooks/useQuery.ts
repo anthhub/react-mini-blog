@@ -1,4 +1,6 @@
-import { useCallback, useEffect, useMemo, useState, useRef } from 'react'
+/* eslint-disable react-hooks/exhaustive-deps */
+
+import { useCallback, useMemo, useRef } from 'react'
 import { useHistory, useLocation } from 'react-router'
 
 const queryToObject = (search: string) => {

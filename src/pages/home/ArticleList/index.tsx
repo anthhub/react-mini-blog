@@ -1,10 +1,12 @@
-import { async } from 'q'
+/* eslint-disable react-hooks/exhaustive-deps */
+
+
 import React, { useEffect, useState, useCallback } from 'react'
 import InfiniteScroll from 'react-infinite-scroll-component'
-import { Link, useHistory } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 
 import { getArticles } from '@/Api/article'
-import { getUserArticles, getUserInfo } from '@/Api/user'
+import { getUserArticles } from '@/Api/user'
 import useFetch from '@/lib/hooks/useFetch'
 import useQuery from '@/lib/hooks/useQuery'
 import { ArticleEntity } from '@/modal/entities/article.entity'
@@ -35,7 +37,7 @@ const ArticleList: React.FC = () => {
     user: { id },
   } = useSelector()
 
-  const { data = [] } = useFetch(async () => {
+  useFetch(async () => {
     const rs = query.own === 'mine' ? await getUserArticles({ id, endCursor: 0 }) : await getArticles({ ...query, endCursor: 0 })
     const list = (rs && rs.edges) || []
 

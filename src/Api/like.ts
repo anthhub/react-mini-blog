@@ -1,5 +1,3 @@
-import { UserUpdateDto } from '@/modal/dtos/userUpdate.dto'
-
 import http from './request'
 import { baseUrl } from './url'
 

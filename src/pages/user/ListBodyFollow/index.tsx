@@ -1,16 +1,18 @@
-import React, { useCallback, useEffect, useState, memo } from 'react'
-import { Link, useHistory, useParams } from 'react-router-dom'
+/* eslint-disable react-hooks/exhaustive-deps */
+
+import React, { useCallback, memo } from 'react'
+import { Link, useParams } from 'react-router-dom'
 
 import { addFollow, deleteFollow } from '@/Api/follow'
 import { getUserFollowers, getUserFollowing, getUserInfo } from '@/Api/user'
 import useFetch from '@/lib/hooks/useFetch'
-import useToggle from '@/lib/hooks/useToggle'
-import { useDispatch, useIsLogin, useSelector } from '@/redux/context'
+
+import { useDispatch, useSelector } from '@/redux/context'
 
 import { Wrapper } from './style'
 
 const ListBodyFollow: React.FC = () => {
-  const { id = '', item = '' } = useParams()
+  const { id = '', item = '' } = useParams() as any
 
   // 拿到当前登录用户的 id
   const {

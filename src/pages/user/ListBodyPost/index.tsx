@@ -1,17 +1,14 @@
-import { title } from 'process'
-import { async } from 'q'
+/* eslint-disable react-hooks/exhaustive-deps */
+
 import React, { useCallback, useEffect, useState } from 'react'
 import { Link, useHistory, useParams } from 'react-router-dom'
 
-import { deleteArticle, getArticles } from '@/Api/article'
-import { getUserArticles, getUserInfo } from '@/Api/user'
-import useFetch from '@/lib/hooks/useFetch'
-import useQuery from '@/lib/hooks/useQuery'
+import { deleteArticle } from '@/Api/article'
 import { translateMarkdown } from '@/lib/utils/markdown'
 import { ArticleEntity } from '@/modal/entities/article.entity'
 import { formatDate } from '@/pages/home/Article'
 import { matchReg } from '@/pages/post/Catalog'
-import { useDispatch, useIsLogin, useSelector } from '@/redux/context'
+import { useDispatch, useSelector } from '@/redux/context'
 
 import { Wrapper } from './style'
 import { deleteLike, addLike } from '@/Api/like'
@@ -32,7 +29,7 @@ const ListBodyPost: React.FC<IProps> = ({
   user: { avatarLarge, username } = {},
 }) => {
   // 拿用户 id
-  const { id = '' } = useParams()
+  const { id = '' } = useParams() as any
 
   const {
     user: { id: loginId },
@@ -138,9 +135,10 @@ const ListBodyPost: React.FC<IProps> = ({
           <ul className="action-left">
             <div className="little-box like" onClick={onLike}>
               <li className="action like">
-                {/* <img className="icon" src="https://b-gold-cdn.xitu.io/v3/static/img/zan.e9d7698.svg" /> */}
+                {/* <img alt="" className="icon" src="https://b-gold-cdn.xitu.io/v3/static/img/zan.e9d7698.svg" /> */}
 
                 <img
+                  alt=""
                   className="icon"
                   src={likeFlag ? 'https://b-gold-cdn.xitu.io/v3/static/img/zan-active.930baa2.svg' : 'https://b-gold-cdn.xitu.io/v3/static/img/zan.e9d7698.svg'}
                 />
@@ -158,7 +156,7 @@ const ListBodyPost: React.FC<IProps> = ({
             </div>
             <Link to={`/post/${articleId}#comment`} onClick={e => e.stopPropagation()}>
               <li className="action comment">
-                <img className="icon" src="https://b-gold-cdn.xitu.io/v3/static/img/comment.4d5744f.svg" />
+                <img alt="" className="icon" src="https://b-gold-cdn.xitu.io/v3/static/img/comment.4d5744f.svg" />
                 <span
                   className="count"
                   style={{

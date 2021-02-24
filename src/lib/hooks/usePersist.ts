@@ -1,3 +1,6 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+
+
 import axios from 'axios'
 import { useEffect } from 'react'
 
@@ -22,16 +25,16 @@ export function usePersistedReducer([state, dispatch]: any[], key = 'state', fla
     // if (!flag) {
     //   return
     // }
-    const tmp = state || {}
+    // const tmp = state || {}
 
-    const newState = Object.keys(tmp).reduce((res, cur) => {
-      if (Array.isArray(tmp[cur])) {
-        // 避免数组过大
-        res[cur] = tmp[cur].slice(0, 20)
-      }
-      res[cur] = tmp[cur]
-      return res
-    }, {} as any)
+    // const newState = Object.keys(tmp).reduce((res, cur) => {
+    //   if (Array.isArray(tmp[cur])) {
+    //     // 避免数组过大
+    //     res[cur] = tmp[cur].slice(0, 20)
+    //   }
+    //   res[cur] = tmp[cur]
+    //   return res
+    // }, {} as any)
 
     return localStorage.setItem(key, JSON.stringify(state))
   }, [state])

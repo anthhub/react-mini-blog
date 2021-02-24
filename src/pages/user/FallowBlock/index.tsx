@@ -3,8 +3,6 @@
 import React from 'react'
 import { Link, useParams } from 'react-router-dom'
 
-import useFetch from '@/lib/hooks/useFetch'
-
 import { Wrapper } from './style'
 
 interface IProps {
@@ -15,7 +13,7 @@ interface IProps {
 }
 
 const FallowBlock: React.FC<IProps> = ({ user: { followersCount, followingCount } = {} }) => {
-  const { id = '' } = useParams()
+  const { id = '' } = useParams() as any
 
   return (
     <Wrapper>

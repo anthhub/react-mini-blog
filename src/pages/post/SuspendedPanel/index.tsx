@@ -1,5 +1,6 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+
 import React, { useCallback, useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
 
 import { addLike, deleteLike } from '@/Api/like'
 import { ArticleEntity } from '@/modal/entities/article.entity'

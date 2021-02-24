@@ -1,5 +1,3 @@
-import axios from 'axios'
-
 import { CreateArticleDto } from '@/modal/dtos/article.dto'
 import { ArticleEntity } from '@/modal/entities/article.entity'
 import { IPage } from '@/modal/interfaces/common.interface'
