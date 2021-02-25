@@ -4,14 +4,20 @@ import React from 'react'
 
 import { Wrapper } from './style'
 
+
+import avatar from '@/statics/avatar.png'
+
+
 interface IProps {}
-const avatar = 'http://localhost:3003/image-1575807041779.jpg'
 
 const Advertising: React.FC<IProps> = () => {
   return (
     <Wrapper avatarLarge={avatar}>
       <header className="author-title" title={'由于公司经营不善...'}>
-        打个广告  <span role="img" aria-label="Panda">😂😂😂</span>
+        打个广告{' '}
+        <span role="img" aria-label="Panda">
+          😂😂😂
+        </span>
       </header>
       <div className="author-info">
         <a className="author-desc" href={'https://juejin.im/user/5bc3ed12e51d450e77631fd4'} target="_blank" rel="noopener noreferrer" title={'由于公司经营不善...'}>
