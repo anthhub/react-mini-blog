@@ -1,0 +1,43 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.service.app }}
+spec:
+  ports:
+    - protocol: TCP
+      name: web
+      port: {{ .Values.service.port }}
+  selector:
+    app: {{ .Values.service.app }}
+---
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: {{ .Values.service.app }}
+  labels:
+    app: {{ .Values.service.app }}
+spec:
+  replicas: {{ .Values.pod.replicas }}
+  selector:
+    matchLabels:
+      app: {{ .Values.service.app }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.service.app }}
+    spec:
+      imagePullSecrets:
+        - name: liuma-registry
+      containers:
+        - name: {{ .Values.service.app }}
+          image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
+          resources:
+            requests:
+              memory: {{ .Values.resources.requests.memory }}
+              cpu: {{ .Values.resources.requests.cpu }}
+            limits:
+              memory: {{ .Values.resources.limits.memory }}
+              cpu: {{ .Values.resources.limits.cpu }}
+          ports:
+            - name: web
+              containerPort: {{ .Values.service.port }}
