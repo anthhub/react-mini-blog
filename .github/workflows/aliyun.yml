@@ -1,0 +1,102 @@
+name: Helm CI
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+env:
+  NAMESPACE: namespace
+  TAG: 0.0.${{ github.run_number }}
+  REPO: https://anthhub.github.io/react-mini-blog
+  REQ: $(curl -s https://anthhub.github.io/react-mini-blog/latest?q=$RANDOM) 
+  APP: react-mini-blog
+  HOST: "118.190.37.169"
+  DOMAIN: anthhub/react-mini-blog
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Dockerfile
+        uses: actions/checkout@v2
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+
+      - name: Cache Docker layers
+        uses: actions/cache@v2
+        with:
+          path: /tmp/.buildx-cache
+          key: ${{ runner.os }}-buildx-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-buildx-
+ 
+      - name: Cache NPM Dependences
+        uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      - name: Build and Push Docker Image
+        uses: docker/build-push-action@v1
+        with: 
+          registry: ${{ secrets.ALI_DOCKER_HUB_REGISTRY }}
+          username: ${{ secrets.ALI_DOCKER_HUB_USN }}
+          password: ${{ secrets.ALI_DOCKER_HUB_PWD }}
+          repository: ${{ secrets.HOST }}
+          tags: ${{ env.TAG }}
+          cache-from: type=local,src=/tmp/.buildx-cache
+          cache-to: type=local,dest=/tmp/.buildx-cache
+
+      - name: Install Helm
+        uses: azure/setup-helm@v1
+        with:
+          version: v3.4.0
+
+      - name: Package Helm 
+        run: cd ./.helm && helm package ./config --version=${{ env.TAG }} && helm repo index . && ls > index.html && echo ${{ env.TAG }} > latest
+
+      - name: Deploy Helm Repo
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./.helm
+          commit_message: "helm repo: ${{ env.REPO }}?v=${{ env.TAG }} deployed!"
+
+      - name: Setup Helm
+        timeout-minutes: 10
+        uses: JimCronqvist/action-ssh@master
+        with:
+          hosts: ${{ env.HOST }}
+          privateKey: ${{ secrets.PRIVATE_KEY }}
+          command: |
+            function error_exit {
+              echo "$1" 1>&2
+              exit 1
+            }
+
+            until [ ${{ env.REQ }} = ${{ env.TAG }} ]
+            do
+              sleep 1
+              echo "sleeping"
+              echo ${{ env.REQ }} -- ${{ env.TAG }}
+            done
+            echo "pass"
+
+            helm repo add ${{ env.APP }} ${{ env.REPO }} || error_exit "$LINENO failed: helm repo add ${{ env.APP }} "
+            helm repo update || error_exit "$LINENO failed: helm repo update"
+            helm search repo ${{ env.APP }} || error_exit "$LINENO failed: helm search repo ${{ env.APP }}"
+            if helm status ${{ env.APP }} 
+            then
+              helm upgrade ${{ env.APP }} ${{ env.APP }}/mychart --version=${{ env.TAG }} --set image.tag=${{ env.TAG }} || error_exit "$LINENO failed: helm upgrade ${{ env.APP }} ${{ env.APP }}/mychart"
+            else
+              helm install ${{ env.APP }} ${{ env.APP }}/mychart --version=${{ env.TAG }} --set image.tag=${{ env.TAG }} || error_exit "$LINENO failed: helm install ${{ env.APP }} ${{ env.APP }}/mychart"
+            fi 
+
+            helm ls
+

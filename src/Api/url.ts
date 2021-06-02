@@ -1,17 +1,10 @@
-const HOST = '/blog-test'
-
-const ENV_MAP = {
-  development: '-dev',
-  test: '-test',
-  preview: '-prev',
-  production: '',
-}
-
 const VERSION = '/api/v1'
 
-// const DOMAIN = 'http://101.132.79.152'
-const DOMAIN = 'http://118.190.37.169:7700'
+function getBaseUrl() {
+  if (process.env.API_ENV === 'development') {
+    return 'http://localhost:3003/blog' + VERSION
+  }
+  return 'http://njj.liuma.top/blog' + VERSION
+}
 
-const url = DOMAIN + HOST + (ENV_MAP[process.env.API_ENV] || '') + VERSION
-
-export const baseUrl = process.env.API_ENV === 'development' ? 'http://localhost:3003/blog-test/api/v1' : url
+export const baseUrl = getBaseUrl()

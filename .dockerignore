@@ -1,0 +1,6 @@
+node_modules/
+logs/
+.github/
+.vscode/
+test/
+build/
