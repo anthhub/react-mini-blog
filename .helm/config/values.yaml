@@ -3,8 +3,8 @@
 # Declare variables to be passed into your templates.
 
 image:
-  rigistry: registry.cn-qingdao.aliyuncs.com
-  repository: registry.cn-qingdao.aliyuncs.com/anthhub/react-mini-blog
+  rigistry: registry.cn-shanghai.aliyuncs.com
+  repository: registry.cn-shanghai.aliyuncs.com/anthhub/react-mini-blog
   tag: latest
   # pullPolicy: IfNotPresent
 

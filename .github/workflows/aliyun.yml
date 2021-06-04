@@ -12,7 +12,6 @@ env:
   REPO: https://anthhub.github.io/react-mini-blog
   REQ: $(curl -s https://anthhub.github.io/react-mini-blog/latest?q=$RANDOM) 
   APP: react-mini-blog
-  HOST: "118.190.37.169"
   DOMAIN: anthhub/react-mini-blog
 
 jobs:
@@ -72,7 +71,7 @@ jobs:
         timeout-minutes: 10
         uses: JimCronqvist/action-ssh@master
         with:
-          hosts: ${{ env.HOST }}
+          hosts: ${{ env.ALI_HOST }}
           privateKey: ${{ secrets.PRIVATE_KEY }}
           command: |
             function error_exit {
