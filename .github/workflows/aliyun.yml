@@ -10,8 +10,9 @@ env:
   NAMESPACE: namespace
   TAG: 0.0.${{ github.run_number }}
   REPO: https://anthhub.github.io/react-mini-blog
-  REQ: $(curl -s https://anthhub.github.io/react-mini-blog/latest?q=$RANDOM) 
+  REQ: $(curl -s https://anthhub.github.io/react-mini-blog/latest?q=$RANDOM)
   APP: react-mini-blog
+  HOST: ${{ secrets.ALI_HOST }}
   DOMAIN: anthhub/react-mini-blog
 
 jobs:
@@ -32,7 +33,7 @@ jobs:
           key: ${{ runner.os }}-buildx-${{ github.sha }}
           restore-keys: |
             ${{ runner.os }}-buildx-
- 
+    
       - name: Cache NPM Dependences
         uses: actions/cache@v2
         with:
@@ -65,13 +66,14 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./.helm
+          keep_files: true
           commit_message: "helm repo: ${{ env.REPO }}?v=${{ env.TAG }} deployed!"
 
       - name: Setup Helm
         timeout-minutes: 10
         uses: JimCronqvist/action-ssh@master
         with:
-          hosts: ${{ env.ALI_HOST }}
+          hosts: ${{ env.HOST }}
           privateKey: ${{ secrets.PRIVATE_KEY }}
           command: |
             function error_exit {
@@ -90,12 +92,13 @@ jobs:
             helm repo add ${{ env.APP }} ${{ env.REPO }} || error_exit "$LINENO failed: helm repo add ${{ env.APP }} "
             helm repo update || error_exit "$LINENO failed: helm repo update"
             helm search repo ${{ env.APP }} || error_exit "$LINENO failed: helm search repo ${{ env.APP }}"
-            if helm status ${{ env.APP }} 
-            then
-              helm upgrade ${{ env.APP }} ${{ env.APP }}/mychart --version=${{ env.TAG }} --set image.tag=${{ env.TAG }} || error_exit "$LINENO failed: helm upgrade ${{ env.APP }} ${{ env.APP }}/mychart"
-            else
-              helm install ${{ env.APP }} ${{ env.APP }}/mychart --version=${{ env.TAG }} --set image.tag=${{ env.TAG }} || error_exit "$LINENO failed: helm install ${{ env.APP }} ${{ env.APP }}/mychart"
-            fi 
 
+            helm upgrade -i ${{ env.APP }} ${{ env.APP }}/mychart --version=${{ env.TAG }} --set image.tag=${{ env.TAG }} || error_exit "$LINENO failed: helm upgrade ${{ env.APP }} ${{ env.APP }}/mychart"
             helm ls
 
+ 
+
+
+
+
+     
