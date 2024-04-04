@@ -1,47 +1,93 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+一直以来都想写个自己的博客, 本来想简单做个博客就好, 后面就想干脆写个掘金好啦, 哈哈哈..., 于是和徒弟开始动手~ ●ω● ~
 
-In the project directory, you can run:
+  [在线地址](http://101.132.79.152/)
+ 
+ [GitHub 地址](https://github.com/anthhub/react-mini-blog)
 
-### `yarn start`
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## 简介
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+> react + nestjs  掘金全栈!
 
-### `yarn test`
+> 前端技术栈
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- react -- 全家桶
+- react hooks -- 到处都是, 基本操作了吧...
+- ant design -- 只用了一些
+- styled-components -- 必须啊, react的好基友=.=
+- typescript -- 基本操作啊 pro
 
-### `yarn build`
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+> 后端技术栈 
+- nestjs --node界的spring, 也是因为 typescript 写太久, 所以选用; 阿里 midway 也用过
+- mongoose -- 为了用的爽, 选择的比较新的 typegoose, 暂时没坑... 
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+> 后端详细打算放在另一篇, 小伙伴们 clone 前端项目的话可以直接调我的接口, 应该扛得住 ~ ●ω● ~
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `yarn eject`
+## 运行项目
+```javascript
+git clone https://github.com/anthhub/react-mini-blog
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+cd react-mini-blog
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+yarn 
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+yarn start:test
+```
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+注：此项目与  [掘金](https://juejin.im/timeline) 无任何关系, 如有侵权, 敬请告知
 
-## Learn More
+## 部分功能截图
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+> 登录
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+
+![](https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2019/12/8/16ee60cfd0e782f0~tplv-t2oaga2asx-image.image)
+
+> 搜索
+
+![](https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2019/12/8/16ee613608c334b6~tplv-t2oaga2asx-image.image)
+
+> 发帖
+
+![](https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2019/12/8/16ee614c7245f992~tplv-t2oaga2asx-image.image)
+
+> 点赞、评论、关注
+
+![](https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2019/12/8/16ee616d5abcbe31~tplv-t2oaga2asx-image.image)
+
+> 个人主页
+
+![](https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2019/12/8/16ee617c40aa5e6c~tplv-t2oaga2asx-image.image)
+
+
+> 修改个人信息
+
+![](https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2019/12/8/16ee6189b2d6338d~tplv-t2oaga2asx-image.image)
+
+
+
+## 目标功能
+
+- [x] 登录、注册 -- 完成
+- [x] 修改个人信息 --完成
+- [x] 个人主页 --完成
+- [x] 关注 -- 完成
+- [x] 评论 -- 完成
+- [x] 点赞 -- 完成
+- [x] 搜索帖子 -- 完成
+- [x] 上传头像 -- 完成
+- [x] 发帖 -- 完成
+
+只完成了主要功能,代码可能有点乱, 没办法, 时间太紧了😂
+
+ 小伙伴们，如果觉得文章有点东西，记得点个赞或者给个 star！  
+ 
+ [在线地址](http://101.132.79.152/)
+ 
+ [GitHub 地址](https://github.com/anthhub/react-mini-blog)
 
 
  
